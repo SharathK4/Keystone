@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import functools
 from collections.abc import Iterator
-from contextlib import contextmanager
+from contextlib import contextmanager, suppress
 
 from sqlalchemy import Engine, create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker
@@ -74,10 +74,8 @@ def get_session_factory() -> sessionmaker[Session]:
 
 def reset_engine_cache() -> None:
     """Drop cached engine/session factory (tests, or after a config change)."""
-    try:
+    with suppress(Exception):  # best effort during teardown
         get_engine().dispose()
-    except Exception:  # pragma: no cover - best effort during teardown
-        pass
     get_engine.cache_clear()
     get_session_factory.cache_clear()
 

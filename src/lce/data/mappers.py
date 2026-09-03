@@ -8,6 +8,20 @@ from __future__ import annotations
 
 from typing import Any
 
+from lce.data.orm import (
+    DependencyEdgeRow,
+    InterventionPlanRow,
+    MerchantRow,
+    NodeExposureRow,
+    NodeOutcomeRow,
+    ObligationRow,
+    PaymentEventRow,
+    PredictionRow,
+    PropagationEventRow,
+    ShockRow,
+    from_minor,
+    to_minor,
+)
 from lce.domain.edges import DependencyEdge, EdgeFeatures, LagDistribution
 from lce.domain.enums import (
     MerchantSector,
@@ -26,20 +40,6 @@ from lce.domain.merchant import MerchantProfile
 from lce.domain.prediction import ModelPrediction, NodeExposure
 from lce.domain.propagation import NodeOutcome, PropagationEvent
 from lce.domain.shock import Shock, ShockComponent
-from lce.data.orm import (
-    DependencyEdgeRow,
-    InterventionPlanRow,
-    MerchantRow,
-    NodeExposureRow,
-    NodeOutcomeRow,
-    ObligationRow,
-    PaymentEventRow,
-    PredictionRow,
-    PropagationEventRow,
-    ShockRow,
-    from_minor,
-    to_minor,
-)
 
 # --------------------------------------------------------------------- merchant
 
@@ -168,7 +168,9 @@ def obligation_from_row(row: ObligationRow) -> Obligation:
 # ------------------------------------------------------------- dependency edge
 
 
-def edge_to_row(edge: DependencyEdge, dataset_id: str, model_version: str = "v0") -> DependencyEdgeRow:
+def edge_to_row(
+    edge: DependencyEdge, dataset_id: str, model_version: str = "v0"
+) -> DependencyEdgeRow:
     return DependencyEdgeRow(
         dataset_id=dataset_id,
         source_id=edge.source_id,

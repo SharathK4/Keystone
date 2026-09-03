@@ -47,7 +47,7 @@ MINOR_UNITS = 100  # paise per rupee
 
 def to_minor(amount: float) -> int:
     """Rupees (float) -> paise (int), half-up."""
-    return int(round(amount * MINOR_UNITS))
+    return round(amount * MINOR_UNITS)
 
 
 def from_minor(amount: int | None) -> float:
