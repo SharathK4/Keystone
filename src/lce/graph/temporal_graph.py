@@ -115,7 +115,9 @@ class TemporalPaymentGraph:
         try:
             return self._profiles[merchant_id]
         except KeyError as exc:
-            raise NotFoundError(f"unknown merchant {merchant_id!r}", merchant_id=merchant_id) from exc
+            raise NotFoundError(
+                f"unknown merchant {merchant_id!r}", merchant_id=merchant_id
+            ) from exc
 
     def has_merchant(self, merchant_id: str) -> bool:
         return merchant_id in self._profiles

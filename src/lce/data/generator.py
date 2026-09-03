@@ -751,7 +751,7 @@ class NetworkGenerator:
         # scaled by the same draw within a bucket, so inflows across the network
         # are genuinely correlated rather than independent noise that averages
         # away at scale.
-        n_buckets = int(math.ceil(cfg.history_hours / cfg.common_factor_bucket_hours)) + 1
+        n_buckets = math.ceil(cfg.history_hours / cfg.common_factor_bucket_hours) + 1
         common_factor = (
             rng.lognormal(0.0, cfg.common_factor_sigma, size=n_buckets)
             if cfg.common_factor_sigma > 0
