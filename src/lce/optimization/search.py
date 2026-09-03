@@ -145,11 +145,10 @@ def _feasible(
         total = sum(u.cost for u in chosen) + candidate.cost
         if total > config.budget + 1e-6:
             return False
-    if config.one_per_merchant and any(
-        u.merchant_id == candidate.merchant_id for u in chosen
-    ):
-        return False
-    return True
+    return not (
+        config.one_per_merchant
+        and any(u.merchant_id == candidate.merchant_id for u in chosen)
+    )
 
 
 def _finish(
@@ -317,16 +316,16 @@ class CpSatSearch:
         cost_scale = 1000.0 / max(max((u.cost for u in candidates), default=1.0), 1.0)
 
         model = cp_model.CpModel()
-        x = [model.NewBoolVar(f"u{i}") for i in range(len(candidates))]
+        x = [model.new_bool_var(f"u{i}") for i in range(len(candidates))]
 
-        model.Add(sum(x) <= config.max_actions)
+        model.add(sum(x) <= config.max_actions)
         if config.budget is not None:
-            model.Add(
+            model.add(
                 sum(
-                    int(round(u.cost * cost_scale)) * x[i]
+                    round(u.cost * cost_scale) * x[i]
                     for i, u in enumerate(candidates)
                 )
-                <= int(round(config.budget * cost_scale))
+                <= round(config.budget * cost_scale)
             )
         if config.one_per_merchant:
             by_merchant: dict[str, list[int]] = {}
@@ -334,10 +333,10 @@ class CpSatSearch:
                 by_merchant.setdefault(u.merchant_id, []).append(i)
             for indices in by_merchant.values():
                 if len(indices) > 1:
-                    model.Add(sum(x[i] for i in indices) <= 1)
+                    model.add(sum(x[i] for i in indices) <= 1)
 
-        model.Maximize(
-            sum(int(round(max(0.0, gains[i]) * gain_scale)) * x[i] for i in range(len(x)))
+        model.maximize(
+            sum(round(max(0.0, gains[i]) * gain_scale) * x[i] for i in range(len(x)))
         )
 
         solver = cp_model.CpSolver()
