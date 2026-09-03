@@ -78,7 +78,8 @@ def node_disruption(
     outcome: NodeOutcome,
     settings: ObjectiveSettings | None = None,
 ) -> DisruptionBreakdown:
-    """Per-node contribution :math:`w_i [\\gamma_1 \\ldots + \\gamma_2 \\ldots + \\gamma_3 \\ldots]`.
+    """Per-node contribution
+    :math:`w_i [\\gamma_1 \\ldots + \\gamma_2 \\ldots + \\gamma_3 \\ldots]`.
 
     ``outcome.weighted_delay`` already carries :math:`\\sum a_o \\phi(\\delta_o)`,
     accumulated by the simulator as obligations settle, so the objective does

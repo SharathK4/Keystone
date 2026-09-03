@@ -83,6 +83,15 @@ class Intervention(DomainModel):
     )
 
     label: str = ""
+    provenance: dict[str, Any] = Field(
+        default_factory=dict,
+        description=(
+            "Why this action was generated: which rule proposed it, which "
+            "measurable factors scored it, and what it was sized from. Written by "
+            "the Phase-4 candidate generator so a recommendation can be explained "
+            "without re-deriving it."
+        ),
+    )
     metadata: dict[str, Any] = Field(default_factory=dict)
 
     @model_validator(mode="after")
