@@ -9,17 +9,16 @@ several repositories in one atomic transaction.
 from __future__ import annotations
 
 from collections.abc import Sequence
-from typing import Any, Generic, TypeVar
+from typing import Any
 
 from sqlalchemy import Select, delete, func, select
+from sqlalchemy import insert as sa_insert
 from sqlalchemy.orm import Session
 
 from lce.data.orm import Base
 
-RowT = TypeVar("RowT", bound=Base)
 
-
-class Repository(Generic[RowT]):
+class Repository[RowT: Base]:
     """Thin, typed query helper over one ORM table."""
 
     model: type[RowT]
@@ -44,7 +43,7 @@ class Repository(Generic[RowT]):
         payload = list(mappings)
         if not payload:
             return 0
-        self.session.execute(self.model.__table__.insert(), payload)
+        self.session.execute(sa_insert(self.model), payload)
         return len(payload)
 
     def flush(self) -> None:

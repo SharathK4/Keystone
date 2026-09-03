@@ -6,6 +6,7 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 from typing import Any
 
+from sqlalchemy import insert as sa_insert
 from sqlalchemy import select
 
 from lce.data import mappers
@@ -236,7 +237,7 @@ class CascadeResultRepository(Repository[NodeOutcomeRow]):
         ]
         if not payload:
             return 0
-        self.session.execute(PropagationEventRow.__table__.insert(), payload)
+        self.session.execute(sa_insert(PropagationEventRow), payload)
         return len(payload)
 
     def outcomes_for_run(self, run_id: str) -> dict[str, NodeOutcome]:

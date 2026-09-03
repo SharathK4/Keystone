@@ -18,8 +18,8 @@ from lce.data.orm import (
     ProvenanceRow,
     WebhookEventRow,
 )
-from lce.data.repositories.base import Repository
 from lce.data.pipeline import Provenance
+from lce.data.repositories.base import Repository
 from lce.domain.evaluation import EvaluationResult
 from lce.domain.prediction import ModelPrediction
 from lce.errors import NotFoundError
@@ -33,7 +33,7 @@ class PredictionRepository(Repository[PredictionRow]):
     ) -> PredictionRow:
         head, exposures = mappers.prediction_to_rows(prediction, dataset_version)
         self.add(head)
-        self.add_all(exposures)
+        self.session.add_all(exposures)
         return head
 
     def get(self, prediction_id: str) -> ModelPrediction | None:
