@@ -61,17 +61,23 @@ from __future__ import annotations
 import hashlib
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field, replace
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import numpy as np
 
-from lce.benchmark.scenarios import BuiltScenario
 from lce.domain.events import EXTERNAL_SINK, Obligation, PaymentEvent
 from lce.domain.merchant import MerchantProfile
 from lce.domain.shock import Shock
 from lce.errors import LeakageError
 from lce.graph.temporal_graph import TemporalPaymentGraph
 from lce.simulation.engine import LiquiditySimulator, SimulationConfig
+
+if TYPE_CHECKING:  # pragma: no cover
+    # Import-time only. Pulling the benchmark package in at runtime would drag
+    # the dataset generator into every process that touches a feature table -
+    # including the production inference service, which must load a model
+    # artifact without any training or data-generation code present.
+    from lce.benchmark.scenarios import BuiltScenario
 
 #: Merchant attributes a deployment plausibly holds: identity, sector, size band
 #: and - under the disclosure assumption - the balance sheet.

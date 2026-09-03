@@ -518,6 +518,45 @@ def build_interval_features(
     return np.nan_to_num(out, nan=0.0, posinf=0.0, neginf=0.0)
 
 
+#: Version of the node/interval feature contract. Any change to the columns, their
+#: order, or their definitions must bump this: an exported model artifact records
+#: it, and the inference service refuses a bundle whose schema it does not match.
+FEATURE_SCHEMA_VERSION = "phase3-node-v1"
+
+
+def build_hazard_design(
+    x: np.ndarray,
+    interval_x: np.ndarray,
+    *,
+    remaining_hours: float,
+    feature_mask: np.ndarray | None = None,
+) -> np.ndarray:
+    """Assemble the discrete-time hazard design tensor ``(n, K, P)``.
+
+    Lives here, in the feature module, because it *is* part of the feature
+    contract: the training model and the production inference service must build
+    byte-identical designs or the exported weights mean something different at
+    serving time than they did at fit time. One definition, used by both, is the
+    only way to guarantee that - a second copy in the inference package would
+    drift the first time a column moved.
+
+    Layout, left to right: the (optionally masked) static node features repeated
+    across intervals, the time-varying interval features, a one-hot interval
+    indicator giving the baseline hazard a free level per interval, the log
+    interval width, and a constant.
+    """
+    n_intervals = interval_x.shape[1]
+    node = x if feature_mask is None else x[:, feature_mask]
+    static = np.repeat(node[:, None, :], n_intervals, axis=1)
+    one_hot = np.tile(np.eye(n_intervals)[None, :, :], (x.shape[0], 1, 1))
+    width = np.full(
+        (x.shape[0], n_intervals, 1),
+        math.log1p(max(remaining_hours, 0.0) / max(n_intervals, 1)),
+    )
+    intercept = np.ones((x.shape[0], n_intervals, 1))
+    return np.concatenate([static, interval_x, one_hot, width, intercept], axis=2)
+
+
 # ------------------------------------------------------------------ pair table
 
 

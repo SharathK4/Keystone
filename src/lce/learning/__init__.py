@@ -20,156 +20,115 @@ Layered in the order they were built:
 ``evaluation``   discrimination, timing and calibration, reported together
 ``ablations``    which part of the system is doing the work
 ``experiment``   the protocol, start to finish, in the order it must run
+
+Imports are lazy
+----------------
+Every public name resolves through :func:`__getattr__` rather than being imported
+when the package loads. That is not a style choice: ``dataset`` reaches the
+benchmark package and therefore the dataset *generator*, and the production
+inference service must be able to build a feature table without any
+data-generation or training code in the process. Eager imports here would make
+that impossible from the first line, and a test asserts it stays impossible to
+break.
 """
 
 from __future__ import annotations
 
-from lce.learning.baselines import (
-    CLASSICAL_MODELS,
-    CashCoverBaseline,
-    ContagionModel,
-    DiscreteTimeHazard,
-    ExampleForecast,
-    PrevalenceBaseline,
-    ShockDistanceBaseline,
-)
-from lce.learning.calibration import (
-    CalibrationReport,
-    IsotonicCalibrator,
-    PlattCalibrator,
-    assess_calibration,
-    select_calibrator,
-)
-from lce.learning.dataset import (
-    ContagionExample,
-    ExampleCorpus,
-    HiddenTruth,
-    build_corpus,
-    build_dataset_examples,
-    load_corpus,
-    save_corpus,
-)
-from lce.learning.evaluation import (
-    LearningReport,
-    ScoreCard,
-    best_f1_threshold,
-    bootstrap_pr_auc,
-    evaluate_forecasts,
-    pooled,
-)
-from lce.learning.experiment import (
-    Phase3Config,
-    build_models,
-    quick_config,
-    run_phase3,
-    score_on_split,
-)
-from lce.learning.features import (
-    NODE_FEATURE_NAMES,
-    ObservedStats,
-    build_node_features,
-    build_pair_features,
-    feature_summary,
-    network_free_mask,
-)
-from lce.learning.pointprocess import (
-    HawkesContagionModel,
-    HawkesDependencyEstimator,
-    SupervisedDependencyRegressor,
-    evaluate_dependency_recovery,
-)
-from lce.learning.problem import (
-    DEFAULT_OBSERVATION,
-    DEFAULT_TASK,
-    LATENT_PROFILE_FIELDS,
-    OBSERVABLE_PROFILE_FIELDS,
-    LeakageAudit,
-    ObservationSpec,
-    ObservedWindow,
-    PredictionTask,
-    audit_leakage,
-    audit_window,
-    build_observed_window,
-)
-from lce.learning.splits import (
-    SplitName,
-    SplitSpec,
-    TemporalSplit,
-    assert_split_clean,
-    make_temporal_split,
-    verify_split,
-)
+from typing import Any
 
-__all__ = [
-    "CLASSICAL_MODELS",
-    "DEFAULT_OBSERVATION",
-    "DEFAULT_TASK",
-    "LATENT_PROFILE_FIELDS",
-    "NODE_FEATURE_NAMES",
-    "OBSERVABLE_PROFILE_FIELDS",
-    "CalibrationReport",
-    "CashCoverBaseline",
-    "ContagionExample",
-    "ContagionModel",
-    "DiscreteTimeHazard",
-    "ExampleCorpus",
-    "ExampleForecast",
-    "HawkesContagionModel",
-    "HawkesDependencyEstimator",
-    "HiddenTruth",
-    "IsotonicCalibrator",
-    "LeakageAudit",
-    "LearningReport",
-    "ObservationSpec",
-    "ObservedStats",
-    "ObservedWindow",
-    "Phase3Config",
-    "PlattCalibrator",
-    "PredictionTask",
-    "PrevalenceBaseline",
-    "ScoreCard",
-    "ShockDistanceBaseline",
-    "SplitName",
-    "SplitSpec",
-    "SupervisedDependencyRegressor",
-    "TemporalSplit",
-    "assert_split_clean",
-    "assess_calibration",
-    "audit_leakage",
-    "audit_window",
-    "best_f1_threshold",
-    "bootstrap_pr_auc",
-    "build_corpus",
-    "build_dataset_examples",
-    "build_models",
-    "build_node_features",
-    "build_observed_window",
-    "build_pair_features",
-    "evaluate_dependency_recovery",
-    "evaluate_forecasts",
-    "feature_summary",
-    "load_corpus",
-    "make_temporal_split",
-    "network_free_mask",
-    "pooled",
-    "quick_config",
-    "run_phase3",
-    "save_corpus",
-    "score_on_split",
-    "select_calibrator",
-    "verify_split",
-]
+#: Public name -> module it lives in. The single source of truth for both
+#: ``__all__`` and the lazy resolver, so the two cannot drift apart.
+_EXPORTS: dict[str, str] = {
+    # problem
+    "DEFAULT_OBSERVATION": "problem",
+    "DEFAULT_TASK": "problem",
+    "LATENT_PROFILE_FIELDS": "problem",
+    "OBSERVABLE_PROFILE_FIELDS": "problem",
+    "LeakageAudit": "problem",
+    "ObservationSpec": "problem",
+    "ObservedWindow": "problem",
+    "PredictionTask": "problem",
+    "audit_leakage": "problem",
+    "audit_window": "problem",
+    "build_observed_window": "problem",
+    "is_observed": "problem",
+    "scrub_profile": "problem",
+    # features
+    "NODE_FEATURE_NAMES": "features",
+    "ObservedStats": "features",
+    "build_node_features": "features",
+    "build_interval_features": "features",
+    "build_pair_features": "features",
+    "feature_summary": "features",
+    "network_free_mask": "features",
+    # dataset
+    "ContagionExample": "dataset",
+    "ExampleCorpus": "dataset",
+    "HiddenTruth": "dataset",
+    "build_corpus": "dataset",
+    "build_dataset_examples": "dataset",
+    "load_corpus": "dataset",
+    "save_corpus": "dataset",
+    # splits
+    "SplitName": "splits",
+    "SplitSpec": "splits",
+    "TemporalSplit": "splits",
+    "assert_split_clean": "splits",
+    "make_temporal_split": "splits",
+    "verify_split": "splits",
+    # baselines
+    "CLASSICAL_MODELS": "baselines",
+    "CashCoverBaseline": "baselines",
+    "ContagionModel": "baselines",
+    "DiscreteTimeHazard": "baselines",
+    "ExampleForecast": "baselines",
+    "PrevalenceBaseline": "baselines",
+    "ShockDistanceBaseline": "baselines",
+    # calibration
+    "CalibrationReport": "calibration",
+    "IsotonicCalibrator": "calibration",
+    "PlattCalibrator": "calibration",
+    "assess_calibration": "calibration",
+    "select_calibrator": "calibration",
+    # evaluation
+    "LearningReport": "evaluation",
+    "ScoreCard": "evaluation",
+    "best_f1_threshold": "evaluation",
+    "bootstrap_pr_auc": "evaluation",
+    "evaluate_forecasts": "evaluation",
+    "pooled": "evaluation",
+    # point process
+    "HawkesContagionModel": "pointprocess",
+    "HawkesDependencyEstimator": "pointprocess",
+    "SupervisedDependencyRegressor": "pointprocess",
+    "evaluate_dependency_recovery": "pointprocess",
+    # graph model (needs the ml extra)
+    "GraphSampleSpec": "graphmodel",
+    "TemporalGraphModel": "graphmodel",
+    "build_graph_sample": "graphmodel",
+    # experiment
+    "Phase3Config": "experiment",
+    "build_models": "experiment",
+    "quick_config": "experiment",
+    "run_phase3": "experiment",
+    "score_on_split": "experiment",
+}
+
+__all__ = sorted(_EXPORTS)
 
 
-def __getattr__(name: str) -> object:
-    """Expose the torch-dependent graph model lazily.
+def __getattr__(name: str) -> Any:
+    """Resolve a public name to its module on first access."""
+    module_name = _EXPORTS.get(name)
+    if module_name is None:
+        raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    import importlib
 
-    Importing ``lce.learning`` must not require the ``ml`` extra: every classical
-    and point-process model runs without it, and only the graph model needs
-    torch.
-    """
-    if name in {"TemporalGraphModel", "GraphSampleSpec", "build_graph_sample"}:
-        from lce.learning import graphmodel
+    module = importlib.import_module(f"{__name__}.{module_name}")
+    value = getattr(module, name)
+    globals()[name] = value  # cache, so repeated access is a plain lookup
+    return value
 
-        return getattr(graphmodel, name)
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+def __dir__() -> list[str]:
+    return __all__
