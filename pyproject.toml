@@ -51,10 +51,13 @@ where = ["src"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-addopts = "-q --strict-markers"
+# Live-provider tests are deselected by default: the offline suite must pass on
+# a machine with no credentials and no network. Opt in with `-m razorpay_live`.
+addopts = "-q --strict-markers -m 'not razorpay_live'"
 filterwarnings = ["ignore::DeprecationWarning"]
 markers = [
     "slow: long-running tests",
+    "razorpay_live: hits the real Razorpay Test Mode API; opt in with -m razorpay_live",
     "requires_torch: needs the optional torch/PyG extra",
     "requires_ortools: needs the optional ortools extra",
     "requires_postgres: needs a live PostgreSQL instance",

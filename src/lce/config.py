@@ -111,7 +111,9 @@ class ObjectiveSettings(BaseSettings):
 
     gamma_delay: float = Field(default=1.0, ge=0, description="Weight on value-weighted delay.")
     gamma_default: float = Field(default=500000.0, ge=0, description="Weight per default event.")
-    gamma_deficit: float = Field(default=0.02, ge=0, description="Weight on liquidity deficit-time.")
+    gamma_deficit: float = Field(
+        default=0.02, ge=0, description="Weight on liquidity deficit-time."
+    )
     delay_unit_hours: float = Field(default=24.0, gt=0, description="phi() delay normaliser.")
     discount_rate_per_hour: float = Field(
         default=0.0, ge=0, description="Exponential discount applied to disruption over time."

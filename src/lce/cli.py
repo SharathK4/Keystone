@@ -16,6 +16,12 @@ database).
     lce learn spec                 print the Phase-3 learning problem
     lce learn split                audit the temporal train/val/test split
     lce learn run                  fit, calibrate and score the contagion models
+    lce intervene spec             print the intervention problem
+    lce intervene run              predict, decide, replay, measure
+    lce infer export               train once and export a servable artifact
+    lce infer check                verify an artifact before deploying it
+    lce snapshot build             build the analytical snapshot the API serves
+    lce snapshot info              load a snapshot the way the API does
 """
 
 from __future__ import annotations
@@ -248,6 +254,18 @@ def build_parser() -> argparse.ArgumentParser:
     from lce.learning import cli as learn_cli
 
     learn_cli.register(sub)
+
+    from lce.intervention import cli as intervene_cli
+
+    intervene_cli.register(sub)
+
+    from lce.inference import cli as infer_cli
+
+    infer_cli.register(sub)
+
+    from lce.snapshot import cli as snapshot_cli
+
+    snapshot_cli.register(sub)
 
     serve = sub.add_parser("serve", help="Run the API")
     serve.add_argument("--host", default=None)
