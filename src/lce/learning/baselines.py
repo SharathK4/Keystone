@@ -63,7 +63,11 @@ from lce.domain.enums import PredictorKind
 from lce.domain.prediction import ModelPrediction, NodeExposure
 from lce.errors import ModelError
 from lce.learning.dataset import ContagionExample
-from lce.learning.features import INTERVAL_FEATURE_INDEX, NODE_FEATURE_INDEX
+from lce.learning.features import (
+    INTERVAL_FEATURE_INDEX,
+    NODE_FEATURE_INDEX,
+    build_hazard_design,
+)
 from lce.learning.problem import DEFAULT_TASK, PredictionTask
 from lce.logging import get_logger
 from lce.seeds import config_hash
@@ -589,16 +593,19 @@ class DiscreteTimeHazard(ContagionModel):
         }
 
     def _design(self, example: ContagionExample) -> np.ndarray:
-        """``(n, K, P)``: static features, time-varying features, interval one-hot."""
-        n_intervals = example.interval_x.shape[1]
-        node = example.x if self.feature_mask is None else example.x[:, self.feature_mask]
-        static = np.repeat(node[:, None, :], n_intervals, axis=1)
-        one_hot = np.tile(np.eye(n_intervals)[None, :, :], (example.n_merchants, 1, 1))
-        width = np.full(
-            (example.n_merchants, n_intervals, 1),
-            math.log1p(example.remaining_hours / max(n_intervals, 1)),
-        )
-        return np.concatenate([static, example.interval_x, one_hot, width], axis=2)
+        """``(n, K, P)`` design tensor, minus the intercept column.
+
+        Delegates the layout to :func:`~lce.learning.features.build_hazard_design`
+        so training and serving cannot disagree about what column ``j`` means.
+        The intercept is stripped here and re-appended after standardisation,
+        because standardising a constant column would zero it.
+        """
+        return build_hazard_design(
+            example.x,
+            example.interval_x,
+            remaining_hours=example.remaining_hours,
+            feature_mask=self.feature_mask,
+        )[:, :, :-1]
 
     def fit(
         self,

@@ -290,7 +290,7 @@ def _build_module(config: TGNNConfig) -> Any:
     torch, GATv2Conv = _require_torch()
     nn = torch.nn
 
-    class ContagionGNN(nn.Module):
+    class ContagionGNN(nn.Module):  # type: ignore[name-defined]  # torch resolved at call time
         """Shared GATv2 trunk with exposure and hit-time heads."""
 
         def __init__(self, cfg: TGNNConfig) -> None:
@@ -328,8 +328,8 @@ def _build_module(config: TGNNConfig) -> Any:
             )
 
         def forward(
-            self, x: torch.Tensor, edge_index: torch.Tensor, edge_attr: torch.Tensor
-        ) -> tuple[torch.Tensor, torch.Tensor]:
+            self, x: torch.Tensor, edge_index: torch.Tensor, edge_attr: torch.Tensor  # type: ignore[name-defined]
+        ) -> tuple[torch.Tensor, torch.Tensor]:  # type: ignore[name-defined]
             h = self.encoder(self.input_norm(x))
             for conv, norm in zip(self.convs, self.norms, strict=True):
                 # Residual connection: contagion depth varies per node, and the
