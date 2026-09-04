@@ -1,0 +1,36 @@
+
+config_hash        7d7cdcd4b9ec936a
+corpus             168 examples over 24 datasets (105/35/28 split)
+positives          260 of 16800 (1.55%); downstream 60 (0.36%)
+split audit        clean=True gap_to_test=1446h
+leakage audit      clean=True (168 window probes, 24 perturbation probes)
+
+model                 PR-AUC    down    ROC    P@R     F1    Brier     ECE   MAE h  C-idx
+discrete_hazard        0.890   0.188  0.957  0.860  0.835  0.00288  0.0014    17.3  0.792
+hawkes_linear          0.875   0.440  0.964  0.860  0.821  0.00548  0.0054    25.7  0.700
+shock_distance         0.841   0.124  0.971  0.791  0.861  0.00363  0.0013    29.0  0.640
+temporal_gnn           0.824   0.258  0.969  0.814  0.763  0.00484  0.0025    21.5  0.793
+hawkes_cascade         0.756   0.013  0.943  0.791  0.846  0.00440  0.0037    27.1  0.685
+cash_cover             0.712   0.003  0.862  0.698  0.806  0.00514  0.0044    16.9  0.814
+prevalence             0.014   0.003  0.500  0.023  0.030  0.01512  0.0005    30.0  0.623
+
+dependency (unsupervised, pre-origin events only): theta MAE 0.122, rho 0.658, edge recall 0.996, lag MAE 40.0h
+supervised upper bound (trains on hidden labels): theta MAE 0.150, rho 0.498
+
+ablation no_graph             vs discrete_hazard
+  is the network worth anything over per-merchant features?
+  pr_auc -0.089  downstream -0.183  timing -0.0h
+
+ablation true_structure       vs temporal_gnn [leaky upper bound]
+  how much of the gap is dependency-estimation error?
+  pr_auc +0.031  downstream +0.218  timing +0.7h
+
+ablation shuffled_edges       vs temporal_gnn
+  negative control: same degrees, destroyed topology
+  pr_auc +0.055  downstream -0.077  timing -1.2h
+
+ablation no_edges             vs temporal_gnn
+  graph neural network, or just neural network?
+  pr_auc +0.066  downstream -0.054  timing -0.0h
+
+written to reports\phase3.json  (467s)

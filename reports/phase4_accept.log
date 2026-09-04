@@ -1,0 +1,44 @@
+{"version": "0.1.0", "env": "local", "app_name": "liquidity-contagion-engine", "database_url": "postgresql+psycopg://lce:***@localhost:5432/lce", "model_artifact_dir": "C:\\Users\\Sharath\\OneDrive\\Desktop\\Razorpay_Hackathon\\artifacts", "random_seed": 20250101, "log_level": "INFO", "log_format": "json", "razorpay_mode": "test", "razorpay_configured": false, "razorpay_webhook_configured": false, "simulation": {"horizon_hours": 168.0, "tick_hours": 1.0, "grace_period_hours": 48.0, "default_credit_line_ratio": 0.15, "partial_payment_enabled": true, "min_partial_fraction": 0.1}, "objective": {"gamma_delay": 1.0, "gamma_default": 500000.0, "gamma_deficit": 0.02, "delay_unit_hours": 24.0, "discount_rate_per_hour": 0.0}, "event": "api_starting", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.621515Z"}
+{"api_version": "v1", "load_ms": 2.02, "name": "contagion_hazard", "model_version": "discrete_hazard-9d1ffe99e9", "model_kind": "discrete_hazard", "feature_schema_version": "phase3-node-v1", "n_hazard_intervals": 8, "design_width": 52, "calibrator": "isotonic", "threshold": 1.0, "dataset_version": "synth-4278431f5062", "code_version": "0.1.0", "content_hash": "0a68862e938a0f43", "path": "C:\\Users\\Sharath\\AppData\\Local\\Temp\\phase4-accept-ta9mujb1\\artifacts\\accept", "event": "inference_service_loaded", "level": "info", "logger": "lce.inference.service", "request_id": "2ea3f8cf607b47d9", "timestamp": "2026-09-01T19:36:36.625736Z"}
+{"n_merchants": 3, "n_flagged": 0, "model_version": "discrete_hazard-9d1ffe99e9", "latency_ms": 2.35, "event": "contagion_predicted", "level": "info", "logger": "lce.inference.service", "request_id": "2ea3f8cf607b47d9", "timestamp": "2026-09-01T19:36:36.629575Z"}
+{"method": "POST", "path": "/api/v1/predict/contagion", "status": 200, "duration_ms": 7.48, "request_id": "2ea3f8cf607b47d9", "event": "request", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.630232Z"}
+{"api_version": "v1", "load_ms": 1.86, "name": "contagion_hazard", "model_version": "discrete_hazard-9d1ffe99e9", "model_kind": "discrete_hazard", "feature_schema_version": "phase3-node-v1", "n_hazard_intervals": 8, "design_width": 52, "calibrator": "isotonic", "threshold": 1.0, "dataset_version": "synth-4278431f5062", "code_version": "0.1.0", "content_hash": "0a68862e938a0f43", "path": "C:\\Users\\Sharath\\AppData\\Local\\Temp\\phase4-accept-ta9mujb1\\artifacts\\accept", "event": "inference_service_loaded", "level": "info", "logger": "lce.inference.service", "request_id": "ccab496da70548e3", "timestamp": "2026-09-01T19:36:36.634034Z"}
+{"n_merchants": 3, "n_flagged": 0, "model_version": "discrete_hazard-9d1ffe99e9", "latency_ms": 2.11, "event": "contagion_predicted", "level": "info", "logger": "lce.inference.service", "request_id": "ccab496da70548e3", "timestamp": "2026-09-01T19:36:36.638377Z"}
+{"n_selected": 1, "cost": 48.0, "reduction": 60000.0, "latency_ms": 5.03, "event": "intervention_recommended", "level": "info", "logger": "lce.inference.service", "request_id": "ccab496da70548e3", "timestamp": "2026-09-01T19:36:36.641315Z"}
+{"method": "POST", "path": "/api/v1/interventions/recommend", "status": 200, "duration_ms": 10.3, "request_id": "ccab496da70548e3", "event": "request", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.642040Z"}
+{"api_version": "v1", "load_ms": 2.34, "name": "contagion_hazard", "model_version": "discrete_hazard-9d1ffe99e9", "model_kind": "discrete_hazard", "feature_schema_version": "phase3-node-v1", "n_hazard_intervals": 8, "design_width": 52, "calibrator": "isotonic", "threshold": 1.0, "dataset_version": "synth-4278431f5062", "code_version": "0.1.0", "content_hash": "0a68862e938a0f43", "path": "C:\\Users\\Sharath\\AppData\\Local\\Temp\\phase4-accept-ta9mujb1\\artifacts\\accept", "event": "inference_service_loaded", "level": "info", "logger": "lce.inference.service", "request_id": "af4f6c8736f9484c", "timestamp": "2026-09-01T19:36:36.645662Z"}
+{"method": "POST", "path": "/api/v1/scenarios/replay", "status": 200, "duration_ms": 6.99, "request_id": "af4f6c8736f9484c", "event": "request", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.649930Z"}
+{"api_version": "v1", "load_ms": 1.83, "name": "contagion_hazard", "model_version": "discrete_hazard-9d1ffe99e9", "model_kind": "discrete_hazard", "feature_schema_version": "phase3-node-v1", "n_hazard_intervals": 8, "design_width": 52, "calibrator": "isotonic", "threshold": 1.0, "dataset_version": "synth-4278431f5062", "code_version": "0.1.0", "content_hash": "0a68862e938a0f43", "path": "C:\\Users\\Sharath\\AppData\\Local\\Temp\\phase4-accept-ta9mujb1\\artifacts\\accept", "event": "inference_service_loaded", "level": "info", "logger": "lce.inference.service", "request_id": "8e287c5746cd428d", "timestamp": "2026-09-01T19:36:36.653063Z"}
+{"method": "POST", "path": "/api/v1/predict/contagion", "status": 422, "duration_ms": 2.63, "request_id": "8e287c5746cd428d", "event": "request", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.653476Z"}
+{"event": "api_stopped", "level": "info", "logger": "lce.api.app", "timestamp": "2026-09-01T19:36:36.654062Z"}
+
+run_id            p4-f61b675fa8a867c1
+scenarios         14 in 224.5s
+artifact          reports\phase4\p4-f61b675fa8a867c1\result.json
+
+strategy                          red%           cost   cap.eff  rel.gap infeas
+exact_optimum                    55.73      232633438     13.50   0.0000      0
+model_guided_greedy              37.91       50277311     36.62   0.3339      0
+model_guided_milp                37.93       50276634     36.62   0.3336      2
+model_guided_robust              37.92       50277372     36.62   0.3337      1
+cash_cover                       27.20      123991322      8.43   0.6812      0
+highest_systemic_importance      25.99      196669752      6.31   0.6596      0
+naive_largest_deficit            25.99      196669752      6.31   0.6596      0
+highest_degree                    2.89       58717115      0.00   1.1806      0
+no_intervention                   0.00              0         -   1.2132      0
+
+pruning           39 -> 11 candidates, optimum retained=True, relative regret=0.00000, runtime -89.8%
+
+pruning           45 -> 12 candidates, optimum retained=False, relative regret=0.98087, runtime -90.4%
+
+systemic (synth-1bac5674de0e): rank correlation with throughput=0.83, degree=0.83, deficit=0.66
+
+systemic (synth-55876f617452): rank correlation with throughput=0.80, degree=0.73, deficit=0.75
+
+inference         discrete_hazard-9d1ffe99e9 (calibrator=isotonic, hash=0a68862e938a0f43)
+
+checks passed     28
+
+========================================================================
+ALL PHASE-4 ACCEPTANCE CRITERIA HOLD (28 checks)
+EXIT=0
