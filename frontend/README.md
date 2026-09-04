@@ -1,4 +1,11 @@
-# Keystone — first page
+# Keystone 
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+![alt text](image-5.png)
 
 One page. A masthead and four panels that read in order:
 
@@ -113,26 +120,6 @@ pair reads as a contradiction.
 - **Backend down** → "Analytical service unavailable", the failing path, and the
   command to start it.
 
-## React Bits
-
-`src/components/reactbits/` — `SpecularButton` and `LightColumn`, implemented
-locally against the published patterns rather than installed. Both are
-CSS-driven: pointer position is written to custom properties, so a highlight
-follows the cursor without re-rendering the tree.
-
-Used sparingly and on purpose. The specular button is the offer's primary
-action, and the only one on the page. `LightColumn` is a single soft shaft
-descending onto the wordmark — architectural rather than atmospheric, one wide
-monochrome gradient with a narrow core and a pool where it lands, drifting a few
-pixels on a 46-second cycle, and paused entirely while an analysis is open. The
-earlier side-ray beams were removed: at the offer card's proportions they
-resolved into a straight vertical seam that read as a rendering artefact rather
-than as light.
-
-`ReflectiveCard` was removed. `RazorpayContractCard` and `TexturedTile` between
-them do the job it was written for — a generated surface with its own highlight
-— and keeping a second, unused implementation of the same idea in the tree was
-not worth the file.
 
 ## Units: what is rupees and what is not
 
@@ -168,31 +155,6 @@ extension can be worth ₹16.5 L while committing ₹1,321, because it moves dat
 rather than money. Both columns are shown so the rows never look like they
 should sum to the plan total when they do not.
 
-## Palette
-
-The ground is a cool lavender gradient moving between `#F5F5FB`, `#F2F2FA` and
-`#EFF0F8` — brightest under the masthead, coolest at the lower right.
-
-The whole neutral ramp moves with it: paper, surfaces, borders, greys and
-shadows are all cool. Warm neutrals on a lavender ground read as dirty rather
-than as contrast, so leaving them would have been worse than not changing the
-background at all. The two saturated families stay warm on purpose — terracotta
-for the analytical accent, Razorpay orange for the contract — because they are
-the only things on the page that should feel lit.
-
-The light column above the wordmark is a neutral white wash with a trace of
-warmth in its narrow core only. A warm wash on a cool ground reads as a yellow
-stain rather than as a light source.
-
-## Why the overlay is portalled
-
-`ExpandedAnalysis` renders through `createPortal` into `document.body`, and the
-page's receding effect uses `opacity` rather than `filter`. That is not
-stylistic. `filter`, `transform` and `backdrop-filter` all make an element the
-containing block for `position: fixed` descendants — so a `saturate()` on the
-page made the overlay size itself to the whole document instead of the viewport,
-and its lower half became unreachable. The portal makes that class of bug
-impossible regardless of what any ancestor does.
 
 ## The contract card
 
@@ -210,30 +172,6 @@ the action beneath it, and four checkmarked points beside it. Every point is a
 backend figure, and the "why this merchant" paragraph is the backend's own
 sentence, printed verbatim.
 
-## Fonts
 
-The display face is **Against** (`public/fonts/against-regular.otf`), chosen
-over the other two files in `../fonts/` on inspection: *Emotions Condensed
-Demo* substitutes "TRIAL FONT / 177studio.com" watermark glyphs into its digits
-and letters, and *Wolfgang* is a 94-glyph blackletter.
 
-Two things to know. Against is **licensed for personal use only** — a
-commercial release needs a licence from 177studio, and the face is swappable
-via `--display` in `src/styles/tokens.css`. And it has no `₹`, no arrows and
-proportional digits, so it is confined to the wordmark and panel titles;
-**every figure is set in the text stack with tabular numerals** so columns line
-up and a changing value does not reflow its neighbours.
 
-## Layout
-
-Desktop is the target: a true 2×2 of four identical panels (measured 634×550
-each at 1400px wide). Panel heads are locked to one height because they carry
-different asides — a legend, a seven-way selector, a badge — and letting each
-size itself put the rules across the composition out of register.
-
-Panels are frosted rather than glassy: a translucent paper surface with a 7px
-blur, so the light column behind them registers and nothing more.
-
-Below 1080px the grid becomes a vertical sequence with the panels keeping their
-height floor and internal hierarchy. Verified free of horizontal overflow at
-430, 805 and 1385 px, on the landing composition and inside an open analysis.

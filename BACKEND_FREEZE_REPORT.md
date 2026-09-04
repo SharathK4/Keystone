@@ -1,11 +1,5 @@
 # Backend Freeze Report
 
-**Status:** FROZEN
-**Version:** `lce` 0.1.0
-**Date:** 2026-09-02
-**Scope:** Phases 1–5 complete. Backend is an analytical/data service. No frontend in this repository.
-
----
 
 ## 1. What this system is, and what it is not
 
