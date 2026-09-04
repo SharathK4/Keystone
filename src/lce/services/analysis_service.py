@@ -8,7 +8,8 @@ through HTTP leaves exactly the same provenance trail as one made from a script.
 from __future__ import annotations
 
 import time
-from typing import Any
+from collections.abc import Callable
+from typing import Any, Protocol
 
 from lce.config import ObjectiveSettings, get_settings
 from lce.data.unit_of_work import UnitOfWork
@@ -38,7 +39,20 @@ from lce.simulation.engine import LiquiditySimulator, SimulationConfig
 
 logger = get_logger(__name__)
 
-_PREDICTORS = {
+class _Predictor(Protocol):
+    """What the registry requires of a predictor: nothing more than this."""
+
+    def predict(
+        self,
+        graph: TemporalPaymentGraph,
+        shock: Shock,
+        *,
+        model_version: str = ...,
+        run_id: str | None = ...,
+    ) -> ModelPrediction: ...
+
+
+_PREDICTORS: dict[PredictorKind, Callable[[Any], _Predictor]] = {
     PredictorKind.LINEAR_THRESHOLD: LinearThresholdPropagator,
     PredictorKind.HAWKES_CASCADE: HawkesCascadePredictor,
 }
