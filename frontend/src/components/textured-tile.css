@@ -1,0 +1,92 @@
+.tile {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Each tile sits in its own light, like the contract card. */
+.tile__glow {
+  position: absolute;
+  inset: 8% 5%;
+  border-radius: 44px;
+  filter: blur(40px);
+  opacity: 0.6;
+  z-index: 0;
+}
+
+.tile--ink   .tile__glow { background: rgba(46, 74, 56, 0.5); }
+.tile--slate .tile__glow { background: rgba(96, 112, 128, 0.42); }
+.tile--clay  .tile__glow { background: rgba(160, 110, 44, 0.4); }
+.tile--ember .tile__glow { background: var(--rzp-glow); }
+
+.tile__body {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 4px rgba(30, 26, 18, 0.12),
+    0 32px 64px -34px rgba(30, 26, 18, 0.5);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+.card:hover .tile__body {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 2px 4px rgba(30, 26, 18, 0.14),
+    0 44px 80px -36px rgba(30, 26, 18, 0.56);
+}
+
+.tile--ink   .tile__body { background: linear-gradient(152deg, #33513f, #1e3427 54%, #13221a); }
+.tile--slate .tile__body { background: linear-gradient(152deg, #8a99a8, #6b7a89 52%, #4d5a68); }
+.tile--clay  .tile__body { background: linear-gradient(152deg, #9c6c33, #75491a 52%, #4a2c0b); }
+.tile--ember .tile__body { background: linear-gradient(150deg, #f08a45, #d9501f 52%, #b3350f); }
+
+/* ---- generated surface ---- */
+
+.tile__texture {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  opacity: 0.7;
+  mix-blend-mode: overlay;
+}
+
+.tile--slate .tile__texture { opacity: 0.5; }
+.tile--clay  .tile__texture { opacity: 0.42; }
+
+.tile__sheen {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(76% 56% at 22% 6%, rgba(255, 255, 255, 0.3), transparent 62%),
+    radial-gradient(64% 74% at 92% 96%, rgba(0, 0, 0, 0.26), transparent 66%);
+}
+
+/* ---- layers above the surface ---- */
+
+.tile__figure {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6%;
+}
+
+.tile__content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 28px;
+  color: #fbf7f2;
+}

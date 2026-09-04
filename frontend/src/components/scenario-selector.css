@@ -1,0 +1,62 @@
+.scenarios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.scenarios--compact { max-width: 292px; row-gap: 2px; }
+
+.scenarios__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 10.5px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color var(--fast) var(--ease),
+    background var(--fast) var(--ease),
+    border-color var(--fast) var(--ease);
+}
+
+.scenarios--compact .scenarios__item {
+  padding: 3px 7px;
+  font-size: 9.5px;
+  letter-spacing: 0.015em;
+}
+
+.scenarios__item:hover:not(:disabled) {
+  color: var(--ink-1);
+  background: var(--surface-2);
+}
+
+.scenarios__item.is-active {
+  color: var(--ink);
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+.scenarios__item:disabled { opacity: 0.4; cursor: default; }
+
+/* Marks a scenario the optimiser found nothing feasible for. */
+.scenarios__flag {
+  color: var(--accent);
+  font-size: 15px;
+  line-height: 0;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 840px) {
+  .scenarios, .scenarios--compact {
+    max-width: none;
+    justify-content: flex-start;
+  }
+}

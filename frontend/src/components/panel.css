@@ -1,0 +1,139 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 14px;
+  box-shadow: var(--lift-1);
+  opacity: 0;
+  animation: rise 780ms var(--ease-out) forwards;
+  animation-delay: var(--card-delay, 0ms);
+  overflow: hidden;
+  transition:
+    border-color var(--med) var(--ease),
+    box-shadow var(--med) var(--ease),
+    transform var(--med) var(--ease);
+}
+
+.card:hover {
+  border-color: var(--border);
+  box-shadow: var(--lift-2);
+  transform: translateY(-3px);
+}
+
+.card:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------- head */
+
+.card__head {
+  padding: 30px 34px 0;
+  flex: none;
+}
+
+.card__index {
+  display: block;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--ink-4);
+  margin-bottom: 12px;
+}
+
+.card__title {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.004em;
+  color: var(--ink);
+}
+
+.card__subtitle {
+  margin-top: 9px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-2);
+  letter-spacing: 0.006em;
+  max-width: 38ch;
+}
+
+/* ------------------------------------------------------------------ stage */
+
+/* Where the artwork lives. Generous, centred, and the only thing in the card
+ * that carries information. */
+.card__stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  padding: 22px 34px 26px;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+}
+
+.card__stage > * { min-height: 0; }
+
+/* ------------------------------------------------------------------- foot */
+
+.card__foot {
+  flex: none;
+  border-top: 1px solid var(--border-soft);
+  padding: 15px 34px 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.card__reveals {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color var(--med) var(--ease);
+}
+
+.card:hover .card__reveals { color: var(--ink-1); }
+
+/* A rule that grows an arrowhead on hover: the way in, without a button. */
+.card__open {
+  flex: none;
+  position: relative;
+  width: 28px;
+  height: 1px;
+  background: var(--border-strong);
+  transition: width var(--med) var(--ease), background var(--med) var(--ease);
+}
+
+.card__open i {
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid var(--border-strong);
+  border-right: 1px solid var(--border-strong);
+  transform: rotate(45deg);
+  transition: border-color var(--med) var(--ease);
+}
+
+.card:hover .card__open { width: 44px; background: var(--accent); }
+.card:hover .card__open i { border-color: var(--accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; opacity: 1; }
+  .card:hover { transform: none; }
+}
+
+@media (max-width: 840px) {
+  .card__head { padding: 24px 22px 0; }
+  .card__stage { padding: 18px 22px 22px; }
+  .card__foot { padding: 14px 22px 15px; }
+  .card__title { font-size: 26px; }
+}

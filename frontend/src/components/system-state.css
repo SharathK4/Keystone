@@ -1,0 +1,58 @@
+.sys {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 64px 0 96px;
+  max-width: 62ch;
+}
+
+.sys__pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  /* No pulse. A blinking dot is the cheapest possible signal of "a machine is
+   * thinking", and this page does not make that claim anywhere else. */
+  opacity: 0.55;
+}
+
+.sys__title {
+  font-family: var(--display);
+  font-size: 30px;
+  color: var(--ink);
+  letter-spacing: 0.004em;
+}
+
+.sys__line {
+  font-size: 12.5px;
+  color: var(--ink-2);
+  line-height: 1.6;
+}
+
+.sys__path {
+  font-size: 10.5px;
+  color: var(--ink-4);
+  letter-spacing: 0.02em;
+}
+
+.sys__hint {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ink-3);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sys__hint code {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--ink-1);
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 7px 10px;
+}
+

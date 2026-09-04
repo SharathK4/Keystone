@@ -1,0 +1,100 @@
+.ks {
+  position: relative;
+  z-index: 1;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 56px 48px 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: filter var(--med) var(--ease);
+}
+
+/* The composition recedes while an analysis is open, but stays visible.
+ * Deliberately NOT a filter: filter, transform and backdrop-filter all make an
+ * element the containing block for position:fixed descendants, which is how the
+ * overlay ended up sized to the document instead of the viewport. */
+.ks.is-open { opacity: 0.92; }
+
+/* The shaft is cast onto the masthead and fades out before the panels. */
+.ks__light {
+  position: absolute;
+  inset: -64px 0 auto;
+  height: 720px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(180deg, #000 0%, #000 54%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 54%, transparent 100%);
+}
+
+/* --------------------------------------------------------------- masthead */
+
+.ks__masthead {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: rise 900ms var(--ease) forwards;
+}
+
+.ks__wordmark {
+  font-family: var(--display);
+  /* One heading on the page. It is the identity, so it is set as large as the
+   * column allows and nothing competes with it. */
+  font-size: clamp(58px, 8.6vw, 138px);
+  font-weight: 400;
+  line-height: 0.86;
+  letter-spacing: -0.014em;
+  color: var(--ink);
+  margin-left: -0.045em;
+}
+
+.ks__standfirst {
+  margin-top: 30px;
+  max-width: 46ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  letter-spacing: 0.008em;
+  opacity: 0;
+  animation: rise 900ms var(--ease) 220ms forwards;
+}
+
+/* ------------------------------------------------------------------- grid */
+
+.ks__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* Equal rows: the four panels are one composition, so they share a height
+   * rather than each sizing to its own content. */
+  grid-auto-rows: minmax(392px, 1fr);
+  gap: 20px;
+  flex: 1;
+}
+
+/* ------------------------------------------------------------- responsive */
+
+@media (max-width: 1380px) {
+  .ks { padding: 44px 32px 40px; }
+  .ks__grid { gap: 16px; }
+}
+
+@media (max-width: 1080px) {
+  /* Below two comfortable columns the grid becomes a vertical sequence. The
+   * panels keep their internal hierarchy and their height floor; this is not a
+   * different, smaller dashboard. */
+  .ks__grid { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+  .ks__grid > * { min-height: 412px; }
+}
+
+@media (max-width: 720px) {
+  .ks { padding: 36px 18px 30px; }
+  .ks__wordmark { font-size: clamp(40px, 13vw, 72px); }
+  .ks__standfirst { margin-top: 18px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks__masthead, .ks__standfirst { animation: none; opacity: 1; }
+}
