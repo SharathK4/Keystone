@@ -38,7 +38,7 @@ from __future__ import annotations
 
 import math
 from collections import defaultdict
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 from lce.config import ObjectiveSettings, SimulationSettings, get_settings
 from lce.domain.base import AMOUNT_TOL, new_id
@@ -127,7 +127,7 @@ class SimulationConfig:
 
     @property
     def n_ticks(self) -> int:
-        return max(1, int(math.ceil(self.horizon_hours / self.tick_hours)))
+        return max(1, math.ceil(self.horizon_hours / self.tick_hours))
 
 
 @dataclass(slots=True)
@@ -405,7 +405,9 @@ class LiquiditySimulator:
         per = outstanding / n
         start = max(t, parent.due_t)
 
-        self._replace_obligation(parent.model_copy(update={"status": ObligationStatus.RESTRUCTURED}))
+        self._replace_obligation(
+            parent.model_copy(update={"status": ObligationStatus.RESTRUCTURED})
+        )
         self._open_by_debtor[parent.debtor_id].discard(parent.obligation_id)
 
         children: list[str] = []

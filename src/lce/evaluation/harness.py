@@ -249,14 +249,18 @@ class ComparisonReport:
         }
 
     def best_predictor(self) -> EvaluationResult | None:
-        scored = [e for e in self.predictions if e.classification is not None]
-        return max(scored, key=lambda e: e.classification.f1) if scored else None
+        scored = [
+            (e, e.classification) for e in self.predictions if e.classification is not None
+        ]
+        return max(scored, key=lambda pair: pair[1].f1)[0] if scored else None
 
     def best_search(self) -> EvaluationResult | None:
-        scored = [e for e in self.searches if e.intervention is not None]
+        scored = [
+            (e, e.intervention) for e in self.searches if e.intervention is not None
+        ]
         if not scored:
             return None
-        return max(scored, key=lambda e: e.intervention.disruption_prevented)
+        return max(scored, key=lambda pair: pair[1].disruption_prevented)[0]
 
 
 def compare_predictors(
