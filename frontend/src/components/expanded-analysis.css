@@ -1,0 +1,166 @@
+.xa {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 44px 36px;
+  overflow-y: auto;
+}
+
+/* The composition underneath stays visible and recedes. */
+.xa__scrim {
+  position: fixed;
+  inset: 0;
+  border: none;
+  padding: 0;
+  cursor: default;
+  background: rgba(236, 237, 246, 0.74);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: xa-scrim 380ms var(--ease-out) forwards;
+}
+
+.xa__shell {
+  position: relative;
+  width: min(1240px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--lift-3);
+  animation: xa-rise 460ms var(--ease-out) forwards;
+  outline: none;
+}
+
+/* Focus is moved here on open so the keyboard follows the eye; that is not
+ * keyboard navigation and must not paint a ring round the whole dialog. */
+.xa__shell:focus-visible { outline: none; }
+
+/* ------------------------------------------------------------------- head */
+
+.xa__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 36px;
+  padding: 42px 52px 30px;
+}
+
+.xa__heading { flex: 1 1 auto; min-width: 0; }
+
+.xa__title {
+  font-family: var(--display);
+  font-size: 46px;
+  max-width: 22ch;
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.003em;
+  color: var(--ink);
+}
+
+.xa__subtitle {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+
+.xa__aside {
+  padding: 0 52px 4px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.xa__close {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
+}
+
+.xa__close:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+.xa__close span {
+  position: relative;
+  width: 11px;
+  height: 11px;
+}
+
+.xa__close span::before,
+.xa__close span::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 0;
+  width: 11px;
+  height: 1px;
+  background: var(--ink-1);
+}
+
+.xa__close span::before { transform: rotate(45deg); }
+.xa__close span::after  { transform: rotate(-45deg); }
+
+/* ------------------------------------------------------------------- body */
+
+.xa__head--bare { padding: 22px 52px 0; align-items: center; }
+
+.xa__body { padding: 10px 52px 52px; }
+
+/* ---------------------------------------------------------------- section */
+
+.xs { position: relative; margin-top: 58px; }
+.xs:first-child { margin-top: 0; }
+
+.xs__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+
+.xs__label {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.004em;
+}
+
+.xs__note {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink-4);
+  text-align: right;
+}
+
+@keyframes xa-scrim {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes xa-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.994); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xa__scrim, .xa__shell { animation: none; opacity: 1; transform: none; }
+}
+
+@media (max-width: 900px) {
+  .xa { padding: 20px 14px; }
+  .xa__head { padding: 24px 20px 18px; }
+  .xa__aside { padding: 0 20px 4px; }
+  .xa__title { font-size: 31px; }
+  .xa__body { padding: 20px 20px 24px; }
+  .xa__foot { padding: 12px 20px 14px; }
+}

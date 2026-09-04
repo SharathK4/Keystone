@@ -1,0 +1,31 @@
+/* The marginal caption. It sits above the artwork but must never intercept a
+ * pointer. */
+.annot {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  max-width: 132px;
+  font-size: 10.5px;
+  line-height: 1.35;
+  letter-spacing: 0.012em;
+  color: var(--ink-2);
+  font-style: italic;
+  opacity: 0;
+  animation: annot-in 700ms var(--ease) forwards;
+  animation-delay: var(--annot-delay, 0ms);
+}
+
+/* Both keyframes are used by the marks drawn inside the network figure as well
+ * as by this caption, so they stay here as the shared definition. */
+@keyframes ink-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes annot-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .annot { animation: none; opacity: 1; }
+}
