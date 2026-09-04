@@ -188,7 +188,7 @@ observations and report an interval several times too narrow.
 
 Newly written (`src/lce/learning/`): `problem`, `features`, `dataset`, `splits`,
 `baselines`, `pointprocess`, `graphmodel`, `calibration`, `evaluation`,
-`ablations`, `experiment`, `cli`. Plus `scripts/run_phase3.py`,
+`ablations`, `experiment`, `cli`. Plus `src/lce/scripts/run_phase3.py`,
 `tests/test_learning.py` and `LeakageError` in `lce.errors`.
 
 Two additive changes outside the new package, both backward compatible:
@@ -199,7 +199,7 @@ feature builder can drive the existing trunk without duplicating it.
 ## 9. Reproducing
 
 ```
-python scripts/run_phase3.py --seeds 101 ... 124 --ablations --out reports/phase3.json
+python src/lce/scripts/run_phase3.py --seeds 101 ... 124 --ablations --out reports/phase3.json
 ```
 
 or through the CLI:
