@@ -24,9 +24,10 @@ from typing import Any
 import numpy as np
 
 from lce.data.generator import NetworkGenerator, SyntheticNetwork
-from lce.domain.enums import OptimizerKind, PredictorKind, RunKind
+from lce.domain.enums import PredictorKind, RunKind
 from lce.domain.evaluation import EvaluationResult
 from lce.domain.shock import Shock
+from lce.errors import OptimizationError
 from lce.evaluation.harness import build_ground_truth, evaluate_prediction, evaluate_search
 from lce.experiments.config import ExperimentConfig
 from lce.experiments.tracker import RunTracker
@@ -38,7 +39,6 @@ from lce.optimization.candidates import generate_candidates
 from lce.optimization.search import SearchConfig, build_search
 from lce.simulation.counterfactual import CounterfactualEvaluator
 from lce.simulation.scenarios import unit_shock
-from lce.errors import OptimizationError
 
 logger = get_logger(__name__)
 

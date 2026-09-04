@@ -16,7 +16,7 @@ from the generator half of the same config.
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass, field, replace
+from dataclasses import asdict, dataclass, field, is_dataclass, replace
 from pathlib import Path
 from typing import Any
 
@@ -29,6 +29,13 @@ from lce.optimization.candidates import CandidateConfig
 from lce.optimization.search import SearchConfig
 from lce.seeds import SeedBundle, build_seed_bundle, config_hash
 from lce.simulation.engine import SimulationConfig
+
+
+def _objective_dict(objective: Any) -> dict[str, Any]:
+    """Objective settings arrive as either a dataclass or a pydantic model."""
+    if is_dataclass(objective) and not isinstance(objective, type):
+        return asdict(objective)
+    return dict(objective.model_dump())
 
 
 @dataclass(frozen=True, slots=True)
@@ -101,8 +108,7 @@ class ExperimentConfig:
             "propagation": self.propagation.to_dict(),
             "candidates": self.candidates.to_dict(),
             "search": self.search.to_dict(),
-            "objective": asdict(self.objective) if hasattr(self.objective, "__dataclass_fields__")
-            else self.objective.model_dump(),
+            "objective": _objective_dict(self.objective),
             "predictors": [str(p) for p in self.predictors],
             "optimizers": [str(o) for o in self.optimizers],
             "reference_optimizer": (
