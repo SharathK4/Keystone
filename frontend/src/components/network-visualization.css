@@ -1,0 +1,152 @@
+.nv {
+  display: block;
+  /* Square and centred: the ring is round, so the plot box has to be too, or
+   * the figure floats in a tall empty column. */
+  width: min(100%, 100cqh);
+  aspect-ratio: 1;
+  max-height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------- tier bands */
+
+.nv__band {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.nv--compact .nv__band { stroke-width: 2; opacity: 0.75; }
+
+.nv__band-label {
+  font-family: var(--text);
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--ink-4);
+}
+
+/* ------------------------------------------------------------------ chords */
+
+.nv__edge {
+  fill: none;
+  stroke: #767a8c;
+  stroke-linecap: round;
+  opacity: var(--edge-o, 0.3);
+  transition:
+    stroke var(--med) var(--ease),
+    opacity var(--med) var(--ease);
+}
+
+.nv__edge.is-hub { stroke: #3f4353; }
+
+/* Unrelated structure recedes far enough to be read as ground, not as line
+ * noise competing with the selected merchant's own chords. */
+.nv__edge.is-dim { opacity: calc(var(--edge-o, 0.3) * 0.09); }
+
+.nv__edge.is-lit {
+  stroke: var(--accent);
+  opacity: 0.92;
+}
+
+/* ------------------------------------------------------------------- nodes */
+
+.nv__node { cursor: pointer; }
+.nv--compact .nv__node { cursor: inherit; }
+
+.nv__hit { fill: transparent; }
+
+.nv__dot {
+  fill: #767a8c;
+  transition:
+    fill var(--med) var(--ease),
+    r var(--med) var(--ease),
+    opacity var(--med) var(--ease);
+}
+
+/* Selection ring, drawn under the node so it reads as emphasis on the mark
+ * rather than as a second mark. */
+.nv__halo {
+  fill: var(--accent-soft);
+  stroke: var(--accent-line);
+  stroke-width: 0.8;
+  pointer-events: none;
+}
+
+.nv__node.is-uncovered .nv__dot {
+  fill: #b3b6c6;
+  stroke: #8a8ea0;
+  stroke-width: 0.7;
+}
+
+.nv__node.is-focus .nv__dot {
+  fill: var(--accent);
+  stroke: var(--surface);
+  stroke-width: 1.6;
+}
+
+/* Counterparties of the selected merchant: readable, clearly subordinate. */
+.nv__node.is-near .nv__dot {
+  fill: var(--ink-1);
+  stroke: var(--surface);
+  stroke-width: 1;
+}
+
+.nv__node.is-isolated .nv__dot {
+  stroke: var(--accent);
+  stroke-width: 1.4;
+  fill: var(--surface);
+}
+
+.nv__node.is-dim { opacity: 0.16; }
+
+/* ---------------------------------------------------------------- the pen */
+
+.nv__note-text {
+  font-family: var(--text);
+  font-style: italic;
+  /* User units: the compact figure is drawn small, so it needs the larger
+   * nominal size to land at the same optical size on screen. */
+  font-size: 12px;
+  letter-spacing: 0.012em;
+  fill: var(--ink-2);
+  pointer-events: none;
+  opacity: 0;
+  animation: annot-in 700ms var(--ease) 1000ms forwards;
+}
+
+.nv--compact .nv__note-text { font-size: 17px; }
+
+.nv--dark .nv__note-text { fill: rgba(226, 238, 228, 0.88); }
+.nv--dark .nv__ink--note path { stroke: rgba(214, 230, 217, 0.68); }
+
+.nv__ink path {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ink-draw 900ms var(--ease) 900ms forwards;
+  vector-effect: non-scaling-stroke;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nv__ink path { animation: none; stroke-dashoffset: 0; }
+  .nv__note-text { animation: none; opacity: 1; }
+}
+
+/* ------------------------------------------------- light-on-dark variant */
+
+.nv--dark .nv__band { stroke: rgba(233, 240, 234, 0.26); }
+.nv--dark .nv__band-label { fill: rgba(233, 240, 234, 0.5); }
+.nv--dark .nv__edge { stroke: #dfe9e0; }
+.nv--dark .nv__edge.is-hub { stroke: #f2f7f2; }
+.nv--dark .nv__dot { fill: #cbd8cd; }
+.nv--dark .nv__node.is-uncovered .nv__dot { fill: transparent; stroke: #9fb4a3; stroke-width: 0.9; }
+.nv--dark .nv__ink path { stroke: rgba(240, 246, 240, 0.85); }
+
+.nv--dark .nv__halo { fill: rgba(255, 217, 194, 0.16); stroke: rgba(255, 217, 194, 0.4); }
+.nv--dark .nv__node.is-near .nv__dot { fill: rgba(240, 245, 250, 0.9); }

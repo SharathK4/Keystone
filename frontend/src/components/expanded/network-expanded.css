@@ -1,0 +1,186 @@
+.nx {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 34px;
+  align-items: start;
+}
+
+.nx__plot {
+  position: relative;
+  margin: 0;
+  min-width: 0;
+  height: 470px;
+  container-type: size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nx__note { max-width: 168px; }
+.nx__note--lead { left: 0; top: 4px; }
+.nx__note--outlier { right: 0; bottom: 34px; text-align: right; }
+
+.nx__hint {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-size: 9.5px;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+/* ------------------------------------------------------------------- rail */
+
+.nx__rail { min-width: 0; }
+
+.nx__profile { display: flex; flex-direction: column; gap: 14px; animation: rise 300ms var(--ease); }
+
+.nx__profile-head { display: flex; flex-direction: column; gap: 3px; }
+
+.nx__id { font-size: 24px; letter-spacing: 0.015em; color: var(--ink); }
+
+.nx__tier {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.nx__rows { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+
+.nx__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nx__row dt { font-size: 12px; color: var(--ink-2); min-width: 0; }
+
+.nx__row dd {
+  margin: 0;
+  text-align: right;
+  font-size: 15px;
+  color: var(--ink);
+  white-space: nowrap;
+  flex: none;
+}
+
+.nx__row dd em {
+  display: block;
+  font-style: normal;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-top: 1px;
+}
+
+.nx__row--accent dd { color: var(--accent); }
+.nx__row--accent dd em { color: var(--accent); opacity: 0.75; }
+
+/* ------------------------------------------------------------------- deps */
+
+.nx__deps {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.nx__deps-label {
+  font-size: 9px;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  margin-bottom: 3px;
+}
+
+.nx__dep {
+  display: grid;
+  grid-template-columns: 56px 1fr 42px 42px;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--ink-2);
+  padding: 3px 0;
+}
+
+.nx__dep-bar { height: 4px; background: var(--border); border-radius: 1px; overflow: hidden; }
+.nx__dep-bar i { display: block; height: 100%; background: var(--ink-2); }
+
+.nx__dep-val { text-align: right; color: var(--ink); }
+.nx__dep-lag { text-align: right; color: var(--ink-4); }
+
+.nx__isolated {
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 10.5px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+/* ---------------------------------------------------------------- ranking */
+
+.nx__ranking { display: flex; flex-direction: column; }
+
+.nx__rank {
+  display: grid;
+  grid-template-columns: 30px 74px minmax(80px, 1fr) 108px 180px;
+  align-items: center;
+  gap: 22px;
+  padding: 15px 12px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-soft);
+  cursor: pointer;
+  text-align: left;
+  border-radius: 6px;
+  transition: background var(--fast) var(--ease);
+}
+
+.nx__rank:hover, .nx__rank.is-on { background: var(--surface-2); }
+
+.nx__rank-n { font-size: 12px; color: var(--ink-4); }
+.nx__rank-id { font-size: 15px; color: var(--ink); letter-spacing: 0.008em; }
+
+.nx__rank-bar { height: 5px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+
+.nx__rank-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0.8;
+}
+
+.nx__rank.is-on .nx__rank-bar i { opacity: 1; }
+
+.nx__rank-val { font-size: 15px; color: var(--ink); text-align: right; letter-spacing: -0.012em; }
+
+.nx__rank-meta {
+  font-size: 11.5px;
+  color: var(--ink-4);
+  letter-spacing: 0.01em;
+  text-align: right;
+}
+
+.nx__correlations {
+  margin-top: 22px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 90ch;
+}
+
+.nx__correlations b { font-weight: 500; color: var(--ink); }
+
+@media (max-width: 1080px) {
+  .nx { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .nx__plot { height: min(72vw, 400px); }
+  .nx__note { display: none; }
+  .nx__rank { grid-template-columns: 20px 48px minmax(50px, 1fr) 70px; }
+  .nx__rank-meta { display: none; }
+}
