@@ -1,0 +1,146 @@
+.rzpc {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+}
+
+/* The card sits in its own light. */
+.rzpc__glow {
+  position: absolute;
+  inset: 6% 4%;
+  border-radius: 40px;
+  background: var(--rzp-glow);
+  filter: blur(38px);
+  opacity: 0.75;
+  z-index: 0;
+}
+
+.rzpc--compact .rzpc__glow { filter: blur(26px); opacity: 0.6; }
+
+.rzpc__card {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 1.62;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #f08a45, #d9501f 52%, #b3350f);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 196, 0.34),
+    0 2px 4px rgba(120, 46, 14, 0.18),
+    0 30px 60px -30px rgba(140, 52, 16, 0.62);
+  transition: transform var(--med) var(--ease), box-shadow var(--med) var(--ease);
+}
+
+.rzpc--compact .rzpc__card { border-radius: 16px; }
+
+.card:hover .rzpc__card {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 226, 196, 0.34),
+    0 2px 4px rgba(120, 46, 14, 0.2),
+    0 40px 72px -32px rgba(140, 52, 16, 0.7);
+}
+
+/* ---- the generated surface ---- */
+
+.rzpc__texture {
+  position: absolute;
+  inset: -8%;
+  width: 116%;
+  height: 116%;
+  opacity: 0.82;
+  mix-blend-mode: overlay;
+}
+
+/* A broad highlight so the surface reads as curved, not printed. */
+.rzpc__sheen {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(78% 58% at 20% 6%, rgba(255, 224, 178, 0.5), transparent 62%),
+    radial-gradient(64% 74% at 92% 96%, rgba(150, 34, 8, 0.44), transparent 66%);
+}
+
+/* ---- content ---- */
+
+.rzpc__body {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 26px 28px;
+  color: #fff5ec;
+}
+
+.rzpc--compact .rzpc__body { padding: 18px 20px; }
+
+.rzpc__top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+
+.rzpc__brand {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  text-shadow: 0 1px 2px rgba(120, 40, 10, 0.28);
+}
+
+.rzpc--compact .rzpc__brand { font-size: 16px; }
+
+.rzpc__status {
+  font-size: 8.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(255, 245, 236, 0.2);
+  border: 1px solid rgba(255, 245, 236, 0.3);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+.rzpc__bottom { display: flex; flex-direction: column; gap: 3px; }
+
+.rzpc__amount { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+
+.rzpc__amount-value {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.034em;
+  text-shadow: 0 1px 3px rgba(120, 40, 10, 0.24);
+}
+
+.rzpc--compact .rzpc__amount-value { font-size: 28px; }
+
+.rzpc__amount-unit { font-size: 13px; color: rgba(255, 240, 228, 0.86); }
+.rzpc--compact .rzpc__amount-unit { font-size: 11px; }
+
+.rzpc__terms {
+  font-size: 11.5px;
+  color: rgba(255, 240, 228, 0.86);
+  letter-spacing: 0.005em;
+}
+
+.rzpc--compact .rzpc__terms { font-size: 10px; }
+
+.rzpc__for {
+  margin-top: 5px;
+  font-size: 9.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 236, 220, 0.66);
+}
+
+.rzpc--compact .rzpc__for { font-size: 8.5px; margin-top: 3px; }
+
+/* Fill mode: matches the footprint of the other three tiles on the landing
+ * grid, so the four cards read as one set rather than three plus a postcard. */
+.rzpc--fill { max-width: none; height: 100%; }
+.rzpc--fill .rzpc__card { aspect-ratio: auto; height: 100%; border-radius: 18px; }
+.rzpc--fill .rzpc__glow { border-radius: 44px; }
+.rzpc--fill .rzpc__body { padding: 26px 28px; }
+.rzpc--fill .rzpc__brand { font-size: 21px; }
+.rzpc--fill .rzpc__amount-value { font-size: 40px; }
+.rzpc--fill .rzpc__terms { font-size: 11.5px; }
+.rzpc--fill .rzpc__for { font-size: 9.5px; }
