@@ -9,7 +9,7 @@ import pytest
 
 from lce.domain.enums import PredictorKind, RecurrencePattern
 from lce.domain.events import PaymentEvent
-from lce.errors import ModelError, NotFoundError
+from lce.errors import NotFoundError
 from lce.models.dependency import (
     DependencyLearner,
     DependencyLearnerConfig,

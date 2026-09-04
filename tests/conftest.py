@@ -69,7 +69,7 @@ def _test_environment(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None
 
 
 @pytest.fixture
-def uow() -> Iterator["object"]:
+def uow() -> Iterator[object]:
     """A unit of work on a clean transaction, rolled back after the test."""
     from lce.data.unit_of_work import UnitOfWork
 
@@ -127,7 +127,7 @@ def sim_config():
 
 
 @pytest.fixture
-def api_client() -> Iterator["object"]:
+def api_client() -> Iterator[object]:
     """FastAPI test client sharing the test database."""
     from fastapi.testclient import TestClient
 
@@ -152,6 +152,9 @@ def pytest_configure(config: pytest.Config) -> None:
     config.addinivalue_line("markers", "requires_torch: needs the optional ml extra")
     config.addinivalue_line("markers", "requires_ortools: needs the optional opt extra")
     config.addinivalue_line("markers", "requires_postgres: needs a live PostgreSQL")
+    config.addinivalue_line(
+        "markers", "razorpay_live: hits the real Razorpay Test Mode API"
+    )
 
 
 def _module_available(name: str) -> bool:
@@ -162,3 +165,26 @@ def _module_available(name: str) -> bool:
 
 HAS_TORCH = _module_available("torch") and _module_available("torch_geometric")
 HAS_ORTOOLS = _module_available("ortools")
+
+
+def razorpay_credentials_present() -> bool:
+    """Whether real Test-Mode credentials are configured for this checkout.
+
+    Constructed fresh rather than read from ``os.environ`` or the cached global
+    settings: credentials normally live in ``.env``, which pydantic-settings
+    loads but which never reaches ``os.environ``, and the session fixture
+    rewrites parts of the global settings for the test database. Building a
+    ``RazorpaySettings`` here asks exactly the operator's question - are there
+    usable Test-Mode keys on this machine?
+    """
+    from lce.config import RazorpayMode, RazorpaySettings
+
+    try:
+        settings = RazorpaySettings()
+    except Exception:
+        return False
+    return bool(
+        settings.configured
+        and settings.mode is RazorpayMode.TEST
+        and settings.key_id.startswith("rzp_test_")
+    )

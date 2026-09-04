@@ -7,6 +7,7 @@ from dataclasses import replace
 import numpy as np
 import pytest
 
+from conftest import HAS_ORTOOLS
 from lce.domain.enums import InterventionType, OptimizerKind
 from lce.domain.intervention import Intervention
 from lce.errors import OptimizationError
@@ -33,8 +34,6 @@ from lce.optimization.search import (
 from lce.optimization.systemic import compute_systemic_importance
 from lce.simulation.counterfactual import CounterfactualEvaluator
 from lce.simulation.scenarios import unit_shock
-
-from conftest import HAS_ORTOOLS
 
 
 class TestMetrics:
