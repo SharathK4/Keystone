@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import time
 import uuid
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Sequence
 from contextlib import asynccontextmanager
 from typing import Any
 
@@ -20,7 +20,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from lce import __version__
-from lce.api.routers import analysis, health, networks, runs, webhooks
+from lce.api.routers import (
+    analysis,
+    analytics,
+    health,
+    inference,
+    networks,
+    runs,
+    webhooks,
+)
 from lce.config import Settings, get_settings
 from lce.errors import LCEError
 from lce.logging import configure_logging, get_logger, set_request_id
@@ -148,6 +156,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(analysis.router, prefix=prefix)
     app.include_router(runs.router, prefix=prefix)
     app.include_router(webhooks.router, prefix=prefix)
+    # The serving surface. Registered last so a deployment that only wants
+    # inference and analytics can drop the routers above without reordering.
+    app.include_router(inference.router, prefix=prefix)
+    app.include_router(analytics.router, prefix=prefix)
 
     @app.get("/", include_in_schema=False)
     def root() -> dict[str, str]:
@@ -165,7 +177,7 @@ def _jsonable(payload: dict[str, Any]) -> dict[str, Any]:
     return {k: _coerce(v) for k, v in (payload or {}).items()}
 
 
-def _jsonable_list(items: list[Any]) -> list[Any]:
+def _jsonable_list(items: Sequence[Any]) -> list[Any]:
     return [
         {k: _coerce(v) for k, v in item.items()} if isinstance(item, dict) else _coerce(item)
         for item in items
