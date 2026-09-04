@@ -1,0 +1,82 @@
+@import './tokens.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  /* A panel misbehaving must never turn the whole page into a sideways
+   * scroller; it should be visibly clipped instead so the bug is obvious. */
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 14px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The ground. A very shallow gradient between the three stops - cooler at the
+ * lower right, brighter under the masthead - so the page is not a flat fill
+ * without ever reading as a coloured background. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(120% 90% at 16% -14%, var(--paper-bright), transparent 58%),
+    radial-gradient(96% 80% at 96% 104%, var(--paper-cool), transparent 62%),
+    linear-gradient(163deg, var(--paper-bright) 0%, var(--paper) 46%, var(--paper-cool) 100%);
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Utility: any element holding a figure. */
+.num {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: var(--num);
+}
+
+::selection {
+  background: rgba(181, 70, 42, 0.14);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

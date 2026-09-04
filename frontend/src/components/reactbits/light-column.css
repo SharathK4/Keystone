@@ -1,0 +1,86 @@
+.lightcol {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lightcol span {
+  position: absolute;
+  display: block;
+  /* Cast from above and landing on the wordmark, so every layer is anchored to
+   * the top and fades out before the cards begin. */
+  top: -18%;
+  transform-origin: 50% 0;
+}
+
+/* Wide wash: the body of the shaft, warmed toward gold. */
+.lightcol__wash {
+  left: 0%;
+  width: 50%;
+  height: 122%;
+  filter: blur(64px);
+  opacity: calc(var(--lc-i) * 0.78);
+  background: linear-gradient(
+    177deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(253, 253, 255, 0.6) 34%,
+    rgba(250, 251, 255, 0.22) 62%,
+    transparent 88%
+  );
+  animation: lc-wash 46s var(--ease) infinite alternate;
+}
+
+/* Narrow core: gives the shaft an edge without giving it a line. */
+.lightcol__core {
+  left: 8%;
+  width: 19%;
+  height: 100%;
+  filter: blur(38px);
+  opacity: calc(var(--lc-i) * 0.72);
+  background: linear-gradient(
+    178deg,
+    rgba(255, 254, 250, 0.92) 0%,
+    rgba(255, 251, 240, 0.36) 44%,
+    transparent 78%
+  );
+  animation: lc-core 58s var(--ease) infinite alternate;
+}
+
+/* The pool where it lands, sitting just behind the wordmark's baseline. */
+.lightcol__pool {
+  top: auto;
+  bottom: 22%;
+  left: -4%;
+  width: 62%;
+  height: 40%;
+  filter: blur(54px);
+  opacity: calc(var(--lc-i) * 0.62);
+  background: radial-gradient(
+    58% 100% at 28% 100%,
+    rgba(255, 253, 246, 0.72),
+    rgba(252, 251, 250, 0.24) 54%,
+    transparent 74%
+  );
+  animation: lc-pool 52s var(--ease) infinite alternate;
+}
+
+@keyframes lc-wash {
+  to { transform: translateX(22px) rotate(0.8deg); opacity: calc(var(--lc-i) * 0.66); }
+}
+
+@keyframes lc-core {
+  to { transform: translateX(-14px) rotate(-0.6deg); opacity: calc(var(--lc-i) * 0.52); }
+}
+
+@keyframes lc-pool {
+  to { transform: translateX(16px); opacity: calc(var(--lc-i) * 0.46); }
+}
+
+/* Nothing ambient runs while an analysis is open on top of it. */
+.ks.is-open .lightcol span { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .lightcol span { animation: none; }
+}

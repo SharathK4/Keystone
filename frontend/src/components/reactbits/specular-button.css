@@ -1,0 +1,87 @@
+.specular {
+  --px: 50%;
+  --py: 120%;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  isolation: isolate;
+  overflow: hidden;
+  font-size: 13.5px;
+  font-weight: 550;
+  letter-spacing: 0.01em;
+  transition:
+    transform var(--fast) var(--ease),
+    box-shadow var(--med) var(--ease);
+}
+
+.specular--product {
+  background: linear-gradient(178deg, #2c2e3a, #17181f);
+  color: #fbf8f3;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.13),
+    0 1px 2px rgba(24, 26, 36, 0.24),
+    0 12px 28px -16px rgba(24, 26, 36, 0.55);
+}
+
+.specular--quiet {
+  background: transparent;
+  color: var(--ink-1);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+
+/* The highlight itself: a soft radial pinned to the pointer. */
+.specular__sheen {
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(
+    38% 60% at var(--px) var(--py),
+    rgba(255, 244, 226, 0.5),
+    rgba(255, 236, 210, 0.16) 42%,
+    transparent 70%
+  );
+  transition: opacity var(--med) var(--ease);
+}
+
+.specular--quiet .specular__sheen {
+  background: radial-gradient(
+    40% 62% at var(--px) var(--py),
+    rgba(179, 69, 42, 0.14),
+    transparent 70%
+  );
+}
+
+.specular:hover .specular__sheen {
+  opacity: 1;
+}
+
+.specular__label {
+  position: relative;
+  z-index: 1;
+}
+
+.specular:hover {
+  transform: translateY(-1px);
+}
+
+.specular:active {
+  transform: translateY(0);
+}
+
+.specular:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
+.specular:disabled .specular__sheen {
+  opacity: 0;
+}
