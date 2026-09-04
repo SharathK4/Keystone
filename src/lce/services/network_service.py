@@ -16,9 +16,10 @@ construction, so the cache cannot go stale.
 from __future__ import annotations
 
 from collections import OrderedDict
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from lce.data.generator import GeneratorConfig, NetworkGenerator, SyntheticNetwork
+if TYPE_CHECKING:  # the generator is a build-time dependency, not a serving one
+    from lce.data.generator import GeneratorConfig, SyntheticNetwork
 from lce.data.unit_of_work import UnitOfWork
 from lce.domain.enums import RunKind
 from lce.errors import NotFoundError
@@ -74,6 +75,8 @@ class NetworkService:
         self, config: GeneratorConfig | None = None, *, notes: str = ""
     ) -> SyntheticNetwork:
         """Generate a synthetic network and persist it in one transaction."""
+        from lce.data.generator import GeneratorConfig, NetworkGenerator
+
         cfg = config or GeneratorConfig()
         existing = self.uow.datasets.by_version(cfg.dataset_version)
         if existing is not None:

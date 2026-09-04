@@ -18,7 +18,6 @@ from lce.api.schemas import (
     MerchantSummary,
     PagedMerchants,
 )
-from lce.data.generator import GeneratorConfig
 from lce.errors import NotFoundError
 from lce.graph.temporal_graph import TemporalPaymentGraph
 from lce.models.dependency import DependencyLearnerConfig
@@ -56,6 +55,8 @@ def generate_dataset(
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="coverage_low must not exceed coverage_high",
         )
+
+    from lce.data.generator import GeneratorConfig
 
     config = replace(
         GeneratorConfig(),
