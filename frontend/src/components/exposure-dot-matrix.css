@@ -1,0 +1,172 @@
+.dm {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------- field */
+
+.dm__field {
+  flex: 0 1 auto;
+  min-width: 0;
+  width: 430px;
+  max-width: 100%;
+}
+
+.dm--compact .dm__field { width: 262px; }
+
+.dm__grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.dm--compact .dm__grid { gap: 8px; }
+
+.dm__dot {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition:
+    background var(--slow) var(--ease),
+    box-shadow var(--slow) var(--ease),
+    transform var(--fast) var(--ease);
+}
+
+/* The ramp runs with the ordering: thin cover is heavy, and the field lightens
+ * left to right as merchants cover more of their own book. */
+.dm__dot--thin { background: var(--ink-1); }
+.dm__dot--covered { background: #c5c9db; }
+.dm__dot--idle { background: #e4e6f1; }
+.dm__dot--reached { background: var(--accent); }
+
+/* Origin of the shock: a ring, not a fourth colour. */
+.dm__dot.is-origin { box-shadow: 0 0 0 3px var(--accent-soft); }
+.dm__dot--reached { box-shadow: 0 0 0 2.5px rgba(181, 70, 42, 0.16); }
+.dm__dot--reached.is-origin { box-shadow: 0 0 0 4px rgba(181, 70, 42, 0.22); }
+
+.dm__dot:hover { transform: scale(1.6); }
+
+/* The scale caption under the field: what the left-to-right order means. */
+.dm__scale {
+  margin-top: 13px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.dm__scale i { height: 1px; background: var(--border); }
+
+/* ------------------------------------------------------------------ legend */
+
+.dm__legend {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
+  min-width: 0;
+  max-width: 44ch;
+}
+
+.dm--compact .dm__legend { gap: 14px; max-width: none; }
+
+.dm__caption {
+  margin: 0 0 2px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  letter-spacing: 0.004em;
+}
+
+.dm__row {
+  display: grid;
+  grid-template-columns: 12px auto 1fr;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.dm__swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c5c9db;
+  transform: translateY(-1px);
+}
+
+.dm__row--thin .dm__swatch { background: var(--ink-1); }
+.dm__row--idle .dm__swatch { background: #e4e6f1; }
+.dm__row--reached .dm__swatch { background: var(--accent); }
+
+.dm__n {
+  font-size: 27px;
+  font-weight: 350;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.dm--compact .dm__n { font-size: 23px; }
+
+.dm__row--reached .dm__n { color: var(--accent); }
+.dm__row--idle .dm__n { color: var(--ink-3); }
+
+.dm__label {
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-2);
+  line-height: 1.35;
+}
+
+.dm--compact .dm__label { font-size: 11px; }
+
+.dm__aside {
+  grid-column: 2 / -1;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
+}
+
+.dm__note {
+  margin: 2px 0 0;
+  padding-top: 13px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--ink-3);
+  letter-spacing: 0.004em;
+}
+
+@media (max-width: 900px) {
+  .dm { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .dm__field, .dm--compact .dm__field { width: 300px; }
+  .dm__legend { max-width: none; }
+}
+
+/* ------------------------------------------------- light-on-dark variant */
+
+.dm--dark .dm__dot--thin { background: rgba(247, 250, 252, 0.86); }
+.dm--dark .dm__dot--covered { background: rgba(244, 247, 250, 0.34); }
+.dm--dark .dm__dot--idle { background: rgba(244, 247, 250, 0.14); }
+.dm--dark .dm__dot--reached { background: #ffd9c2; box-shadow: 0 0 0 2.5px rgba(255, 217, 194, 0.24); }
+.dm--dark .dm__dot.is-origin { box-shadow: 0 0 0 3px rgba(255, 217, 194, 0.26); }
+.dm--dark .dm__dot--reached.is-origin { box-shadow: 0 0 0 4px rgba(255, 217, 194, 0.3); }
+
+.dm--dark .dm__swatch { background: rgba(244, 247, 250, 0.34); }
+.dm--dark .dm__row--thin .dm__swatch { background: rgba(247, 250, 252, 0.86); }
+.dm--dark .dm__row--idle .dm__swatch { background: rgba(244, 247, 250, 0.14); }
+.dm--dark .dm__row--reached .dm__swatch { background: #ffd9c2; }
+
+.dm--dark .dm__n { color: #f7fafc; }
+.dm--dark .dm__row--reached .dm__n { color: #ffd9c2; }
+.dm--dark .dm__row--idle .dm__n { color: rgba(240, 245, 250, 0.55); }
+.dm--dark .dm__label { color: rgba(240, 245, 250, 0.72); }
+.dm--dark .dm__scale { color: rgba(240, 245, 250, 0.4); }
+.dm--dark .dm__scale i { background: rgba(240, 245, 250, 0.16); }

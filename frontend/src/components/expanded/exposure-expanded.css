@@ -1,0 +1,201 @@
+.xx { transition: opacity var(--med) var(--ease); }
+.xx.is-busy { opacity: 0.42; }
+
+/* ---------------------------------------------------------------- figures */
+
+.xx__figures {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 30px;
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.xx__fig { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+
+.xx__fig-value {
+  font-size: 34px;
+  font-weight: 350;
+  line-height: 1;
+  letter-spacing: -0.026em;
+  color: var(--ink);
+}
+
+.xx__fig.is-lead .xx__fig-value { font-size: 56px; color: var(--accent); letter-spacing: -0.036em; }
+
+.xx__fig-label {
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.xx__fig-note { font-size: 11.5px; color: var(--ink-4); line-height: 1.35; }
+
+/* --------------------------------------------------------------- spectrum */
+
+.xx__spectrum { position: relative; }
+
+/* ------------------------------------------------------------------ split */
+
+.xx__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 34px 56px;
+  align-items: start;
+}
+
+/* Both halves are section-first-children, so neither picks up the rule that
+ * spaces one section from the last. The gap belongs to the wrapper. */
+.xx__split { margin-top: 58px; }
+.xx__split > .xs { margin-top: 0; }
+
+/* ----------------------------------------------------------------- timing */
+
+.xx__timing {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 8px;
+}
+
+.xx__bar {
+  display: grid;
+  grid-template-rows: 18px 118px 20px;
+  align-items: end;
+  gap: 5px;
+  justify-items: center;
+}
+
+.xx__bar-n {
+  font-size: 13px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* An empty bucket keeps its baseline, so the shape of the timing reads as a
+ * distribution with gaps rather than as a chart with missing bars. */
+.xx__bar-col {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--border);
+}
+
+.xx__bar-fill {
+  display: block;
+  width: 100%;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: var(--border);
+  transition: height var(--med) var(--ease), background var(--med) var(--ease);
+}
+
+.xx__bar.is-hit .xx__bar-fill { background: var(--accent); }
+
+.xx__bar-tick {
+  font-size: 9.5px;
+  color: var(--ink-4);
+  letter-spacing: 0.04em;
+}
+
+.xx__none { font-size: 11.5px; line-height: 1.6; color: var(--ink-2); max-width: 46ch; }
+
+/* ------------------------------------------------------------- confidence */
+
+.xx__conf { margin: 0; display: flex; flex-direction: column; gap: 17px; }
+
+.xx__conf-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.xx__conf-row dt { font-size: 12.5px; color: var(--ink-2); }
+
+.xx__conf-row dd {
+  margin: 0;
+  text-align: right;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.xx__conf-row dd em {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--ink-4);
+  margin-top: 1px;
+  max-width: 26ch;
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------------------- reached */
+
+.xx__affected { display: flex; flex-direction: column; }
+
+.xx__hit {
+  display: grid;
+  grid-template-columns: 30px 74px minmax(110px, 1fr) 90px 70px 110px;
+  align-items: baseline;
+  gap: 22px;
+  padding: 15px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 14px;
+}
+
+.xx__hit-rank { color: var(--ink-4); font-size: 12px; }
+.xx__hit-id { color: var(--ink); font-size: 15px; }
+.xx__hit-tier {
+  color: var(--ink-3);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+}
+.xx__hit-depth { color: var(--ink-2); font-size: 12.5px; }
+.xx__hit-time { color: var(--ink-2); text-align: right; }
+.xx__hit-value { color: var(--accent); text-align: right; }
+
+/* ---------------------------------------------------------------- compare */
+
+.xx__compare { display: flex; flex-direction: column; }
+
+.xx__row {
+  display: grid;
+  grid-template-columns: 190px minmax(100px, 1fr) 110px 108px 100px;
+  align-items: center;
+  gap: 24px;
+  padding: 15px 12px;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-soft);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--fast) var(--ease);
+}
+
+.xx__row:hover { background: var(--surface-2); }
+.xx__row.is-on { background: var(--surface-2); }
+
+.xx__row-name { font-size: 15px; color: var(--ink-1); }
+.xx__row.is-on .xx__row-name { color: var(--ink); font-weight: 500; }
+
+.xx__row-bar { height: 5px; background: var(--surface-2); border-radius: 3px; overflow: hidden; }
+.xx__row-bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: 0.66; }
+.xx__row.is-on .xx__row-bar i { opacity: 1; }
+
+.xx__row-val { font-size: 15px; color: var(--ink); text-align: right; letter-spacing: -0.012em; }
+.xx__row-n { font-size: 12px; color: var(--ink-4); text-align: right; }
+.xx__row-red { font-size: 13px; color: var(--ink-2); text-align: right; }
+
+@media (max-width: 1080px) {
+  .xx__figures { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .xx__split { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .xx__note { display: none; }
+  .xx__hit { grid-template-columns: 20px 52px 1fr 62px; }
+  .xx__hit-tier, .xx__hit-time { display: none; }
+  .xx__row { grid-template-columns: 120px 1fr 76px; }
+  .xx__row-n, .xx__row-red { display: none; }
+}
