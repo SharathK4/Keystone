@@ -5,6 +5,8 @@
 ![alt text](image-3.png)
 ![alt text](image-4.png)
 ![alt text](image-6.png)
+
+**Demo Link: https://www.loom.com/share/24f2ece2fffc42dfac401686578f81c4**
 **A liquidity shock at one merchant, followed all the way to the capital that stops it.**
 
 Merchants on a payment platform do not fail independently. A supplier who is
