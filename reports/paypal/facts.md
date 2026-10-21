@@ -36,6 +36,18 @@ fetchers).
 
 ## Payouts
 
+- Request and response contract — **VERIFIED against PayPal's published spec**
+  (`payments_payouts_batch_v1.json`, v1.9, commit `90e8041`, Apache-2.0, vendored
+  in `tests/fixtures/paypal/`): body `{sender_batch_header, items[]}`; each item
+  requires `amount {currency, value: string}` and `receiver` (≤ 127 chars);
+  `recipient_type ∈ {EMAIL, PHONE, PAYPAL_ID}`; `sender_batch_id` ≤ 256,
+  `sender_item_id` ≤ 63, `note` ≤ 4000; header `PayPal-Request-Id` ≤ 1000
+  ("the server stores keys for 30 days"); a `sender_batch_id` reused within 30
+  days is rejected. Batch status `{DENIED, PENDING, PROCESSING, SUCCESS,
+  CANCELED}`; item `transaction_status {SUCCESS, FAILED, PENDING, UNCLAIMED,
+  RETURNED, ONHOLD, BLOCKED, REFUNDED, REVERSED}`. Paths: `POST /v1/payments/payouts`,
+  `GET /v1/payments/payouts/{id}`, `GET /v1/payments/payouts-item/{id}`.
+  *Spec-verified, not yet sandbox-verified* — see `spikes.md`.
 - Item webhook events — **VERIFIED**
   (<https://developer.paypal.com/api/rest/webhooks/event-names/>):
   `PAYMENT.PAYOUTS-ITEM.{SUCCEEDED, FAILED, HELD, BLOCKED, RETURNED, UNCLAIMED,
