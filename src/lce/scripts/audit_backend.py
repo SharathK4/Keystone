@@ -312,6 +312,68 @@ def audit_razorpay(audit: Audit, *, live: bool) -> None:
     audit.notes["razorpay"] = {"probed": True, "capabilities": capabilities}
 
 
+def audit_paypal(audit: Audit) -> None:
+    """PayPal is sandbox-only by construction, and money moves only by approval."""
+    from fastapi import FastAPI
+
+    from lce.api.app import create_app
+    from lce.config import PayPalSettings
+    from lce.domain.enums import InterventionType
+    from lce.domain.intervention import Intervention
+    from lce.errors import ConfigError, ExecutionRefused
+    from lce.execution.paypal import PayPalSandboxProvider
+    from lce.paypal.client import PayPalClient
+
+    def refused(cfg: PayPalSettings) -> bool:
+        outcomes = []
+        for build in (PayPalClient, PayPalSandboxProvider):
+            try:
+                build(cfg)
+                outcomes.append(False)
+            except ConfigError:
+                outcomes.append(True)
+        return all(outcomes)
+
+    live = PayPalSettings(_env_file=None, PAYPAL_CLIENT_ID="x", PAYPAL_CLIENT_SECRET="y",
+                          PAYPAL_MODE="live")
+    production = PayPalSettings(_env_file=None, PAYPAL_CLIENT_ID="x",
+                                PAYPAL_CLIENT_SECRET="y",
+                                PAYPAL_API_BASE="https://api-m.paypal.com")
+    audit.check("paypal_live_mode_refused", refused(live), "PAYPAL_MODE=live was accepted")
+    audit.check("paypal_production_host_refused", refused(production),
+                "a production PayPal host was accepted")
+
+    secret = "audit-probe-secret-value"
+    cfg = PayPalSettings(_env_file=None, PAYPAL_CLIENT_ID=secret, PAYPAL_CLIENT_SECRET=secret,
+                         PAYPAL_WEBHOOK_ID=secret)
+    leaked = secret in repr(cfg) or secret in str(cfg.safe_dump())
+    audit.check("paypal_secrets_not_in_repr", not leaked, "a PayPal secret appeared in output")
+
+    provider = PayPalSandboxProvider(cfg)
+    action = Intervention(type=InterventionType.LIQUIDITY_INJECTION, merchant_id="m0000",
+                          t=0.0, amount=1.0)
+    try:
+        provider.execute(action, dry_run=False)
+        door_closed = False
+    except ExecutionRefused:
+        door_closed = True
+    audit.check("paypal_generic_interface_cannot_pay", door_closed,
+                "the generic provider interface executed without an approval")
+
+    app: FastAPI = create_app()
+    published = {getattr(r, "path", "") for r in app.routes}
+    required = {
+        "/api/v1/execution/paypal",
+        "/api/v1/execution/plans/{scenario_id}",
+        "/api/v1/execution/plans/{scenario_id}/approvals",
+        "/api/v1/execution/plans/{scenario_id}/executions",
+        "/api/v1/execution/records/{record_id}/refresh",
+        "/api/v1/execution/ledger",
+    }
+    missing = sorted(required - published)
+    audit.check("execution_routes_present", not missing, f"missing: {missing}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Backend freeze audit")
     parser.add_argument("--artifacts", default="artifacts")
@@ -335,6 +397,7 @@ def main() -> int:
     audit_api(audit)
     audit_migrations(audit)
     audit_razorpay(audit, live=args.live)
+    audit_paypal(audit)
 
     payload = {
         "passed": audit.passed,

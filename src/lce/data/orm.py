@@ -622,3 +622,118 @@ class WebhookEventRow(Base, TimestampMixin):
     processed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     error: Mapped[str | None] = mapped_column(Text)
     payload: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+
+
+# -------------------------------------------------------------------- execution
+#
+# Everything below records what a human approved and what was sent to a payment
+# provider. None of it feeds the analysis, and the analysis serves without it:
+# these tables are needed only by the execution routes.
+#
+# Executed money is stored in the sandbox currency's **minor units** (integer),
+# never as a float, and always next to its currency code. Analytic rupee amounts
+# are stored as the exact text of the float the snapshot holds, so the two kinds
+# of amount cannot be summed by accident.
+
+
+class PayPalIdentityRow(Base, TimestampMixin):
+    """A merchant in the synthetic network mapped to a PayPal sandbox account.
+
+    Only mapped merchants can be paid out to. This is the "live subset": the
+    analysis covers all merchants, execution only these.
+    """
+
+    __tablename__ = "paypal_identities"
+    __table_args__ = (UniqueConstraint("merchant_id", name="uq_paypal_identity_merchant"),)
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    merchant_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    recipient_type: Mapped[str] = mapped_column(String(16), nullable=False)
+    receiver: Mapped[str] = mapped_column(String(127), nullable=False)
+    label: Mapped[str] = mapped_column(String(128), nullable=False, default="")
+
+
+class ExecutionApprovalRow(Base):
+    """A human's explicit approval of one exact plan, bound to its hash."""
+
+    __tablename__ = "execution_approvals"
+    __table_args__ = (
+        UniqueConstraint("approval_id", name="uq_execution_approval_id"),
+        Index("ix_execution_approval_plan", "plan_hash"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    approval_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    plan_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    snapshot_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    scenario_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    provider: Mapped[str] = mapped_column(String(32), nullable=False)
+    approver: Mapped[str] = mapped_column(String(80), nullable=False)
+    executed_total_minor: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), nullable=False)
+    demo_scale: Mapped[str] = mapped_column(String(32), nullable=False)
+    detail: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    approved_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+
+class ExecutionRecordRow(Base, TimestampMixin):
+    """One action of an approved plan, and what the provider did with it.
+
+    ``idempotency_key`` is unique: the database itself refuses a second record
+    for the same (approved plan, action), which is the guard against paying
+    twice. The same key is sent to PayPal as ``PayPal-Request-Id`` and
+    ``sender_batch_id``, so PayPal refuses a duplicate too.
+    """
+
+    __tablename__ = "execution_records"
+    __table_args__ = (
+        UniqueConstraint("record_id", name="uq_execution_record_id"),
+        UniqueConstraint("idempotency_key", name="uq_execution_idempotency"),
+        Index("ix_execution_record_plan", "plan_hash"),
+        Index("ix_execution_record_scenario", "scenario_id"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    record_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    idempotency_key: Mapped[str] = mapped_column(String(64), nullable=False)
+    approval_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    plan_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    scenario_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    action_key: Mapped[str] = mapped_column(String(64), nullable=False)
+    merchant_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    action_type: Mapped[str] = mapped_column(String(32), nullable=False)
+    analytic_amount_inr: Mapped[str] = mapped_column(String(40), nullable=False)
+    executed_minor: Mapped[int] = mapped_column(BigInteger, nullable=False)
+    currency: Mapped[str] = mapped_column(String(3), nullable=False)
+    provider: Mapped[str] = mapped_column(String(32), nullable=False)
+    status: Mapped[str] = mapped_column(String(16), nullable=False)
+    reason: Mapped[str | None] = mapped_column(Text)
+    provider_batch_id: Mapped[str | None] = mapped_column(String(64))
+    provider_item_id: Mapped[str | None] = mapped_column(String(64))
+    provider_status: Mapped[str | None] = mapped_column(String(32))
+    debug_id: Mapped[str | None] = mapped_column(String(64))
+
+
+class ExecutionEventRow(Base):
+    """Append-only audit trail: every approval, submission and status change."""
+
+    __tablename__ = "execution_events"
+    __table_args__ = (
+        UniqueConstraint("event_id", name="uq_execution_event_id"),
+        Index("ix_execution_event_scenario", "scenario_id"),
+        Index("ix_execution_event_record", "record_id"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    event_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    scenario_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    plan_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    record_id: Mapped[str | None] = mapped_column(String(40))
+    kind: Mapped[str] = mapped_column(String(40), nullable=False)
+    status: Mapped[str | None] = mapped_column(String(16))
+    detail: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )

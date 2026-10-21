@@ -23,6 +23,7 @@ from lce import __version__
 from lce.api.routers import (
     analysis,
     analytics,
+    execution,
     health,
     inference,
     networks,
@@ -160,6 +161,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # inference and analytics can drop the routers above without reordering.
     app.include_router(inference.router, prefix=prefix)
     app.include_router(analytics.router, prefix=prefix)
+    app.include_router(execution.router, prefix=prefix)
 
     @app.get("/", include_in_schema=False)
     def root() -> dict[str, str]:

@@ -267,6 +267,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     snapshot_cli.register(sub)
 
+    from lce.paypal import cli as paypal_cli
+
+    paypal_cli.register(sub)
+
     serve = sub.add_parser("serve", help="Run the API")
     serve.add_argument("--host", default=None)
     serve.add_argument("--port", type=int, default=None)

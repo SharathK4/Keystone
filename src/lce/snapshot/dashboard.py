@@ -44,6 +44,13 @@ def execution_status(*, probe: bool = True) -> ExecutionStatus:
     recommendation, and a provider being down changes what can be *carried out*,
     not what is *advised*.
     """
+    from lce.config import get_settings
+
+    if get_settings().execution_provider == "paypal_sandbox":
+        from lce.execution.paypal import paypal_execution_status
+
+        return paypal_execution_status(probe=probe)
+
     from lce.execution.providers import _REQUIRED_CAPABILITY, RazorpayTestProvider
 
     capabilities: dict[str, bool] = {}
