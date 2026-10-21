@@ -24,8 +24,18 @@ import pytest
 _TEST_DB = Path(os.environ.get("PYTEST_TMP_DB", "")) if os.environ.get("PYTEST_TMP_DB") else None
 
 
+#: PayPal settings the offline suite must never see. ``.env`` may hold real
+#: sandbox credentials; process environment overrides ``.env``, so blanking them
+#: here makes every PayPal code path in the default run report "not configured"
+#: and makes a live call structurally impossible. Only an explicit
+#: ``-m paypal_live`` run keeps them.
+_PAYPAL_ENV = ("PAYPAL_CLIENT_ID", "PAYPAL_CLIENT_SECRET", "PAYPAL_WEBHOOK_ID")
+
+
 @pytest.fixture(scope="session", autouse=True)
-def _test_environment(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None]:
+def _test_environment(
+    tmp_path_factory: pytest.TempPathFactory, request: pytest.FixtureRequest
+) -> Iterator[None]:
     """Point the app at a throwaway database and artifact directory."""
     root = tmp_path_factory.mktemp("lce")
     db_path = root / "test.sqlite"
@@ -41,6 +51,8 @@ def _test_environment(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None
             "LCE_LOG_LEVEL",
             "RANDOM_SEED",
             "RAZORPAY_MODE",
+            "LCE_EXECUTION_PROVIDER",
+            *_PAYPAL_ENV,
         )
     }
     os.environ["DATABASE_URL"] = f"sqlite+pysqlite:///{db_path.as_posix()}"
@@ -49,11 +61,18 @@ def _test_environment(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None
     os.environ["LCE_LOG_LEVEL"] = "WARNING"
     os.environ["RANDOM_SEED"] = "1234"
     os.environ["RAZORPAY_MODE"] = "test"
+    os.environ.pop("LCE_EXECUTION_PROVIDER", None)
+    if "paypal_live" not in (request.config.option.markexpr or "").replace(
+        "not paypal_live", ""
+    ):
+        for key in _PAYPAL_ENV:
+            os.environ[key] = ""
 
-    from lce.config import reset_settings_cache
+    from lce.config import reset_paypal_settings_cache, reset_settings_cache
     from lce.data.database import create_all, reset_engine_cache
 
     reset_settings_cache()
+    reset_paypal_settings_cache()
     reset_engine_cache()
     create_all()
 
@@ -61,6 +80,7 @@ def _test_environment(tmp_path_factory: pytest.TempPathFactory) -> Iterator[None
 
     reset_engine_cache()
     reset_settings_cache()
+    reset_paypal_settings_cache()
     for key, value in previous.items():
         if value is None:
             os.environ.pop(key, None)

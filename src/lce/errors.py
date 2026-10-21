@@ -88,3 +88,38 @@ class RazorpayError(LCEError):
 class SignatureVerificationError(RazorpayError):
     code = "invalid_signature"
     http_status = 400
+
+
+class PayPalError(LCEError):
+    """PayPal answered, and the answer was an error."""
+
+    code = "paypal_error"
+    http_status = 502
+
+
+class PayPalTransportError(PayPalError):
+    """No answer at all. For a write, the outcome is *unknown*, not failed."""
+
+    code = "paypal_unreachable"
+    http_status = 504
+
+
+class WebhookVerificationError(LCEError):
+    """An inbound webhook did not prove it came from the provider."""
+
+    code = "webhook_not_verified"
+    http_status = 400
+
+
+class ExecutionRefused(LCEError):
+    """A request to move money that a guard rail stopped before it left."""
+
+    code = "execution_refused"
+    http_status = 409
+
+
+class ServiceUnavailable(LCEError):
+    """A required backing service (database, provider) is not configured."""
+
+    code = "service_unavailable"
+    http_status = 503

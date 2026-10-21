@@ -2,3 +2,7 @@ Keystone
 Copyright 2026 Sharath Koppu
 
 This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This product includes the Payouts API specification from
+https://github.com/paypal/paypal-rest-api-specifications (Apache-2.0), in
+tests/fixtures/paypal/.

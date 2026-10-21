@@ -8,9 +8,11 @@ are redacted from reprs, logs and tracebacks. Nothing is hard-coded.
 from __future__ import annotations
 
 import functools
+from decimal import Decimal
 from enum import StrEnum
 from pathlib import Path
 from typing import Literal
+from urllib.parse import urlparse
 
 from pydantic import Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -77,6 +79,117 @@ class RazorpaySettings(BaseSettings):
         if not self.webhook_configured:
             raise ConfigError("RAZORPAY_WEBHOOK_SECRET is not configured.")
         return self.webhook_secret.get_secret_value()
+
+
+class PayPalMode(StrEnum):
+    SANDBOX = "sandbox"
+    LIVE = "live"
+
+
+#: Hosts a PayPal API base may point at. Anything else - including PayPal's own
+#: production hosts - is refused, so a wrong URL cannot turn a sandbox build into
+#: one that moves real money.
+PAYPAL_SANDBOX_HOSTS = frozenset({"api-m.sandbox.paypal.com", "api.sandbox.paypal.com"})
+
+
+class PayPalSettings(BaseSettings):
+    """PayPal sandbox credentials, demo scale and guardrails.
+
+    Deliberately **not** nested inside :class:`Settings`. The analysis must serve
+    with no PayPal account at all, and a misconfigured PayPal section must never
+    stop it from starting; only code paths that talk to PayPal load this.
+
+    Every credential is a :class:`SecretStr`, including the client id and the
+    webhook id, so none of them can reach a repr, a log line or a traceback.
+
+    Sandbox only. ``PAYPAL_MODE=live`` parses (so status can say *why* it is
+    refused) but :meth:`require_sandbox` raises on it, and there is no override:
+    unlike Razorpay, no ``LCE_ALLOW_LIVE`` switch enables live PayPal.
+    """
+
+    model_config = SettingsConfigDict(
+        env_file=(REPO_ROOT / ".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+        case_sensitive=False,
+        populate_by_name=True,
+    )
+
+    client_id: SecretStr = Field(default=SecretStr(""), alias="PAYPAL_CLIENT_ID")
+    client_secret: SecretStr = Field(default=SecretStr(""), alias="PAYPAL_CLIENT_SECRET")
+    webhook_id: SecretStr = Field(default=SecretStr(""), alias="PAYPAL_WEBHOOK_ID")
+    mode: PayPalMode = Field(default=PayPalMode.SANDBOX, alias="PAYPAL_MODE")
+    api_base: str = Field(default="https://api-m.sandbox.paypal.com", alias="PAYPAL_API_BASE")
+    timeout_seconds: float = Field(default=15.0, alias="PAYPAL_TIMEOUT_SECONDS", gt=0)
+
+    # --- demo scale -----------------------------------------------------------
+    # The analysis is in rupees and PayPal cannot pay out INR, so execution runs
+    # in a sandbox currency at one declared scale: units of `demo_currency` per
+    # analytic rupee. The default, 0.00001, is one US dollar per rupee lakh.
+    demo_currency: str = Field(default="USD", alias="PAYPAL_DEMO_CURRENCY")
+    demo_scale: Decimal = Field(default=Decimal("0.00001"), alias="PAYPAL_DEMO_SCALE", gt=0)
+
+    @field_validator("demo_currency")
+    @classmethod
+    def _iso_currency(cls, v: str) -> str:
+        code = v.strip().upper()
+        if len(code) != 3 or not code.isalpha():
+            raise ValueError(f"PAYPAL_DEMO_CURRENCY must be an ISO-4217 code, got {v!r}")
+        if code == "INR":
+            raise ValueError("PayPal cannot pay out INR; choose a supported sandbox currency")
+        return code
+
+    @property
+    def configured(self) -> bool:
+        return bool(self.client_id.get_secret_value() and self.client_secret.get_secret_value())
+
+    @property
+    def webhook_configured(self) -> bool:
+        return bool(self.webhook_id.get_secret_value())
+
+    @property
+    def api_host(self) -> str:
+        return urlparse(self.api_base).hostname or ""
+
+    def refusal(self) -> str | None:
+        """Why this configuration must not be used, or ``None`` if it may."""
+        if self.mode is PayPalMode.LIVE:
+            return "PAYPAL_MODE=live is refused: this build is sandbox-only"
+        parsed = urlparse(self.api_base)
+        if parsed.scheme != "https" or (parsed.hostname or "") not in PAYPAL_SANDBOX_HOSTS:
+            return f"PAYPAL_API_BASE host {parsed.hostname!r} is not a PayPal sandbox host"
+        return None
+
+    def require_sandbox(self) -> None:
+        reason = self.refusal()
+        if reason is not None:
+            raise ConfigError(reason, mode=str(self.mode))
+
+    def require_credentials(self) -> tuple[str, str]:
+        self.require_sandbox()
+        if not self.configured:
+            raise ConfigError(
+                "PayPal sandbox credentials are not configured; "
+                "set PAYPAL_CLIENT_ID and PAYPAL_CLIENT_SECRET."
+            )
+        return self.client_id.get_secret_value(), self.client_secret.get_secret_value()
+
+    def require_webhook_id(self) -> str:
+        if not self.webhook_configured:
+            raise ConfigError("PAYPAL_WEBHOOK_ID is not configured.")
+        return self.webhook_id.get_secret_value()
+
+    def safe_dump(self) -> dict[str, object]:
+        """Everything except credentials - safe to log or return."""
+        return {
+            "mode": str(self.mode),
+            "api_host": self.api_host,
+            "configured": self.configured,
+            "webhook_configured": self.webhook_configured,
+            "demo_currency": self.demo_currency,
+            "demo_scale": str(self.demo_scale),
+            "refused": self.refusal(),
+        }
 
 
 class SimulationSettings(BaseSettings):
@@ -157,6 +270,11 @@ class Settings(BaseSettings):
 
     # --- guardrails ---------------------------------------------------------
     allow_live: bool = Field(default=False, alias="LCE_ALLOW_LIVE")
+    # Which provider /execution/status describes. The default keeps the
+    # behaviour this API shipped with; "paypal_sandbox" switches it to PayPal.
+    execution_provider: Literal["razorpay_test", "paypal_sandbox"] = Field(
+        default="razorpay_test", alias="LCE_EXECUTION_PROVIDER"
+    )
 
     # --- nested -------------------------------------------------------------
     razorpay: RazorpaySettings = Field(default_factory=RazorpaySettings)
@@ -242,3 +360,13 @@ def get_settings() -> Settings:
 def reset_settings_cache() -> None:
     """Clear the settings cache (tests only)."""
     get_settings.cache_clear()
+
+
+@functools.lru_cache(maxsize=1)
+def get_paypal_settings() -> PayPalSettings:
+    """PayPal settings, loaded only by code that talks to PayPal."""
+    return PayPalSettings()
+
+
+def reset_paypal_settings_cache() -> None:
+    get_paypal_settings.cache_clear()
