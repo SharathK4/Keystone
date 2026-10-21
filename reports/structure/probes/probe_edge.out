@@ -1,0 +1,21 @@
+snapshot snap-a4c99d5a49a64ffd: 100 merchants, 216 estimated edges
+ground-truth edges in serving overlay: 0
+
+L1  N_ij = c_ij * F_ij(168h)     rho = 0.282919
+    nnz=211  max entry=0.8596  mean nz=0.2994
+    max row sum=4.7288  max col sum=3.9117
+    nilpotent: False  (N^60 != 0)
+
+L2  M_ij = share_ij * (2-rel_ij)  rho = 0.863847   (buffers ignored: upper bound)
+
+scenario                     origins  hop1 max|p - N row|   LT reached
+single_missed_inflow           1     2.78e-17            0
+delayed_inflow                 1     2.78e-17            0
+partial_payment                1     2.78e-17            0
+liquidity_drain                1     4.60e-08            1
+supplier_failure               1     4.60e-08            1
+concentrated_shock             1     4.60e-08            1
+multi_node_shock               3     8.80e-02            0
+
+single-origin max err: 4.60e-08
+multi-origin  max err: 8.80e-02

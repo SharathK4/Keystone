@@ -1,0 +1,65 @@
+dataset synth-eab9b3bbb256 merchants 100 payments 11413
+artifact discrete_hazard-9d1ffe99e9 threshold 1.0
+
+single_missed_inflow     cutoff=  18.8h  origins=['m0070']  512ms
+   intervals: [0, 19, 37, 56, 75, 93, 112, 131, 149]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0070  P=1.000  E[T|T<H]=  48.9h  origin
+     m0000  P=0.000  E[T|T<H]=   0.9h  
+     m0001  P=0.000  E[T|T<H]=   0.4h  
+     m0002  P=0.000  E[T|T<H]=   0.5h  
+     m0003  P=0.000  E[T|T<H]=   0.5h  
+
+delayed_inflow           cutoff=  18.8h  origins=['m0070']  65ms
+   intervals: [0, 19, 37, 56, 75, 93, 112, 131, 149]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0070  P=1.000  E[T|T<H]=  37.4h  origin
+     m0000  P=0.000  E[T|T<H]=   0.8h  
+     m0001  P=0.000  E[T|T<H]=   0.4h  
+     m0002  P=0.000  E[T|T<H]=   0.5h  
+     m0003  P=0.000  E[T|T<H]=   0.4h  
+
+partial_payment          cutoff=  18.8h  origins=['m0070']  129ms
+   intervals: [0, 19, 37, 56, 75, 93, 112, 131, 149]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0070  P=1.000  E[T|T<H]=  47.7h  origin
+     m0000  P=0.000  E[T|T<H]=   0.9h  
+     m0001  P=0.000  E[T|T<H]=   0.4h  
+     m0002  P=0.000  E[T|T<H]=   0.5h  
+     m0003  P=0.000  E[T|T<H]=   0.5h  
+
+liquidity_drain          cutoff= 107.4h  origins=['m0080']  109ms
+   intervals: [0, 8, 15, 23, 30, 38, 45, 53, 61]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0080  P=1.000  E[T|T<H]=  17.0h  origin
+     m0000  P=0.000  E[T|T<H]=   0.1h  
+     m0001  P=0.000  E[T|T<H]=   0.1h  
+     m0002  P=0.000  E[T|T<H]=   0.1h  
+     m0003  P=0.000  E[T|T<H]=   0.2h  
+
+supplier_failure         cutoff= 107.4h  origins=['m0080']  76ms
+   intervals: [0, 8, 15, 23, 30, 38, 45, 53, 61]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0080  P=1.000  E[T|T<H]=   7.0h  origin
+     m0000  P=0.000  E[T|T<H]=   0.1h  
+     m0001  P=0.000  E[T|T<H]=   0.1h  
+     m0002  P=0.000  E[T|T<H]=   0.1h  
+     m0003  P=0.000  E[T|T<H]=   0.2h  
+
+concentrated_shock       cutoff= 107.4h  origins=['m0080']  86ms
+   intervals: [0, 8, 15, 23, 30, 38, 45, 53, 61]
+   P>=0.05:   1   P>=0.2:   1   P>=0.5:   1   non-origin max P: 0.000   median P: 0.0000
+     m0080  P=1.000  E[T|T<H]=  17.0h  origin
+     m0000  P=0.000  E[T|T<H]=   0.1h  
+     m0001  P=0.000  E[T|T<H]=   0.1h  
+     m0002  P=0.000  E[T|T<H]=   0.1h  
+     m0003  P=0.000  E[T|T<H]=   0.2h  
+
+multi_node_shock         cutoff=  66.5h  origins=['m0031', 'm0034', 'm0080']  75ms
+   intervals: [0, 13, 25, 38, 51, 63, 76, 89, 102]
+   P>=0.05:   3   P>=0.2:   3   P>=0.5:   3   non-origin max P: 0.000   median P: 0.0000
+     m0031  P=1.000  E[T|T<H]=  13.5h  origin
+     m0034  P=1.000  E[T|T<H]=  27.2h  origin
+     m0080  P=1.000  E[T|T<H]=  39.5h  origin
+     m0000  P=0.000  E[T|T<H]=   0.2h  
+     m0001  P=0.000  E[T|T<H]=   0.1h  

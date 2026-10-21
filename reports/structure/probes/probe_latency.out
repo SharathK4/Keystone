@@ -1,0 +1,47 @@
+
+single_missed_inflow   plan: liquidity_injection@m0005 t=18.8h amt=772.7L, liquidity_injection@m0009 t=18.8h amt=350.7L   (26s)
+   delta   commerce_kept   protected   disruption_cut%
+       0h        12.18 Cr        1        40.36
+       1h        12.18 Cr        1        40.28
+       6h        10.48 Cr        0        39.73
+      12h         4.54 Cr        0        37.78
+      24h         2.65 Cr        0        32.93
+      48h         0.00 Cr        0        20.93
+      72h         0.00 Cr        0         3.69
+
+delayed_inflow         plan: liquidity_injection@m0005 t=18.8h amt=772.7L, liquidity_injection@m0009 t=18.8h amt=350.7L   (20s)
+   delta   commerce_kept   protected   disruption_cut%
+       0h        12.18 Cr        1        40.45
+       1h        12.18 Cr        1        40.36
+       6h        10.48 Cr        0        39.82
+      12h         4.54 Cr        0        37.87
+      24h         2.65 Cr        0        33.00
+      48h         0.00 Cr        0        20.98
+      72h         0.00 Cr        0         3.70
+
+partial_payment        plan: liquidity_injection@m0005 t=18.8h amt=772.7L, liquidity_injection@m0009 t=18.8h amt=350.7L   (28s)
+   delta   commerce_kept   protected   disruption_cut%
+       0h        12.18 Cr        1        40.44
+       1h        12.18 Cr        1        40.36
+       6h        10.48 Cr        0        39.81
+      12h         4.54 Cr        0        37.86
+      24h         2.65 Cr        0        33.00
+      48h         0.00 Cr        0        20.98
+      72h         0.00 Cr        0         3.70
+
+liquidity_drain        no plan (21s)
+
+supplier_failure       no plan (22s)
+
+concentrated_shock     no plan (26s)
+
+multi_node_shock       plan: liquidity_injection@m0005 t=66.5h amt=55.2L, supplier_term_extension@m0031 t=66.5h amt=16.5L   (44s)
+   delta   commerce_kept   protected   disruption_cut%
+       0h         0.00 Cr        0         2.44
+       1h         0.00 Cr        0         2.41
+       6h         0.00 Cr        0         3.12
+      12h         0.00 Cr        0         2.06
+      24h         0.00 Cr        0         0.05
+      48h         0.00 Cr        0         0.03
+      72h         0.00 Cr        0         0.00
+
