@@ -10,7 +10,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1a hygiene + baseline | **PASS** — 517 passed / 8 deselected; ruff, mypy clean; audit 27; phase-4 28; anchors unchanged | Push URL was *not* disabled; disabled it locally. | — | 1b |
 | 1 | 1b Gate P2 webhooks + failure re-entry | **PASS** (offline) — 539 passed / 8 deselected; audit 30; phase-4 28; migration 0004 single head, zero diff | Refresh no longer re-POSTs; PayPal events get their own table (see decisions). | Register a sandbox webhook once a public URL exists. | 1c |
 | 1 | 1c Gate H value of speed | **PASS** — 551 passed / 8 deselected; audit 32; phase-4 28; δ=0 == snapshot exactly; full rebuild hash identical (`fe887776da0213e1`) | Replays follow the snapshot's (unmutated-network) convention; replanned arm beats δ=0 in 2 scenarios (optimiser pruning). See `reports/structure/gate_h.md`. | — | 1d |
-| 1 | 1d hosting readiness | pending | | | |
+| 1 | 1d hosting readiness | **PASS** (no deploy) — 565 passed / 8 deselected; audit 33; phase-4 28 | Render Workflows dropped (no free tier, separate service; jobs take seconds). Readiness check needs the DB (frozen). | Create the Blueprint, enter secrets, register the webhook, record the canonical run. | 1e |
 | 1 | 1e concept boards → **STOP** | pending | | design pick | |
 
 ## Decisions taken
@@ -64,6 +64,22 @@ Never push (`origin` push URL is disabled locally).
   still late, but less late), 1 % defaults avoided, 1.5 % deficit-time. Payments
   kept on time is ₹0. The UI must show both together.
 
+- **1d** Render Workflows not adopted (`reports/hosting/render.md`): Python SDK
+  exists, but it is a separate paid service with no stated free tier and our jobs
+  take seconds; the in-process background tasks stay.
+- **1d** Demo safety is a FastAPI dependency on approve / execute / refresh only;
+  `LCE_DEMO_MODE=off` (default, and pinned in the test session) changes nothing.
+  The rate limit is in memory per process — a courtesy limit for token holders.
+- **1d** `lce demo reset` is a subcommand on the existing `demo` parser; `lce demo
+  -n …` parses exactly as before (tested).
+- **1d** Frontend: `VITE_API_BASE` (default empty = same origin) as the fallback
+  if the static-site `/api/*` rewrite does not proxy POSTs.
+- **1d** `/api/v1/health/ready` requires the database (frozen). The blueprint uses
+  it as the runbook says; when the free database expires the check fails while
+  the analysis still serves. Not changed.
+- **1d** README is pre-PayPal: "Nothing moves money" and the old provider's name
+  are stale. Left for the Phase 3 README rewrite; only the Deploy section added.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
@@ -76,6 +92,10 @@ None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 - After a public URL exists: register `<url>/api/v1/webhooks/paypal` as a sandbox
   webhook for `PAYMENT.PAYOUTS-ITEM.*` and `PAYMENT.PAYOUTSBATCH.*`, and put its id
   in `.env` as `PAYPAL_WEBHOOK_ID`.
+- Render (when ready): create a Blueprint from `render.yaml`, enter the
+  `sync: false` values (sandbox client id/secret, webhook id, a private
+  `LCE_DEMO_TOKEN`), check the API address against the `/api/*` rewrite, then
+  record the canonical run with the token header. Steps in README → Deploy.
 - Say **"run live tests"** in chat to run `pytest -m paypal_live` (spikes S1–S3).
 
 ## Checks to run at any checkpoint
