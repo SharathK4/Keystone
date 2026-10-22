@@ -1,3 +1,7 @@
 # Canonical artifacts are stored byte-for-byte on every platform: no
 # line-ending normalisation, no diffs, no merges.
 artifacts/** -text -diff -merge
+
+# Shell scripts and git hooks must keep LF endings or sh cannot run them.
+*.sh text eol=lf
+scripts/git-hooks/* text eol=lf
