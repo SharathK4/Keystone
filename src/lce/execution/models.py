@@ -160,3 +160,49 @@ class LedgerView(_Contract):
     records: list[ExecutionRecordView]
     events: list[LedgerEventView]
     demo: DemoScaleView
+
+
+class ReentryPlanView(_Contract):
+    """The plan the bounded analysis proposes for the new shock. Never executed
+    without its own approval."""
+
+    action_type: str
+    merchant_id: str
+    analytic_amount_inr: str
+
+
+class ReentryView(_Contract):
+    """A failed payout, re-entered as a shock and analysed within fixed bounds.
+
+    Provenance kind is *computed now*: a bounded analysis run when PayPal
+    reported the failure, on the snapshot named in ``snapshot_id``.
+    """
+
+    analysis_id: str
+    record_id: str
+    scenario_id: str
+    merchant_id: str
+    trigger: str
+    status: Literal["analysed", "skipped"]
+    reason: str | None
+    missing_inr: str | None
+    snapshot_id: str | None
+    computed_in_ms: float | None
+    adhoc_scenario_id: str | None
+    merchants_reached: int | None
+    disrupted_value_inr: str | None
+    new_plan: list[ReentryPlanView]
+    created_at: datetime
+
+
+class PayPalWebhookAck(_Contract):
+    """What happened to one delivery. Returned with 200 for every verified event."""
+
+    status: Literal["accepted", "duplicate", "ignored"]
+    event_id: str
+    event_type: str
+    record_id: str | None
+    record_status: str | None
+    applied: bool
+    reason: str | None
+    reentry_scheduled: bool

@@ -20,12 +20,18 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, Query
+from sqlalchemy import select
 from sqlalchemy.exc import OperationalError, ProgrammingError
 from sqlalchemy.orm import Session
 
 from lce.config import get_paypal_settings
-from lce.data.orm import ExecutionApprovalRow, ExecutionEventRow, ExecutionRecordRow
+from lce.data.orm import (
+    ExecutionApprovalRow,
+    ExecutionEventRow,
+    ExecutionRecordRow,
+    ReentryAnalysisRow,
+)
 from lce.errors import ServiceUnavailable
 from lce.execution.models import (
     ApprovalRequest,
@@ -41,6 +47,8 @@ from lce.execution.models import (
     PayPalStatusView,
     PlannedActionView,
     RecipientView,
+    ReentryPlanView,
+    ReentryView,
 )
 from lce.execution.paypal import (
     PayPalSandboxProvider,
@@ -48,6 +56,7 @@ from lce.execution.paypal import (
     refused_report,
 )
 from lce.execution.plan import ExecutablePlan
+from lce.execution.reentry import run_scheduled
 from lce.execution.service import NO_DATABASE, ExecutionService
 from lce.paypal.money import DemoScale, Money
 from lce.snapshot.store import SnapshotStore, require_store
@@ -258,9 +267,66 @@ def execute_plan(
     response_model=ExecutionRecordView,
     summary="Reconcile one record with PayPal (explicit, never automatic)",
 )
-def refresh_record(record_id: str, service: Service) -> ExecutionRecordView:
+def refresh_record(
+    record_id: str, service: Service, background: BackgroundTasks
+) -> ExecutionRecordView:
     with _db():
-        return record_view(service.refresh(record_id))
+        record, reentry = service.refresh(record_id)
+    if reentry is not None:
+        background.add_task(run_scheduled, reentry.record_id, reentry.trigger,
+                            receiver=reentry.receiver, source_event_id=reentry.source_event_id)
+    return record_view(record)
+
+
+def reentry_view(row: ReentryAnalysisRow) -> ReentryView:
+    result = row.result or {}
+    recommended = result.get("recommended_intervention")
+    offer = result.get("offer")
+    plan: list[ReentryPlanView] = []
+    if recommended:
+        plan.append(ReentryPlanView(action_type=str(recommended["type"]),
+                                    merchant_id=str(recommended["merchant_id"]),
+                                    analytic_amount_inr=repr(float(recommended["amount"]))))
+    if offer and recommended and offer["merchant_id"] != recommended["merchant_id"]:
+        plan.append(ReentryPlanView(action_type=str(offer["intervention_type"]),
+                                    merchant_id=str(offer["merchant_id"]),
+                                    analytic_amount_inr=repr(float(offer["proposed_amount"]))))
+    impact = result.get("projected_impact") or {}
+    prov = row.provenance or {}
+    return ReentryView(
+        analysis_id=row.analysis_id,
+        record_id=row.record_id,
+        scenario_id=row.scenario_id,
+        merchant_id=row.merchant_id,
+        trigger=row.trigger,
+        status=row.status,  # type: ignore[arg-type]
+        reason=row.reason,
+        missing_inr=repr(float(row.shock["missing_inr"])) if row.shock else None,
+        snapshot_id=prov.get("snapshot_id"),
+        computed_in_ms=prov.get("computed_in_ms"),
+        adhoc_scenario_id=result.get("scenario_id"),
+        merchants_reached=impact.get("n_affected"),
+        disrupted_value_inr=(
+            repr(float(impact["disrupted_value"])) if "disrupted_value" in impact else None
+        ),
+        new_plan=plan,
+        created_at=row.created_at,
+    )
+
+
+@router.get(
+    "/reentries",
+    response_model=list[ReentryView],
+    summary="Failed payouts re-entered as shocks, with the plan each analysis proposes",
+)
+def reentries(service: Service, scenario_id: str = Query(min_length=1)) -> list[ReentryView]:
+    with _db():
+        rows = service.session.execute(
+            select(ReentryAnalysisRow)
+            .where(ReentryAnalysisRow.scenario_id == scenario_id)
+            .order_by(ReentryAnalysisRow.id)
+        ).scalars()
+        return [reentry_view(r) for r in rows]
 
 
 @router.get(

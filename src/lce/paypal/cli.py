@@ -70,6 +70,38 @@ def cmd_status(args: argparse.Namespace) -> int:
     return 0 if report.refused is None else 1
 
 
+def cmd_reconcile(args: argparse.Namespace) -> int:
+    """Read payouts back from PayPal. Never resubmits; calls PayPal (GET only)."""
+    from sqlalchemy import select
+
+    from lce.data.database import session_scope
+    from lce.data.orm import ExecutionRecordRow
+    from lce.execution.reentry import reenter
+    from lce.execution.service import ExecutionService
+    from lce.snapshot.store import require_store
+
+    store = require_store()
+    with session_scope() as session:
+        if args.record:
+            ids = [args.record]
+        else:
+            ids = [r.record_id for r in session.execute(
+                select(ExecutionRecordRow).where(ExecutionRecordRow.status.in_(
+                    ["unknown", "submitted", "pending", "held"]))).scalars()]
+        service = ExecutionService(session, store=store)
+        out = []
+        for record_id in ids:
+            record, reentry = service.refresh(record_id)
+            analysed = None
+            if reentry is not None:
+                analysed = reenter(session, store, record, trigger=reentry.trigger,
+                                   receiver=reentry.receiver).status
+            out.append({"record_id": record.record_id, "status": record.status,
+                        "reason": record.reason, "reentry": analysed})
+    print(json.dumps(out, indent=2))
+    return 0
+
+
 def register(sub: Any) -> None:
     paypal = sub.add_parser("paypal", help="PayPal sandbox: identities and connection")
     psub = paypal.add_subparsers(dest="paypal_command", required=True)
@@ -86,6 +118,11 @@ def register(sub: Any) -> None:
     psub.add_parser("identities", help="List mapped sandbox identities").set_defaults(
         func=cmd_identities
     )
+
+    rc = psub.add_parser("reconcile",
+                         help="Read open payouts back from PayPal (GET only; never resubmits)")
+    rc.add_argument("--record", default=None, help="One record id; default: every open record")
+    rc.set_defaults(func=cmd_reconcile)
 
     st = psub.add_parser("status", help="Configuration, and capabilities if probed")
     st.add_argument("--probe", action="store_true",

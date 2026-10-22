@@ -183,7 +183,7 @@ class TestApproveExecuteLedger:
         ledger = client.get("/api/v1/execution/ledger", params={"scenario_id": sid}).json()
         assert len(ledger["approvals"]) == 1 and len(ledger["records"]) == 2
         kinds = [e["kind"] for e in ledger["events"]]
-        assert kinds[0] == "approval_refused" and "reconciled" in kinds
+        assert kinds[0] == "approval_refused" and "provider_status_applied" in kinds
 
     def test_execute_without_approval_is_409(self, wired, extract):
         client, fake = wired

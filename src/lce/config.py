@@ -119,6 +119,9 @@ class PayPalSettings(BaseSettings):
     client_secret: SecretStr = Field(default=SecretStr(""), alias="PAYPAL_CLIENT_SECRET")
     webhook_id: SecretStr = Field(default=SecretStr(""), alias="PAYPAL_WEBHOOK_ID")
     mode: PayPalMode = Field(default=PayPalMode.SANDBOX, alias="PAYPAL_MODE")
+    # Also accept events from PayPal's webhook simulator, which signs with the
+    # literal id "WEBHOOK_ID". Off by default; turn on only while testing.
+    accept_simulator_events: bool = Field(default=False, alias="PAYPAL_ACCEPT_SIMULATOR_EVENTS")
     api_base: str = Field(default="https://api-m.sandbox.paypal.com", alias="PAYPAL_API_BASE")
     timeout_seconds: float = Field(default=15.0, alias="PAYPAL_TIMEOUT_SECONDS", gt=0)
 

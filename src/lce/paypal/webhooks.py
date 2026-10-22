@@ -34,12 +34,14 @@ from __future__ import annotations
 
 import base64
 import binascii
+import threading
 import zlib
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from urllib.parse import urlparse
 
+import httpx
 from cryptography import x509
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import hashes
@@ -150,3 +152,27 @@ def require_verified(verification: Verification) -> None:
             reason=verification.reason,
             transmission_id=verification.transmission_id,
         )
+
+
+_cert_cache: dict[str, bytes] = {}
+_cert_lock = threading.Lock()
+
+
+def fetch_certificate(url: str) -> bytes:
+    """Download (once) the signing certificate PayPal points at.
+
+    Refuses any URL that is not HTTPS on a ``paypal.com`` host *before* making a
+    request, so a forged header cannot make this server fetch from elsewhere.
+    """
+    if not cert_url_allowed(url):
+        raise ValueError("certificate URL is not an HTTPS paypal.com URL")
+    with _cert_lock:
+        cached = _cert_cache.get(url)
+    if cached is not None:
+        return cached
+    response = httpx.get(url, timeout=5.0, follow_redirects=False)
+    response.raise_for_status()
+    pem = response.content
+    with _cert_lock:
+        _cert_cache[url] = pem
+    return pem

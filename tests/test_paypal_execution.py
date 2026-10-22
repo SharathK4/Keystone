@@ -220,25 +220,76 @@ class TestPaidAtMostOnce:
         assert len(fake.batches) == 2
         assert len(fake.payout_posts) == 2, "a write is never retried automatically"
 
-    def test_reconciling_a_lost_response_does_not_pay_twice(self, session, store, fake, single):
+    def test_reconciling_a_lost_response_never_resubmits(self, session, store, fake, single):
+        """Outcome unknown: reconcile reads, it never pays again."""
         svc = _service(session, store, fake)
         _map_both(svc)
         approval = _approve(svc, single)
         fake.failing_drop_response()
         records = svc.execute(single, approval_id=approval.approval_id)
         unknown = next(r for r in records if r.status == "unknown")
-        posts_before = list(fake.payout_posts)
+        posts_before = len(fake.payout_posts)
 
-        reconciled = svc.refresh(unknown.record_id)
+        record, reentry = svc.refresh(unknown.record_id)
 
-        assert len(fake.batches) == 2, "PayPal answered from its record; no new payout"
-        resent = fake.payout_posts[len(posts_before):][0]
-        original = next(p for p in posts_before
-                        if p.headers["paypal-request-id"] == unknown.idempotency_key)
-        assert resent.headers["paypal-request-id"] == original.headers["paypal-request-id"]
-        assert json.loads(resent.content) == json.loads(original.content)
-        assert reconciled.provider_batch_id is not None
-        assert reconciled.status == "pending"
+        assert len(fake.payout_posts) == posts_before, "nothing was resubmitted"
+        assert len(fake.batches) == 2
+        assert record.status == "unknown" and reentry is None
+        assert "nothing is resubmitted" in record.reason
+        assert "reconcile_unresolved" in [e.kind for e in svc.ledger(single)]
+
+    def test_a_batch_event_resolves_an_unknown_outcome(self, session, store, fake, single):
+        from lce.execution.webhooks import ingest
+        from lce.paypal.webhooks import Verification
+
+        svc = _service(session, store, fake)
+        _map_both(svc)
+        approval = _approve(svc, single)
+        fake.failing_drop_response()
+        records = svc.execute(single, approval_id=approval.approval_id)
+        unknown = next(r for r in records if r.status == "unknown")
+        batch_id = next(b for b, v in fake.batches.items()
+                        if v["header"]["sender_batch_id"] == unknown.idempotency_key)
+
+        event = {"id": "WH-BATCH-1", "event_type": "PAYMENT.PAYOUTSBATCH.SUCCESS",
+                 "resource": {"batch_header": {
+                     "payout_batch_id": batch_id, "batch_status": "SUCCESS",
+                     "sender_batch_header": {"sender_batch_id": unknown.idempotency_key}}}}
+        result = ingest(session, event=event, raw_body=json.dumps(event).encode(),
+                        headers={}, verification=Verification(True, "verified"))
+        assert result.record_id == unknown.record_id
+        assert result.record_status == "submitted"
+
+        posts_before = len(fake.payout_posts)
+        record, _ = svc.refresh(unknown.record_id)
+        assert record.provider_batch_id == batch_id
+        assert record.status == "succeeded"
+        assert len(fake.payout_posts) == posts_before
+
+    def test_reconcile_learns_a_batch_id_from_a_stored_event(self, session, store, fake, single):
+        from lce.data.orm import PayPalWebhookEventRow
+
+        svc = _service(session, store, fake)
+        _map_both(svc)
+        approval = _approve(svc, single)
+        fake.failing_drop_response()
+        records = svc.execute(single, approval_id=approval.approval_id)
+        unknown = next(r for r in records if r.status == "unknown")
+        batch_id = next(b for b, v in fake.batches.items()
+                        if v["header"]["sender_batch_id"] == unknown.idempotency_key)
+        session.add(PayPalWebhookEventRow(
+            event_id="WH-BATCH-STORED", event_type="PAYMENT.PAYOUTSBATCH.PROCESSING",
+            raw_sha256="0" * 64, processed=True, payload={
+                "id": "WH-BATCH-STORED", "event_type": "PAYMENT.PAYOUTSBATCH.PROCESSING",
+                "resource": {"batch_header": {
+                    "payout_batch_id": batch_id, "batch_status": "PROCESSING",
+                    "sender_batch_header": {"sender_batch_id": unknown.idempotency_key}}}}))
+        session.commit()
+
+        record, _ = svc.refresh(unknown.record_id)
+        assert record.provider_batch_id == batch_id
+        assert record.status == "succeeded"
+        assert "batch_id_learned" in [e.kind for e in svc.ledger(single)]
 
 
 # ------------------------------------------------------------------ amounts
@@ -326,7 +377,7 @@ class TestReconciliation:
         records = svc.execute(single, approval_id=approval.approval_id)
         fake.item_status = paypal_status
         for r in records:
-            refreshed = svc.refresh(r.record_id)
+            refreshed, _ = svc.refresh(r.record_id)
             assert refreshed.status == expected
             assert refreshed.provider_batch_id and refreshed.provider_item_id
             assert refreshed.provider_status == paypal_status
@@ -355,7 +406,7 @@ class TestReconciliation:
         assert kinds[0] == "approval_recorded"
         assert kinds.count("submission_started") == 2
         assert kinds.count("submitted") == 2
-        assert "reconciled" in kinds
+        assert "provider_status_applied" in kinds
 
 
 # ----------------------------------------------------------------- guardrails

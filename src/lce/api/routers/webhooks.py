@@ -14,12 +14,26 @@ Two things this route must get right, and both are easy to get wrong:
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Header, HTTPException, Request, status
+import json
+from collections.abc import Mapping
+from dataclasses import dataclass
+from typing import Annotated
+
+from fastapi import APIRouter, BackgroundTasks, Depends, Header, HTTPException, Request, status
+from starlette.concurrency import run_in_threadpool
 
 from lce.api.deps import Config, Ingestion
 from lce.api.schemas import WebhookAck
 from lce.errors import SignatureVerificationError, ValidationError
+from lce.execution.models import PayPalWebhookAck
+from lce.execution.webhooks import Reentry
 from lce.logging import get_logger
+from lce.paypal.webhooks import (
+    SIMULATOR_WEBHOOK_ID,
+    CertLoader,
+    fetch_certificate,
+    verify_webhook,
+)
 from lce.razorpay.mapper import identity_resolver
 from lce.razorpay.webhooks import parse_webhook
 
@@ -79,3 +93,104 @@ async def razorpay_webhook(
 @router.get("/pending", summary="Webhooks recorded but not yet processed")
 def pending(ingestion: Ingestion, limit: int = 100) -> list[dict[str, object]]:
     return ingestion.pending(limit)
+
+
+# ------------------------------------------------------------------ PayPal
+
+
+def paypal_cert_loader() -> CertLoader:
+    """Dependency so tests can supply certificates without a network."""
+    return fetch_certificate
+
+
+CertLoaderDep = Annotated[CertLoader, Depends(paypal_cert_loader)]
+
+
+@dataclass(frozen=True, slots=True)
+class _PayPalOutcome:
+    code: int
+    detail: str = ""
+    ack: PayPalWebhookAck | None = None
+    reentry: Reentry | None = None
+
+
+def _process_paypal(
+    raw_body: bytes, headers: Mapping[str, str], load_cert: CertLoader
+) -> _PayPalOutcome:
+    """Verify, persist once, apply. Runs off the event loop (DB and cert I/O)."""
+    from lce.config import get_paypal_settings
+    from lce.data.database import get_session_factory
+    from lce.execution.webhooks import ingest
+
+    settings = get_paypal_settings()
+    if settings.refusal() is not None or not settings.webhook_configured:
+        return _PayPalOutcome(
+            503, "PAYPAL_WEBHOOK_ID is not configured; refusing unverified webhooks"
+        )
+
+    verification = verify_webhook(headers, raw_body, webhook_id=settings.require_webhook_id(),
+                                  load_cert=load_cert)
+    if not verification.verified and settings.accept_simulator_events:
+        simulated = verify_webhook(headers, raw_body, webhook_id=SIMULATOR_WEBHOOK_ID,
+                                   load_cert=load_cert)
+        if simulated.verified:
+            verification = simulated
+    if not verification.verified:
+        logger.warning("paypal_webhook_rejected", reason=verification.reason,
+                       transmission_id=verification.transmission_id)
+        return _PayPalOutcome(400, verification.reason)
+
+    try:
+        event = json.loads(raw_body)
+    except ValueError:
+        return _PayPalOutcome(400, "body is not JSON")
+    if not isinstance(event, dict) or not event.get("id"):
+        return _PayPalOutcome(400, "event has no id")
+
+    try:
+        with get_session_factory()() as session:
+            result = ingest(session, event=event, raw_body=raw_body, headers=headers,
+                            verification=verification)
+    except Exception as exc:  # no database: PayPal will redeliver later
+        logger.error("paypal_webhook_unpersisted", error=type(exc).__name__)
+        return _PayPalOutcome(503, "the event could not be recorded; PayPal will redeliver it")
+
+    ack = PayPalWebhookAck(
+        status=result.status,  # type: ignore[arg-type]
+        event_id=result.event_id,
+        event_type=result.event_type,
+        record_id=result.record_id,
+        record_status=result.record_status,
+        applied=result.applied,
+        reason=result.reason,
+        reentry_scheduled=result.reentry is not None,
+    )
+    return _PayPalOutcome(200, ack=ack, reentry=result.reentry)
+
+
+@router.post(
+    "/paypal",
+    response_model=PayPalWebhookAck,
+    summary="Receive a PayPal sandbox webhook (verified, recorded once, applied)",
+)
+async def paypal_webhook(
+    request: Request, background: BackgroundTasks, load_cert: CertLoaderDep
+) -> PayPalWebhookAck:
+    """Verify the signature over the raw body; nothing is processed before that.
+
+    Every verified event is acknowledged with 200 - including duplicates and
+    types Keystone ignores - so PayPal does not retry what is already recorded.
+    A failed payout is re-analysed *after* this response is sent.
+    """
+    from lce.execution.reentry import run_scheduled
+
+    raw_body = await request.body()
+    headers = dict(request.headers)
+    outcome = await run_in_threadpool(_process_paypal, raw_body, headers, load_cert)
+    if outcome.code != 200 or outcome.ack is None:
+        raise HTTPException(status_code=outcome.code, detail=outcome.detail)
+    if outcome.reentry is not None:
+        r = outcome.reentry
+        background.add_task(run_scheduled, r.record_id, r.trigger,
+                            receiver=r.receiver, source_event_id=r.source_event_id)
+    return outcome.ack

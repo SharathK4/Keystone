@@ -16,10 +16,10 @@ The lifecycle, and the guard on each step:
               committed *before* the request is sent, so a crash mid-flight
               leaves a trace rather than a mystery.
 ``refresh``   an explicit, human-initiated reconcile: ``GET`` the payout and
-              map PayPal's item status onto the record. For an action whose
-              outcome is unknown (PayPal never answered), it resubmits the
-              byte-identical request with the same idempotency fields, which
-              PayPal answers from its own record instead of paying again.
+              map PayPal's item status onto the record through the state
+              machine. It **never resubmits**: an action whose outcome is
+              unknown learns its batch id from PayPal's batch event, or stays
+              unknown. A retry needs a new plan and a fresh approval.
 ``ledger``    the append-only audit trail.
 
 There is no automatic retry anywhere in this module.
@@ -60,6 +60,7 @@ from lce.execution.plan import (
     build_plan,
     idempotency_key,
 )
+from lce.execution.webhooks import Reentry, reconcile
 from lce.logging import get_logger
 from lce.paypal.client import PayPalClient
 from lce.paypal.money import DemoScale, Money
@@ -74,19 +75,6 @@ NO_DATABASE = (
     "`alembic upgrade head`. The analysis does not need one."
 )
 
-#: PayPal's item ``transaction_status`` -> this system's record status.
-ITEM_STATUS = {
-    "SUCCESS": "succeeded",
-    "PENDING": "pending",
-    "ONHOLD": "held",
-    "UNCLAIMED": "failed",
-    "FAILED": "failed",
-    "RETURNED": "failed",
-    "BLOCKED": "failed",
-    "REFUNDED": "failed",
-    "REVERSED": "failed",
-}
-
 #: PayPal's ``batch_status`` when no item status is available yet.
 BATCH_STATUS = {
     "PENDING": "pending",
@@ -95,9 +83,6 @@ BATCH_STATUS = {
     "DENIED": "failed",
     "CANCELED": "failed",
 }
-
-#: Record statuses that mean "nothing more will happen without a human".
-TERMINAL = frozenset({"planned", "succeeded", "failed"})
 
 EMAIL_SUBJECT = "Keystone sandbox payout"
 EMAIL_MESSAGE = (
@@ -440,71 +425,20 @@ class ExecutionService:
 
     # ---------------------------------------------------------------- refresh
 
-    def refresh(self, record_id: str) -> ExecutionRecordRow:
+    def refresh(self, record_id: str) -> tuple[ExecutionRecordRow, Reentry | None]:
+        """Explicit, human-initiated reconcile. Reads only; never resubmits.
+
+        Returns the record and, if PayPal now reports a failure that should
+        re-enter the analysis, the re-entry to schedule after the response.
+        """
         record = self.session.execute(
             select(ExecutionRecordRow).where(ExecutionRecordRow.record_id == record_id)
         ).scalar_one_or_none()
         if record is None:
             raise NotFoundError("no such execution record", record_id=record_id)
-        plan = self.plan(record.scenario_id)
-        if record.plan_hash != plan.plan_hash:
-            raise ExecutionRefused("this record belongs to a plan no longer in force")
         if record.status == "planned":
-            return record
-
-        if record.provider_batch_id is None:
-            if record.status != "unknown":
-                return record
-            # PayPal may or may not have the payout. Resubmit the identical
-            # request: PayPal answers a known PayPal-Request-Id from its record.
-            action = next((a for a in plan.actions if a.key == record.action_key), None)
-            if action is None:
-                raise ExecutionRefused("the action is no longer in the plan")
-            self._event(plan, "reconcile_resubmitted", "unknown",
-                        {"idempotency_key": record.idempotency_key}, record_id=record.record_id)
-            self._submit(plan, record, payout_request(plan, action))
-            return record
-
-        try:
-            batch = self._paypal().get_payout(record.provider_batch_id)
-        except PayPalError as exc:
-            self._event(plan, "reconcile_failed", record.status,
-                        {"name": exc.context.get("name"), "debug_id": exc.context.get("debug_id")},
-                        record_id=record.record_id)
-            self.session.commit()
-            raise
-
-        header = batch.get("batch_header", {})
-        batch_status = str(header.get("batch_status", "")).upper()
-        item = next(
-            (
-                i for i in batch.get("items", [])
-                if str(i.get("payout_item", {}).get("sender_item_id", ""))
-                == record.idempotency_key[:63]
-            ),
-            None,
-        )
-        before = record.status
-        if item is not None:
-            status = str(item.get("transaction_status", "")).upper()
-            record.provider_item_id = _str_or_none(item.get("payout_item_id"))
-            record.provider_status = status or None
-            record.status = ITEM_STATUS.get(status, record.status)
-            errors = item.get("errors") or {}
-            record.reason = (
-                None if record.status in {"succeeded", "pending", "submitted"}
-                else f"PayPal item {status.lower()}"
-                + (f": {errors.get('name')}" if isinstance(errors, dict) and errors.get("name")
-                   else "")
-            )
-        elif batch_status:
-            record.provider_status = batch_status
-            record.status = BATCH_STATUS.get(batch_status, record.status)
-        self._event(plan, "reconciled", record.status,
-                    {"from": before, "provider_status": record.provider_status,
-                     "payout_item_id": record.provider_item_id}, record_id=record.record_id)
-        self.session.commit()
-        return record
+            return record, None
+        return reconcile(self.session, self._paypal(), record)
 
     # ----------------------------------------------------------------- ledger
 
