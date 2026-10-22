@@ -22,9 +22,17 @@ venv/
 .coverage
 htmlcov/
 
-# Model artifacts & run outputs
+# Model artifacts & run outputs. Everything under artifacts/ is ignored except
+# the canonical, immutable artifacts the hosted demo and the regression anchors
+# depend on (see artifacts/README.md). Never rebuild these in place.
 artifacts/**
 !artifacts/.gitkeep
+!artifacts/README.md
+!artifacts/snapshots/
+!artifacts/snapshots/snap-a4c99d5a49a64ffd/
+!artifacts/snapshots/snap-a4c99d5a49a64ffd/**
+!artifacts/contagion/
+!artifacts/contagion/**
 runs/
 *.pt
 *.ckpt
@@ -39,3 +47,13 @@ data/local/
 Thumbs.db
 .idea/
 .vscode/
+
+# Node and frontend build output
+node_modules/
+frontend/dist/
+
+# Playwright output (curated screenshots live in docs/screens and are kept)
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
