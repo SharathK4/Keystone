@@ -1,0 +1,10 @@
+#!/bin/sh
+# Strip attribution trailer lines from the commit message, then trailing blank
+# lines. Always exits 0: it cleans, it never blocks a commit.
+msg_file="$1"
+[ -f "$msg_file" ] || exit 0
+tmp="$msg_file.strip.$$"
+grep -viE 'co-authored-by|claude-session|generated with|claude code|anthropic' "$msg_file" > "$tmp" || true
+awk 'NF { last = NR } { line[NR] = $0 } END { for (i = 1; i <= last; i++) print line[i] }' "$tmp" > "$msg_file"
+rm -f "$tmp"
+exit 0
