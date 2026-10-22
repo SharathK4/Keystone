@@ -371,6 +371,8 @@ def audit_paypal(audit: Audit) -> None:
         "/api/v1/execution/ledger",
         "/api/v1/execution/reentries",
         "/api/v1/webhooks/paypal",
+        "/api/v1/structure/speed",
+        "/api/v1/structure/speed/scenarios/{scenario_id}",
     }
     missing = sorted(required - published)
     audit.check("execution_routes_present", not missing, f"missing: {missing}")
@@ -415,6 +417,30 @@ def audit_paypal_webhooks(audit: Audit) -> None:
                 "reconcile can submit a payout")
 
 
+def audit_structure(audit: Audit, *, artifact_root: Path) -> None:
+    """The value-of-speed artifact loads, verifies, and starts where the snapshot is."""
+    import json
+
+    from lce.structure.build import check_against_snapshot
+    from lce.structure.store import SpeedStore, resolve_speed
+
+    try:
+        store = SpeedStore(resolve_speed(artifact_root / "structure"))
+    except Exception as exc:  # reported as a failed check, not a crash
+        audit.check("speed_artifact_verified", False, str(exc))
+        return
+    audit.check("speed_artifact_verified", True, "")
+    snapshot = artifact_root / "snapshots" / store.provenance.snapshot_id / "snapshot.json"
+    reference = {
+        s["scenario_id"]: s["counterfactual"]
+        for s in json.loads(snapshot.read_text(encoding="utf-8"))["scenarios"]
+    }
+    problems = check_against_snapshot(store.scenarios(), reference)
+    audit.check("speed_zero_delay_matches_snapshot", not problems, f"{problems[:3]}")
+    audit.notes["structure"] = {"artifact_id": store.artifact_id,
+                                "n_scenarios": len(store.scenarios())}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Backend freeze audit")
     parser.add_argument("--artifacts", default="artifacts")
@@ -439,6 +465,7 @@ def main() -> int:
     audit_migrations(audit)
     audit_razorpay(audit, live=args.live)
     audit_paypal(audit)
+    audit_structure(audit, artifact_root=artifact_root)
 
     payload = {
         "passed": audit.passed,
