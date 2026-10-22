@@ -737,3 +737,66 @@ class ExecutionEventRow(Base):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )
+
+
+class ReentryAnalysisRow(Base):
+    """A failed payout, re-entered as a shock and analysed within fixed bounds.
+
+    One row per (execution record, trigger): a redelivered or out-of-order
+    failure event cannot start a second analysis. The full scenario the bounded
+    analysis returned is kept, so the new plan it offers survives a restart; it
+    is never executed without a fresh approval of its own.
+    """
+
+    __tablename__ = "reentry_analyses"
+    __table_args__ = (
+        UniqueConstraint("analysis_id", name="uq_reentry_analysis_id"),
+        UniqueConstraint("record_id", "trigger", name="uq_reentry_record_trigger"),
+        Index("ix_reentry_scenario", "scenario_id"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    analysis_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    record_id: Mapped[str] = mapped_column(String(40), nullable=False)
+    scenario_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    merchant_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    trigger: Mapped[str] = mapped_column(String(32), nullable=False)
+    source_event_id: Mapped[str | None] = mapped_column(String(128))
+    status: Mapped[str] = mapped_column(String(16), nullable=False)
+    reason: Mapped[str | None] = mapped_column(Text)
+    shock: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    result: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    provenance: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
+
+
+class PayPalWebhookEventRow(Base):
+    """Raw inbound PayPal webhooks, recorded once before anything acts on them.
+
+    ``event_id`` is unique: two concurrent deliveries of one event produce one
+    row, which is the race-safe dedupe. Only verified events are stored; a
+    delivery that fails verification is refused before it reaches this table.
+    Transmission headers are kept as provenance; nothing secret is.
+    """
+
+    __tablename__ = "paypal_webhook_events"
+    __table_args__ = (
+        UniqueConstraint("event_id", name="uq_paypal_webhook_event"),
+        Index("ix_paypal_webhook_type", "event_type"),
+    )
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    event_id: Mapped[str] = mapped_column(String(128), nullable=False)
+    event_type: Mapped[str] = mapped_column(String(64), nullable=False)
+    verification: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    transmission: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    raw_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    payload: Mapped[dict[str, Any]] = mapped_column(JsonType, default=dict)
+    processed: Mapped[bool] = mapped_column(Boolean, nullable=False, default=False)
+    processed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    outcome: Mapped[str | None] = mapped_column(Text)
+    received_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), nullable=False
+    )
