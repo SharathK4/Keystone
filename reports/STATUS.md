@@ -9,7 +9,7 @@ Never push (`origin` push URL is disabled locally).
 | --- | --- | --- | --- | --- | --- |
 | 1 | 1a hygiene + baseline | **PASS** — 517 passed / 8 deselected; ruff, mypy clean; audit 27; phase-4 28; anchors unchanged | Push URL was *not* disabled; disabled it locally. | — | 1b |
 | 1 | 1b Gate P2 webhooks + failure re-entry | **PASS** (offline) — 539 passed / 8 deselected; audit 30; phase-4 28; migration 0004 single head, zero diff | Refresh no longer re-POSTs; PayPal events get their own table (see decisions). | Register a sandbox webhook once a public URL exists. | 1c |
-| 1 | 1c Gate H value of speed | pending | | | |
+| 1 | 1c Gate H value of speed | **PASS** — 551 passed / 8 deselected; audit 32; phase-4 28; δ=0 == snapshot exactly; full rebuild hash identical (`fe887776da0213e1`) | Replays follow the snapshot's (unmutated-network) convention; replanned arm beats δ=0 in 2 scenarios (optimiser pruning). See `reports/structure/gate_h.md`. | — | 1d |
 | 1 | 1d hosting readiness | pending | | | |
 | 1 | 1e concept boards → **STOP** | pending | | design pick | |
 
@@ -44,6 +44,25 @@ Never push (`origin` push URL is disabled locally).
   with `PAYPAL_ACCEPT_SIMULATOR_EVENTS=true`; default off.
 - **1b** Property tests enumerate every event sequence up to length 5 instead of
   adding `hypothesis` as a dependency.
+
+- **1c** The value-of-speed artifact covers the Phase-4 benchmark's 14 scenarios
+  (seeds 2025 and 7), regenerated with the current generator; the old
+  `reports/phase4/p4-f61b675fa8a867c1` dataset ids predate it and are not reused.
+- **1c** "Frozen" delays every action of the plan (both are injections in the
+  canonical plan); "replanned" reruns `generate_actions` + `greedy_solve` with
+  `decision_time = onset + d`. Systemic importance, baselines, MILP, exact and
+  robust stages are skipped: they do not affect the greedy plan.
+- **1c** Replay uses the scenario's shock on the unmutated network, exactly as
+  the snapshot's counterfactual does, so δ=0 matches what is on screen. Found,
+  not fixed (frozen): for `delayed_inflow` the snapshot shows 40.45 %; on its own
+  mutated network the same plan cuts 41.34 %.
+- **1c** Found, not fixed (frozen optimiser): in two seed-7 scenarios the
+  zero-delay plan is worth 0.02 % because the top-12 candidate list at onset
+  omits injections it lists an hour later (those cut 14.85 % at onset). Reported
+  as monotonicity rises, not smoothed.
+- **1c** 48 h explanation: the remaining 20.9 % cut is 97 % delay term (payments
+  still late, but less late), 1 % defaults avoided, 1.5 % deficit-time. Payments
+  kept on time is ₹0. The UI must show both together.
 
 ## Leaks
 
