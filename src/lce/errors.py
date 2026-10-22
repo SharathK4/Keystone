@@ -118,6 +118,20 @@ class ExecutionRefused(LCEError):
     http_status = 409
 
 
+class DemoRefused(LCEError):
+    """The hosted demo does not start this action for this caller."""
+
+    code = "demo_refused"
+    http_status = 403
+
+
+class RateLimited(LCEError):
+    """Too many execution requests from one address on the hosted demo."""
+
+    code = "rate_limited"
+    http_status = 429
+
+
 class ServiceUnavailable(LCEError):
     """A required backing service (database, provider) is not configured."""
 

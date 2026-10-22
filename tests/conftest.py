@@ -52,6 +52,8 @@ def _test_environment(
             "RANDOM_SEED",
             "RAZORPAY_MODE",
             "LCE_EXECUTION_PROVIDER",
+            "LCE_DEMO_MODE",
+            "LCE_DEMO_TOKEN",
             *_PAYPAL_ENV,
         )
     }
@@ -62,17 +64,24 @@ def _test_environment(
     os.environ["RANDOM_SEED"] = "1234"
     os.environ["RAZORPAY_MODE"] = "test"
     os.environ.pop("LCE_EXECUTION_PROVIDER", None)
+    os.environ["LCE_DEMO_MODE"] = "off"
+    os.environ["LCE_DEMO_TOKEN"] = ""
     if "paypal_live" not in (request.config.option.markexpr or "").replace(
         "not paypal_live", ""
     ):
         for key in _PAYPAL_ENV:
             os.environ[key] = ""
 
-    from lce.config import reset_paypal_settings_cache, reset_settings_cache
+    from lce.config import (
+        reset_demo_settings_cache,
+        reset_paypal_settings_cache,
+        reset_settings_cache,
+    )
     from lce.data.database import create_all, reset_engine_cache
 
     reset_settings_cache()
     reset_paypal_settings_cache()
+    reset_demo_settings_cache()
     reset_engine_cache()
     create_all()
 

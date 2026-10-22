@@ -441,6 +441,29 @@ def audit_structure(audit: Audit, *, artifact_root: Path) -> None:
                                 "n_scenarios": len(store.scenarios())}
 
 
+def audit_demo(audit: Audit) -> None:
+    """In recorded mode nothing starts a payout without the demo token."""
+    from starlette.requests import Request
+
+    from lce.config import DemoSettings
+    from lce.errors import DemoRefused
+    from lce.execution.demo import check
+
+    request = Request({"type": "http", "method": "POST", "headers": [],
+                       "path_params": {"scenario_id": "scn-07c647ec1459"},
+                       "client": ("192.0.2.1", 1)})
+    outcomes = []
+    for token in ("", "configured-token"):
+        cfg = DemoSettings(_env_file=None, LCE_DEMO_MODE="recorded", LCE_DEMO_TOKEN=token)
+        try:
+            check(request, cfg)
+            outcomes.append(False)
+        except DemoRefused:
+            outcomes.append(True)
+    audit.check("demo_recorded_mode_needs_token", all(outcomes),
+                "recorded mode let a request without the token through")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Backend freeze audit")
     parser.add_argument("--artifacts", default="artifacts")
@@ -466,6 +489,7 @@ def main() -> int:
     audit_razorpay(audit, live=args.live)
     audit_paypal(audit)
     audit_structure(audit, artifact_root=artifact_root)
+    audit_demo(audit)
 
     payload = {
         "passed": audit.passed,

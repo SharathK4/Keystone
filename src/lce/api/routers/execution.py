@@ -25,7 +25,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import OperationalError, ProgrammingError
 from sqlalchemy.orm import Session
 
-from lce.config import get_paypal_settings
+from lce.config import get_demo_settings, get_paypal_settings
 from lce.data.orm import (
     ExecutionApprovalRow,
     ExecutionEventRow,
@@ -33,11 +33,13 @@ from lce.data.orm import (
     ReentryAnalysisRow,
 )
 from lce.errors import ServiceUnavailable
+from lce.execution.demo import RECORDED_NOTE, TOKEN_HEADER, demo_guard
 from lce.execution.models import (
     ApprovalRequest,
     ApprovalView,
     CapabilityView,
     DemoScaleView,
+    DemoStatusView,
     ExecutablePlanView,
     ExecuteRequest,
     ExecutionRecordView,
@@ -94,6 +96,8 @@ def _db() -> Iterator[None]:
 
 
 Service = Annotated[ExecutionService, Depends(_service)]
+#: Routes that start or re-check a payout. A no-op unless LCE_DEMO_MODE is set.
+Guarded = [Depends(demo_guard)]
 
 
 # ----------------------------------------------------------------- converters
@@ -227,6 +231,25 @@ def paypal_status(probe: bool = True, refresh: bool = False) -> PayPalStatusView
 
 
 @router.get(
+    "/demo",
+    response_model=DemoStatusView,
+    summary="Whether this deployment shows a recorded run or can start one",
+)
+def demo_status() -> DemoStatusView:
+    s = get_demo_settings()
+    recorded = s.mode == "recorded"
+    return DemoStatusView(
+        mode=s.mode,
+        token_required=recorded,
+        token_header=TOKEN_HEADER,
+        executes_only=s.scenario_id if recorded else None,
+        rate_limit=s.rate_limit if recorded else None,
+        rate_window_s=s.rate_window_s if recorded else None,
+        note=RECORDED_NOTE if recorded else None,
+    )
+
+
+@router.get(
     "/plans/{scenario_id}",
     response_model=ExecutablePlanView,
     summary="The selected plan, priced for the sandbox, with the hash to approve",
@@ -240,6 +263,7 @@ def get_plan(scenario_id: str, service: Service) -> ExecutablePlanView:
     response_model=ApprovalView,
     status_code=201,
     summary="Approve one exact plan (by hash). Nothing executes without this.",
+    dependencies=Guarded,
 )
 def approve_plan(scenario_id: str, body: ApprovalRequest, service: Service) -> ApprovalView:
     with _db():
@@ -252,6 +276,7 @@ def approve_plan(scenario_id: str, body: ApprovalRequest, service: Service) -> A
     "/plans/{scenario_id}/executions",
     response_model=list[ExecutionRecordView],
     summary="Execute an approved plan in the PayPal sandbox (idempotent)",
+    dependencies=Guarded,
 )
 def execute_plan(
     scenario_id: str, body: ExecuteRequest, service: Service
@@ -266,6 +291,7 @@ def execute_plan(
     "/records/{record_id}/refresh",
     response_model=ExecutionRecordView,
     summary="Reconcile one record with PayPal (explicit, never automatic)",
+    dependencies=Guarded,
 )
 def refresh_record(
     record_id: str, service: Service, background: BackgroundTasks

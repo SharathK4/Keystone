@@ -195,6 +195,18 @@ class ReentryView(_Contract):
     created_at: datetime
 
 
+class DemoStatusView(_Contract):
+    """How the hosted demo treats execution, so a page can say so up front."""
+
+    mode: Literal["off", "recorded"]
+    token_required: bool
+    token_header: str
+    executes_only: str | None
+    rate_limit: int | None
+    rate_window_s: int | None
+    note: str | None
+
+
 class PayPalWebhookAck(_Contract):
     """What happened to one delivery. Returned with 200 for every verified event."""
 

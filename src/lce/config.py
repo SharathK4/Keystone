@@ -373,3 +373,37 @@ def get_paypal_settings() -> PayPalSettings:
 
 def reset_paypal_settings_cache() -> None:
     get_paypal_settings.cache_clear()
+
+
+class DemoSettings(BaseSettings):
+    """Guardrails for a publicly hosted demo.
+
+    ``LCE_DEMO_MODE=recorded`` (what ``render.yaml`` sets) shows the ledger of a
+    sandbox run recorded earlier and refuses to start a new one unless the
+    request carries the demo token. A token holder is rate-limited per address
+    and can execute only the canonical plan. ``off`` (the default) changes
+    nothing, so local development and the tests behave as before.
+    """
+
+    model_config = SettingsConfigDict(
+        env_file=(REPO_ROOT / ".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+        case_sensitive=False,
+        populate_by_name=True,
+    )
+
+    mode: Literal["off", "recorded"] = Field(default="off", alias="LCE_DEMO_MODE")
+    token: SecretStr = Field(default=SecretStr(""), alias="LCE_DEMO_TOKEN")
+    scenario_id: str = Field(default="scn-07c647ec1459", alias="LCE_DEMO_SCENARIO")
+    rate_limit: int = Field(default=6, ge=1, alias="LCE_DEMO_RATE_LIMIT")
+    rate_window_s: int = Field(default=600, ge=1, alias="LCE_DEMO_RATE_WINDOW_S")
+
+
+@functools.lru_cache(maxsize=1)
+def get_demo_settings() -> DemoSettings:
+    return DemoSettings()
+
+
+def reset_demo_settings_cache() -> None:
+    get_demo_settings.cache_clear()

@@ -247,6 +247,10 @@ def build_parser() -> argparse.ArgumentParser:
     demo.add_argument("--max-actions", type=int, default=2, dest="max_actions")
     demo.set_defaults(func=cmd_demo)
 
+    from lce.execution import demo as demo_safety
+
+    demo_safety.register(demo)
+
     from lce.benchmark import cli as bench_cli
 
     bench_cli.register(sub)
