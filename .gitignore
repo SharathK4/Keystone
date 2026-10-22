@@ -61,5 +61,4 @@ blob-report/
 playwright/.cache/
 
 # personal-use-only demo fonts: kept locally, never committed
-fonts/
-design/concepts/
+/fonts/

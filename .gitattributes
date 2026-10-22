@@ -5,3 +5,6 @@ artifacts/** -text -diff -merge
 # Shell scripts and git hooks must keep LF endings or sh cannot run them.
 *.sh text eol=lf
 scripts/git-hooks/* text eol=lf
+# generated boards: stored byte-for-byte
+design/concepts/*.svg -text -diff
+design/concepts/*.png binary
