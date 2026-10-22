@@ -189,3 +189,69 @@ class ExtractStore:
 
     def by_family(self, family: str) -> ScenarioSnapshot:
         return next(s for s in self._scenarios.values() if s.family == family)
+
+
+# ------------------------------------------------------------ webhook signing
+
+def keypair(*, valid_days: int = 30, start_days_ago: int = 1):
+    """An RSA key and a self-signed certificate, PEM-encoded."""
+    from datetime import UTC, datetime, timedelta
+
+    from cryptography import x509
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import rsa
+    from cryptography.x509.oid import NameOID
+
+    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "keystone-test-signer")])
+    start = datetime.now(UTC) - timedelta(days=start_days_ago)
+    cert = (
+        x509.CertificateBuilder().subject_name(name).issuer_name(name)
+        .public_key(key.public_key()).serial_number(x509.random_serial_number())
+        .not_valid_before(start).not_valid_after(start + timedelta(days=valid_days))
+        .sign(key, hashes.SHA256())
+    )
+    return key, cert.public_bytes(serialization.Encoding.PEM)
+
+
+CERT_URL = "https://api.sandbox.paypal.com/v1/notifications/certs/CERT-KS-TEST"
+
+
+def signed_headers(key, body: bytes, webhook_id: str = FAKE_WEBHOOK_ID,
+                   transmission_id: str | None = None) -> dict[str, str]:
+    """Headers for one delivery, signed the way PayPal signs."""
+    from cryptography.hazmat.primitives import hashes
+    from cryptography.hazmat.primitives.asymmetric import padding
+
+    from lce.paypal.webhooks import signed_message
+
+    tid = transmission_id or f"TX-{uuid.uuid4().hex[:12]}"
+    ttime = "2026-10-22T10:00:00Z"
+    sig = key.sign(signed_message(tid, ttime, webhook_id, body), padding.PKCS1v15(),
+                   hashes.SHA256())
+    return {
+        "PAYPAL-TRANSMISSION-ID": tid,
+        "PAYPAL-TRANSMISSION-TIME": ttime,
+        "PAYPAL-TRANSMISSION-SIG": base64.b64encode(sig).decode(),
+        "PAYPAL-CERT-URL": CERT_URL,
+        "PAYPAL-AUTH-ALGO": "SHA256withRSA",
+        "Content-Type": "application/json",
+    }
+
+
+def item_event(outcome: str, *, sender_item_id: str, batch_id: str | None = None,
+               receiver: str | None = None, event_id: str | None = None) -> dict:
+    """A PAYMENT.PAYOUTS-ITEM.<outcome> event as PayPal shapes it."""
+    status = {"SUCCEEDED": "SUCCESS", "HELD": "ONHOLD"}.get(outcome, outcome)
+    return {
+        "id": event_id or f"WH-{uuid.uuid4().hex[:16]}",
+        "event_type": f"PAYMENT.PAYOUTS-ITEM.{outcome}",
+        "resource": {
+            "payout_item_id": f"ITEM-{sender_item_id[-8:]}",
+            "payout_batch_id": batch_id,
+            "transaction_status": status,
+            "payout_item": {"sender_item_id": sender_item_id, "receiver": receiver,
+                            "recipient_type": "EMAIL",
+                            "amount": {"currency": "USD", "value": "1.00"}},
+        },
+    }

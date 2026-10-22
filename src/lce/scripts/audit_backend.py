@@ -369,9 +369,50 @@ def audit_paypal(audit: Audit) -> None:
         "/api/v1/execution/plans/{scenario_id}/executions",
         "/api/v1/execution/records/{record_id}/refresh",
         "/api/v1/execution/ledger",
+        "/api/v1/execution/reentries",
+        "/api/v1/webhooks/paypal",
     }
     missing = sorted(required - published)
     audit.check("execution_routes_present", not missing, f"missing: {missing}")
+
+    audit_paypal_webhooks(audit)
+
+
+def audit_paypal_webhooks(audit: Audit) -> None:
+    """Unverified deliveries are refused; facts never regress; reconcile only reads."""
+    import inspect
+
+    from lce.execution import webhooks as ingest_module
+    from lce.execution.state import advance
+    from lce.paypal.webhooks import verify_webhook
+
+    def no_cert(_url: str) -> bytes:
+        raise AssertionError("no certificate should be fetched for this delivery")
+
+    body = b'{"id":"WH-AUDIT","event_type":"PAYMENT.PAYOUTS-ITEM.SUCCEEDED"}'
+    unsigned = verify_webhook({}, body, webhook_id="WH-AUDIT", load_cert=no_cert)
+    off_host = verify_webhook(
+        {"paypal-transmission-id": "t", "paypal-transmission-time": "2026-01-01T00:00:00Z",
+         "paypal-transmission-sig": "AAAA", "paypal-auth-algo": "SHA256withRSA",
+         "paypal-cert-url": "https://example.com/cert.pem"},
+        body, webhook_id="WH-AUDIT", load_cert=no_cert,
+    )
+    audit.check("paypal_unverified_webhook_refused",
+                not unsigned.verified and not off_host.verified,
+                "an unsigned or off-host webhook delivery verified")
+
+    regressions = [
+        (current, incoming)
+        for current in ("succeeded", "failed")
+        for incoming in ("unknown", "submitted", "pending", "held", "succeeded", "failed")
+        if advance(current, incoming).status != current
+    ]
+    audit.check("paypal_terminal_status_never_regresses", not regressions,
+                f"terminal status moved: {regressions}")
+
+    source = inspect.getsource(ingest_module.reconcile)
+    audit.check("paypal_reconcile_never_resubmits", "create_payout" not in source,
+                "reconcile can submit a payout")
 
 
 def main() -> int:
