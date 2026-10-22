@@ -1,0 +1,8 @@
+{
+  "artifact_id": "speed-fe887776da0213e1",
+  "content_hash": "fe887776da0213e1ec55fb68ac06c6f614961c17132688d47350a79a99c9d891",
+  "format": "keystone-speed-v1",
+  "label": "Replayed offline, inside the synthetic generator",
+  "n_scenarios": 14,
+  "snapshot_id": "snap-a4c99d5a49a64ffd"
+}

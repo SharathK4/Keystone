@@ -33,6 +33,8 @@ artifacts/**
 !artifacts/snapshots/snap-a4c99d5a49a64ffd/**
 !artifacts/contagion/
 !artifacts/contagion/**
+!artifacts/structure/
+!artifacts/structure/**
 runs/
 *.pt
 *.ckpt

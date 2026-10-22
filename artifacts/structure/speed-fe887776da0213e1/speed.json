@@ -1,0 +1,5514 @@
+{
+  "format": "keystone-speed-v1",
+  "monotone_scenarios": 5,
+  "points": [
+    {
+      "delay_hours": 0.0,
+      "frozen_cut_pct": {
+        "high": 30.6531786505985,
+        "low": 5.397144253974084,
+        "mean": 17.358245305698595
+      },
+      "frozen_kept_inr": {
+        "high": 91371189.54146698,
+        "low": 14325429.622025043,
+        "mean": 46038960.843481615
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 84945284.83659676,
+        "low": 14045360.54232951,
+        "mean": 44383153.8614658
+      },
+      "replanned_cut_pct": {
+        "high": 30.6531786505985,
+        "low": 5.397144253974084,
+        "mean": 17.358245305698595
+      },
+      "replanned_kept_inr": {
+        "high": 91371189.54146698,
+        "low": 14325429.622025043,
+        "mean": 46038960.843481615
+      },
+      "replanned_mix": {
+        "liquidity_injection": 9,
+        "receivable_acceleration": 1,
+        "supplier_term_extension": 6
+      },
+      "replanning_gain_pp": {
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0
+      }
+    },
+    {
+      "delay_hours": 1.0,
+      "frozen_cut_pct": {
+        "high": 30.562404834030445,
+        "low": 5.382110909302382,
+        "mean": 17.20906664384893
+      },
+      "frozen_kept_inr": {
+        "high": 91451827.70300606,
+        "low": 15435982.57492248,
+        "mean": 46380684.724690825
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 86509692.48530763,
+        "low": 17861830.25712859,
+        "mean": 47511458.71103368
+      },
+      "replanned_cut_pct": {
+        "high": 32.291240133313835,
+        "low": 9.433954189158614,
+        "mean": 20.675523556713035
+      },
+      "replanned_kept_inr": {
+        "high": 91451827.70300606,
+        "low": 15451556.298315488,
+        "mean": 46011711.59852278
+      },
+      "replanned_mix": {
+        "liquidity_injection": 13
+      },
+      "replanning_gain_pp": {
+        "high": 6.996508056747693,
+        "low": -0.05055609977493884,
+        "mean": 3.4664569128641025
+      }
+    },
+    {
+      "delay_hours": 6.0,
+      "frozen_cut_pct": {
+        "high": 30.241469891978415,
+        "low": 5.383831387971094,
+        "mean": 17.00431040258224
+      },
+      "frozen_kept_inr": {
+        "high": 78670935.94208524,
+        "low": 13152053.899392832,
+        "mean": 39596739.3042116
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 86509692.48530763,
+        "low": 17861830.25712859,
+        "mean": 47511458.71103368
+      },
+      "replanned_cut_pct": {
+        "high": 31.898482648886134,
+        "low": 9.488242992339542,
+        "mean": 20.343176383070094
+      },
+      "replanned_kept_inr": {
+        "high": 78680884.54792185,
+        "low": 13323065.77246812,
+        "mean": 39626240.02098068
+      },
+      "replanned_mix": {
+        "liquidity_injection": 13
+      },
+      "replanning_gain_pp": {
+        "high": 6.708516429473755,
+        "low": -0.018171694233900835,
+        "mean": 3.3388659804878515
+      }
+    },
+    {
+      "delay_hours": 12.0,
+      "frozen_cut_pct": {
+        "high": 28.644007493805937,
+        "low": 4.9886204242598,
+        "mean": 16.04813843931835
+      },
+      "frozen_kept_inr": {
+        "high": 34070405.5129095,
+        "low": 5626303.017334025,
+        "mean": 17127327.207197927
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 86509692.48530763,
+        "low": 17861830.25712859,
+        "mean": 47511458.71103368
+      },
+      "replanned_cut_pct": {
+        "high": 30.218448619528903,
+        "low": 8.676947473421382,
+        "mean": 19.223089765465254
+      },
+      "replanned_kept_inr": {
+        "high": 34184724.6117174,
+        "low": 5907039.116434053,
+        "mean": 17378160.052878454
+      },
+      "replanned_mix": {
+        "liquidity_injection": 13
+      },
+      "replanning_gain_pp": {
+        "high": 6.366236104381835,
+        "low": -0.008308418175481114,
+        "mean": 3.174951326146903
+      }
+    },
+    {
+      "delay_hours": 24.0,
+      "frozen_cut_pct": {
+        "high": 24.748577379677986,
+        "low": 4.136327281005775,
+        "mean": 13.78739276289575
+      },
+      "frozen_kept_inr": {
+        "high": 19878569.60426861,
+        "low": 3260997.0325605385,
+        "mean": 10031409.252877496
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 85819623.12938175,
+        "low": 17171760.90120269,
+        "mean": 46821389.35510778
+      },
+      "replanned_cut_pct": {
+        "high": 26.14179315552468,
+        "low": 7.0301048939268735,
+        "mean": 16.586074156890557
+      },
+      "replanned_kept_inr": {
+        "high": 19992888.70307654,
+        "low": 3541733.1316605657,
+        "mean": 10282242.098558024
+      },
+      "replanned_mix": {
+        "liquidity_injection": 12
+      },
+      "replanning_gain_pp": {
+        "high": 5.617733827920906,
+        "low": -0.013366009849849866,
+        "mean": 2.7986813939948076
+      }
+    },
+    {
+      "delay_hours": 48.0,
+      "frozen_cut_pct": {
+        "high": 15.727049764684844,
+        "low": 2.616789786481666,
+        "mean": 7.865363351820264
+      },
+      "frozen_kept_inr": {
+        "high": 4.470348358154297e-08,
+        "low": 0.0,
+        "mean": 1.4901161193847656e-08
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 92081488.87846538,
+        "low": 15346914.813077565,
+        "mean": 46040744.43923269
+      },
+      "replanned_cut_pct": {
+        "high": 16.539446819739805,
+        "low": 2.7526898820201544,
+        "mean": 8.269472381554541
+      },
+      "replanned_kept_inr": {
+        "high": 4124073.3444719315,
+        "low": 687345.5574119836,
+        "mean": 2062036.6722359657
+      },
+      "replanned_mix": {
+        "liquidity_injection": 6
+      },
+      "replanning_gain_pp": {
+        "high": 0.8159393586012862,
+        "low": 0.12334095978188879,
+        "mean": 0.4041090297342783
+      }
+    },
+    {
+      "delay_hours": 72.0,
+      "frozen_cut_pct": {
+        "high": 2.7728651379893456,
+        "low": 0.4614929321844009,
+        "mean": 1.3863904836896503
+      },
+      "frozen_kept_inr": {
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0
+      },
+      "n_scenarios": 8,
+      "replanned_cost_inr": {
+        "high": 26303218.886816394,
+        "low": 4383869.814469399,
+        "mean": 13151609.443408197
+      },
+      "replanned_cut_pct": {
+        "high": 2.7576292752224383,
+        "low": 0.4589572001409169,
+        "mean": 1.378772783549297
+      },
+      "replanned_kept_inr": {
+        "high": 0.0,
+        "low": 0.0,
+        "mean": 0.0
+      },
+      "replanned_mix": {
+        "liquidity_injection": 3
+      },
+      "replanning_gain_pp": {
+        "high": -0.002535732043484007,
+        "low": -0.015235862766907415,
+        "mean": -0.0076177001403531786
+      }
+    }
+  ],
+  "provenance": {
+    "bootstrap": {
+      "level": 0.95,
+      "resamples": 2000,
+      "seed": 20251022,
+      "unit": "scenario"
+    },
+    "budget": {
+      "approx_peak_memory_mb": 1024,
+      "exact_optimum": true,
+      "horizon_hours": 168.0,
+      "max_actions": 2,
+      "max_candidates": 12,
+      "n_robust_scenarios": 5,
+      "pairwise_surrogate": true,
+      "profile": "small_fast",
+      "scale": "small",
+      "solver_time_limit_s": 5.0,
+      "systemic_sample": 40
+    },
+    "code_version": "0.1.0",
+    "dataset_versions": [
+      "synth-eab9b3bbb256",
+      "synth-af28210679e4"
+    ],
+    "delay_note": "Delays are scenario parameters: the hours between the moment the shock is known and the moment the money lands. They are not production timings.",
+    "delays_hours": [
+      0.0,
+      1.0,
+      6.0,
+      12.0,
+      24.0,
+      48.0,
+      72.0
+    ],
+    "kind": "replayed_offline",
+    "label": "Replayed offline, inside the synthetic generator",
+    "objective": {
+      "delay_unit_hours": 24.0,
+      "gamma_default": 500000.0,
+      "gamma_deficit": 0.02,
+      "gamma_delay": 1.0
+    },
+    "optimiser": "greedy_objective",
+    "replay_config_hash": "ca5576ca6c56fd77",
+    "replay_note": "Each plan is replayed with the scenario's shock on the unmutated network, the same replay the snapshot's counterfactual uses, so a zero delay reproduces the snapshot exactly. For network-mutation families the mutation is not replayed.",
+    "scale": "small",
+    "seeds": [
+      2025,
+      7
+    ],
+    "snapshot_id": "snap-a4c99d5a49a64ffd"
+  },
+  "scenarios": [
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 8,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.36435063262523,
+            "disruption_index": 3402062067.640296,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.8055976,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751383,
+              "delay": 2253981773.775155,
+              "total": 2302683506.072669
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.36435063262523,
+            "disruption_index": 3402062067.640296,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.8055976,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751383,
+              "delay": 2253981773.775155,
+              "total": 2302683506.072669
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.27657306936961,
+            "disruption_index": 3407069554.294834,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.8055976,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.582034,
+              "total": 2297676019.418131
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.27657306936961,
+            "disruption_index": 3407069554.294834,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.8055976,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.582034,
+              "total": 2297676019.418131
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.73131227049953,
+            "disruption_index": 3438175295.583567,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.59881866,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.066512,
+              "total": 2266570278.129398
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.73131227049953,
+            "disruption_index": 3438175295.583567,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.59881866,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.066512,
+              "total": 2266570278.129398
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.78383172343912,
+            "disruption_index": 3549274105.890917,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521869,
+              "total": 2155471467.822048
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.78383172343912,
+            "disruption_index": 3549274105.890917,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521869,
+              "total": 2155471467.822048
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 32.93082779760917,
+            "disruption_index": 3826125632.541817,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358227,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.360433,
+              "total": 1878619941.1711478
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 32.93082779760917,
+            "disruption_index": 3826125632.541817,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358227,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.360433,
+              "total": 1878619941.1711478
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 20.934318291853327,
+            "disruption_index": 4510495977.571479,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 1.1920928955078125e-07,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 18471961.081713155,
+              "delay": 1163777635.0597725,
+              "total": 1194249596.1414862
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 45506287.6694224,
+                "cost_inr": 45506287.6694224,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0003",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 122775318.50462052,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 22.021519056161235,
+            "disruption_index": 4448473940.09225,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 5498764.459295988,
+            "reduction": {
+              "default": 16000000.0,
+              "deficit": 13498849.08699803,
+              "delay": 1226772784.5337172,
+              "total": 1256271633.6207151
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.6919434574752072,
+            "disruption_index": 5494129592.738663,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 3337129.2461072803,
+              "delay": 203278851.7281952,
+              "total": 210615980.9743023
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 35070958.51575519,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.671657601127335,
+            "disruption_index": 5495286849.230758,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 2179872.754012257,
+              "delay": 203278851.7281952,
+              "total": 209458724.4822073
+            }
+          }
+        }
+      ],
+      "family": "single_missed_inflow",
+      "has_plan": true,
+      "in_snapshot": true,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 599701987.8804468,
+      "scenario_id": "scn-07c647ec1459",
+      "seed": 2025,
+      "shock_onset_hours": 18.781346115982956,
+      "unplanned": {
+        "default": 32000000.0,
+        "deficit": 146611426.78497583,
+        "delay": 5526134146.927989,
+        "total": 5704745573.712965
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 8,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.45163420326513,
+            "disruption_index": 3389752785.8752174,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559748,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751384,
+              "delay": 2253981773.7751546,
+              "total": 2302683506.072668
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.45163420326513,
+            "disruption_index": 3389752785.8752174,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559748,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751384,
+              "delay": 2253981773.7751546,
+              "total": 2302683506.072668
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.36366683046165,
+            "disruption_index": 3394760272.5297556,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559748,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.5820336,
+              "total": 2297676019.41813
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.36366683046165,
+            "disruption_index": 3394760272.5297556,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559748,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.5820336,
+              "total": 2297676019.41813
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.817226963708414,
+            "disruption_index": 3425866013.8184886,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.59881854,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.0665116,
+              "total": 2266570278.129397
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.817226963708414,
+            "disruption_index": 3425866013.8184886,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.59881854,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.0665116,
+              "total": 2266570278.129397
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.86553519924366,
+            "disruption_index": 3536964824.1258383,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521864,
+              "total": 2155471467.822047
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.86553519924366,
+            "disruption_index": 3536964824.1258383,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521864,
+              "total": 2155471467.822047
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 33.00203717393392,
+            "disruption_index": 3813816350.7767386,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358108,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.3604326,
+              "total": 1878619941.1711469
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 33.00203717393392,
+            "disruption_index": 3813816350.7767386,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358108,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.3604326,
+              "total": 1878619941.1711469
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 20.979586505531657,
+            "disruption_index": 4498186695.8064,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 18471961.081713155,
+              "delay": 1163777635.0597725,
+              "total": 1194249596.1414852
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 45506287.6694224,
+                "cost_inr": 45506287.6694224,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0003",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 122775318.50462052,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 22.06913822466044,
+            "disruption_index": 4436164658.327171,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 5498764.459295869,
+            "reduction": {
+              "default": 16000000.0,
+              "deficit": 13498849.086998045,
+              "delay": 1226772784.5337157,
+              "total": 1256271633.6207142
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.6999268884611785,
+            "disruption_index": 5481820310.973583,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 3337129.2461072803,
+              "delay": 203278851.7281952,
+              "total": 210615980.9743023
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 35070958.51575519,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.6795971661288975,
+            "disruption_index": 5482977567.465678,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 2179872.754012227,
+              "delay": 203278851.7281952,
+              "total": 209458724.4822073
+            }
+          }
+        }
+      ],
+      "family": "delayed_inflow",
+      "has_plan": true,
+      "in_snapshot": true,
+      "merchants_affected": 13,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 599322746.2711519,
+      "scenario_id": "scn-93f80db7bc45",
+      "seed": 2025,
+      "shock_onset_hours": 18.781346115982956,
+      "unplanned": {
+        "default": 32000000.0,
+        "deficit": 146972117.57197225,
+        "delay": 5513464174.375914,
+        "total": 5692436291.9478855
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 8,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.444272244327344,
+            "disruption_index": 3390788964.298312,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559754,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751384,
+              "delay": 2253981773.775155,
+              "total": 2302683506.072669
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 18.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.444272244327344,
+            "disruption_index": 3390788964.298312,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559754,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36701732.29751384,
+              "delay": 2253981773.775155,
+              "total": 2302683506.072669
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.35632088106709,
+            "disruption_index": 3395796450.9528503,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559754,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.582034,
+              "total": 2297676019.418131
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 19.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 40.35632088106709,
+            "disruption_index": 3395796450.9528503,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 121783344.80559754,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 36352444.836096644,
+              "delay": 2249323574.582034,
+              "total": 2297676019.418131
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.80998046314801,
+            "disruption_index": 3426902192.2415833,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.5988186,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.066512,
+              "total": 2266570278.129398
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 24.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 39.80998046314801,
+            "disruption_index": 3426902192.2415833,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 104755420.5988186,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 33700834.06288549,
+              "delay": 2220869444.066512,
+              "total": 2266570278.129398
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.85864389507797,
+            "disruption_index": 3538001002.548933,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521869,
+              "total": 2155471467.822048
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 30.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 37.85864389507797,
+            "disruption_index": 3538001002.548933,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 45427207.350546,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 31756392.66986102,
+              "delay": 2111715075.1521869,
+              "total": 2155471467.822048
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 32.99603099773553,
+            "disruption_index": 3814852529.1998334,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358227,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.360433,
+              "total": 1878619941.1711478
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 42.781346115982956,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 32.99603099773553,
+            "disruption_index": 3814852529.1998334,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 26504759.472358227,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 25713348.810714707,
+              "delay": 1840906592.360433,
+              "total": 1878619941.1711478
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 20.975768344475195,
+            "disruption_index": 4499222874.229495,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 12000000.0,
+              "deficit": 18471961.081713155,
+              "delay": 1163777635.0597725,
+              "total": 1194249596.1414862
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 45506287.6694224,
+                "cost_inr": 45506287.6694224,
+                "lands_at_hours": 66.78134611598296,
+                "merchant_id": "m0003",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 122775318.50462052,
+            "defaults_avoided": 2,
+            "disruption_cut_pct": 22.065121771614656,
+            "disruption_index": 4437200836.750267,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 5498764.459295869,
+            "reduction": {
+              "default": 16000000.0,
+              "deficit": 13498849.086998045,
+              "delay": 1226772784.5337162,
+              "total": 1256271633.6207142
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 77269030.83519812,
+                "cost_inr": 77269030.83519812,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 112339989.35095331,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.6992535235808166,
+            "disruption_index": 5482856489.396679,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 3337129.2461072803,
+              "delay": 203278851.7281952,
+              "total": 210615980.9743023
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 35070958.51575519,
+                "cost_inr": 35070958.51575519,
+                "lands_at_hours": 90.78134611598296,
+                "merchant_id": "m0009",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 35070958.51575519,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 3.678927501138144,
+            "disruption_index": 5484013745.888774,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 2179872.754012227,
+              "delay": 203278851.7281952,
+              "total": 209458724.4822073
+            }
+          }
+        }
+      ],
+      "family": "partial_payment",
+      "has_plan": true,
+      "in_snapshot": true,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 600317189.8334615,
+      "scenario_id": "scn-a3e81a36d91b",
+      "seed": 2025,
+      "shock_onset_hours": 18.781346115982956,
+      "unplanned": {
+        "default": 32000000.0,
+        "deficit": 147162547.0408829,
+        "delay": 5514309923.330098,
+        "total": 5693472470.370981
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 8,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "liquidity_drain",
+      "has_plan": false,
+      "in_snapshot": true,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 600238228.6066049,
+      "scenario_id": "scn-b340adfb588f",
+      "seed": 2025,
+      "shock_onset_hours": 107.35452462751704,
+      "unplanned": {
+        "default": 32000000.0,
+        "deficit": 146996291.48545492,
+        "delay": 5515236816.13243,
+        "total": 5694233107.617885
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 9,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5707394609.233812,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "supplier_failure",
+      "has_plan": false,
+      "in_snapshot": true,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 601347471.2797796,
+      "scenario_id": "scn-5f58c8727494",
+      "seed": 2025,
+      "shock_onset_hours": 107.35452462751704,
+      "unplanned": {
+        "default": 33000000.0,
+        "deficit": 154349102.6614722,
+        "delay": 5520045506.57234,
+        "total": 5707394609.233812
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 8,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5694233107.617885,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "concentrated_shock",
+      "has_plan": false,
+      "in_snapshot": true,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 600238228.6066049,
+      "scenario_id": "scn-cc256c67bfd1",
+      "seed": 2025,
+      "shock_onset_hours": 107.35452462751704,
+      "unplanned": {
+        "default": 32000000.0,
+        "deficit": 146996291.48545492,
+        "delay": 5515236816.13243,
+        "total": 5694233107.617885
+      }
+    },
+    {
+      "dataset_version": "synth-eab9b3bbb256",
+      "defaults": 10,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 66.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 66.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.4388824971634055,
+            "disruption_index": 5580879392.576308,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4250000.0,
+              "deficit": 701846.8016789556,
+              "delay": 134561818.24975395,
+              "total": 139513665.05143356
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 66.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 66.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.4388824971634055,
+            "disruption_index": 5580879392.576308,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4250000.0,
+              "deficit": 701846.8016789556,
+              "delay": 134561818.24975395,
+              "total": 139513665.05143356
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 67.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 67.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.4067136421459856,
+            "disruption_index": 5582719577.525443,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4250000.0,
+              "deficit": 701846.8016789556,
+              "delay": 132721633.30061913,
+              "total": 137673480.10229874
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 67.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 5520554.847407177,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.373479969444061,
+            "disruption_index": 5584620674.231479,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 701846.8016789556,
+              "delay": 131070536.59458351,
+              "total": 135772383.39626312
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 72.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 72.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 3.1181389183062924,
+            "disruption_index": 5542023255.41776,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 250000.0,
+              "deficit": 0.0,
+              "delay": 178119802.20998192,
+              "total": 178369802.20998192
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 72.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 5520554.847407177,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 3.084905245604368,
+            "disruption_index": 5543924352.1237955,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 176468705.5039463,
+              "total": 176468705.5039463
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 78.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 78.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.0608815780788796,
+            "disruption_index": 5602502530.909389,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4250000.0,
+              "deficit": 701846.8016789556,
+              "delay": 112938679.91667366,
+              "total": 117890526.71835327
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 78.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 5520554.847407177,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 2.027647905376955,
+            "disruption_index": 5604403627.615424,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 4000000.0,
+              "deficit": 701846.8016789556,
+              "delay": 111287583.21063805,
+              "total": 115989430.01231766
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 90.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 90.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.05346403939939946,
+            "disruption_index": 5717334704.429611,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 250000.0,
+              "deficit": 1157256.4920950532,
+              "delay": 1651096.706035614,
+              "total": 3058353.1981306076
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5720393057.627742,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 114.45332176095026,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 114.45332176095026,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.03323367270192448,
+            "disruption_index": 5718491960.921706,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 250000.0,
+              "deficit": 0.0,
+              "delay": 1651096.706035614,
+              "total": 1901096.706035614
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5720393057.627742,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 5520554.847407177,
+                "cost_inr": 5520554.847407177,
+                "lands_at_hours": 138.45332176095025,
+                "merchant_id": "m0005",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 1651096.706036357,
+                "cost_inr": 1320.8773648290855,
+                "lands_at_hours": 138.45332176095025,
+                "merchant_id": "m0031",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 5521875.724772006,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5720393057.627742,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 5720393057.627742,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "multi_node_shock",
+      "has_plan": true,
+      "in_snapshot": true,
+      "merchants_affected": 16,
+      "monotonicity": {
+        "frozen_non_increasing": false,
+        "replanned_non_increasing": false,
+        "rises": [
+          "frozen: 1 h 2.41% -> 6 h 3.12%",
+          "replanned: 1 h 2.37% -> 6 h 3.08%"
+        ]
+      },
+      "payments_late_inr": 609015768.4383022,
+      "scenario_id": "scn-2f8b212bb5e2",
+      "seed": 2025,
+      "shock_onset_hours": 66.45332176095026,
+      "unplanned": {
+        "default": 34250000.0,
+        "deficit": 154175048.5311162,
+        "delay": 5531968009.096625,
+        "total": 5720393057.627742
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 7,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.019522370490227637,
+            "disruption_index": 3444291234.985143,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 269447.4981505871,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 25492.8409088552,
+              "delay": 147045.75022268295,
+              "total": 672538.5911316872
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.019522370490227637,
+            "disruption_index": 3444291234.985143,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 269447.4981505871,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 25492.8409088552,
+              "delay": 147045.75022268295,
+              "total": 672538.5911316872
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.019522370490227637,
+            "disruption_index": 3444291234.985143,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 269447.4981505871,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 25492.8409088552,
+              "delay": 147045.75022268295,
+              "total": 672538.5911316872
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 13.95923495104476,
+            "disruption_index": 2964073186.444385,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 480443361.75033,
+              "total": 480890587.1318898
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.017912630160656487,
+            "disruption_index": 3444346689.9563456,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -79588.8466925621,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 4200.661712393165,
+              "delay": 112882.95821714401,
+              "total": 617083.6199293137
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 13.383996678970858,
+            "disruption_index": 2983889936.529077,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 460626611.66563797,
+              "total": 461073837.0471978
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.017912630160656487,
+            "disruption_index": 3444346689.9563456,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -79588.8466925621,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 4200.661712393165,
+              "delay": 112882.95821714401,
+              "total": 617083.6199293137
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 12.70223463544904,
+            "disruption_index": 3007376391.950397,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 437140156.244318,
+              "total": 437587381.62587786
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.017912630160656487,
+            "disruption_index": 3444346689.9563456,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -79588.8466925621,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 4200.661712393165,
+              "delay": 112882.95821714401,
+              "total": 617083.6199293137
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 11.211350105513828,
+            "disruption_index": 3058736823.912518,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 385779724.282197,
+              "total": 386226949.66375685
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3444963773.576275,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3444963773.576275,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3444963773.576275,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3444963773.576275,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "single_missed_inflow",
+      "has_plan": true,
+      "in_snapshot": false,
+      "merchants_affected": 14,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": false,
+        "rises": [
+          "replanned: 0 h 0.02% -> 1 h 13.96%"
+        ]
+      },
+      "payments_late_inr": 465178490.3745049,
+      "scenario_id": "scn-86338b0f60b7",
+      "seed": 7,
+      "shock_onset_hours": 46.188455117664645,
+      "unplanned": {
+        "default": 20750000.0,
+        "deficit": 113632037.98649023,
+        "delay": 3310581735.5897846,
+        "total": 3444963773.576275
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 5,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 14.936703845161327,
+            "disruption_index": 2913693085.3642774,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": -1862338.8318869472,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 35008.266132354736,
+              "delay": 511595420.8270502,
+              "total": 511630429.09318256
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 14.936703845161327,
+            "disruption_index": 2913693085.3642774,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": -1862338.8318869472,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 35008.266132354736,
+              "delay": 511595420.8270502,
+              "total": 511630429.09318256
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 14.039274979492221,
+            "disruption_index": 2944432927.32557,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 480443361.75033,
+              "total": 480890587.1318898
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 14.039274979492221,
+            "disruption_index": 2944432927.32557,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 480443361.75033,
+              "total": 480890587.1318898
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 13.46073838284521,
+            "disruption_index": 2964249677.410262,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 460626611.66563797,
+              "total": 461073837.0471978
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 13.46073838284521,
+            "disruption_index": 2964249677.410262,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 460626611.66563797,
+              "total": 461073837.0471978
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 12.775067224422092,
+            "disruption_index": 2987736132.831582,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 437140156.244318,
+              "total": 437587381.62587786
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 12.775067224422092,
+            "disruption_index": 2987736132.831582,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 437140156.244318,
+              "total": 437587381.62587786
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 11.275634200202902,
+            "disruption_index": 3039096564.7937026,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 385779724.2821975,
+              "total": 386226949.6637573
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 11.275634200202902,
+            "disruption_index": 3039096564.7937026,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 385779724.2821975,
+              "total": 386226949.6637573
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3425323514.45746,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3425323514.45746,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3425323514.45746,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3425323514.45746,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "delayed_inflow",
+      "has_plan": true,
+      "in_snapshot": false,
+      "merchants_affected": 12,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 464944728.039966,
+      "scenario_id": "scn-8d19bacd4aed",
+      "seed": 7,
+      "shock_onset_hours": 46.188455117664645,
+      "unplanned": {
+        "default": 18000000.0,
+        "deficit": 113612949.50670727,
+        "delay": 3293710564.9507527,
+        "total": 3425323514.45746
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 6,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.02485381501586571,
+            "disruption_index": 3425359611.4156013,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 251068.00701791048,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 31224.85258537531,
+              "delay": 70319.33008003235,
+              "total": 851544.182665348
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 46.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.02485381501586571,
+            "disruption_index": 3425359611.4156013,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 251068.00701791048,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 31224.85258537531,
+              "delay": 70319.33008003235,
+              "total": 851544.182665348
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.02485381501586571,
+            "disruption_index": 3425359611.4156013,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 251068.00701791048,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 31224.85258537531,
+              "delay": 70319.33008003235,
+              "total": 851544.182665348
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 47.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 14.03563777282487,
+            "disruption_index": 2945320568.466377,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 480443361.75033,
+              "total": 480890587.1318898
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.023235264124415664,
+            "disruption_index": 3425415066.386803,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -97968.3378252387,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 9932.673388913274,
+              "delay": 36156.53807449341,
+              "total": 796089.2114634514
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 52.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 13.457251059784364,
+            "disruption_index": 2965137318.551069,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 460626611.66563797,
+              "total": 461073837.0471978
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.023235264124415664,
+            "disruption_index": 3425415066.386803,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -97968.3378252387,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 9932.673388913274,
+              "delay": 36156.53807449341,
+              "total": 796089.2114634514
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 58.188455117664645,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 12.771757540713182,
+            "disruption_index": 2988623773.9723887,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 437140156.244318,
+              "total": 437587381.62587786
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 1,
+            "disruption_cut_pct": 0.023235264124415664,
+            "disruption_index": 3425415066.386803,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": -97968.3378252387,
+            "reduction": {
+              "default": 750000.0,
+              "deficit": 9932.673388913274,
+              "delay": 36156.53807449341,
+              "total": 796089.2114634514
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 9350846.43912755,
+                "cost_inr": 9350846.43912755,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0004",
+                "shift_hours": 0.0
+              },
+              {
+                "action_type": "liquidity_injection",
+                "amount_inr": 3166202.490206562,
+                "cost_inr": 3166202.490206562,
+                "lands_at_hours": 70.18845511766465,
+                "merchant_id": "m0002",
+                "shift_hours": 0.0
+              }
+            ],
+            "cost_inr": 12517048.929334112,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 11.272712980129109,
+            "disruption_index": 3039984205.9345093,
+            "merchants_protected": 1,
+            "payments_kept_on_time_inr": 914552.7904632092,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 447225.3815600127,
+              "delay": 385779724.2821975,
+              "total": 386226949.6637573
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 94.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3426211155.5982666,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3426211155.5982666,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 234541.507819767,
+                "cost_inr": 187.6332062558136,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0028",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 349036.3448431085,
+                "cost_inr": 279.2290758744868,
+                "lands_at_hours": 118.18845511766465,
+                "merchant_id": "m0007",
+                "shift_hours": 48.0
+              }
+            ],
+            "cost_inr": 466.8622821303004,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3426211155.5982666,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3426211155.5982666,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "partial_payment",
+      "has_plan": true,
+      "in_snapshot": false,
+      "merchants_affected": 13,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": false,
+        "rises": [
+          "replanned: 0 h 0.02% -> 1 h 14.04%"
+        ]
+      },
+      "payments_late_inr": 465040893.145652,
+      "scenario_id": "scn-fdcedd5832bf",
+      "seed": 7,
+      "shock_onset_hours": 46.188455117664645,
+      "unplanned": {
+        "default": 18750000.0,
+        "deficit": 113632037.98649023,
+        "delay": 3293829117.6117764,
+        "total": 3426211155.5982666
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 5,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "liquidity_drain",
+      "has_plan": false,
+      "in_snapshot": false,
+      "merchants_affected": 13,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 464944728.039966,
+      "scenario_id": "scn-0d3abe84c64b",
+      "seed": 7,
+      "shock_onset_hours": 104.96618042745158,
+      "unplanned": {
+        "default": 18000000.0,
+        "deficit": 113670483.0699725,
+        "delay": 3297991564.7127113,
+        "total": 3429662047.782684
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 6,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3507456530.228011,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "supplier_failure",
+      "has_plan": false,
+      "in_snapshot": false,
+      "merchants_affected": 13,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 475652089.35682374,
+      "scenario_id": "scn-da5b3c044f62",
+      "seed": 7,
+      "shock_onset_hours": 104.96618042745158,
+      "unplanned": {
+        "default": 18500000.0,
+        "deficit": 162798339.08395794,
+        "delay": 3326158191.144053,
+        "total": 3507456530.228011
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 5,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3429662047.782684,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "concentrated_shock",
+      "has_plan": false,
+      "in_snapshot": false,
+      "merchants_affected": 13,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 464944728.039966,
+      "scenario_id": "scn-76d664680a4b",
+      "seed": 7,
+      "shock_onset_hours": 104.96618042745158,
+      "unplanned": {
+        "default": 18000000.0,
+        "deficit": 113670483.0699725,
+        "delay": 3297991564.7127113,
+        "total": 3429662047.782684
+      }
+    },
+    {
+      "dataset_version": "synth-af28210679e4",
+      "defaults": 7,
+      "delays": [
+        {
+          "delay_hours": 0.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 67.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 67.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.1857428375402163,
+            "disruption_index": 3466324505.134681,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 4303475.65777874,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 178108.64696101844,
+              "delay": 5772322.060256958,
+              "total": 6450430.70721817
+            }
+          },
+          "replanned": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 67.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 67.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.1857428375402163,
+            "disruption_index": 3466324505.134681,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 4303475.65777874,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 178108.64696101844,
+              "delay": 5772322.060256958,
+              "total": 6450430.70721817
+            }
+          }
+        },
+        {
+          "delay_hours": 1.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 68.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 68.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.18560756274879314,
+            "disruption_index": 3466329202.9237323,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 4260375.08510226,
+            "reduction": {
+              "default": 500000.0,
+              "deficit": 175414.47288659215,
+              "delay": 5770318.445280552,
+              "total": 6445732.918167114
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 6.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 73.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 73.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.055938327865410864,
+            "disruption_index": 3470832323.6122603,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 1770657.031291604,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 74781.09831137955,
+              "delay": 1867831.131327629,
+              "total": 1942612.2296390533
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 12.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 79.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 79.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 24.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 91.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 91.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 48.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 115.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 115.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        },
+        {
+          "delay_hours": 72.0,
+          "frozen": {
+            "actions": [
+              {
+                "action_type": "supplier_term_extension",
+                "amount_inr": 6721367.17932609,
+                "cost_inr": 5377.093743460872,
+                "lands_at_hours": 139.5567526315097,
+                "merchant_id": "m0041",
+                "shift_hours": 48.0
+              },
+              {
+                "action_type": "receivable_acceleration",
+                "amount_inr": 256177.19527118656,
+                "cost_inr": 27.366452596827564,
+                "lands_at_hours": 139.5567526315097,
+                "merchant_id": "m0027",
+                "shift_hours": 5.127660654013994
+              }
+            ],
+            "cost_inr": 5404.4601960577,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          },
+          "replanned": {
+            "actions": [],
+            "cost_inr": 0.0,
+            "defaults_avoided": 0,
+            "disruption_cut_pct": 0.0,
+            "disruption_index": 3472774935.8418994,
+            "merchants_protected": 0,
+            "payments_kept_on_time_inr": 0.0,
+            "reduction": {
+              "default": 0.0,
+              "deficit": 0.0,
+              "delay": 0.0,
+              "total": 0.0
+            }
+          }
+        }
+      ],
+      "family": "multi_node_shock",
+      "has_plan": true,
+      "in_snapshot": false,
+      "merchants_affected": 15,
+      "monotonicity": {
+        "frozen_non_increasing": true,
+        "replanned_non_increasing": true,
+        "rises": []
+      },
+      "payments_late_inr": 480923136.46406215,
+      "scenario_id": "scn-cf2fec80afb0",
+      "seed": 7,
+      "shock_onset_hours": 67.5567526315097,
+      "unplanned": {
+        "default": 27500000.0,
+        "deficit": 114364508.24054082,
+        "delay": 3330910427.6013584,
+        "total": 3472774935.8418994
+      }
+    }
+  ]
+}
