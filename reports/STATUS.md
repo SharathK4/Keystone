@@ -11,7 +11,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1b Gate P2 webhooks + failure re-entry | **PASS** (offline) — 539 passed / 8 deselected; audit 30; phase-4 28; migration 0004 single head, zero diff | Refresh no longer re-POSTs; PayPal events get their own table (see decisions). | Register a sandbox webhook once a public URL exists. | 1c |
 | 1 | 1c Gate H value of speed | **PASS** — 551 passed / 8 deselected; audit 32; phase-4 28; δ=0 == snapshot exactly; full rebuild hash identical (`fe887776da0213e1`) | Replays follow the snapshot's (unmutated-network) convention; replanned arm beats δ=0 in 2 scenarios (optimiser pruning). See `reports/structure/gate_h.md`. | — | 1d |
 | 1 | 1d hosting readiness | **PASS** (no deploy) — 565 passed / 8 deselected; audit 33; phase-4 28 | Render Workflows dropped (no free tier, separate service; jobs take seconds). Readiness check needs the DB (frozen). | Create the Blueprint, enter secrets, register the webhook, record the canonical run. | 1e |
-| 1 | 1e concept boards → **STOP** | pending | | design pick | |
+| 1 | 1e concept boards → **STOP** | **IN PROGRESS** — Board A generator + headless renderer written (`design/build_concepts.py`, `design/render.mjs`); A renders (1440x2280) but is not yet reviewed | — | design pick (after B, C, specimen) | Resume: review A's PNG, write `board_b` (Ledger Room), `board_c` (Survey Chart), specimen, `index.html`, a `main()`; render; critique; un-ignore `design/concepts/`; commit; tag `phase-1`; STOP |
 
 ## Decisions taken
 
@@ -80,11 +80,29 @@ Never push (`origin` push URL is disabled locally).
 - **1d** README is pre-PayPal: "Nothing moves money" and the old provider's name
   are stale. Left for the Phase 3 README rewrite; only the Deploy section added.
 
+- **1e** Fonts measured: only IBM Plex Mono has ₹ (U+20B9) among mono candidates
+  (JetBrains Mono, DM Mono, Courier Prime lack it), so all boards use it for
+  figures. Display serifs: Source Serif 4 (A), Libre Caslon Text (B), Spectral (C).
+  Packages pinned in `design/package.json`; licences still to copy into the repo
+  and list in `docs/ASSETS.md`.
+- **1e** The three personal-use-only demo font zips in `fonts/` are untracked on
+  this branch (kept on disk, ignored). `frontend/public/fonts/against-regular.otf`
+  (same licence) is still served by the current frontend until Phase 2 replaces it.
+- **1e** Narrative risk: no snapshot scenario has a multi-hop cascade (max depth
+  1; only shocked merchants affected). The canonical 40.4 % cut is on the whole
+  week's network disruption (14 merchants miss payments, 13 would anyway), and
+  the plan shores up two keystones already short of cover (m0005, m0009). Copy
+  must say this plainly.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 
 ## Needs the human (exact commands, never blocking)
+
+- The public original (`origin/master`) already contains personal-use-only demo
+  fonts (`fonts/*.zip`, `frontend/public/fonts/against-regular.otf`). Nothing is
+  pushed from here; decide whether to remove them there.
 
 - Two PayPal sandbox **personal** accounts for the canonical plan's merchants:
   `lce paypal map m0005 --email <account 1>` and

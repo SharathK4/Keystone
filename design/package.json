@@ -1,0 +1,20 @@
+{
+  "name": "keystone-design",
+  "private": true,
+  "description": "Concept boards: generated SVG plates, font specimens and headless PNG exports.",
+  "license": "Apache-2.0",
+  "scripts": {
+    "render": "node render.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/courier-prime": "5.2.5",
+    "@fontsource/dm-mono": "5.2.5",
+    "@fontsource/ibm-plex-mono": "5.2.5",
+    "@fontsource/jetbrains-mono": "5.2.5",
+    "@fontsource/libre-caslon-text": "5.2.5",
+    "@fontsource/newsreader": "5.2.5",
+    "@fontsource/source-serif-4": "5.2.5",
+    "@fontsource/spectral": "5.2.5",
+    "playwright-core": "1.55.0"
+  }
+}
