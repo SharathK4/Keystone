@@ -271,6 +271,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     paypal_cli.register(sub)
 
+    from lce.structure import cli as structure_cli
+
+    structure_cli.register(sub)
+
     serve = sub.add_parser("serve", help="Run the API")
     serve.add_argument("--host", default=None)
     serve.add_argument("--port", type=int, default=None)
