@@ -11,7 +11,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1b Gate P2 webhooks + failure re-entry | **PASS** (offline) — 539 passed / 8 deselected; audit 30; phase-4 28; migration 0004 single head, zero diff | Refresh no longer re-POSTs; PayPal events get their own table (see decisions). | Register a sandbox webhook once a public URL exists. | 1c |
 | 1 | 1c Gate H value of speed | **PASS** — 551 passed / 8 deselected; audit 32; phase-4 28; δ=0 == snapshot exactly; full rebuild hash identical (`fe887776da0213e1`) | Replays follow the snapshot's (unmutated-network) convention; replanned arm beats δ=0 in 2 scenarios (optimiser pruning). See `reports/structure/gate_h.md`. | — | 1d |
 | 1 | 1d hosting readiness | **PASS** (no deploy) — 565 passed / 8 deselected; audit 33; phase-4 28 | Render Workflows dropped (no free tier, separate service; jobs take seconds). Readiness check needs the DB (frozen). | Create the Blueprint, enter secrets, register the webhook, record the canonical run. | 1e |
-| 1 | 1e concept boards → **STOP** | **IN PROGRESS** — Board A generator + headless renderer written (`design/build_concepts.py`, `design/render.mjs`); A renders (1440x2280) but is not yet reviewed | — | design pick (after B, C, specimen) | Resume: review A's PNG, write `board_b` (Ledger Room), `board_c` (Survey Chart), specimen, `index.html`, a `main()`; render; critique; un-ignore `design/concepts/`; commit; tag `phase-1`; STOP |
+| 1 | 1e concept boards → **STOP** | **DONE** — boards A, B, C + font specimen + index under `design/concepts/` (SVG with subset OFL fonts embedded, PNG via headless Chrome); each rendered and self-critiqued | Ledger hero and chart layout reworked after review (see decisions) | **Pick A, B or C**: open `design/concepts/index.html` | Phase 2 after the pick |
 
 ## Decisions taken
 
@@ -94,11 +94,27 @@ Never push (`origin` push URL is disabled locally).
   the plan shores up two keystones already short of cover (m0005, m0009). Copy
   must say this plainly.
 
+- **1e** Self-critique fixes applied before presenting: A's staggered courses
+  trimmed flush, keystone marks moved to the ground line, shoring drawn as raking
+  shores in front of the wall, the cost chart re-laid out; B's keystone labels
+  collapsed into one bracket note; C laid out on connected merchants only (the 15
+  with no inferred dependency are drawn apart as labelled islands), title moved
+  out of the chart so it hides no data.
+- **1e** Board generator `design/build_concepts.py` (Python, reads the committed
+  artifacts) and renderer `design/render.mjs` (playwright-core driving local
+  Chrome; downloads no browser). Rebuild: `python design/build_concepts.py &&
+  node design/render.mjs` after `npm ci` in `design/`.
+- **1e** Open for Phase 2 (`docs/ASSETS.md`): subsets of Reserved-Font-Name faces
+  (Source Serif 4; IBM Plex likely) — serve unmodified files or confirm the OFL
+  FAQ position before shipping.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 
 ## Needs the human (exact commands, never blocking)
+
+- **Now (STOP point):** open `design/concepts/index.html` and reply A, B or C (or a mix).
 
 - The public original (`origin/master`) already contains personal-use-only demo
   fonts (`fonts/*.zip`, `frontend/public/fonts/against-regular.otf`). Nothing is
