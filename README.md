@@ -83,6 +83,54 @@ See [`frontend/README.md`](frontend/README.md) for the interface, and
 [`BACKEND_FREEZE_REPORT.md`](BACKEND_FREEZE_REPORT.md) for the architecture,
 benchmarks and verified provider capabilities.
 
+## Deploy (Render)
+
+[`render.yaml`](render.yaml) is a Render Blueprint for three pieces: the API as a
+Python web service, the frontend as a static site, and a free Postgres database
+that holds **execution records only**. The analysis is served from committed
+artifacts and works with no database at all. Nothing deploys automatically.
+
+1. Create a Blueprint from the repository. Render asks once for each
+   `sync: false` value: the sandbox app's `PAYPAL_CLIENT_ID` and
+   `PAYPAL_CLIENT_SECRET`, `PAYPAL_WEBHOOK_ID` (fill in after step 3) and
+   `LCE_DEMO_TOKEN` (a long random string you keep private). Leave
+   `LCE_CORS_ORIGINS` and `VITE_API_BASE` empty unless you use the fallback below.
+2. After the first deploy, check the API's address. If it is not
+   `keystone-api.onrender.com`, edit the `/api/*` rewrite in `render.yaml`.
+3. In the PayPal developer dashboard, add a **sandbox** webhook pointing at
+   `https://<api>/api/v1/webhooks/paypal` for `PAYMENT.PAYOUTS-ITEM.*` and
+   `PAYMENT.PAYOUTSBATCH.*`, and put its id in `PAYPAL_WEBHOOK_ID`.
+4. Map the two sandbox accounts against the hosted database (`DATABASE_URL` set
+   to Render's external connection string):
+   `lce paypal map m0005 --email <sandbox account>` and the same for `m0009`.
+5. Record the canonical run once, sending the header `X-Keystone-Demo-Token`.
+   `lce demo reset --yes` clears it (identities are kept) if you need to redo it.
+
+**What visitors can and cannot do.** The hosted service runs with
+`LCE_DEMO_MODE=recorded`: everyone sees the analysis and the ledger of the
+sandbox run recorded in step 5, and nobody starts a new payout without the demo
+token. A token holder is limited to the canonical plan and to six execution
+requests per address per ten minutes. Reads are never limited. PayPal is sandbox
+only; live mode is refused in code, with no override.
+
+**Free-tier limits (US region, Oregon).** A free web service spins down after a
+period without traffic, and the next request waits while it starts again (about
+a minute). A free Postgres database expires 30 days after it is created; after
+that `/api/v1/health/ready` (which needs the database) fails while the analysis
+routes still answer, so upgrade or recreate it first. The plan is to move the API
+to an always-on paid instance for 1–15 December. A free instance has 0.1 CPU:
+the re-entry analysis that takes about 1.6 s on a laptop will take longer there
+(not measured).
+
+**Known limitations.** The PayPal webhook signature is verified locally, but the
+certificate **chain is not validated**: the certificate must come from an HTTPS
+`paypal.com` URL and be within its validity window, and the RSA-SHA256 signature
+must match. The demo rate limit is in memory, per process. Whether Render's
+static-site rewrite proxies `POST /api/*` to the API is unverified; if it does
+not, set `VITE_API_BASE` on the static site to the API's address and
+`LCE_CORS_ORIGINS` on the API to the site's address, then redeploy both.
+Render Workflows is not used ([why](reports/hosting/render.md)).
+
 ## Three things worth stating plainly
 
 **The benchmark is synthetic, and that is the point.** Every metric is measured

@@ -25,7 +25,8 @@ import type {
   SystemicRankingView,
 } from './types'
 
-const BASE = '/api/v1'
+// Same origin by default; a separately hosted frontend sets VITE_API_BASE.
+const BASE = `${import.meta.env.VITE_API_BASE ?? ''}/api/v1`
 
 export class ApiError extends Error {
   readonly status: number | null

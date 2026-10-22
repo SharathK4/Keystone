@@ -1,0 +1,76 @@
+# Keystone on Render (Blueprint). Not deployed from this file automatically.
+#
+# No secret appears here: every secret is `sync: false` and is typed once into
+# the Render dashboard when the Blueprint is created. The analysis serves from
+# committed artifacts and works with no database; Postgres holds execution
+# records only. The hosted demo starts in recorded mode (see README, Deploy).
+
+databases:
+  - name: keystone-db
+    plan: free            # expires 30 days after creation; see README
+    region: oregon
+    databaseName: keystone
+    user: keystone
+    postgresMajorVersion: "16"
+
+services:
+  - type: web
+    name: keystone-api
+    runtime: python
+    plan: free            # spins down when idle; first request after takes ~1 min
+    region: oregon
+    buildCommand: pip install --upgrade pip && pip install .
+    startCommand: bash scripts/render_start.sh
+    healthCheckPath: /api/v1/health/ready
+    autoDeploy: false
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.1
+      - key: LCE_ENV
+        value: production
+      - key: LCE_LOG_FORMAT
+        value: json
+      - key: DATABASE_URL
+        fromDatabase:
+          name: keystone-db
+          property: connectionString
+      - key: LCE_EXECUTION_PROVIDER
+        value: paypal_sandbox
+      - key: PAYPAL_MODE
+        value: sandbox
+      - key: PAYPAL_CLIENT_ID
+        sync: false
+      - key: PAYPAL_CLIENT_SECRET
+        sync: false
+      - key: PAYPAL_WEBHOOK_ID
+        sync: false
+      - key: LCE_DEMO_MODE
+        value: recorded
+      - key: LCE_DEMO_TOKEN
+        sync: false
+      - key: LCE_CORS_ORIGINS
+        sync: false       # only for the fallback below: the static site's URL
+
+  - type: web
+    name: keystone-web
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: frontend/dist
+    autoDeploy: false
+    envVars:
+      - key: NODE_VERSION
+        value: 22.13.1
+      # Fallback if the /api rewrite below does not proxy: set this to the API's
+      # URL (e.g. https://keystone-api.onrender.com) and LCE_CORS_ORIGINS above to
+      # this site's URL, then redeploy both.
+      - key: VITE_API_BASE
+        sync: false
+    routes:
+      # The API's URL depends on the name Render assigns; check it after the
+      # first deploy and edit this line if it differs.
+      - type: rewrite
+        source: /api/*
+        destination: https://keystone-api.onrender.com/api/*
+      - type: rewrite
+        source: /*
+        destination: /index.html
