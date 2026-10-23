@@ -170,3 +170,19 @@
 .dm--dark .dm__label { color: rgba(240, 245, 250, 0.72); }
 .dm--dark .dm__scale { color: rgba(240, 245, 250, 0.4); }
 .dm--dark .dm__scale i { background: rgba(240, 245, 250, 0.16); }
+
+/* ---- pick mode: every dot is a merchant to pull ---- */
+.dm__dot--pick {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+  transition: transform var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+}
+.dm__dot--pick:hover {
+  transform: scale(1.18);
+}
+.dm__dot--pick.is-picked {
+  box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent);
+  transform: scale(1.12);
+}

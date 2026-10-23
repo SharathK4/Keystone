@@ -1,0 +1,83 @@
+.card--wide {
+  grid-column: 1 / -1;
+}
+
+.pp {
+  height: 100%;
+}
+.pp__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  height: 100%;
+  padding: 30px 44px;
+  color: rgba(244, 244, 250, 0.9);
+}
+.pp__seal {
+  width: clamp(130px, 14vw, 190px);
+  height: auto;
+}
+.pp__ring {
+  fill: none;
+  stroke: rgba(244, 244, 250, 0.55);
+  stroke-width: 1.2;
+}
+.pp__ring--inner {
+  stroke: rgba(244, 244, 250, 0.3);
+}
+.pp__ringtext {
+  font: 600 11.5px var(--text);
+  letter-spacing: 0.26em;
+  fill: rgba(244, 244, 250, 0.8);
+}
+.pp__tick {
+  fill: none;
+  stroke: #f3b49b;
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pp__lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2 240px;
+  column-gap: 36px;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+.pp__lines li {
+  break-inside: avoid;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(244, 244, 250, 0.12);
+  color: rgba(244, 244, 250, 0.82);
+}
+.pp__lines i {
+  display: inline-block;
+  width: 20px;
+  font-style: normal;
+  color: #f3b49b;
+}
+.pp__lines li.is-failed {
+  color: #f3b49b;
+}
+.pp__more {
+  font-style: italic;
+  color: rgba(244, 244, 250, 0.6) !important;
+  border-bottom: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .pp__body {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: 22px;
+    padding: 24px;
+  }
+  .pp__lines {
+    columns: 1;
+    width: 100%;
+  }
+}

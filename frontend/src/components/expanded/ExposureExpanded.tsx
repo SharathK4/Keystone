@@ -14,6 +14,7 @@
 
 import type { MerchantView, ScenarioSnapshot, ScenarioSummary } from '../../api/types'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
+import { PullAMerchant } from '../PullAMerchant'
 import { ExposureDotMatrix } from '../ExposureDotMatrix'
 import { ScenarioSelector } from '../ScenarioSelector'
 import { count, hours, idx, inr, pct, scenarioLabel } from '../../lib/format'
@@ -103,6 +104,10 @@ export function ExposureExpanded({
               origins={scenario?.shock.origin_merchants ?? []}
             />
           </div>
+        </XSection>
+
+        <XSection label="Pull any merchant" note="every merchant’s failure, replayed offline · or computed now">
+          <PullAMerchant merchants={merchants} />
         </XSection>
 
         <div className="xx__split">

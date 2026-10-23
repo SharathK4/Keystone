@@ -34,6 +34,7 @@ import type {
   SystemicRankingView,
 } from '../../api/types'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
+import { CostOfWaiting } from '../CostOfWaiting'
 import { count, hours, humanise, idx, inr, inrExact, multiple, pct, ratio } from '../../lib/format'
 import './intervention-expanded.css'
 
@@ -92,7 +93,7 @@ export function InterventionExpanded({
   return (
     <ExpandedAnalysis
       title="Where one rupee does the most work"
-      subtitle="Candidates are generated from measurable network properties, then replayed against the simulator. The model proposes; the simulator scores. Protected value is measured, never predicted."
+      subtitle="Candidates are generated from measurable network properties, then each is replayed against the same shock. The model proposes; the replay scores. Protected value is measured, never predicted."
       onClose={onClose}
     >
       <div className={`ix${busy ? ' is-busy' : ''}`}>
@@ -395,21 +396,28 @@ export function InterventionExpanded({
               </XSection>
             ) : null}
 
+            {/* ------------------------------------------ the cost of waiting */}
+            <XSection label="The cost of waiting" note="the same plan, with the money landing later">
+              <CostOfWaiting scenarioId={scenario.scenario_id} />
+            </XSection>
+
             {/* ------------------------------------------------- the method */}
             <XSection label="How this was measured" note={scenario.provenance.optimizer}>
               <p className="ix__method">
                 Candidates are generated from observable network properties, then each plan is
-                replayed in the liquidity simulator against the same shock. What is reported is the
+                replayed against the same shock with the same random draws. What is reported is the
                 difference between the two runs, not a forecast. The objective sums a
                 value-weighted delay term, a default count and a liquidity deficit-time term, so
                 its units are an index rather than currency — which is why the money figures above
                 come from payment value, and the index figures are labelled as index.
-                {execution.mode === 'test' ? ' Razorpay Test Mode; no funds move.' : ''}
+                {execution.configured
+                  ? ' Approved plans are paid in the PayPal sandbox at a declared demo scale.'
+                  : ' Plans are recorded; the PayPal sandbox pays only an approved plan.'}
               </p>
               <dl className="ix__prov">
                 <ProvRow k="Run" v={scenario.provenance.run_id} />
                 <ProvRow
-                  k="Simulator config"
+                  k="Replay config"
                   v={scenario.provenance.simulator_config_hash.slice(0, 16)}
                 />
                 <ProvRow k="Seed" v={String(scenario.provenance.seed)} />
@@ -429,7 +437,7 @@ export function InterventionExpanded({
             <p className="ix__empty-title">No feasible intervention for this scenario.</p>
             <p className="ix__empty-body">
               The bounded search generated {count(candidates.length)} candidates and replayed them
-              against the simulator. None both satisfied the constraints and reduced disruption, so
+              against the same shock. None both satisfied the constraints and reduced disruption, so
               the backend returns no recommendation rather than the least-bad one.
             </p>
             {candidates.length > 0 ? (

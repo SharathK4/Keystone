@@ -20,6 +20,7 @@ import type {
   SystemicRankingView,
 } from '../../api/types'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
+import { InferenceQuality } from '../InferenceQuality'
 import { NetworkVisualization } from '../NetworkVisualization'
 import { Annotation } from '../Annotation'
 import { count, hours, inr, multiple } from '../../lib/format'
@@ -211,6 +212,10 @@ export function NetworkExpanded({
           ))}
           . Correlated but not equivalent: ranking by size alone picks different merchants.
         </p>
+      </XSection>
+
+      <XSection label="How well the links were inferred" note="each inferred strength, scored against the generator’s truth">
+        <InferenceQuality />
       </XSection>
     </ExpandedAnalysis>
   )

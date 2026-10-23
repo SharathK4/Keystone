@@ -22,12 +22,13 @@ import { NetworkExpanded } from './expanded/NetworkExpanded'
 import { ExposureExpanded } from './expanded/ExposureExpanded'
 import { InterventionExpanded } from './expanded/InterventionExpanded'
 import { OfferExpanded } from './expanded/OfferExpanded'
+import { ProofExpanded } from './expanded/ProofExpanded'
 import { Failure, Loading } from './SystemState'
 import { LightColumn } from './reactbits/LightColumn'
 import type { PanelId } from './ExpandedAnalysis'
 import './keystone-page.css'
 
-const PANELS: PanelId[] = ['network', 'exposure', 'intervention', 'offer']
+const PANELS: PanelId[] = ['network', 'exposure', 'intervention', 'offer', 'proof']
 
 function panelFromHash(): PanelId | null {
   const id = window.location.hash.replace('#', '') as PanelId
@@ -79,7 +80,7 @@ export function KeystonePage() {
         {structure ? (
           <p className="ks__standfirst">
             A liquidity shock at one merchant, followed all the way to the capital that
-            stops it.
+            stops it, and paid in the PayPal sandbox once a person signs.
           </p>
         ) : null}
       </header>
@@ -141,6 +142,8 @@ export function KeystonePage() {
           onClose={close}
         />
       ) : null}
+
+      {open === 'proof' && structure ? <ProofExpanded onClose={close} /> : null}
     </main>
   )
 }

@@ -24,6 +24,19 @@ import type {
   SnapshotHealth,
   SystemicRankingView,
 } from './types'
+import type {
+  ApprovalView,
+  DemoStatusView,
+  ExecutablePlanView,
+  ExecutionRecordView,
+  LedgerView,
+  PayPalStatusView,
+  ProofView,
+  PullsView,
+  ReentryView,
+  SpeedScenarioView,
+  SpeedSummary,
+} from './schema'
 
 // Same origin by default; a separately hosted frontend sets VITE_API_BASE.
 const BASE = `${import.meta.env.VITE_API_BASE ?? ''}/api/v1`
@@ -31,34 +44,69 @@ const BASE = `${import.meta.env.VITE_API_BASE ?? ''}/api/v1`
 export class ApiError extends Error {
   readonly status: number | null
   readonly path: string
+  readonly code: string | null
 
-  constructor(message: string, status: number | null, path: string) {
+  constructor(message: string, status: number | null, path: string, code: string | null = null) {
     super(message)
     this.name = 'ApiError'
     this.status = status
     this.path = path
+    this.code = code
+  }
+}
+
+const TOKEN_KEY = 'keystone.demoToken'
+const TOKEN_HEADER = 'X-Keystone-Demo-Token'
+
+/** The hosted demo's token, kept for this tab only. Sent on actions, never on reads. */
+export function demoToken(): string {
+  try {
+    return sessionStorage.getItem(TOKEN_KEY) ?? ''
+  } catch {
+    return ''
+  }
+}
+
+export function setDemoToken(value: string): void {
+  try {
+    if (value) sessionStorage.setItem(TOKEN_KEY, value)
+    else sessionStorage.removeItem(TOKEN_KEY)
+  } catch {
+    /* storage unavailable: the token lives only in the field */
   }
 }
 
 const cache = new Map<string, Promise<unknown>>()
 
-async function request<T>(path: string): Promise<T> {
+async function request<T>(path: string, body?: unknown): Promise<T> {
+  const headers: Record<string, string> = { accept: 'application/json' }
+  if (body !== undefined) {
+    headers['content-type'] = 'application/json'
+    const token = demoToken()
+    if (token) headers[TOKEN_HEADER] = token
+  }
   let response: Response
   try {
-    response = await fetch(BASE + path, { headers: { accept: 'application/json' } })
+    response = await fetch(BASE + path, {
+      method: body === undefined ? 'GET' : 'POST',
+      headers,
+      body: body === undefined ? undefined : JSON.stringify(body),
+    })
   } catch {
     throw new ApiError('Analytical service unreachable.', null, path)
   }
   if (!response.ok) {
     // The API returns a typed error envelope; use its message when there is one.
     let detail = `Request failed (${response.status}).`
+    let code: string | null = null
     try {
-      const body = (await response.json()) as { message?: string }
-      if (body?.message) detail = body.message
+      const err = (await response.json()) as { message?: string; code?: string }
+      if (err?.message) detail = err.message
+      code = err?.code ?? null
     } catch {
       /* non-JSON error body: keep the status line */
     }
-    throw new ApiError(detail, response.status, path)
+    throw new ApiError(detail, response.status, path, code)
   }
   return (await response.json()) as T
 }
@@ -86,4 +134,40 @@ export const api = {
   scenario: (id: string) => cached<ScenarioSnapshot>(`/scenarios/${encodeURIComponent(id)}`),
   execution: () => cached<ExecutionStatus>('/execution/status'),
   snapshot: () => cached<SnapshotHealth>('/snapshot'),
+
+  // Offline, content-addressed artifacts: frozen like the snapshot, so cached.
+  pulls: () => cached<PullsView>('/structure/pulls'),
+  speed: () => cached<SpeedSummary>('/structure/speed'),
+  speedScenario: (id: string) =>
+    cached<SpeedScenarioView>(`/structure/speed/scenarios/${encodeURIComponent(id)}`),
+  proof: () => cached<ProofView>('/structure/proof'),
+
+  // A user-triggered bounded analysis: computed now, never cached.
+  analyze: (merchantIds: string[], magnitudeMultiple: number, onsetHours: number) =>
+    request<ScenarioSnapshot>('/scenarios/analyze', {
+      merchant_ids: merchantIds,
+      magnitude_multiple: magnitudeMultiple,
+      onset_hours: onsetHours,
+    }),
+
+  // Execution state changes underneath the page, so it is read fresh each time
+  // it is opened or explicitly refreshed, never from the cache.
+  paypal: () => request<PayPalStatusView>('/execution/paypal'),
+  demo: () => request<DemoStatusView>('/execution/demo'),
+  plan: (id: string) => request<ExecutablePlanView>(`/execution/plans/${encodeURIComponent(id)}`),
+  ledger: (id: string) =>
+    request<LedgerView>(`/execution/ledger?scenario_id=${encodeURIComponent(id)}`),
+  reentries: (id: string) =>
+    request<ReentryView[]>(`/execution/reentries?scenario_id=${encodeURIComponent(id)}`),
+  approve: (id: string, approver: string, planHash: string) =>
+    request<ApprovalView>(`/execution/plans/${encodeURIComponent(id)}/approvals`, {
+      approver,
+      plan_hash: planHash,
+    }),
+  execute: (id: string, approvalId: string) =>
+    request<ExecutionRecordView[]>(`/execution/plans/${encodeURIComponent(id)}/executions`, {
+      approval_id: approvalId,
+    }),
+  refresh: (recordId: string) =>
+    request<ExecutionRecordView>(`/execution/records/${encodeURIComponent(recordId)}/refresh`, {}),
 }

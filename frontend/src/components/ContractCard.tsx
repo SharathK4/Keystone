@@ -2,7 +2,7 @@
  * The contract card.
  *
  * A physical object: a rounded card with an organic, living surface, the
- * Razorpay wordmark, and the two facts a merchant cares about first — how much,
+ * Keystone wordmark, and the two facts a merchant cares about first — how much,
  * and for how long. It is the only saturated colour in the entire product and
  * the only place the brand appears.
  *
@@ -14,7 +14,7 @@
 
 import { useMemo } from 'react'
 import { hours, inr } from '../lib/format'
-import './razorpay-contract-card.css'
+import './contract-card.css'
 
 interface Props {
   merchantId: string
@@ -36,7 +36,7 @@ function seedOf(id: string): number {
   return h
 }
 
-export function RazorpayContractCard({
+export function ContractCard({
   merchantId,
   amount,
   durationHours,
@@ -46,15 +46,15 @@ export function RazorpayContractCard({
   fill,
 }: Props) {
   const seed = useMemo(() => seedOf(merchantId), [merchantId])
-  const filterId = `rzp-organic-${seed}`
+  const filterId = `card-organic-${seed}`
 
   return (
-    <div className={`rzpc${compact ? ' rzpc--compact' : ''}${fill ? ' rzpc--fill' : ''}`}>
-      <div className="rzpc__glow" aria-hidden="true" />
+    <div className={`ctc${compact ? ' ctc--compact' : ''}${fill ? ' ctc--fill' : ''}`}>
+      <div className="ctc__glow" aria-hidden="true" />
 
-      <div className="rzpc__card">
+      <div className="ctc__card">
         {/* The living surface. */}
-        <svg className="rzpc__texture" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        <svg className="ctc__texture" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
           <defs>
             <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%">
               <feTurbulence
@@ -81,23 +81,23 @@ export function RazorpayContractCard({
           <rect width="100%" height="100%" filter={`url(#${filterId})`} />
         </svg>
 
-        <div className="rzpc__sheen" aria-hidden="true" />
+        <div className="ctc__sheen" aria-hidden="true" />
 
-        <div className="rzpc__body">
-          <header className="rzpc__top">
-            <span className="rzpc__brand">Razorpay</span>
-            {status && !compact ? <span className="rzpc__status">{status}</span> : null}
+        <div className="ctc__body">
+          <header className="ctc__top">
+            <span className="ctc__brand">Keystone</span>
+            {status && !compact ? <span className="ctc__status">{status}</span> : null}
           </header>
 
-          <footer className="rzpc__bottom">
-            <div className="rzpc__amount">
-              <span className="rzpc__amount-value num">{inr(amount)}</span>
-              <span className="rzpc__amount-unit">
+          <footer className="ctc__bottom">
+            <div className="ctc__amount">
+              <span className="ctc__amount-value num">{inr(amount)}</span>
+              <span className="ctc__amount-unit">
                 / <span className="num">{hours(durationHours)}</span>
               </span>
             </div>
-            <span className="rzpc__terms">{terms}</span>
-            <span className="rzpc__for num">Issued to {merchantId}</span>
+            <span className="ctc__terms">{terms}</span>
+            <span className="ctc__for num">Issued to {merchantId}</span>
           </footer>
         </div>
       </div>

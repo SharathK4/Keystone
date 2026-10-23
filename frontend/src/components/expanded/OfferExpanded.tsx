@@ -11,20 +11,17 @@
  * rationale is the backend's own sentence about their book, and the eligibility
  * criteria are the booleans it actually evaluated.
  *
- * Two things are deliberately never said here. Nothing implies a credit
- * decision — the backend ships its own disclaimer and it is shown verbatim
- * rather than paraphrased into something softer. And nothing implies money
- * moved: `executable_intervention_types` is empty on this account because
- * Route and Direct Transfers are not enabled, so the action is recorded as a
- * plan and one line under the card says so. That line is the whole provider
- * story; the capability grid it replaced was engineering detail on a page that
- * is meant to read as a product.
+ * Nothing here implies a credit decision: the backend ships its own disclaimer
+ * and it is shown verbatim. Money moves only through the settlement below the
+ * card: the exact plan is reviewed, signed by a person, and paid in the PayPal
+ * sandbox, and the ledger shows what PayPal said.
  */
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { ExecutionStatus, ScenarioSnapshot } from '../../api/types'
+import { Settlement } from '../Settlement'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
-import { RazorpayContractCard } from '../RazorpayContractCard'
+import { ContractCard } from '../ContractCard'
 import { SpecularButton } from '../reactbits/SpecularButton'
 import { count, hours, idx, inr, inrExact, pct } from '../../lib/format'
 import { repaymentSummary, resolveOfferCopy } from '../../lib/offerCopy'
@@ -41,11 +38,15 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
   const offer = scenario?.offer ?? null
   const copy = offer ? resolveOfferCopy(offer.intervention_type, scenario?.family) : null
   const benefit = offer?.expected_network_benefit
-  const executable = offer
-    ? execution.executable_intervention_types.includes(offer.intervention_type)
-    : false
 
   const [reviewing, setReviewing] = useState(false)
+  const desk = useRef<HTMLDivElement>(null)
+  const review = () => {
+    setReviewing((v) => !v)
+    if (!reviewing) {
+      window.requestAnimationFrame(() => desk.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+    }
+  }
 
   return (
     <ExpandedAnalysis
@@ -73,7 +74,7 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
 
             <div className="ox__product">
               <div className="ox__left">
-                <RazorpayContractCard
+                <ContractCard
                   merchantId={offer.merchant_id}
                   amount={offer.proposed_amount}
                   durationHours={offer.duration_hours}
@@ -82,14 +83,12 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                 />
 
                 <div className="ox__cta">
-                  <SpecularButton onClick={() => setReviewing((v) => !v)}>
-                    {reviewing ? 'Hide the terms' : 'Review offer'}
+                  <SpecularButton onClick={review}>
+                    {reviewing ? 'Close the settlement' : 'Review and approve'}
                   </SpecularButton>
-                  <span className={`ox__cap${executable ? ' is-live' : ''}`}>
+                  <span className={`ox__cap${execution.configured ? ' is-live' : ''}`}>
                     <i aria-hidden="true" />
-                    {executable
-                      ? `${execution.provider} · test capability available`
-                      : 'Razorpay Test Mode · recorded as a plan, no funds move'}
+                    PayPal sandbox · nothing moves without a signature on this exact plan
                   </span>
                 </div>
               </div>
@@ -121,7 +120,7 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                 </Point>
 
                 <Point title={`${inr(benefit?.commerce_preserved)} kept on schedule`}>
-                  Replaying this plan in the simulator kept that much payment value on its original
+                  Replaying this plan with the same random draws kept that much payment value on its original
                   dates, protected {count(benefit?.merchants_protected)} merchant
                   {(benefit?.merchants_protected ?? 0) === 1 ? '' : 's'} and reduced modelled
                   network disruption by {pct(benefit?.disruption_reduction_pct)}. Measured, not
@@ -137,6 +136,14 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                 </Point>
               </ul>
             </div>
+
+            {reviewing && scenario ? (
+              <div ref={desk}>
+                <XSection label="Approve and pay" note="the plan behind this offer, paid in the PayPal sandbox">
+                  <Settlement scenarioId={scenario.scenario_id} />
+                </XSection>
+              </div>
+            ) : null}
 
             {reviewing ? (
               <XSection label="The terms" note={offer.offer_id}>
@@ -172,9 +179,6 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
               </XSection>
             ) : null}
 
-            <XSection label="Why this merchant" note="the backend's own sentence">
-              <p className="ox__rationale">{offer.rationale}</p>
-            </XSection>
 
           </>
         ) : (

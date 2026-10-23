@@ -1,13 +1,13 @@
 /* Design tokens.
  *
- * Cool lavender ground, near-black ink, one terracotta accent, and Razorpay
- * orange fenced off to the contract so it reads as product rather than
+ * Cool lavender ground, near-black ink, one terracotta accent, and the
+ * product's ember fenced off to the contract so it reads as product rather than
  * decoration. Sage appears only on a confirmed state.
  *
  * The neutral ramp is deliberately cool all the way through - paper, surfaces,
  * borders, greys and shadows. Warm neutrals on a lavender ground read as dirty
  * rather than as contrast, so the ramp has to move with the background. The two
- * saturated families (terracotta, Razorpay orange) stay warm on purpose: they
+ * saturated families (terracotta, the product's ember) stay warm on purpose: they
  * are the only things on the page that should feel like they are lit.
  */
 
@@ -57,9 +57,9 @@
   --sage: #4f7360;
 
   /* ---- product layer, the contract only ---- */
-  --rzp: #ef7a3c;
-  --rzp-deep: #b93c17;
-  --rzp-glow: rgba(233, 108, 52, 0.4);
+  --product: #ef7a3c;
+  --product-deep: #b93c17;
+  --product-glow: rgba(233, 108, 52, 0.4);
 
   /* ---- elevation: cool shadow, to match the ground ---- */
   --lift-1: 0 1px 2px rgba(40, 44, 68, 0.04), 0 12px 30px -24px rgba(40, 44, 68, 0.26);

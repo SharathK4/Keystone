@@ -1,0 +1,51 @@
+.seal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  max-width: 100%;
+  padding: 5px 11px 5px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font: 500 11px/1.35 var(--text);
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+}
+.seal i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  flex: none;
+}
+.seal b {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10px;
+  color: var(--ink-1);
+}
+.seal__ref {
+  color: var(--ink-1);
+  font-size: 11px;
+}
+.seal--inferred i {
+  background: #4f7360;
+  box-shadow: 0 0 0 3px rgba(79, 115, 96, 0.14);
+}
+.seal--computed_now i {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.seal--computed_now {
+  border-style: dashed;
+}
+.seal--executed_paypal_sandbox i {
+  background: #1f3a68;
+  box-shadow: 0 0 0 3px rgba(31, 58, 104, 0.14);
+}
+.seal--executed_paypal_sandbox {
+  border-color: rgba(31, 58, 104, 0.35);
+}

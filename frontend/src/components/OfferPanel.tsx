@@ -12,7 +12,7 @@
 
 import type { ExecutionStatus, ScenarioSnapshot } from '../api/types'
 import { Panel } from './Panel'
-import { RazorpayContractCard } from './RazorpayContractCard'
+import { ContractCard } from './ContractCard'
 import { repaymentSummary, resolveOfferCopy } from '../lib/offerCopy'
 import './offer-panel.css'
 
@@ -39,7 +39,7 @@ export function OfferPanel({ scenario, execution, busy, onOpen }: Props) {
     >
       <div className={`op${busy ? ' is-busy' : ''}`}>
         {offer ? (
-          <RazorpayContractCard
+          <ContractCard
             merchantId={offer.merchant_id}
             amount={offer.proposed_amount}
             durationHours={offer.duration_hours}

@@ -17,7 +17,7 @@ import { useEffect, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import './expanded-analysis.css'
 
-export type PanelId = 'network' | 'exposure' | 'intervention' | 'offer'
+export type PanelId = 'network' | 'exposure' | 'intervention' | 'offer' | 'proof'
 
 interface Props {
   title: string

@@ -22,7 +22,7 @@
  * a fourth colour.
  */
 
-import { useMemo } from 'react'
+import { useMemo, useRef, type KeyboardEvent } from 'react'
 import type { AffectedMerchant, MerchantView } from '../api/types'
 import { count, inr } from '../lib/format'
 import './exposure-dot-matrix.css'
@@ -35,6 +35,9 @@ interface Props {
   compact?: boolean
   /** Invert the ink for a dark tile. */
   onDark?: boolean
+  /** Make every dot a choice: pulling that merchant. */
+  onPick?: (merchantId: string) => void
+  picked?: string | null
 }
 
 type State = 'reached' | 'thin' | 'covered' | 'idle'
@@ -48,7 +51,10 @@ const LABEL: Record<State, string> = {
   idle: 'nothing due this window',
 }
 
-export function ExposureDotMatrix({ merchants, affected, origins, compact, onDark }: Props) {
+const COLUMNS = 10
+
+export function ExposureDotMatrix({ merchants, affected, origins, compact, onDark, onPick, picked }: Props) {
+  const buttons = useRef<(HTMLButtonElement | null)[]>([])
   const { dots, tally } = useMemo(() => {
     const hit = new Map(affected.map((a) => [a.merchant_id, a]))
     const originIds = new Set(origins)
@@ -89,15 +95,44 @@ export function ExposureDotMatrix({ merchants, affected, origins, compact, onDar
   return (
     <figure className={`dm${compact ? ' dm--compact' : ''}${onDark ? ' dm--dark' : ''}`}>
       <div className="dm__field">
-        <div className="dm__grid" role="img" aria-label={ariaLabel(tally, merchants.length)}>
-          {dots.map((d) => (
-            <span
-              key={d.id}
-              className={`dm__dot dm__dot--${d.state}${d.origin ? ' is-origin' : ''}`}
-              title={title(d)}
-            />
-          ))}
-        </div>
+        {onPick ? (
+          <div className="dm__grid" role="radiogroup" aria-label="Pull a merchant: one dot per merchant, in cover order">
+            {dots.map((d, i) => (
+              <button
+                key={d.id}
+                ref={(el) => {
+                  buttons.current[i] = el
+                }}
+                type="button"
+                role="radio"
+                aria-checked={d.id === picked}
+                tabIndex={d.id === picked || (!picked && i === 0) ? 0 : -1}
+                className={`dm__dot dm__dot--${d.state} dm__dot--pick${d.origin ? ' is-origin' : ''}${d.id === picked ? ' is-picked' : ''}`}
+                title={title(d)}
+                aria-label={`${d.id}, ${LABEL[d.state]}`}
+                onClick={() => onPick(d.id)}
+                onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
+                  const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: COLUMNS, ArrowUp: -COLUMNS }[e.key]
+                  if (!step) return
+                  e.preventDefault()
+                  const next = Math.min(dots.length - 1, Math.max(0, i + step))
+                  onPick(dots[next].id)
+                  buttons.current[next]?.focus()
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="dm__grid" role="img" aria-label={ariaLabel(tally, merchants.length)}>
+            {dots.map((d) => (
+              <span
+                key={d.id}
+                className={`dm__dot dm__dot--${d.state}${d.origin ? ' is-origin' : ''}`}
+                title={title(d)}
+              />
+            ))}
+          </div>
+        )}
 
         {compact ? null : (
           <div className="dm__scale" aria-hidden="true">

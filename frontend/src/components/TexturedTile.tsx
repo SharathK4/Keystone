@@ -14,7 +14,7 @@
 import { useId, type ReactNode } from 'react'
 import './textured-tile.css'
 
-export type TileTone = 'ink' | 'slate' | 'clay' | 'ember'
+export type TileTone = 'ink' | 'slate' | 'clay' | 'ember' | 'graphite'
 
 interface Props {
   tone: TileTone
@@ -44,7 +44,12 @@ const MATRIX: Record<TileTone, string> = {
          0.80 0.42 0    0 -0.28
          0.26 0.14 0.12 0 -0.14
          0    0    0    0  1`,
-  // razorpay orange, the product
+  // graphite, for the proof: the quiet one, so the certificate reads as record
+  graphite: `0.46 0.20 0.12 0 -0.14
+             0.44 0.20 0.12 0 -0.14
+             0.48 0.22 0.15 0 -0.12
+             0    0    0    0  1`,
+  // ember, the product
   ember: `1.90 0    0    0 -0.18
           0.90 0.50 0    0 -0.24
           0.20 0.10 0.30 0 -0.14

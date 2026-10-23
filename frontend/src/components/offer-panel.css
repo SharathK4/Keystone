@@ -9,7 +9,7 @@
 }
 
 /* The contract takes the stage; the provider line sits under it. */
-.op > .rzpc { flex: 1 1 auto; min-height: 0; }
+.op > .ctc { flex: 1 1 auto; min-height: 0; }
 
 .op.is-busy { opacity: 0.45; }
 

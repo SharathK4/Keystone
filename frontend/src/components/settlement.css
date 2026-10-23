@@ -1,0 +1,320 @@
+.st {
+  display: grid;
+  gap: 26px;
+}
+.st h5 {
+  margin: 0;
+  font: 600 15px var(--text);
+  color: var(--ink);
+}
+
+/* ---- status ---- */
+.st__status {
+  display: grid;
+  gap: 12px;
+}
+.st__light {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.st__light i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-3);
+}
+.st__light--on i {
+  background: var(--sage);
+  box-shadow: 0 0 0 4px rgba(79, 115, 96, 0.15);
+}
+.st__recorded {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 24px;
+  padding: 14px 16px;
+  border: 1px dashed var(--accent-line);
+  border-radius: 14px;
+  background: var(--accent-soft);
+}
+.st__recorded p {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 13px;
+  color: var(--ink-1);
+}
+
+/* ---- plan ---- */
+.st__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.st__table th,
+.st__table td {
+  padding: 11px 10px;
+  border-bottom: 1px solid var(--border-soft);
+  text-align: left;
+  vertical-align: baseline;
+}
+.st__table thead th {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border-bottom-color: var(--border);
+}
+.st__table tfoot th,
+.st__table tfoot td {
+  border-top: 1px solid var(--ink-4);
+  border-bottom: 0;
+  font-weight: 600;
+}
+.st__table em {
+  display: block;
+  font-style: normal;
+  font-size: 12px;
+  color: var(--ink-3);
+}
+.st__table .is-num {
+  text-align: right;
+  white-space: nowrap;
+  font-feature-settings: var(--num);
+}
+.st__gap {
+  color: var(--accent);
+  font-size: 13px;
+}
+.st__muted {
+  color: var(--ink-3);
+  font-size: 12px;
+  font-weight: 400 !important;
+}
+.st__scale {
+  margin: 12px 0 10px;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* ---- steps ---- */
+.st__steps ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.st__step {
+  position: relative;
+  padding: 18px 18px 18px 56px;
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: 13px;
+  transition: box-shadow var(--med) var(--ease), border-color var(--med) var(--ease);
+}
+.st__step p {
+  margin: 8px 0 0;
+  line-height: 1.5;
+}
+.st__step.is-on {
+  border-color: var(--ink-4);
+  box-shadow: var(--lift-2);
+  color: var(--ink-1);
+}
+.st__n {
+  position: absolute;
+  left: 18px;
+  top: 16px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font: 600 12px var(--text);
+  background: var(--surface-2);
+  color: var(--ink-2);
+}
+.st__step.is-on .st__n {
+  background: var(--ink);
+  color: var(--surface);
+}
+.st__step.is-done .st__n {
+  background: var(--sage);
+  color: var(--surface);
+}
+.st__step.is-done .st__n::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--sage);
+  border-radius: 50%;
+}
+.st__sign {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+.st__field {
+  display: grid;
+  gap: 4px;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.st__field input {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--paper-bright);
+  font: 400 14px var(--text);
+  color: var(--ink);
+  letter-spacing: normal;
+  text-transform: none;
+}
+.st__check {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: var(--ink-1);
+}
+.st__check input {
+  margin-top: 3px;
+  accent-color: var(--accent);
+}
+
+.st__btn {
+  margin-top: 10px;
+  padding: 9px 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 500 13px var(--text);
+  cursor: pointer;
+  transition: background var(--fast) var(--ease);
+}
+.st__btn:hover {
+  background: var(--surface-2);
+}
+.st__btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.st__btn--ink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--surface);
+}
+.st__btn--ink:hover {
+  background: var(--ink-1);
+}
+.st__btn--quiet {
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+.st__error {
+  margin: 12px 0 0;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+/* ---- ledger ---- */
+.st__ledger-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.st__line {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+.st__records {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.st__record {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 14px;
+  color: var(--ink-1);
+}
+.st__mark {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+  font-weight: 600;
+}
+.st__record--succeeded .st__mark {
+  background: rgba(79, 115, 96, 0.16);
+  color: var(--sage);
+}
+.st__record--failed .st__mark {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.st__reason {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-2);
+}
+.st__record--failed .st__reason {
+  color: var(--accent);
+}
+.st__amount {
+  color: var(--ink);
+}
+
+/* ---- re-entry ---- */
+.st__reentry {
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--accent-line);
+  background: linear-gradient(180deg, var(--accent-soft), transparent);
+}
+.st__re p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: var(--ink-1);
+}
+.st__newplan {
+  color: var(--accent) !important;
+}
+.st__missing {
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+@media (max-width: 900px) {
+  .st__steps ol {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .st__record {
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+  }
+  .st__table th:nth-child(5),
+  .st__table td:nth-child(5) {
+    display: none;
+  }
+}

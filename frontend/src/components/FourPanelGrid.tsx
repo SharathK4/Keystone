@@ -13,6 +13,7 @@ import { NetworkPanel } from './NetworkPanel'
 import { ExposurePanel } from './ExposurePanel'
 import { InterventionPanel } from './InterventionPanel'
 import { OfferPanel } from './OfferPanel'
+import { ProofPanel } from './ProofPanel'
 
 interface Props {
   structure: Structure
@@ -51,6 +52,8 @@ export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen }: Pro
         busy={scenarioBusy}
         onOpen={() => onOpen('offer')}
       />
+
+      <ProofPanel onOpen={() => onOpen('proof')} />
     </div>
   )
 }

@@ -93,7 +93,7 @@
   width: 15px;
   height: 15px;
   margin-top: 2px;
-  color: var(--rzp);
+  color: var(--product);
 }
 
 .ox__tick svg { width: 100%; height: 100%; display: block; }
