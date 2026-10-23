@@ -1,6 +1,13 @@
 .st {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 26px;
+}
+.st > * {
+  min-width: 0;
+}
+.st__plan {
+  overflow-x: auto;
 }
 .st h5 {
   margin: 0;
@@ -316,5 +323,15 @@
   .st__table th:nth-child(5),
   .st__table td:nth-child(5) {
     display: none;
+  }
+  .st__light {
+    align-items: flex-start;
+  }
+  .st__light i {
+    margin-top: 5px;
+    flex: none;
+  }
+  .st__record .seal {
+    grid-column: 2 / -1;
   }
 }

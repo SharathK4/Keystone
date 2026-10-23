@@ -12,6 +12,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1c Gate H value of speed | **PASS** — 551 passed / 8 deselected; audit 32; phase-4 28; δ=0 == snapshot exactly; full rebuild hash identical (`fe887776da0213e1`) | Replays follow the snapshot's (unmutated-network) convention; replanned arm beats δ=0 in 2 scenarios (optimiser pruning). See `reports/structure/gate_h.md`. | — | 1d |
 | 1 | 1d hosting readiness | **PASS** (no deploy) — 565 passed / 8 deselected; audit 33; phase-4 28 | Render Workflows dropped (no free tier, separate service; jobs take seconds). Readiness check needs the DB (frozen). | Create the Blueprint, enter secrets, register the webhook, record the canonical run. | 1e |
 | 1 | 1e concept boards → **STOP** | **DONE** — boards A, B, C + font specimen + index under `design/concepts/` (SVG with subset OFL fonts embedded, PNG via headless Chrome); each rendered and self-critiqued | Ledger hero and chart layout reworked after review (see decisions) | **Pick A, B or C**: open `design/concepts/index.html` | Phase 2 after the pick |
+| 2 | Phase 2 frontend | **IN PROGRESS** — new analyses folded into the original four-card design (+ card 05); 576 passed / 8 deselected; audit 35; phase-4 28 | Human chose B, then redirected: keep the original Keystone design and add the new work to it (see decisions) | Review the cards; map sandbox emails; say "run live tests" | State screenshots to docs/screens, axe + keyboard + reduced-motion checks, README screenshots, tag phase-2 |
 
 ## Decisions taken
 
@@ -107,6 +108,28 @@ Never push (`origin` push URL is disabled locally).
 - **1e** Open for Phase 2 (`docs/ASSETS.md`): subsets of Reserved-Font-Name faces
   (Source Serif 4; IBM Plex likely) — serve unmodified files or confirm the OFL
   FAQ position before shipping.
+
+- **Phase 2** The human picked Board B, then redirected: the original Keystone
+  frontend (four textured cards, analysis over the page) stays, and the new work
+  goes into it. The full Ledger Room rebuild was discarded uncommitted. Added:
+  01 inferred-strength recovery; 02 pull any merchant (offline pulls artifact +
+  compute now); 03 the cost of waiting; 04 provider-neutral contract card whose
+  review opens approval → PayPal sandbox payout → ledger → re-entry; 05 the
+  proof card and certificate. Provenance seals on every new figure, derived
+  from the endpoint.
+- **Phase 2** Fonts: the human chose to keep the original display face
+  (`Against`, a personal-use demo licence) for the demo; recorded here and in
+  `docs/ASSETS.md`. Swapping it is one token in `tokens.css`.
+- **Phase 2** Razorpay branding removed from the UI and the frontend source
+  (card renamed `ContractCard`, `--rzp` tokens renamed); "simulator" removed from
+  user-facing copy in the views touched.
+- **Phase 2** New artifacts: `pulls-36882cbbf5e020ed` (100 merchants × 1.5/2/2.5×
+  slack, ~12 min to build) and `proof-c264028509d38f71`. Proof finding: links
+  are observed, not discovered (216/216); strengths are inferred with rank
+  correlation 0.85 (pass-through), 0.64 (lag), 0.38 (conditional probability).
+  11 of 100 pulls reach one hop; none go further.
+- **Phase 2** `scripts/dev_api.sh` runs the API for frontend work with PayPal
+  deliberately unconfigured, so no page can call PayPal.
 
 ## Leaks
 

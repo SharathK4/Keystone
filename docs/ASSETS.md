@@ -32,7 +32,7 @@ embedded anywhere.
 | Asset | Where it is | Licence | Status |
 | --- | --- | --- | --- |
 | Against, Emotions Condensed, Wolfgang (`fonts/*.zip`) | local only; untracked on `paypal` | personal use only, no commercial use | never used by Keystone deliverables |
-| Against (`frontend/public/fonts/against-regular.otf`) | current frontend display face | personal use only | to be replaced by the chosen OFL serif in Phase 2 |
+| Against (`frontend/public/fonts/against-regular.otf`) | the frontend's display face | personal use only | kept for the demo by the human's decision (2026-10-23); one token in `tokens.css` to swap |
 
 Both are present in the public original repository's history (`origin/master`);
 the Phase 3 publish copy removes them.
