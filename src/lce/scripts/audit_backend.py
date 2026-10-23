@@ -373,6 +373,9 @@ def audit_paypal(audit: Audit) -> None:
         "/api/v1/webhooks/paypal",
         "/api/v1/structure/speed",
         "/api/v1/structure/speed/scenarios/{scenario_id}",
+        "/api/v1/structure/pulls",
+        "/api/v1/structure/pulls/{merchant_id}",
+        "/api/v1/structure/proof",
     }
     missing = sorted(required - published)
     audit.check("execution_routes_present", not missing, f"missing: {missing}")
@@ -437,6 +440,14 @@ def audit_structure(audit: Audit, *, artifact_root: Path) -> None:
     }
     problems = check_against_snapshot(store.scenarios(), reference)
     audit.check("speed_zero_delay_matches_snapshot", not problems, f"{problems[:3]}")
+    from lce.structure.store import ProofStore, PullsStore, resolve_artifact
+
+    for prefix, cls in (("pulls", PullsStore), ("proof", ProofStore)):
+        try:
+            cls(resolve_artifact(artifact_root / "structure", prefix))
+            audit.check(f"{prefix}_artifact_verified", True, "")
+        except Exception as exc:  # reported, not raised
+            audit.check(f"{prefix}_artifact_verified", False, str(exc))
     audit.notes["structure"] = {"artifact_id": store.artifact_id,
                                 "n_scenarios": len(store.scenarios())}
 

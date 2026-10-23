@@ -1,0 +1,348 @@
+{
+  "audit": [
+    {
+      "name": "secrets_not_committed",
+      "passed": true
+    },
+    {
+      "name": "env_is_gitignored",
+      "passed": true
+    },
+    {
+      "name": "no_env_file_staged",
+      "passed": true
+    },
+    {
+      "name": "no_key_file_in_repo_root",
+      "passed": true
+    },
+    {
+      "name": "serving_imports_clean",
+      "passed": true
+    },
+    {
+      "name": "model_artifact_loads",
+      "passed": true
+    },
+    {
+      "name": "model_artifact_has_integrity_hash",
+      "passed": true
+    },
+    {
+      "name": "model_artifact_records_calibration",
+      "passed": true
+    },
+    {
+      "name": "snapshot_loads",
+      "passed": true
+    },
+    {
+      "name": "snapshot_has_scenarios",
+      "passed": true
+    },
+    {
+      "name": "snapshot_carries_no_payment_history",
+      "passed": true
+    },
+    {
+      "name": "snapshot_overlay_is_estimated",
+      "passed": true
+    },
+    {
+      "name": "every_scenario_has_provenance",
+      "passed": true
+    },
+    {
+      "name": "on_demand_analysis_is_bounded",
+      "passed": true
+    },
+    {
+      "name": "on_demand_analysis_is_deterministic",
+      "passed": true
+    },
+    {
+      "name": "all_frontend_routes_present",
+      "passed": true
+    },
+    {
+      "name": "openapi_schema_publishes",
+      "passed": true
+    },
+    {
+      "name": "migrations_present",
+      "passed": true
+    },
+    {
+      "name": "migrations_have_one_root",
+      "passed": true
+    },
+    {
+      "name": "migrations_chain_unbroken",
+      "passed": true
+    },
+    {
+      "name": "migrations_have_one_head",
+      "passed": true
+    },
+    {
+      "name": "paypal_live_mode_refused",
+      "passed": true
+    },
+    {
+      "name": "paypal_production_host_refused",
+      "passed": true
+    },
+    {
+      "name": "paypal_secrets_not_in_repr",
+      "passed": true
+    },
+    {
+      "name": "paypal_generic_interface_cannot_pay",
+      "passed": true
+    },
+    {
+      "name": "execution_routes_present",
+      "passed": true
+    },
+    {
+      "name": "paypal_unverified_webhook_refused",
+      "passed": true
+    },
+    {
+      "name": "paypal_terminal_status_never_regresses",
+      "passed": true
+    },
+    {
+      "name": "paypal_reconcile_never_resubmits",
+      "passed": true
+    },
+    {
+      "name": "speed_artifact_verified",
+      "passed": true
+    },
+    {
+      "name": "speed_zero_delay_matches_snapshot",
+      "passed": true
+    },
+    {
+      "name": "demo_recorded_mode_needs_token",
+      "passed": true
+    }
+  ],
+  "failed": [
+    {
+      "detail": "In the 7 snapshot scenarios 0 merchants beyond the shocked ones are constrained. Of the 100 single-merchant pulls, 11 constrain another merchant one hop away and 0 go further. Plans are measured on the whole week's network disruption, most of which exists without the shock.",
+      "title": "Shocks barely cascade on this network"
+    },
+    {
+      "detail": "6 of 14 benchmark scenarios end with no action the optimiser will take.",
+      "title": "Some benchmark scenarios have no plan at all"
+    },
+    {
+      "detail": "In 2 benchmark scenarios, re-planning one hour later finds a plan worth more than the plan chosen at the shock; the top-12 candidate list at the shock had left it out.",
+      "title": "The optimiser's candidate list can miss the best plan"
+    },
+    {
+      "detail": "The delayed-inflow scenario shows 40.45 %; replayed with its delay applied the same plan cuts 41.34 %. The snapshot is frozen and is shown as built.",
+      "title": "One snapshot figure leaves a scenario's own change out"
+    },
+    {
+      "detail": "All 216 true links appear in the payment history, so finding them is not the hard part. Their strengths are estimated with error: the weakest, chance a shortfall passes on, ranks links with a correlation of 0.38 [0.26, 0.49] against the generator's truth.",
+      "title": "Links are observed; only their strengths are inferred"
+    },
+    {
+      "detail": "Signatures are checked against a certificate fetched from an HTTPS paypal.com address within its validity window; the chain of trust is not walked.",
+      "title": "Webhook certificate chain not validated"
+    }
+  ],
+  "format": "keystone-proof-v1",
+  "leakage": [
+    {
+      "family": "single_missed_inflow",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 18.679363092658516,
+      "n_observed_events": 11461,
+      "onset_hours": 18.781346115982956,
+      "scenario_id": "scn-07c647ec1459"
+    },
+    {
+      "family": "delayed_inflow",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 18.679363092658516,
+      "n_observed_events": 11461,
+      "onset_hours": 18.781346115982956,
+      "scenario_id": "scn-93f80db7bc45"
+    },
+    {
+      "family": "partial_payment",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 18.679363092658516,
+      "n_observed_events": 11461,
+      "onset_hours": 18.781346115982956,
+      "scenario_id": "scn-a3e81a36d91b"
+    },
+    {
+      "family": "liquidity_drain",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 107.05292943755273,
+      "n_observed_events": 12257,
+      "onset_hours": 107.35452462751704,
+      "scenario_id": "scn-b340adfb588f"
+    },
+    {
+      "family": "supplier_failure",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 107.05292943755273,
+      "n_observed_events": 12257,
+      "onset_hours": 107.35452462751704,
+      "scenario_id": "scn-5f58c8727494"
+    },
+    {
+      "family": "concentrated_shock",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 107.05292943755273,
+      "n_observed_events": 12257,
+      "onset_hours": 107.35452462751704,
+      "scenario_id": "scn-cc256c67bfd1"
+    },
+    {
+      "family": "multi_node_shock",
+      "first_observed_hours": -1439.5789762465336,
+      "holds": true,
+      "last_observed_hours": 66.0,
+      "n_observed_events": 11940,
+      "onset_hours": 66.45332176095026,
+      "scenario_id": "scn-2f8b212bb5e2"
+    }
+  ],
+  "provenance": {
+    "code_version": "0.1.0",
+    "kind": "replayed_offline",
+    "label": "Replayed offline, inside the synthetic generator",
+    "snapshot_id": "snap-a4c99d5a49a64ffd",
+    "speed_artifact_id": "speed-fe887776da0213e1"
+  },
+  "recovery": {
+    "n_estimated": 216,
+    "n_matched": 216,
+    "n_true": 216,
+    "parameters": [
+      {
+        "high": 0.4879322211505257,
+        "label": "Chance a shortfall passes on",
+        "low": 0.2568004501125281,
+        "mean_abs_error": 0.3512452234157387,
+        "n_edges": 216,
+        "name": "conditional_probability",
+        "rank_correlation": 0.3761011681491801,
+        "unit": ""
+      },
+      {
+        "high": 0.9239048750282808,
+        "label": "Share of a shortfall passed on",
+        "low": 0.76199168839829,
+        "mean_abs_error": 0.06366891232273424,
+        "n_edges": 216,
+        "name": "pass_through",
+        "rank_correlation": 0.8510687195608425,
+        "unit": ""
+      },
+      {
+        "high": 0.7214276485788114,
+        "label": "Mean lag before it lands",
+        "low": 0.5502107372081114,
+        "mean_abs_error": 30.22535970908068,
+        "n_edges": 216,
+        "name": "lag_mean_hours",
+        "rank_correlation": 0.6408864120792103,
+        "unit": "h"
+      }
+    ],
+    "precision": {
+      "denominator": 216,
+      "high": 1.0,
+      "low": 0.9825262312154358,
+      "numerator": 216,
+      "value": 1.0
+    },
+    "recall": {
+      "denominator": 216,
+      "high": 1.0,
+      "low": 0.9825262312154358,
+      "numerator": 216,
+      "value": 1.0
+    }
+  },
+  "results": [
+    {
+      "high": 0.4879322211505257,
+      "label": "Chance a shortfall passes on: rank agreement with the truth",
+      "low": 0.2568004501125281,
+      "note": "Spearman over 216 links; bootstrap 95 % over links",
+      "unit": "rho",
+      "value": 0.3761011681491801
+    },
+    {
+      "high": 0.9239048750282808,
+      "label": "Share of a shortfall passed on: rank agreement with the truth",
+      "low": 0.76199168839829,
+      "note": "Spearman over 216 links; bootstrap 95 % over links",
+      "unit": "rho",
+      "value": 0.8510687195608425
+    },
+    {
+      "high": 0.7214276485788114,
+      "label": "Mean lag before it lands: rank agreement with the truth",
+      "low": 0.5502107372081114,
+      "note": "Spearman over 216 links; bootstrap 95 % over links",
+      "unit": "rho",
+      "value": 0.6408864120792103
+    },
+    {
+      "high": null,
+      "label": "Largest gap to the exact optimum",
+      "low": null,
+      "note": "over the 4 snapshot scenarios that have a plan",
+      "unit": "%",
+      "value": 10.86742466939675
+    },
+    {
+      "high": null,
+      "label": "Canonical plan, network disruption cut",
+      "low": null,
+      "note": "one scenario, common random numbers; no interval",
+      "unit": "%",
+      "value": 40.36435063262523
+    },
+    {
+      "high": 30.6531786505985,
+      "label": "Cut with the money 0 h late, mean over scenarios",
+      "low": 5.397144253974084,
+      "note": "8 scenarios with a plan; bootstrap 95 %",
+      "unit": "%",
+      "value": 17.358245305698595
+    },
+    {
+      "high": 24.748577379677986,
+      "label": "Cut with the money 24 h late, mean over scenarios",
+      "low": 4.136327281005775,
+      "note": "8 scenarios with a plan; bootstrap 95 %",
+      "unit": "%",
+      "value": 13.78739276289575
+    },
+    {
+      "high": 15.727049764684844,
+      "label": "Cut with the money 48 h late, mean over scenarios",
+      "low": 2.616789786481666,
+      "note": "8 scenarios with a plan; bootstrap 95 %",
+      "unit": "%",
+      "value": 7.865363351820264
+    }
+  ]
+}

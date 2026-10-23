@@ -1,0 +1,7 @@
+{
+  "artifact_id": "proof-c264028509d38f71",
+  "content_hash": "c264028509d38f71b9be6119865a604b5b48d5b2e3b66d166a0547cfcde9b97b",
+  "format": "keystone-proof-v1",
+  "label": "Replayed offline, inside the synthetic generator",
+  "snapshot_id": "snap-a4c99d5a49a64ffd"
+}

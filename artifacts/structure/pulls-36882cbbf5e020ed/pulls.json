@@ -1,0 +1,4255 @@
+{
+  "format": "keystone-pulls-v1",
+  "provenance": {
+    "central_multiple": 2.0,
+    "code_version": "0.1.0",
+    "kind": "replayed_offline",
+    "label": "Replayed offline, inside the synthetic generator",
+    "limits": {
+      "max_actions": 2,
+      "max_candidates": 12,
+      "max_origins": 5
+    },
+    "multiples": [
+      1.5,
+      2.0,
+      2.5
+    ],
+    "shock": "cash withdrawal at hour 0, sized as a multiple of the merchant's liquidity slack",
+    "snapshot_id": "snap-a4c99d5a49a64ffd"
+  },
+  "records": [
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 273919.5827413667,
+          "hours_to_constraint": 109.48127495461821,
+          "merchant_id": "m0031"
+        }
+      ],
+      "disrupted_value_inr": 12073766.958338248,
+      "first_constraint_hours": 109.48127495461821,
+      "magnitude_inr": 6239763.163029159,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0000",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.081564032607716,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          8969445.274263605,
+          15745936.4889647
+        ],
+        "first_constraint_hours": [
+          109.48127495461821,
+          109.48127495461821
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "retail",
+      "tier": "large"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 10164012.99290102,
+      "first_constraint_hours": null,
+      "magnitude_inr": 5793733.651636958,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0001",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.07294425695331,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          6553750.567321483,
+          11612446.40581026
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "services",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 1724114.4674932756,
+          "hours_to_constraint": 138.5089643517573,
+          "merchant_id": "m0054"
+        }
+      ],
+      "disrupted_value_inr": 14256112.340709532,
+      "first_constraint_hours": 138.5089643517573,
+      "magnitude_inr": 19673670.338232405,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0002",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 36.81986278103107,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          11625039.003863022,
+          26766421.631318595
+        ],
+        "first_constraint_hours": [
+          138.5089643517573,
+          138.5089643517573
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          1
+        ]
+      },
+      "sector": "services",
+      "tier": "anchor"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 11903626.963339902,
+      "first_constraint_hours": null,
+      "magnitude_inr": 11903626.963339852,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0003",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 38.3170281217517,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          8365700.979288772,
+          13095372.214128882
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "services",
+      "tier": "anchor"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 2244641.8361392533,
+          "hours_to_constraint": 108.29515928183474,
+          "merchant_id": "m0042"
+        }
+      ],
+      "disrupted_value_inr": 13509468.65006844,
+      "first_constraint_hours": 108.29515928183474,
+      "magnitude_inr": 5877878.017465842,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0004",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.052096133632915,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          10511540.066056592,
+          15204307.677944876
+        ],
+        "first_constraint_hours": [
+          108.29515928183474,
+          111.97837536498541
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "retail",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 8538562.245560793,
+          "hours_to_constraint": 66.97301989380914,
+          "merchant_id": "m0017"
+        }
+      ],
+      "disrupted_value_inr": 26139157.420217365,
+      "first_constraint_hours": 66.97301989380914,
+      "magnitude_inr": 17600595.174656563,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0005",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "supplier_term_extension",
+        "amount_inr": 17898291.629430067,
+        "disruption_cut_pct": 25.425719500029523,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 87290159.17643273
+      },
+      "range": {
+        "disrupted_value_inr": [
+          15297745.041495504,
+          30539306.213881522
+        ],
+        "first_constraint_hours": [
+          66.97301989380914,
+          66.97301989380914
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "services",
+      "tier": "anchor"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 41229752.76544905,
+      "first_constraint_hours": null,
+      "magnitude_inr": 38395709.7629203,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0006",
+      "n_affected": 0,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 31.94247499930329,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          31630825.324718952,
+          60160317.872165695
+        ],
+        "first_constraint_hours": [
+          138.26108994960273,
+          138.26108994960273
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          1
+        ]
+      },
+      "sector": "retail",
+      "tier": "anchor"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 7858681.677697055,
+      "first_constraint_hours": null,
+      "magnitude_inr": 4446061.189447276,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0007",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.190909497903434,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          6216880.092075478,
+          8505277.656896286
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "services",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 637786.9962931962,
+          "hours_to_constraint": 144.09758899474534,
+          "merchant_id": "m0065"
+        }
+      ],
+      "disrupted_value_inr": 6933731.755266106,
+      "first_constraint_hours": 144.09758899474534,
+      "magnitude_inr": 5825615.52024649,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0008",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.2966953322617,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          5712492.494567679,
+          10604212.431709917
+        ],
+        "first_constraint_hours": [
+          127.17722097113416,
+          144.09758899474534
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          2
+        ]
+      },
+      "sector": "retail",
+      "tier": "large"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 24668314.054949015,
+      "first_constraint_hours": null,
+      "magnitude_inr": 20375101.916002832,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0009",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 30.819944838815694,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 95757049.17084545
+      },
+      "range": {
+        "disrupted_value_inr": [
+          20851234.975590944,
+          38900793.835392505
+        ],
+        "first_constraint_hours": [
+          103.76322488379051,
+          103.76322488379051
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          1
+        ]
+      },
+      "sector": "retail",
+      "tier": "anchor"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 972988.7426634467,
+          "hours_to_constraint": 115.76988726995707,
+          "merchant_id": "m0078"
+        }
+      ],
+      "disrupted_value_inr": 7834082.280891746,
+      "first_constraint_hours": 115.76988726995707,
+      "magnitude_inr": 24029726.111364424,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0010",
+      "n_affected": 1,
+      "n_defaulted": 10,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.73740810107262,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          7834082.280891746,
+          7834082.280891746
+        ],
+        "first_constraint_hours": [
+          115.76988726995707,
+          115.76988726995707
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "logistics",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 345471.88609548955,
+          "hours_to_constraint": 39.69781847980457,
+          "merchant_id": "m0011"
+        }
+      ],
+      "disrupted_value_inr": 345471.88609548955,
+      "first_constraint_hours": 39.69781847980457,
+      "magnitude_inr": 332946.9728987501,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0011",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.066622168393785,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          245936.69632313994,
+          345471.88609548955
+        ],
+        "first_constraint_hours": [
+          39.69781847980457,
+          39.69781847980457
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0012",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 33841356.402498,
+          "hours_to_constraint": 38.75796762876825,
+          "merchant_id": "m0013"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 1704518.8431100622,
+          "hours_to_constraint": 125.28306390393267,
+          "merchant_id": "m0064"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 1624364.70260844,
+          "hours_to_constraint": 129.08776554884844,
+          "merchant_id": "m0089"
+        }
+      ],
+      "disrupted_value_inr": 37170239.9482165,
+      "first_constraint_hours": 38.75796762876825,
+      "magnitude_inr": 40270771.35315794,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0013",
+      "n_affected": 3,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "supplier_term_extension",
+        "amount_inr": 3429424.0221392047,
+        "disruption_cut_pct": 10.312401044617483,
+        "merchant_id": "m0089",
+        "payments_kept_on_time_inr": 15167797.391694546
+      },
+      "range": {
+        "disrupted_value_inr": [
+          29174350.254296985,
+          42321654.836628035
+        ],
+        "first_constraint_hours": [
+          38.75796762876825,
+          39.77938367194577
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          3,
+          5
+        ]
+      },
+      "sector": "wholesale",
+      "tier": "large"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0014",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 17101143.406085826,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0015",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.74004654925383,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 1640655.7131993556,
+          "hours_to_constraint": 75.73109643246087,
+          "merchant_id": "m0016"
+        }
+      ],
+      "disrupted_value_inr": 1640655.7131993556,
+      "first_constraint_hours": 75.73109643246087,
+      "magnitude_inr": 8190421.999766231,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0016",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 36.505484008227775,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 95757049.17084545
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1382262.6873276774,
+          5629974.556305705
+        ],
+        "first_constraint_hours": [
+          35.92841475801808,
+          78.51802105811053
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          2
+        ]
+      },
+      "sector": "logistics",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 120134502.9003525,
+          "hours_to_constraint": 3.6716562260855854,
+          "merchant_id": "m0017"
+        }
+      ],
+      "disrupted_value_inr": 120134502.9003525,
+      "first_constraint_hours": 3.6716562260855854,
+      "magnitude_inr": 116206117.7680335,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0017",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.08150046799269,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 209893499.82740968
+      },
+      "range": {
+        "disrupted_value_inr": [
+          90390079.97376302,
+          183098576.69019896
+        ],
+        "first_constraint_hours": [
+          3.6716562260855854,
+          3.6716562260855854
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          2
+        ]
+      },
+      "sector": "wholesale",
+      "tier": "large"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 1797814.3292740665,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0018",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.06619960002382,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 17630934.76630631,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0019",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.89873729577533,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 6210984.87681172,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0020",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.967773855916256,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0021",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "wholesale",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 12898065.784059368,
+      "first_constraint_hours": null,
+      "magnitude_inr": 145376589.26875985,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0022",
+      "n_affected": 0,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 38.88767682749961,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          12898065.784059368,
+          12898065.784059368
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3101285.5659134937,
+          "hours_to_constraint": 33.99951130956991,
+          "merchant_id": "m0023"
+        }
+      ],
+      "disrupted_value_inr": 3101285.5659134937,
+      "first_constraint_hours": 33.99951130956991,
+      "magnitude_inr": 149266874.08049628,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0023",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 38.888316914107605,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          3101285.5659134937,
+          3101285.5659134937
+        ],
+        "first_constraint_hours": [
+          33.99951130956991,
+          33.99951130956991
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 5564170.973266416,
+          "hours_to_constraint": 44.72305246082384,
+          "merchant_id": "m0024"
+        }
+      ],
+      "disrupted_value_inr": 5564170.973266416,
+      "first_constraint_hours": 44.72305246082384,
+      "magnitude_inr": 7589842.846715782,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0024",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.93638891334689,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159977248.26105
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1954510.4786846964,
+          9342467.413000688
+        ],
+        "first_constraint_hours": [
+          35.03249275973251,
+          66.61948816276265
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "logistics",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 80584470.38674556,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0025",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.1938226056686,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "wholesale",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 17116786.7187669,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0026",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.75359650737002,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "wholesale",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 1368273.803545704,
+          "hours_to_constraint": 81.05347672256272,
+          "merchant_id": "m0027"
+        }
+      ],
+      "disrupted_value_inr": 1368273.803545704,
+      "first_constraint_hours": 81.05347672256272,
+      "magnitude_inr": 13473848.466904175,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0027",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.99271254470104,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          4736735.920271749
+        ],
+        "first_constraint_hours": [
+          81.05347672256272,
+          109.18549443695797
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0028",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.082820459558164,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "construction",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3804595.415706601,
+          "hours_to_constraint": 40.666630634889565,
+          "merchant_id": "m0029"
+        }
+      ],
+      "disrupted_value_inr": 3804595.415706601,
+      "first_constraint_hours": 40.666630634889565,
+      "magnitude_inr": 18107155.23152459,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0029",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.44316796499489,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          3804595.415706601,
+          3804595.415706601
+        ],
+        "first_constraint_hours": [
+          40.666630634889565,
+          40.666630634889565
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 58387762.993154176,
+          "hours_to_constraint": 73.47087777244406,
+          "merchant_id": "m0030"
+        }
+      ],
+      "disrupted_value_inr": 58387762.993154176,
+      "first_constraint_hours": 73.47087777244406,
+      "magnitude_inr": 143386826.4858204,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0030",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 36.76589082101113,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          52733673.43945851,
+          58387762.993154176
+        ],
+        "first_constraint_hours": [
+          73.47087777244406,
+          79.6137263518232
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 5558248.863668346,
+          "hours_to_constraint": 67.45332176095026,
+          "merchant_id": "m0031"
+        }
+      ],
+      "disrupted_value_inr": 5558248.863668346,
+      "first_constraint_hours": 67.45332176095026,
+      "magnitude_inr": 20553586.551641516,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0031",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.84003406858297,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          5558248.863668346,
+          5558248.863668346
+        ],
+        "first_constraint_hours": [
+          67.45332176095026,
+          67.45332176095026
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 5541801.44025872,
+          "hours_to_constraint": 82.69972742211094,
+          "merchant_id": "m0032"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 893846.2864883794,
+          "hours_to_constraint": 117.31285232499687,
+          "merchant_id": "m0069"
+        }
+      ],
+      "disrupted_value_inr": 6435647.726747099,
+      "first_constraint_hours": 82.69972742211094,
+      "magnitude_inr": 10821430.282830171,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0032",
+      "n_affected": 2,
+      "n_defaulted": 10,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.521456194230865,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          3275401.5193758314,
+          6435647.726747099
+        ],
+        "first_constraint_hours": [
+          82.69972742211094,
+          90.61074816492682
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          2
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 24083510.527667332,
+          "hours_to_constraint": 76.38282466829615,
+          "merchant_id": "m0033"
+        }
+      ],
+      "disrupted_value_inr": 24083510.527667332,
+      "first_constraint_hours": 76.38282466829615,
+      "magnitude_inr": 43696520.34752752,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0033",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.745322406715786,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408357
+      },
+      "range": {
+        "disrupted_value_inr": [
+          13392023.739687202,
+          35007640.614549264
+        ],
+        "first_constraint_hours": [
+          76.38282466829615,
+          94.8055085425462
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3762007.6869490836,
+          "hours_to_constraint": 72.05574987657978,
+          "merchant_id": "m0034"
+        }
+      ],
+      "disrupted_value_inr": 3762007.6869490836,
+      "first_constraint_hours": 72.05574987657978,
+      "magnitude_inr": 4670857.918009702,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0034",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.035840145251626,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          2608980.8065614044,
+          3966220.5715683713
+        ],
+        "first_constraint_hours": [
+          72.05574987657978,
+          80.80508848886541
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3368869.4774578223,
+          "hours_to_constraint": 91.1463002658341,
+          "merchant_id": "m0035"
+        }
+      ],
+      "disrupted_value_inr": 3368869.4774578223,
+      "first_constraint_hours": 91.1463002658341,
+      "magnitude_inr": 10230918.845589865,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0035",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.01145938267245,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          811339.2632353762,
+          5926050.571623973
+        ],
+        "first_constraint_hours": [
+          80.21004715143648,
+          95.55118677611594
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 8275665.299680893,
+          "hours_to_constraint": 80.05933892354984,
+          "merchant_id": "m0036"
+        }
+      ],
+      "disrupted_value_inr": 8275665.299680893,
+      "first_constraint_hours": 80.05933892354984,
+      "magnitude_inr": 13689301.67073103,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0036",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.14143019019962,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          3686025.779300634,
+          12773412.708667263
+        ],
+        "first_constraint_hours": [
+          77.3448337065651,
+          109.30233688015902
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 6604389.939289352,
+          "hours_to_constraint": 73.7402415076058,
+          "merchant_id": "m0037"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 1198819.8419885477,
+          "hours_to_constraint": 108.35452462751704,
+          "merchant_id": "m0080"
+        }
+      ],
+      "disrupted_value_inr": 7803209.7812779,
+      "first_constraint_hours": 73.7402415076058,
+      "magnitude_inr": 145810211.249478,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0037",
+      "n_affected": 2,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.464033790196794,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          7803209.7812779,
+          7803209.7812779
+        ],
+        "first_constraint_hours": [
+          73.7402415076058,
+          73.7402415076058
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          2,
+          2
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 27203378.49144416,
+          "hours_to_constraint": 67.33578130469587,
+          "merchant_id": "m0038"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 123787.39818279678,
+          "hours_to_constraint": 101.35114712193717,
+          "merchant_id": "m0059"
+        }
+      ],
+      "disrupted_value_inr": 27327165.889626957,
+      "first_constraint_hours": 67.33578130469587,
+      "magnitude_inr": 39697796.16712098,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0038",
+      "n_affected": 2,
+      "n_defaulted": 10,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.778811544981295,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 162295450.77918863
+      },
+      "range": {
+        "disrupted_value_inr": [
+          13733756.18918143,
+          27327165.889626957
+        ],
+        "first_constraint_hours": [
+          67.33578130469587,
+          86.74951935931057
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          2,
+          2
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 0.0,
+          "hours_to_constraint": 114.24315444949225,
+          "merchant_id": "m0039"
+        }
+      ],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": 114.24315444949225,
+      "magnitude_inr": 458420.332463089,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0039",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.078844297600206,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": [
+          114.24315444949225,
+          114.24315444949225
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 8977326.061160944,
+          "hours_to_constraint": 78.06975697523751,
+          "merchant_id": "m0040"
+        }
+      ],
+      "disrupted_value_inr": 8977326.061160944,
+      "first_constraint_hours": 78.06975697523751,
+      "magnitude_inr": 21317280.87692399,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0040",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.928078644033114,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          5450899.990287564,
+          8977326.061160944
+        ],
+        "first_constraint_hours": [
+          78.06975697523751,
+          85.42349090978867
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0041",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.082820459558164,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "construction",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3453022.203594571,
+          "hours_to_constraint": 79.48245401709725,
+          "merchant_id": "m0042"
+        }
+      ],
+      "disrupted_value_inr": 3453022.203594571,
+      "first_constraint_hours": 79.48245401709725,
+      "magnitude_inr": 3570201.271134099,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0042",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.98771204490508,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1670729.414636232,
+          5236250.941422461
+        ],
+        "first_constraint_hours": [
+          77.05626515967909,
+          79.48245401709725
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7639353.61794101,
+          "hours_to_constraint": 77.558376860154,
+          "merchant_id": "m0043"
+        },
+        {
+          "cascade_depth": 1,
+          "disrupted_value_inr": 158490.211625895,
+          "hours_to_constraint": 139.2377098948998,
+          "merchant_id": "m0079"
+        }
+      ],
+      "disrupted_value_inr": 7797843.829566905,
+      "first_constraint_hours": 77.558376860154,
+      "magnitude_inr": 12466412.649953596,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0043",
+      "n_affected": 2,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.63676195068425,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          3289831.4214748302,
+          11921724.713860132
+        ],
+        "first_constraint_hours": [
+          70.80020954357919,
+          100.91335972359582
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          2
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0044",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 5292107.370125368,
+          "hours_to_constraint": 74.23471659724619,
+          "merchant_id": "m0045"
+        }
+      ],
+      "disrupted_value_inr": 5292107.370125368,
+      "first_constraint_hours": 74.23471659724619,
+      "magnitude_inr": 13243448.130539216,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0045",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.93965336672834,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          5292107.370125368,
+          5292107.370125368
+        ],
+        "first_constraint_hours": [
+          74.23471659724619,
+          74.23471659724619
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 2474686.0033304757,
+          "hours_to_constraint": 110.01474542884594,
+          "merchant_id": "m0046"
+        }
+      ],
+      "disrupted_value_inr": 2474686.0033304757,
+      "first_constraint_hours": 110.01474542884594,
+      "magnitude_inr": 4724047.6561055705,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0046",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.00954215764413,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1296719.012960244,
+          4214156.376613787
+        ],
+        "first_constraint_hours": [
+          85.26519199163488,
+          113.54961054119238
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0047",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "construction",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 30257413.064835817,
+          "hours_to_constraint": 77.05301063188696,
+          "merchant_id": "m0048"
+        }
+      ],
+      "disrupted_value_inr": 30257413.064835817,
+      "first_constraint_hours": 77.05301063188696,
+      "magnitude_inr": 38821637.101802036,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0048",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.78877277927402,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          14119381.970693214,
+          36492266.499043256
+        ],
+        "first_constraint_hours": [
+          77.05301063188696,
+          78.59200408869268
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 22757871.40100474,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0049",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.59866442123158,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 24391503.898330748,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0050",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.544783245133765,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "construction",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0051",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.082820459558164,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0052",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.082820459558164,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3499248.265910442,
+          "hours_to_constraint": 88.90929983938855,
+          "merchant_id": "m0053"
+        }
+      ],
+      "disrupted_value_inr": 3499248.265910442,
+      "first_constraint_hours": 88.90929983938855,
+      "magnitude_inr": 6800126.422472775,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0053",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.97907335678457,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1835250.4881934673,
+          6731974.314422857
+        ],
+        "first_constraint_hours": [
+          76.41661939546609,
+          99.22478064451329
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 12491398.440595519,
+          "hours_to_constraint": 60.0400657915352,
+          "merchant_id": "m0054"
+        }
+      ],
+      "disrupted_value_inr": 12491398.440595519,
+      "first_constraint_hours": 60.0400657915352,
+      "magnitude_inr": 16825694.673967157,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0054",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.91430179809485,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          12491398.440595519,
+          12491398.440595519
+        ],
+        "first_constraint_hours": [
+          60.0400657915352,
+          60.0400657915352
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0055",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 2492605.9907652456,
+          "hours_to_constraint": 105.29787243404145,
+          "merchant_id": "m0056"
+        }
+      ],
+      "disrupted_value_inr": 2492605.9907652456,
+      "first_constraint_hours": 105.29787243404145,
+      "magnitude_inr": 4864741.305659091,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0056",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.04563822706617,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1290058.854071766,
+          3417591.122130935
+        ],
+        "first_constraint_hours": [
+          105.29787243404145,
+          129.19746780061337
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 8260751.526220633,
+          "hours_to_constraint": 45.62225109353671,
+          "merchant_id": "m0057"
+        }
+      ],
+      "disrupted_value_inr": 8260751.526220633,
+      "first_constraint_hours": 45.62225109353671,
+      "magnitude_inr": 15472169.545126818,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0057",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.7337857038858,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          4720852.748123495,
+          11835665.1733367
+        ],
+        "first_constraint_hours": [
+          45.62225109353671,
+          45.62225109353671
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 34577505.86659119,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0058",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.75142707534268,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 156877.87218616923,
+          "hours_to_constraint": 101.35114712193717,
+          "merchant_id": "m0059"
+        }
+      ],
+      "disrupted_value_inr": 156877.87218616923,
+      "first_constraint_hours": 101.35114712193717,
+      "magnitude_inr": 234775.5248621236,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0059",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.05157576232106,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          124584.565236856,
+          156877.87218616923
+        ],
+        "first_constraint_hours": [
+          101.35114712193717,
+          101.35114712193717
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 27525823.16266983,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0060",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.00124260533847,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "large"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0061",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7790745.809960889,
+          "hours_to_constraint": 135.78262211985088,
+          "merchant_id": "m0062"
+        }
+      ],
+      "disrupted_value_inr": 7790745.809960889,
+      "first_constraint_hours": 135.78262211985088,
+      "magnitude_inr": 28460013.477200277,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0062",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.990439166894404,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          5344808.889188802,
+          16101194.500449315
+        ],
+        "first_constraint_hours": [
+          108.88025426961183,
+          141.46393589149557
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 140503.08915616103,
+          "hours_to_constraint": 67.47018217113283,
+          "merchant_id": "m0063"
+        }
+      ],
+      "disrupted_value_inr": 140503.08915616103,
+      "first_constraint_hours": 67.47018217113283,
+      "magnitude_inr": 4346152.796643387,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0063",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.046927892789654,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          140503.08915616103,
+          140503.08915616103
+        ],
+        "first_constraint_hours": [
+          67.47018217113283,
+          67.47018217113283
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 2159960.9528947766,
+          "hours_to_constraint": 117.84482603929266,
+          "merchant_id": "m0064"
+        }
+      ],
+      "disrupted_value_inr": 2159960.9528947766,
+      "first_constraint_hours": 117.84482603929266,
+      "magnitude_inr": 4211729.453777606,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0064",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.051432483619195,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1110696.1301965383,
+          3216746.6815548884
+        ],
+        "first_constraint_hours": [
+          117.84482603929266,
+          125.28306390393267
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 8609024.645253817,
+          "hours_to_constraint": 106.14117996000101,
+          "merchant_id": "m0065"
+        }
+      ],
+      "disrupted_value_inr": 8609024.645253817,
+      "first_constraint_hours": 106.14117996000101,
+      "magnitude_inr": 10937674.511013698,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0065",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.97837677748399,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          7946717.608139904,
+          8609024.645253817
+        ],
+        "first_constraint_hours": [
+          106.14117996000101,
+          106.14117996000101
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 46385677.76281024,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0066",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.31068961833164,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 2997726.843615813,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0067",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.05818483990938,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 24673783.724794544,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0068",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.14649634788752,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 837494.3443494476,
+          "hours_to_constraint": 117.31285232499687,
+          "merchant_id": "m0069"
+        }
+      ],
+      "disrupted_value_inr": 837494.3443494476,
+      "first_constraint_hours": 117.31285232499687,
+      "magnitude_inr": 1507870.667146368,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0069",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.05803186019817,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          506765.2848973387,
+          1207380.7390363622
+        ],
+        "first_constraint_hours": [
+          107.05292943755273,
+          145.89761408378766
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 4358807.374567373,
+          "hours_to_constraint": 111.26848848334029,
+          "merchant_id": "m0070"
+        }
+      ],
+      "disrupted_value_inr": 4358807.374567373,
+      "first_constraint_hours": 111.26848848334029,
+      "magnitude_inr": 7930069.6887859125,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0070",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.03663810624766,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          2432543.170967241,
+          6070096.322514835
+        ],
+        "first_constraint_hours": [
+          111.26848848334029,
+          127.17722097113416
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 15388953.692119004,
+          "hours_to_constraint": 129.6734862762974,
+          "merchant_id": "m0071"
+        }
+      ],
+      "disrupted_value_inr": 15388953.692119004,
+      "first_constraint_hours": 129.6734862762974,
+      "magnitude_inr": 26830642.229292646,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0071",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 39.48425073557555,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          8681293.134795852,
+          22096614.249442134
+        ],
+        "first_constraint_hours": [
+          129.6734862762974,
+          129.6734862762974
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "anchor"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 38936987.47141327,
+          "hours_to_constraint": 129.30888064680602,
+          "merchant_id": "m0072"
+        }
+      ],
+      "disrupted_value_inr": 38936987.47141327,
+      "first_constraint_hours": 129.30888064680602,
+      "magnitude_inr": 87348894.46287686,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0072",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.64381503261667,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          25557121.415390335,
+          38936987.47141327
+        ],
+        "first_constraint_hours": [
+          129.30888064680602,
+          138.26108994960273
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 62007921.53746511,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0073",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.933207207787746,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7694414.101226539,
+          "hours_to_constraint": 116.06305653145434,
+          "merchant_id": "m0074"
+        }
+      ],
+      "disrupted_value_inr": 7694414.101226539,
+      "first_constraint_hours": 116.06305653145434,
+      "magnitude_inr": 36104661.358209394,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0074",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.50792162988072,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          7694414.101226539,
+          7694414.101226539
+        ],
+        "first_constraint_hours": [
+          116.06305653145434,
+          116.06305653145434
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 311180.81654582144,
+          "hours_to_constraint": 65.21252516627995,
+          "merchant_id": "m0075"
+        }
+      ],
+      "disrupted_value_inr": 311180.81654582144,
+      "first_constraint_hours": 65.21252516627995,
+      "magnitude_inr": 14855049.73033007,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0075",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.57509728896329,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          311180.81654582144,
+          311180.81654582144
+        ],
+        "first_constraint_hours": [
+          65.21252516627995,
+          65.21252516627995
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7950257.227655798,
+          "hours_to_constraint": 121.41361995575426,
+          "merchant_id": "m0076"
+        }
+      ],
+      "disrupted_value_inr": 7950257.227655798,
+      "first_constraint_hours": 121.41361995575426,
+      "magnitude_inr": 49071489.68258217,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0076",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.25734251787189,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          20218129.648301445
+        ],
+        "first_constraint_hours": [
+          121.41361995575426,
+          160.42965087995148
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7183760.2222725805,
+          "hours_to_constraint": 107.36162596429439,
+          "merchant_id": "m0077"
+        }
+      ],
+      "disrupted_value_inr": 7183760.2222725805,
+      "first_constraint_hours": 107.36162596429439,
+      "magnitude_inr": 15705433.151049275,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0077",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.806817751182585,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          4409449.866712755,
+          7183760.2222725805
+        ],
+        "first_constraint_hours": [
+          107.36162596429439,
+          107.36162596429439
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 421375.13097443955,
+          "hours_to_constraint": 131.0730147230565,
+          "merchant_id": "m0078"
+        }
+      ],
+      "disrupted_value_inr": 421375.13097443955,
+      "first_constraint_hours": 131.0730147230565,
+      "magnitude_inr": 721209.3651252319,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0078",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.07522477599894,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          241072.78969313053,
+          601677.4722557472
+        ],
+        "first_constraint_hours": [
+          131.0730147230565,
+          131.0730147230565
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 598827.2658082531,
+          "hours_to_constraint": 134.29592703519228,
+          "merchant_id": "m0079"
+        }
+      ],
+      "disrupted_value_inr": 598827.2658082531,
+      "first_constraint_hours": 134.29592703519228,
+      "magnitude_inr": 1811663.4050009008,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0079",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.01828930800482,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040835
+      },
+      "range": {
+        "disrupted_value_inr": [
+          598827.2658082531,
+          598827.2658082531
+        ],
+        "first_constraint_hours": [
+          134.29592703519228,
+          139.2377098948998
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "medium"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 973696.795099023,
+          "hours_to_constraint": 143.61652657052656,
+          "merchant_id": "m0080"
+        }
+      ],
+      "disrupted_value_inr": 973696.795099023,
+      "first_constraint_hours": 143.61652657052656,
+      "magnitude_inr": 1897495.481930059,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0080",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.02979943831703,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          499669.4392572582,
+          1715016.2433810649
+        ],
+        "first_constraint_hours": [
+          108.35452462751704,
+          145.32732341675631
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "medium"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 114534980.15594827,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0081",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 40.439146991065094,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 7022228.491398043,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0082",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.02706746276562,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0083",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 17959507.16777265,
+          "hours_to_constraint": 106.01206866024376,
+          "merchant_id": "m0084"
+        }
+      ],
+      "disrupted_value_inr": 17959507.16777265,
+      "first_constraint_hours": 106.01206866024376,
+      "magnitude_inr": 49939482.30365905,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0084",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 39.11853120449234,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          14305924.8068867,
+          17959507.16777265
+        ],
+        "first_constraint_hours": [
+          106.01206866024376,
+          106.01206866024376
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "large"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 7269678.015284295,
+          "hours_to_constraint": 137.41427652036336,
+          "merchant_id": "m0085"
+        }
+      ],
+      "disrupted_value_inr": 7269678.015284295,
+      "first_constraint_hours": 137.41427652036336,
+      "magnitude_inr": 26545981.854953643,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0085",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.924470556204305,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1570785.2526357435,
+          7269678.015284295
+        ],
+        "first_constraint_hours": [
+          137.41427652036336,
+          137.41427652036336
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 4958060.800184555,
+          "hours_to_constraint": 132.88113302163117,
+          "merchant_id": "m0086"
+        }
+      ],
+      "disrupted_value_inr": 4958060.800184555,
+      "first_constraint_hours": 132.88113302163117,
+      "magnitude_inr": 9054723.485913977,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0086",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.0072096873684,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          2684879.2142083957,
+          6581292.910512866
+        ],
+        "first_constraint_hours": [
+          115.97825790578598,
+          132.88113302163117
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0087",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3131303.901484818,
+          "hours_to_constraint": 123.382596668521,
+          "merchant_id": "m0088"
+        }
+      ],
+      "disrupted_value_inr": 3131303.901484818,
+      "first_constraint_hours": 123.382596668521,
+      "magnitude_inr": 5617107.669733049,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0088",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 36.729532323733594,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 95757049.17084545
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1790362.947504069,
+          4527772.349564417
+        ],
+        "first_constraint_hours": [
+          120.31434973972159,
+          147.44559218210793
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "small"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 1962577.5080095334,
+          "hours_to_constraint": 129.08776554884844,
+          "merchant_id": "m0089"
+        }
+      ],
+      "disrupted_value_inr": 1962577.5080095334,
+      "first_constraint_hours": 129.08776554884844,
+      "magnitude_inr": 3729912.558835596,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0089",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.065084286870906,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1030099.3683006353,
+          2895055.647718432
+        ],
+        "first_constraint_hours": [
+          129.08776554884844,
+          129.08776554884844
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 3623665.835383719,
+          "hours_to_constraint": 139.55980677917074,
+          "merchant_id": "m0090"
+        }
+      ],
+      "disrupted_value_inr": 3623665.835383719,
+      "first_constraint_hours": 139.55980677917074,
+      "magnitude_inr": 6400131.106605116,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0090",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.062751628168236,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          2023633.0587324393,
+          5397590.856343989
+        ],
+        "first_constraint_hours": [
+          23.63519932285283,
+          139.55980677917074
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 172085.84849009954,
+      "first_constraint_hours": null,
+      "magnitude_inr": 7974580.226985642,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0091",
+      "n_affected": 0,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.0114866385471,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          172085.84849009954,
+          172085.84849009954
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 125706252.88244528,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0092",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 41.0323814062962,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0093",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 10691593.76049963,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0094",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.006782784174376,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 2406640.4099552347,
+          "hours_to_constraint": 136.50987554293067,
+          "merchant_id": "m0095"
+        }
+      ],
+      "disrupted_value_inr": 2406640.4099552347,
+      "first_constraint_hours": 136.50987554293067,
+      "magnitude_inr": 4161369.5703846253,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0095",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.06958392199343,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          1334742.5983190918,
+          3411129.5702890987
+        ],
+        "first_constraint_hours": [
+          134.86707154023824,
+          136.50987554293067
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 72649.62371564492,
+          "hours_to_constraint": 126.30670325038858,
+          "merchant_id": "m0096"
+        }
+      ],
+      "disrupted_value_inr": 72649.62371564492,
+      "first_constraint_hours": 126.30670325038858,
+      "magnitude_inr": 2352287.0118061854,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0096",
+      "n_affected": 1,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.0638093152943,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          72649.62371564492,
+          72649.62371564492
+        ],
+        "first_constraint_hours": [
+          126.30670325038858,
+          126.30670325038858
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "micro"
+    },
+    {
+      "affected": [
+        {
+          "cascade_depth": 0,
+          "disrupted_value_inr": 106688.54202673497,
+          "hours_to_constraint": 121.43532822150047,
+          "merchant_id": "m0097"
+        }
+      ],
+      "disrupted_value_inr": 106688.54202673497,
+      "first_constraint_hours": 121.43532822150047,
+      "magnitude_inr": 381041.3637546293,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0097",
+      "n_affected": 1,
+      "n_defaulted": 9,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.076183131444964,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.00408345
+      },
+      "range": {
+        "disrupted_value_inr": [
+          106688.54202673497,
+          106688.54202673497
+        ],
+        "first_constraint_hours": [
+          121.43532822150047,
+          127.80925945618152
+        ],
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          1,
+          1
+        ]
+      },
+      "sector": "agri",
+      "tier": "small"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 50000.00000000001,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0098",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 42.08318085356575,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "micro"
+    },
+    {
+      "affected": [],
+      "disrupted_value_inr": 0.0,
+      "first_constraint_hours": null,
+      "magnitude_inr": 71029137.92465308,
+      "magnitude_multiple": 2.0,
+      "max_depth": 1,
+      "merchant_id": "m0099",
+      "n_affected": 0,
+      "n_defaulted": 8,
+      "onset_hours": 0.0,
+      "plan": {
+        "action_type": "liquidity_injection",
+        "amount_inr": 100042018.9017184,
+        "disruption_cut_pct": 37.11574345495901,
+        "merchant_id": "m0005",
+        "payments_kept_on_time_inr": 159315317.0040834
+      },
+      "range": {
+        "disrupted_value_inr": [
+          0.0,
+          0.0
+        ],
+        "first_constraint_hours": null,
+        "multiples": [
+          1.5,
+          2.5
+        ],
+        "n_affected": [
+          0,
+          0
+        ]
+      },
+      "sector": "manufacturing",
+      "tier": "large"
+    }
+  ]
+}

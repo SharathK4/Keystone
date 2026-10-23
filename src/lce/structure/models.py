@@ -156,3 +156,152 @@ class SpeedScenarioView(_Contract):
     content_hash: str
     label: str
     scenario: ScenarioSpeed
+
+
+# ------------------------------------------------------------- pulled stones
+
+
+class PullAffected(_Contract):
+    merchant_id: str
+    cascade_depth: int | None
+    hours_to_constraint: float | None
+    disrupted_value_inr: float
+
+
+class PullRange(_Contract):
+    """What each figure moves over when the shock is 1.5x or 2.5x instead of 2x."""
+
+    multiples: list[float]
+    n_affected: list[int]
+    first_constraint_hours: list[float] | None
+    disrupted_value_inr: list[float]
+
+
+class PullPlan(_Contract):
+    action_type: str
+    merchant_id: str
+    amount_inr: float
+    disruption_cut_pct: float
+    payments_kept_on_time_inr: float
+
+
+class PullRecord(_Contract):
+    merchant_id: str
+    tier: str
+    sector: str
+    magnitude_multiple: float
+    magnitude_inr: float
+    onset_hours: float
+    n_affected: int
+    n_defaulted: int
+    max_depth: int
+    disrupted_value_inr: float
+    first_constraint_hours: float | None
+    affected: list[PullAffected]
+    range: PullRange
+    plan: PullPlan | None
+
+
+class PullsProvenance(_Contract):
+    kind: Literal["replayed_offline"]
+    label: str
+    snapshot_id: str
+    shock: str
+    multiples: list[float]
+    central_multiple: float
+    limits: dict[str, int]
+    code_version: str
+
+
+class PullsView(_Contract):
+    artifact_id: str
+    content_hash: str
+    label: str
+    provenance: PullsProvenance
+    records: list[PullRecord]
+
+
+# --------------------------------------------------------------------- proof
+
+
+class LeakageRow(_Contract):
+    """The barrier for one scenario: history used to estimate ends before the shock."""
+
+    scenario_id: str
+    family: str
+    onset_hours: float
+    first_observed_hours: float | None
+    last_observed_hours: float | None
+    n_observed_events: int
+    holds: bool
+
+
+class Rate(_Contract):
+    value: float
+    low: float
+    high: float
+    numerator: int
+    denominator: int
+
+
+class ParameterRecovery(_Contract):
+    """How well one estimated strength tracks the generator's true value, link by link."""
+
+    name: str
+    label: str
+    n_edges: int
+    rank_correlation: float
+    low: float
+    high: float
+    mean_abs_error: float
+    unit: str
+
+
+class RecoveryView(_Contract):
+    """Which links exist is read from observed payments; their strengths are estimated."""
+
+    n_true: int
+    n_estimated: int
+    n_matched: int
+    precision: Rate
+    recall: Rate
+    parameters: list[ParameterRecovery]
+
+
+class AuditLine(_Contract):
+    name: str
+    passed: bool
+
+
+class MeasuredResult(_Contract):
+    label: str
+    value: float
+    low: float | None
+    high: float | None
+    unit: str
+    note: str
+
+
+class FailedItem(_Contract):
+    title: str
+    detail: str
+
+
+class ProofProvenance(_Contract):
+    kind: Literal["replayed_offline"]
+    label: str
+    snapshot_id: str
+    speed_artifact_id: str
+    code_version: str
+
+
+class ProofView(_Contract):
+    artifact_id: str
+    content_hash: str
+    label: str
+    provenance: ProofProvenance
+    leakage: list[LeakageRow]
+    recovery: RecoveryView
+    audit: list[AuditLine]
+    results: list[MeasuredResult]
+    failed: list[FailedItem]

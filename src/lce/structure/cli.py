@@ -54,6 +54,28 @@ def cmd_show(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_pulls(args: argparse.Namespace) -> int:
+    from lce.structure.build import save_artifact
+    from lce.structure.pulls import build_pulls
+
+    payload = build_pulls(snapshot_dir=Path(args.snapshot), merchant_ids=args.merchants or None)
+    directory = save_artifact(payload, Path(args.out), "pulls", "pulls.json")
+    print(json.dumps({"artifact": str(directory), "n_records": len(payload["records"])}))
+    return 0
+
+
+def cmd_proof(args: argparse.Namespace) -> int:
+    from lce.structure.build import save_artifact
+    from lce.structure.proof import build_proof
+
+    snapshot = Path(args.snapshot)
+    payload = build_proof(artifact_root=snapshot.parents[1], snapshot_id=snapshot.name)
+    directory = save_artifact(payload, Path(args.out), "proof", "proof.json")
+    failed = [a["name"] for a in payload["audit"] if not a["passed"]]
+    print(json.dumps({"artifact": str(directory), "audit_failed": failed}))
+    return 0 if not failed else 1
+
+
 def register(sub: Any) -> None:
     from lce.structure.build import DELAYS_HOURS, SEEDS
     from lce.structure.store import STRUCTURE_ROOT
@@ -75,6 +97,17 @@ def register(sub: Any) -> None:
     v.add_argument("--out", default=str(STRUCTURE_ROOT))
     v.add_argument("--rebuild", action="store_true")
     v.set_defaults(func=cmd_verify)
+
+    pl = ssub.add_parser("pulls", help="Analyse every merchant's failure offline (about 8 min)")
+    pl.add_argument("--snapshot", default=snapshot)
+    pl.add_argument("--out", default=str(STRUCTURE_ROOT))
+    pl.add_argument("--merchants", nargs="+", default=None)
+    pl.set_defaults(func=cmd_pulls)
+
+    pr = ssub.add_parser("proof", help="Build the inspection certificate (runs the audit)")
+    pr.add_argument("--snapshot", default=snapshot)
+    pr.add_argument("--out", default=str(STRUCTURE_ROOT))
+    pr.set_defaults(func=cmd_proof)
 
     s = ssub.add_parser("show", help="Print the aggregate value of speed")
     s.add_argument("--out", default=str(STRUCTURE_ROOT))

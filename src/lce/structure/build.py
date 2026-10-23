@@ -376,24 +376,29 @@ def build_speed(
     }
 
 
-def save_speed(payload: dict[str, Any], root: Path) -> Path:
-    """Write the artifact under ``speed-<hash>``; the bytes depend only on the payload."""
+def save_artifact(payload: dict[str, Any], root: Path, prefix: str, filename: str) -> Path:
+    """Write an artifact under ``<prefix>-<hash>``; the bytes depend only on the payload."""
     digest = content_hash(payload)
-    artifact_id = f"speed-{digest[:16]}"
+    artifact_id = f"{prefix}-{digest[:16]}"
     directory = Path(root) / artifact_id
     directory.mkdir(parents=True, exist_ok=True)
-    (directory / "speed.json").write_text(
+    (directory / filename).write_text(
         json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     manifest = {
         "artifact_id": artifact_id,
         "content_hash": digest,
-        "format": FORMAT,
+        "format": payload["format"],
         "snapshot_id": payload["provenance"]["snapshot_id"],
-        "n_scenarios": len(payload["scenarios"]),
         "label": LABEL,
     }
+    if "scenarios" in payload:
+        manifest["n_scenarios"] = len(payload["scenarios"])
     (directory / "manifest.json").write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n"
     )
     return directory
+
+
+def save_speed(payload: dict[str, Any], root: Path) -> Path:
+    return save_artifact(payload, root, "speed", "speed.json")
