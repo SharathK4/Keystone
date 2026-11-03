@@ -1,7 +1,9 @@
 # Working notes for this repository
 
-Resume from `docs/briefs/RUNBOOK.md` (the brief, verbatim) and
-`reports/STATUS.md` (where the work stands), then `git log`.
+Resume from `docs/briefs/QUIET_DEMO.md` (the current brief, verbatim; it
+replaces the final stretch), `docs/briefs/RUNBOOK.md` (governs everything the
+current brief does not change) and `reports/STATUS.md` (where the work
+stands), then `git log`.
 
 ## Commit rules
 
