@@ -13,6 +13,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1d hosting readiness | **PASS** (no deploy) — 565 passed / 8 deselected; audit 33; phase-4 28 | Render Workflows dropped (no free tier, separate service; jobs take seconds). Readiness check needs the DB (frozen). | Create the Blueprint, enter secrets, register the webhook, record the canonical run. | 1e |
 | 1 | 1e concept boards → **STOP** | **DONE** — boards A, B, C + font specimen + index under `design/concepts/` (SVG with subset OFL fonts embedded, PNG via headless Chrome); each rendered and self-critiqued | Ledger hero and chart layout reworked after review (see decisions) | **Pick A, B or C**: open `design/concepts/index.html` | Phase 2 after the pick |
 | 2 | Phase 2 frontend | **IN PROGRESS** — new analyses folded into the original four-card design (+ card 05); 576 passed / 8 deselected; audit 35; phase-4 28 | Human chose B, then redirected: keep the original Keystone design and add the new work to it (see decisions) | Review the cards; map sandbox emails; say "run live tests" | State screenshots to docs/screens, axe + keyboard + reduced-motion checks, README screenshots, tag phase-2 |
+| 2 | 2b review fixes (Nov 3) | **PASS** — USD display by default (`GET /display`), card 05 as three claims, audience line, ring-label / token / grey / payable-total fixes, `scripts/live_sandbox.sh`; full suite green (5 new tests); ruff, mypy clean; audit 35; phase-4 28; checked in the browser at 1440 and 375 wide | ink-4 still below AA for small text (see decisions) | PayPal sandbox keys + two personal-account emails; font decision by Nov 9 | Live spikes S1–S3 once keys exist, then Render deploy and the failure loop |
 
 ## Decisions taken
 
@@ -131,21 +132,54 @@ Never push (`origin` push URL is disabled locally).
 - **Phase 2** `scripts/dev_api.sh` runs the API for frontend work with PayPal
   deliberately unconfigured, so no page can call PayPal.
 
+- **Phase 2b (Nov 3)** External review of the submission. The four findings
+  acted on: PayPal judges read crore/lakh poorly, card 05 led with
+  housekeeping checks, a few UI defects, and the page never named its audience.
+  These are not yet done: a live sandbox run, a visible AI layer, invoicing,
+  the deploy, the font licence, the public repo, the README, the video and the
+  Devpost text. Plan to Nov 12: live PayPal → Render deploy + failure loop →
+  bounded AI layer + invoicing → stress network (one day at most) → repo,
+  README, Devpost → video → submit Nov 11.
+- **Phase 2b** Money is shown in **US dollars by default** at a declared round
+  rate, 0.01 USD per analytic rupee (`LCE_DISPLAY_*`, served by the additive
+  `GET /api/v1/display`), labelled as not a market rate. The rate is exactly
+  1000× the sandbox scale, so "$773K analytic → $772.69 paid" reads at a
+  glance. `PAYPAL_DEMO_SCALE` is unchanged. The wire stays in rupees, and a
+  masthead switch restores them. If `/display` is missing the page stays in
+  rupees.
+- **Phase 2b** Card 05 makes three claims (PayPal fenced; plans scored by
+  replay; dependencies estimated before the shock). Each counts its backing
+  audit lines from the proof artifact, so a failed or missing check shows.
+- **Phase 2b** Grey ramp darkened for legibility: ink-3 2.8:1 → 4.8:1 and
+  ink-4 1.9:1 → 3.4:1 on surface. ink-4 is still below 4.5:1 for small text;
+  full AA there would flatten the hierarchy.
+- **Phase 2b** `scripts/live_sandbox.sh` serves the API, or runs any `lce`
+  command, with the sandbox keys read from `.env` and its own
+  `artifacts/runs/live.sqlite`. Live mode stays refused in code.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 
 ## Needs the human (exact commands, never blocking)
 
-- **Now (STOP point):** open `design/concepts/index.html` and reply A, B or C (or a mix).
+- **Now:** PayPal sandbox keys. At developer.paypal.com, go to Apps & Credentials
+  (Sandbox) → Create App (Merchant). Put `PAYPAL_CLIENT_ID`,
+  `PAYPAL_CLIENT_SECRET`, `PAYPAL_MODE=sandbox` and
+  `LCE_EXECUTION_PROVIDER=paypal_sandbox` in `.env`. Then create two sandbox
+  Personal (US) accounts and share their emails.
+- **By Nov 9:** the display font. `Against` is personal-use only: swap it for an
+  OFL face (one token in `tokens.css`), or license it and keep the file out of
+  the public repo.
 
 - The public original (`origin/master`) already contains personal-use-only demo
   fonts (`fonts/*.zip`, `frontend/public/fonts/against-regular.otf`). Nothing is
   pushed from here; decide whether to remove them there.
 
-- Two PayPal sandbox **personal** accounts for the canonical plan's merchants:
-  `lce paypal map m0005 --email <account 1>` and
-  `lce paypal map m0009 --email <account 2>`.
+- Two PayPal sandbox **personal** accounts for the canonical plan's merchants,
+  mapped against the live database:
+  `sh scripts/live_sandbox.sh paypal map m0005 --email <account 1>` and
+  `sh scripts/live_sandbox.sh paypal map m0009 --email <account 2>`.
 - After a public URL exists: register `<url>/api/v1/webhooks/paypal` as a sandbox
   webhook for `PAYMENT.PAYOUTS-ITEM.*` and `PAYMENT.PAYOUTSBATCH.*`, and put its id
   in `.env` as `PAYPAL_WEBHOOK_ID`.
