@@ -17,7 +17,7 @@ import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
 import { PullAMerchant } from '../PullAMerchant'
 import { ExposureDotMatrix } from '../ExposureDotMatrix'
 import { ScenarioSelector } from '../ScenarioSelector'
-import { count, hours, idx, inr, pct, scenarioLabel } from '../../lib/format'
+import { count, hours, idx, money, pct, scenarioLabel, unitWord } from '../../lib/format'
 import './exposure-expanded.css'
 
 interface Props {
@@ -75,7 +75,7 @@ export function ExposureExpanded({
             }
             lead
           />
-          <Figure value={inr(impact?.disrupted_value)} label="disrupted value" />
+          <Figure value={money(impact?.disrupted_value)} label="disrupted value" />
           <Figure
             value={count(impact?.max_cascade_depth)}
             label="cascade depth"
@@ -118,7 +118,7 @@ export function ExposureExpanded({
                   <div
                     className={`xx__bar${b.n_merchants > 0 ? ' is-hit' : ''}`}
                     key={`${b.from_hours}-${b.to_hours}`}
-                    title={`${b.from_hours}–${b.to_hours}h · ${b.n_merchants} merchants · ${inr(
+                    title={`${b.from_hours}–${b.to_hours}h · ${b.n_merchants} merchants · ${money(
                       b.disrupted_value,
                     )}`}
                   >
@@ -157,7 +157,7 @@ export function ExposureExpanded({
                 <ConfRow
                   label="Disruption spread"
                   value={conf.disruption_spread !== null ? idx(conf.disruption_spread) : '—'}
-                  note="objective index across those worlds, not rupees"
+                  note={`objective index across those worlds, not ${unitWord(true)}`}
                 />
                 <ConfRow
                   label="Recommendation stable"
@@ -192,7 +192,7 @@ export function ExposureExpanded({
                       ? hours(a.time_to_constraint_hours)
                       : '—'}
                   </span>
-                  <span className="xx__hit-value num">{inr(a.disrupted_value)}</span>
+                  <span className="xx__hit-value num">{money(a.disrupted_value)}</span>
                 </div>
               ))}
             </div>
@@ -215,7 +215,7 @@ export function ExposureExpanded({
                   <span className="xx__row-bar" aria-hidden="true">
                     <i style={{ width: `${(s.disrupted_value / w) * 100}%` }} />
                   </span>
-                  <span className="xx__row-val num">{inr(s.disrupted_value)}</span>
+                  <span className="xx__row-val num">{money(s.disrupted_value)}</span>
                   <span className="xx__row-n num">{count(s.n_affected)} reached</span>
                   <span className="xx__row-red num">
                     {s.recommended_action ? pct(s.disruption_reduction_pct) : 'no action'}

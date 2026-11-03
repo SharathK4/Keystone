@@ -111,3 +111,43 @@
 @media (prefers-reduced-motion: reduce) {
   .ks__masthead, .ks__standfirst, .ks__audience { animation: none; opacity: 1; }
 }
+
+/* ---------------------------------------------------------------- units */
+
+.ks__units {
+  margin-top: 14px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ink-3);
+  letter-spacing: 0.01em;
+  opacity: 0;
+  animation: rise 900ms var(--ease) 360ms forwards;
+}
+.ks__units-switch {
+  margin-left: 4px;
+  white-space: nowrap;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-line);
+  text-underline-offset: 3px;
+}
+.ks__units-switch:hover {
+  text-decoration-color: var(--accent);
+}
+.ks__units-switch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ks__units { animation: none; opacity: 1; }
+}

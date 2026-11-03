@@ -16,7 +16,7 @@
 import type { ScenarioSnapshot } from '../api/types'
 import { Panel } from './Panel'
 import { TexturedTile } from './TexturedTile'
-import { humanise } from '../lib/format'
+import { humanise, unitWord } from '../lib/format'
 import './intervention-panel.css'
 
 interface Props {
@@ -36,7 +36,7 @@ export function InterventionPanel({ scenario, busy, onOpen }: Props) {
     <Panel
       index={3}
       title="Where capital works"
-      subtitle="Put one rupee where it holds the most payments together."
+      subtitle={`Put one ${unitWord()} where it holds the most payments together.`}
       reveals="Open the intervention analysis"
       onOpen={onOpen}
     >

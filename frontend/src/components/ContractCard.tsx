@@ -13,7 +13,7 @@
  */
 
 import { useMemo } from 'react'
-import { hours, inr } from '../lib/format'
+import { hours, money } from '../lib/format'
 import './contract-card.css'
 
 interface Props {
@@ -91,7 +91,7 @@ export function ContractCard({
 
           <footer className="ctc__bottom">
             <div className="ctc__amount">
-              <span className="ctc__amount-value num">{inr(amount)}</span>
+              <span className="ctc__amount-value num">{money(amount)}</span>
               <span className="ctc__amount-unit">
                 / <span className="num">{hours(durationHours)}</span>
               </span>

@@ -10,6 +10,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { ApiError, api } from './client'
+import type { DisplayView } from './schema'
 import type {
   DependencyView,
   ExecutionStatus,
@@ -30,6 +31,8 @@ export interface Structure {
   scenarios: ScenarioSummary[]
   execution: ExecutionStatus
   snapshot: SnapshotHealth
+  /** Null when the server predates /display: amounts then stay in rupees. */
+  display: DisplayView | null
 }
 
 type Phase = 'loading' | 'ready' | 'failed'
@@ -56,10 +59,20 @@ export function useKeystoneData() {
       api.scenarios(),
       api.execution(),
       api.snapshot(),
+      api.display().catch(() => null),
     ])
-      .then(([network, merchants, dependencies, systemic, scenarios, execution, snapshot]) => {
+      .then(([network, merchants, dependencies, systemic, scenarios, execution, snapshot, display]) => {
         if (!live) return
-        setStructure({ network, merchants, dependencies, systemic, scenarios, execution, snapshot })
+        setStructure({
+          network,
+          merchants,
+          dependencies,
+          systemic,
+          scenarios,
+          execution,
+          snapshot,
+          display,
+        })
         // Default to the scenario that actually has something to show: the
         // first one carrying a recommendation. Falls back to the first.
         const withAction = scenarios.find((s) => s.recommended_action !== null)

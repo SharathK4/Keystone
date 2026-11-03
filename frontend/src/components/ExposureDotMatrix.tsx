@@ -24,7 +24,7 @@
 
 import { useMemo, useRef, type KeyboardEvent } from 'react'
 import type { AffectedMerchant, MerchantView } from '../api/types'
-import { count, inr } from '../lib/format'
+import { count, money } from '../lib/format'
 import './exposure-dot-matrix.css'
 
 interface Props {
@@ -160,7 +160,7 @@ export function ExposureDotMatrix({ merchants, affected, origins, compact, onDar
             <span className="dm__label">{LABEL[state]}</span>
             {state === 'reached' && !compact ? (
               <span className="dm__aside num">
-                {n > 0 ? `${inr(reachedValue)} of payments delayed` : 'no merchant reached'}
+                {n > 0 ? `${money(reachedValue)} of payments delayed` : 'no merchant reached'}
               </span>
             ) : null}
           </div>
@@ -191,7 +191,7 @@ interface Dot {
 
 function title(d: Dot): string {
   const cover = d.cover === null ? 'nothing due in horizon' : `cover ${d.cover.toFixed(2)}×`
-  const owed = d.payables > 0 ? `, ${inr(d.payables)} due` : ''
+  const owed = d.payables > 0 ? `, ${money(d.payables)} due` : ''
   if (d.hit) {
     const when =
       d.hit.time_to_constraint_hours !== null

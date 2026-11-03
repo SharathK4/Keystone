@@ -14,7 +14,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 import { ApiError, api } from '../api/client'
 import type { SpeedScenarioView, SpeedSummary } from '../api/schema'
-import { count, hours, idx, inr, pct } from '../lib/format'
+import { count, hours, idx, money, pct } from '../lib/format'
 import { Seal } from './Seal'
 import './cost-of-waiting.css'
 
@@ -180,7 +180,7 @@ export function CostOfWaiting({ scenarioId }: Props) {
           </div>
           <div>
             <dt>Kept on time</dt>
-            <dd className={`num${keptNothing ? ' is-zero' : ''}`}>{inr(d.frozen.payments_kept_on_time_inr)}</dd>
+            <dd className={`num${keptNothing ? ' is-zero' : ''}`}>{money(d.frozen.payments_kept_on_time_inr)}</dd>
             <span className="num">
               {count(d.frozen.merchants_protected)} protected · {count(d.frozen.defaults_avoided)} defaults avoided
             </span>

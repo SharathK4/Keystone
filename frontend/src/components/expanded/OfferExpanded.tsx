@@ -23,7 +23,7 @@ import { Settlement } from '../Settlement'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
 import { ContractCard } from '../ContractCard'
 import { SpecularButton } from '../reactbits/SpecularButton'
-import { count, hours, idx, inr, inrExact, pct } from '../../lib/format'
+import { count, declaredRate, hours, idx, money, moneyDisplay, moneyExact, pct } from '../../lib/format'
 import { repaymentSummary, resolveOfferCopy } from '../../lib/offerCopy'
 import './offer-expanded.css'
 
@@ -65,7 +65,7 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
             <div className="ox__pitch">
               <p className="ox__kicker">
                 Written for <b className="num">{offer.merchant_id}</b> against{' '}
-                <b className="num">{inr(offer.eligibility.constraints.obligations_in_horizon)}</b>{' '}
+                <b className="num">{money(offer.eligibility.constraints.obligations_in_horizon)}</b>{' '}
                 of obligations falling due
               </p>
               <h3 className="ox__headline">{copy.title}</h3>
@@ -94,21 +94,21 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
               </div>
 
               <ul className="ox__points">
-                <Point title={`${inr(offer.proposed_amount)} for ${hours(offer.duration_hours)}`}>
+                <Point title={`${money(offer.proposed_amount)} for ${hours(offer.duration_hours)}`}>
                   {repaymentSummary(offer.repayment.structure, offer.repayment.n_instalments)}
                   {offer.repayment.n_instalments === 1
                     ? `, due at ${hours(offer.repayment.first_due_hours)}`
-                    : `, ${offer.repayment.n_instalments} × ${inr(
+                    : `, ${offer.repayment.n_instalments} × ${money(
                         offer.repayment.instalment_amount,
                       )}`}
-                  . Sized against {inr(offer.eligibility.constraints.obligations_in_horizon)} of
-                  obligations and a {inr(offer.eligibility.constraints.liquidity_buffer)} buffer.
+                  . Sized against {money(offer.eligibility.constraints.obligations_in_horizon)} of
+                  obligations and a {money(offer.eligibility.constraints.liquidity_buffer)} buffer.
                 </Point>
 
                 <Point
                   title={
                     offer.indicative_cost !== null
-                      ? `${inr(offer.indicative_cost)} indicative cost`
+                      ? `${money(offer.indicative_cost)} indicative cost`
                       : 'Indicative cost unavailable'
                   }
                 >
@@ -119,7 +119,7 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                     : 'No indicative rate was produced for this offer.'}
                 </Point>
 
-                <Point title={`${inr(benefit?.commerce_preserved)} kept on schedule`}>
+                <Point title={`${money(benefit?.commerce_preserved)} kept on schedule`}>
                   Replaying this plan with the same random draws kept that much payment value on its original
                   dates, protected {count(benefit?.merchants_protected)} merchant
                   {(benefit?.merchants_protected ?? 0) === 1 ? '' : 's'} and reduced modelled
@@ -131,7 +131,7 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                   {Object.entries(offer.eligibility.criteria)
                     .map(([k, ok]) => `${k.replace(/_/g, ' ')} ${ok ? '✓' : '✗'}`)
                     .join(' · ')}
-                  . Facility capped at {inr(offer.eligibility.constraints.max_amount)} over a
+                  . Facility capped at {money(offer.eligibility.constraints.max_amount)} over a
                   maximum {hours(offer.eligibility.constraints.max_duration_hours)} term.
                 </Point>
               </ul>
@@ -148,8 +148,15 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
             {reviewing ? (
               <XSection label="The terms" note={offer.offer_id}>
                 <dl className="ox__terms">
-                  <Term k="Principal" v={inrExact(offer.proposed_amount)} />
-                  <Term k="Currency" v={offer.currency} />
+                  <Term k="Principal" v={moneyExact(offer.proposed_amount)} />
+                  <Term
+                    k="Currency"
+                    v={
+                      moneyDisplay().currency === 'USD'
+                        ? `USD at a declared ${declaredRate()}; computed in ${offer.currency}`
+                        : offer.currency
+                    }
+                  />
                   <Term k="Term" v={hours(offer.duration_hours)} />
                   <Term
                     k="Repayment"
@@ -158,11 +165,11 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                   <Term k="First due" v={hours(offer.repayment.first_due_hours)} />
                   <Term
                     k="Instalment"
-                    v={inrExact(offer.repayment.instalment_amount)}
+                    v={moneyExact(offer.repayment.instalment_amount)}
                   />
                   <Term
                     k="Indicative cost"
-                    v={offer.indicative_cost !== null ? inrExact(offer.indicative_cost) : '—'}
+                    v={offer.indicative_cost !== null ? moneyExact(offer.indicative_cost) : '—'}
                   />
                   <Term
                     k="Indicative rate"

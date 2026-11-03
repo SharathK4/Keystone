@@ -23,7 +23,7 @@ import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
 import { InferenceQuality } from '../InferenceQuality'
 import { NetworkVisualization } from '../NetworkVisualization'
 import { Annotation } from '../Annotation'
-import { count, hours, inr, multiple } from '../../lib/format'
+import { count, hours, money, multiple } from '../../lib/format'
 import { layoutNetwork } from '../../lib/networkLayout'
 import './network-expanded.css'
 
@@ -130,8 +130,8 @@ export function NetworkExpanded({
                   label="Outbound dependencies"
                   value={count(focusDetail?.downstream.length ?? focus.out_degree)}
                 />
-                <Row label="Payables in horizon" value={inr(focus.payables_in_horizon)} />
-                <Row label="Receivables in horizon" value={inr(focus.receivables_in_horizon)} />
+                <Row label="Payables in horizon" value={money(focus.payables_in_horizon)} />
+                <Row label="Receivables in horizon" value={money(focus.receivables_in_horizon)} />
                 <Row
                   label="Cover ratio"
                   value={focus.cover_ratio !== null ? multiple(focus.cover_ratio) : 'no payables'}
@@ -193,7 +193,7 @@ export function NetworkExpanded({
                 <span className="nx__rank-bar" aria-hidden="true">
                   <i style={{ width: `${share * 100}%` }} />
                 </span>
-                <span className="nx__rank-val num">{inr(e.downstream_delayed_value)}</span>
+                <span className="nx__rank-val num">{money(e.downstream_delayed_value)}</span>
                 <span className="nx__rank-meta num">
                   {count(e.downstream_affected)} downstream · {hours(e.time_to_impact_hours)}
                 </span>

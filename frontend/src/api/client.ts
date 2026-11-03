@@ -27,6 +27,7 @@ import type {
 import type {
   ApprovalView,
   DemoStatusView,
+  DisplayView,
   ExecutablePlanView,
   ExecutionRecordView,
   LedgerView,
@@ -134,6 +135,7 @@ export const api = {
   scenario: (id: string) => cached<ScenarioSnapshot>(`/scenarios/${encodeURIComponent(id)}`),
   execution: () => cached<ExecutionStatus>('/execution/status'),
   snapshot: () => cached<SnapshotHealth>('/snapshot'),
+  display: () => cached<DisplayView>('/display'),
 
   // Offline, content-addressed artifacts: frozen like the snapshot, so cached.
   pulls: () => cached<PullsView>('/structure/pulls'),

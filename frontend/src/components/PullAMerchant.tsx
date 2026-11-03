@@ -16,7 +16,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { ApiError, api } from '../api/client'
 import type { PullRecord, PullsView } from '../api/schema'
 import type { AffectedMerchant, MerchantView, ScenarioSnapshot } from '../api/types'
-import { count, hours, inr, multiple, pct } from '../lib/format'
+import { count, hours, money, multiple, pct } from '../lib/format'
 import { ExposureDotMatrix } from './ExposureDotMatrix'
 import { Seal } from './Seal'
 import './pull-a-merchant.css'
@@ -127,9 +127,9 @@ export function PullAMerchant({ merchants }: Props) {
           </div>
           <div>
             <dt>Payments delayed</dt>
-            <dd className="num">{inr(rec.disrupted_value_inr)}</dd>
+            <dd className="num">{money(rec.disrupted_value_inr)}</dd>
             <span className="pull__range num">
-              {inr(rec.range.disrupted_value_inr[0])}–{inr(rec.range.disrupted_value_inr[1])}
+              {money(rec.range.disrupted_value_inr[0])}–{money(rec.range.disrupted_value_inr[1])}
             </span>
           </div>
           <div>
@@ -150,7 +150,7 @@ export function PullAMerchant({ merchants }: Props) {
                 <span className="num pull__when">{a.hours_to_constraint === null ? '—' : hours(a.hours_to_constraint)}</span>
                 <span className="num pull__who">{a.merchant_id}</span>
                 <span className="pull__how">{depthLabel(a.cascade_depth)}</span>
-                <span className="num pull__what">{inr(a.disrupted_value_inr)} delayed</span>
+                <span className="num pull__what">{money(a.disrupted_value_inr)} delayed</span>
               </li>
             ))}
           </ol>
@@ -160,7 +160,7 @@ export function PullAMerchant({ merchants }: Props) {
           {rec.plan ? (
             <>
               The settlement it draws: {rec.plan.action_type.replace(/_/g, ' ')} to{' '}
-              <b className="num">{rec.plan.merchant_id}</b>, {inr(rec.plan.amount_inr)}, cutting the week’s network
+              <b className="num">{rec.plan.merchant_id}</b>, {money(rec.plan.amount_inr)}, cutting the week’s network
               disruption by {pct(rec.plan.disruption_cut_pct)}.
             </>
           ) : (
@@ -207,7 +207,7 @@ function ComputeNow({ rec }: { rec: PullRecord }) {
             {count(Math.round(state.data.computed_in_ms ?? 0))} ms
           </Seal>
           <span className="num">
-            {count(state.data.projected_impact.n_affected)} constrained · {inr(state.data.projected_impact.disrupted_value)} delayed ·
+            {count(state.data.projected_impact.n_affected)} constrained · {money(state.data.projected_impact.disrupted_value)} delayed ·
             cut {pct(state.data.counterfactual.disruption_reduction_pct)}
           </span>
         </div>

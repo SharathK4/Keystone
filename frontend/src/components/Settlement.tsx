@@ -19,7 +19,7 @@ import type {
   PayPalStatusView,
   ReentryView,
 } from '../api/schema'
-import { count, inr } from '../lib/format'
+import { count, declaredRate, money, moneyDisplay } from '../lib/format'
 import { Seal } from './Seal'
 import './settlement.css'
 
@@ -120,6 +120,7 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
   // The backend totals only what is payable now, to mapped accounts. With no
   // account mapped that total is a true $0.00 that reads like a bug, so say why.
   const anyMapped = plan.actions.some((a) => a.recipient)
+  const shown = moneyDisplay()
   return (
     <div className="st__plan">
       <table className="st__table">
@@ -144,7 +145,7 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
                 {a.mapping ? <em>as a PayPal {a.mapping}</em> : null}
               </td>
               <td className="num">{a.merchant_id}</td>
-              <td className="is-num num">{inr(Number(a.analytic_amount_inr))}</td>
+              <td className="is-num num">{money(Number(a.analytic_amount_inr))}</td>
               <td className="is-num num">{usd(a.executed.value)}</td>
               <td className={a.recipient ? 'num' : 'st__gap'}>
                 {a.recipient ? a.recipient.receiver : (a.reason ?? 'no sandbox account mapped')}
@@ -157,7 +158,7 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
             <th scope="row" colSpan={2}>
               Total
             </th>
-            <td className="is-num num">{inr(Number(plan.replayed_cost_inr))}</td>
+            <td className="is-num num">{money(Number(plan.replayed_cost_inr))}</td>
             <td className="is-num num">{anyMapped ? usd(plan.executed_total.value) : '—'}</td>
             <td className="st__muted">
               {anyMapped
@@ -168,8 +169,20 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
         </tfoot>
       </table>
       <p className="st__scale">
-        Sandbox amounts use a declared display scale of <span className="num">{plan.demo.scale}</span> {plan.demo.currency} per
-        analytic rupee, not an exchange rate. The two columns are never added together.
+        {shown.currency === 'USD' && shown.sandboxRatio ? (
+          <>
+            Analytic amounts are shown at a declared <span className="num">{declaredRate()}</span>; the
+            sandbox pays 1/<span className="num">{shown.sandboxRatio}</span> of each, in{' '}
+            {plan.demo.currency}. Neither is a market exchange rate, and the two columns are never
+            added together.
+          </>
+        ) : (
+          <>
+            Sandbox amounts use a declared display scale of <span className="num">{plan.demo.scale}</span>{' '}
+            {plan.demo.currency} per analytic rupee, not an exchange rate. The two columns are never
+            added together.
+          </>
+        )}
       </p>
       <Seal src={`GET /execution/plans/${plan.scenario_id}`} refId={plan.snapshot_id}>
         priced from the frozen snapshot
@@ -400,7 +413,7 @@ function Reentries({ scenarioId, nonce }: { scenarioId: string; nonce: number })
             PayPal reported the payout to <b className="num">{r.merchant_id}</b> as {r.trigger.toLowerCase()}.{' '}
             {r.status === 'analysed' ? (
               <>
-                It re-entered as a shock of {inr(Number(r.missing_inr))}, analysed within the on-demand bounds, reaching{' '}
+                It re-entered as a shock of {money(Number(r.missing_inr))}, analysed within the on-demand bounds, reaching{' '}
                 {count(r.merchants_reached ?? 0)} merchants.
               </>
             ) : (
@@ -413,7 +426,7 @@ function Reentries({ scenarioId, nonce }: { scenarioId: string; nonce: number })
               {r.new_plan.map((p, i) => (
                 <span key={i}>
                   {i ? '; ' : ''}
-                  {p.action_type.replace(/_/g, ' ')} to <b className="num">{p.merchant_id}</b>, {inr(Number(p.analytic_amount_inr))}
+                  {p.action_type.replace(/_/g, ' ')} to <b className="num">{p.merchant_id}</b>, {money(Number(p.analytic_amount_inr))}
                 </span>
               ))}
             </p>

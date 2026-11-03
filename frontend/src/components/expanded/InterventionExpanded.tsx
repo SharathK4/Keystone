@@ -40,12 +40,13 @@ import {
   hours,
   humanise,
   idx,
-  inr,
-  inrExact,
+  money,
+  moneyExact,
   multiple,
   optimiserLabel,
   pct,
   ratio,
+  unitWord,
 } from '../../lib/format'
 import './intervention-expanded.css'
 
@@ -103,7 +104,7 @@ export function InterventionExpanded({
 
   return (
     <ExpandedAnalysis
-      title="Where one rupee does the most work"
+      title={`Where one ${unitWord()} does the most work`}
       subtitle="Candidates are generated from measurable network properties, then each is replayed against the same shock. The model proposes; the replay scores. Protected value is measured, never predicted."
       onClose={onClose}
     >
@@ -114,21 +115,21 @@ export function InterventionExpanded({
             <div className="ix__ledger">
               <Cell
                 label="Capital committed"
-                value={inr(cf.cost)}
+                value={money(cf.cost)}
                 note="placed as a facility and repaid at term, not spent"
               />
               <Arrow />
               <Cell
                 label="Commerce protected"
-                value={inr(cf.commerce_preserved)}
+                value={money(cf.commerce_preserved)}
                 note="payment value that stayed on its original dates"
                 accent
               />
               <Arrow />
               <Cell
-                label="Rupee leverage"
+                label={`${humanise(unitWord())} leverage`}
                 value={leverage === null ? '—' : ratio(leverage)}
-                note="protected per rupee placed"
+                note={`protected per ${unitWord()} placed`}
                 lead
               />
             </div>
@@ -163,7 +164,7 @@ export function InterventionExpanded({
             {/* --------------------------------------------------- the plan */}
             <XSection
               label="Actions in the selected plan"
-              note={`${inr(cf.cost)} of capital committed across the plan`}
+              note={`${money(cf.cost)} of capital committed across the plan`}
             >
               <table className="ix__table ix__table--plan">
                 <thead>
@@ -188,8 +189,8 @@ export function InterventionExpanded({
                   <tr className="is-lead">
                     <td className="num">{recommended.merchant_id}</td>
                     <td>{humanise(recommended.type)}</td>
-                    <td className="num is-num">{inr(recommended.amount)}</td>
-                    <td className="num is-num">{inr(recommended.cost)}</td>
+                    <td className="num is-num">{money(recommended.amount)}</td>
+                    <td className="num is-num">{money(recommended.cost)}</td>
                     <td className="num is-num">{hours(recommended.apply_at_hours)}</td>
                     <td className="num is-num">{hours(recommended.duration_hours)}</td>
                   </tr>
@@ -200,7 +201,7 @@ export function InterventionExpanded({
                         {humanise(secondAction.intervention_type)}
                         <em className="ix__tag">contract written here</em>
                       </td>
-                      <td className="num is-num">{inr(secondAction.proposed_amount)}</td>
+                      <td className="num is-num">{money(secondAction.proposed_amount)}</td>
                       <td className="num is-num">—</td>
                       <td className="num is-num">—</td>
                       <td className="num is-num">{hours(secondAction.duration_hours)}</td>
@@ -257,8 +258,8 @@ export function InterventionExpanded({
                         }}
                       >
                         <td className="num">{c.merchant_id}</td>
-                        <td className="num is-num">{inr(c.liquidity_required)}</td>
-                        <td className="num is-num">{inr(c.predicted_downstream_disruption)}</td>
+                        <td className="num is-num">{money(c.liquidity_required)}</td>
+                        <td className="num is-num">{money(c.predicted_downstream_disruption)}</td>
                         <td className="num is-num">{moved ? idx(c.disruption_prevented) : '—'}</td>
                         <td>
                           {c.selected ? (
@@ -319,7 +320,7 @@ export function InterventionExpanded({
                     />
                     <E
                       k="Downstream value delayed"
-                      v={probe ? inr(probe.downstream_delayed_value) : '—'}
+                      v={probe ? money(probe.downstream_delayed_value) : '—'}
                       s="in that same probe"
                     />
                   </Group>
@@ -333,16 +334,16 @@ export function InterventionExpanded({
                       s={subject.vulnerable ? 'owes more than it can cover' : 'clears its own book'}
                       tone={subject.vulnerable ? 'accent' : undefined}
                     />
-                    <E k="Obligations in horizon" v={inr(subject.payables_in_horizon)} />
-                    <E k="Receivables in horizon" v={inr(subject.receivables_in_horizon)} />
+                    <E k="Obligations in horizon" v={money(subject.payables_in_horizon)} />
+                    <E k="Receivables in horizon" v={money(subject.receivables_in_horizon)} />
                     <E
                       k="Liquidity buffer"
-                      v={inr(subject.liquidity_buffer)}
+                      v={money(subject.liquidity_buffer)}
                       s="opening balance plus credit line"
                     />
                     <E
                       k="Net position"
-                      v={inr(subject.net_position)}
+                      v={money(subject.net_position)}
                       s="receivables less payables"
                     />
                   </Group>
@@ -379,23 +380,23 @@ export function InterventionExpanded({
                   <Group title="Intervention">
                     <E
                       k="Amount"
-                      v={inspected ? inr(inspected.amount) : inr(offer?.proposed_amount)}
-                      s={inspected ? inrExact(inspected.amount) : undefined}
+                      v={inspected ? money(inspected.amount) : money(offer?.proposed_amount)}
+                      s={inspected ? moneyExact(inspected.amount) : undefined}
                     />
                     <E
                       k="Commerce protected"
-                      v={inr(cf.commerce_preserved)}
+                      v={money(cf.commerce_preserved)}
                       s="measured by replay"
                     />
                     <E
                       k="Objective movement"
                       v={idx(cf.disruption_prevented)}
-                      s="index units, not rupees"
+                      s={`index units, not ${unitWord(true)}`}
                     />
                     <E
                       k="Model ranking score"
                       v={cf.capital_efficiency === null ? '—' : cf.capital_efficiency.toFixed(1)}
-                      s="objective units moved per rupee — what the search ranks on"
+                      s={`objective units moved per ${unitWord()} — what the search ranks on`}
                     />
                     <E
                       k="Regret"
@@ -469,8 +470,8 @@ export function InterventionExpanded({
                   {candidates.map((c) => (
                     <tr key={c.intervention_id}>
                       <td className="num">{c.merchant_id}</td>
-                      <td className="num is-num">{inr(c.liquidity_required)}</td>
-                      <td className="num is-num">{inr(c.predicted_downstream_disruption)}</td>
+                      <td className="num is-num">{money(c.liquidity_required)}</td>
+                      <td className="num is-num">{money(c.predicted_downstream_disruption)}</td>
                       <td>
                         <span className="ix__badge">did not reduce disruption</span>
                       </td>

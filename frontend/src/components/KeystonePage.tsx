@@ -26,9 +26,22 @@ import { ProofExpanded } from './expanded/ProofExpanded'
 import { Failure, Loading } from './SystemState'
 import { LightColumn } from './reactbits/LightColumn'
 import type { PanelId } from './ExpandedAnalysis'
+import { declaredRate, setMoneyDisplay, type Currency } from '../lib/format'
 import './keystone-page.css'
 
 const PANELS: PanelId[] = ['network', 'exposure', 'intervention', 'offer', 'proof']
+
+const CURRENCY_KEY = 'keystone.currency'
+
+/** A reader's earlier choice, if this browser kept one. Never required. */
+function storedCurrency(): Currency | null {
+  try {
+    const v = window.localStorage.getItem(CURRENCY_KEY)
+    return v === 'USD' || v === 'INR' ? v : null
+  } catch {
+    return null
+  }
+}
 
 function panelFromHash(): PanelId | null {
   const id = window.location.hash.replace('#', '') as PanelId
@@ -69,6 +82,28 @@ export function KeystonePage() {
 
   const close = useCallback(() => setOpen(null), [])
 
+  // Money is printed in the reader's currency, defaulting to the server's. It
+  // is set here, above every panel, before any of them renders a figure.
+  const [chosen, setChosen] = useState<Currency | null>(() => storedCurrency())
+  const display = structure?.display ?? null
+  const currency: Currency = display ? (chosen ?? display.currency) : 'INR'
+  if (display) {
+    setMoneyDisplay({
+      currency,
+      usdPerInr: Number(display.usd_per_inr),
+      sandboxRatio: display.sandbox_ratio ? Number(display.sandbox_ratio) : null,
+    })
+  }
+  const flipCurrency = () => {
+    const next: Currency = currency === 'USD' ? 'INR' : 'USD'
+    setChosen(next)
+    try {
+      window.localStorage.setItem(CURRENCY_KEY, next)
+    } catch {
+      // A private window keeps the choice for this visit only.
+    }
+  }
+
   return (
     <main className={`ks${open ? ' is-open' : ''}`}>
       <div className="ks__light">
@@ -87,6 +122,16 @@ export function KeystonePage() {
               For the risk and working-capital teams at a payment platform: the one party
               that sees both sides of every payment.
             </p>
+            {display ? (
+              <p className="ks__units">
+                {currency === 'USD'
+                  ? `Amounts in US dollars at a declared ${declaredRate()}, not a market rate.`
+                  : 'Amounts in rupees, as the synthetic network was generated.'}{' '}
+                <button type="button" className="ks__units-switch" onClick={flipCurrency}>
+                  {currency === 'USD' ? 'Show rupees' : 'Show US dollars'}
+                </button>
+              </p>
+            ) : null}
           </>
         ) : null}
       </header>

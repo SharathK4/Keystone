@@ -41,6 +41,67 @@ export function inrExact(value: number | null | undefined): string {
   return `₹${INR.format(Math.round(value))}`
 }
 
+/* ------------------------------------------------------------ display money
+ *
+ * Every analytic amount arrives in rupees. Which currency the page prints is a
+ * reader's choice, defaulting to what GET /display says, and the rate comes
+ * from there too - nothing here knows a number. The page sets this once per
+ * render, above every panel, so the formatters stay plain functions.
+ */
+
+export type Currency = 'USD' | 'INR'
+
+export interface MoneyDisplay {
+  currency: Currency
+  /** US dollars per analytic rupee, as served. */
+  usdPerInr: number
+  /** Displayed dollars per sandbox dollar, if the sandbox pays dollars. */
+  sandboxRatio: number | null
+}
+
+let shown: MoneyDisplay = { currency: 'INR', usdPerInr: 1, sandboxRatio: null }
+
+export function setMoneyDisplay(next: MoneyDisplay): void {
+  shown = next
+}
+
+export function moneyDisplay(): MoneyDisplay {
+  return shown
+}
+
+const USD = new Intl.NumberFormat('en-US')
+
+/** `$773K`, `$1.12M`: an analytic rupee amount, in the currency on show. */
+export function money(value: number | null | undefined): string {
+  if (shown.currency === 'INR') return inr(value)
+  if (value === null || value === undefined || !Number.isFinite(value)) return '—'
+  const usd = value * shown.usdPerInr
+  const abs = Math.abs(usd)
+  const sign = usd < 0 ? '-' : ''
+  if (abs >= 1e9) return `${sign}$${trim(abs / 1e9)}B`
+  if (abs >= 1e6) return `${sign}$${trim(abs / 1e6)}M`
+  if (abs >= 1e3) return `${sign}$${trim(abs / 1e3)}K`
+  return `${sign}$${Math.round(abs)}`
+}
+
+/** Exact, grouped: for the terms and fine print. */
+export function moneyExact(value: number | null | undefined): string {
+  if (shown.currency === 'INR') return inrExact(value)
+  if (value === null || value === undefined || !Number.isFinite(value)) return '—'
+  return `$${USD.format(Math.round(value * shown.usdPerInr))}`
+}
+
+/** The unit in prose: "Put one dollar where ...". */
+export function unitWord(plural = false): string {
+  const word = shown.currency === 'USD' ? 'dollar' : 'rupee'
+  return plural ? `${word}s` : word
+}
+
+/** "₹100 = $1": the declared rate, read the way people say exchange rates. */
+export function declaredRate(): string {
+  return `₹${trim(1 / shown.usdPerInr)} = $1`
+}
+
 export function hours(value: number | null | undefined): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return '—'
   if (value < 48) return `${Math.round(value)}h`
