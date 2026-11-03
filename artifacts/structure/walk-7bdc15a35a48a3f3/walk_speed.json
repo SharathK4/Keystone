@@ -1,0 +1,326 @@
+{
+  "kind": "keystone-walk-speed-v1",
+  "label": "Replayed offline, on the snapshot's estimated network",
+  "provenance": {
+    "kind": "replayed_offline",
+    "snapshot_id": "snap-a4c99d5a49a64ffd",
+    "code_version": "0.1.0",
+    "built_at": "2026-11-03T06:57:55.946039+00:00"
+  },
+  "shock": {
+    "merchant_ids": [
+      "m0038"
+    ],
+    "magnitude_multiple": 2.0,
+    "onset_hours": 0.0,
+    "description": "m0038 loses INR 39,697,796 of liquidity at t=0h"
+  },
+  "unplanned": {
+    "payments_late_inr": 626649912.1607789,
+    "merchants_affected": 15
+  },
+  "delays": [
+    {
+      "delay_hours": 0.0,
+      "as_chosen": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 0.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 0.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 0.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 1.0,
+      "as_chosen": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 1.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 1.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 1.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 1.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 6.0,
+      "as_chosen": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 6.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 6.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 6.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 6.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 12.0,
+      "as_chosen": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 12.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 12.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 41.778811544981295,
+        "payments_kept_on_time_inr": 162295450.77918863,
+        "merchants_protected": 2,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 12.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 12.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 24.0,
+      "as_chosen": {
+        "disruption_cut_pct": 40.7801023100694,
+        "payments_kept_on_time_inr": 127514998.71673638,
+        "merchants_protected": 0,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 24.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 24.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 40.7801023100694,
+        "payments_kept_on_time_inr": 127514998.71673638,
+        "merchants_protected": 0,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 24.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 24.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 48.0,
+      "as_chosen": {
+        "disruption_cut_pct": 30.35360480917203,
+        "payments_kept_on_time_inr": 2980133.7751051188,
+        "merchants_protected": 0,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 48.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 48.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 30.35360480917203,
+        "payments_kept_on_time_inr": 2980133.7751051188,
+        "merchants_protected": 0,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 48.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 48.0
+          }
+        ]
+      }
+    },
+    {
+      "delay_hours": 72.0,
+      "as_chosen": {
+        "disruption_cut_pct": 18.39302860679298,
+        "payments_kept_on_time_inr": 0.0,
+        "merchants_protected": 0,
+        "cost_inr": 193808350.06195685,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 72.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0009",
+            "amount_inr": 93766331.16023846,
+            "lands_at_hours": 72.0
+          }
+        ]
+      },
+      "replanned": {
+        "disruption_cut_pct": 19.82549604192506,
+        "payments_kept_on_time_inr": 0.0,
+        "merchants_protected": 0,
+        "cost_inr": 159003333.67518413,
+        "actions": [
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0005",
+            "amount_inr": 100042018.9017184,
+            "lands_at_hours": 72.0
+          },
+          {
+            "action_type": "liquidity_injection",
+            "merchant_id": "m0003",
+            "amount_inr": 58961314.77346575,
+            "lands_at_hours": 72.0
+          }
+        ]
+      }
+    }
+  ],
+  "content_hash": "dfe345f26a8e13eb5f7c8479f578d2fe61e8a995c83e7a20a859db9d3cf7a503"
+}

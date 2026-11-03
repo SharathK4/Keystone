@@ -35,6 +35,11 @@ artifacts/**
 !artifacts/contagion/**
 !artifacts/structure/
 !artifacts/structure/**
+# One real PayPal delivery, recorded for replay (lce walk record). Raw captures
+# in artifacts/paypal/deliveries/ stay local.
+!artifacts/paypal/
+!artifacts/paypal/recorded/
+!artifacts/paypal/recorded/**
 runs/
 *.pt
 *.ckpt

@@ -14,6 +14,9 @@ cd "$(dirname "$0")/.."
 export PYTHONPATH=src
 export DATABASE_URL="sqlite+pysqlite:///${KEYSTONE_LIVE_DB:-artifacts/runs/live.sqlite}"
 export LCE_EXECUTION_PROVIDER=paypal_sandbox
+# Keep every verified delivery as received, so `lce walk record <event id>` can
+# turn the walk's failure into the committed fixture.
+export LCE_RECORD_DELIVERIES_DIR="${LCE_RECORD_DELIVERIES_DIR:-artifacts/paypal/deliveries}"
 export LCE_LOG_LEVEL="${LCE_LOG_LEVEL:-WARNING}"
 mkdir -p artifacts/runs
 python -m alembic upgrade head >/dev/null 2>&1 || echo "migration failed: execution routes will answer 503"

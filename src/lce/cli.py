@@ -279,6 +279,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     structure_cli.register(sub)
 
+    from lce.walk import cli as walk_cli
+
+    walk_cli.register(sub)
+
     serve = sub.add_parser("serve", help="Run the API")
     serve.add_argument("--host", default=None)
     serve.add_argument("--port", type=int, default=None)

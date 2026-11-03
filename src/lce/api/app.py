@@ -30,6 +30,7 @@ from lce.api.routers import (
     networks,
     runs,
     structure,
+    walk,
     webhooks,
 )
 from lce.config import Settings, get_settings
@@ -166,6 +167,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(execution.router, prefix=prefix)
     app.include_router(structure.router, prefix=prefix)
     app.include_router(display.router, prefix=prefix)
+    app.include_router(walk.router, prefix=prefix)
 
     @app.get("/", include_in_schema=False)
     def root() -> dict[str, str]:

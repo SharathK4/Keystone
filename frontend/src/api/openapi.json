@@ -5761,6 +5761,39 @@
         "title": "ShockKind",
         "type": "string"
       },
+      "ShockRequest": {
+        "additionalProperties": false,
+        "description": "What the bounded analysis needs, and nothing else.",
+        "properties": {
+          "magnitude_multiple": {
+            "maximum": 4.0,
+            "minimum": 0.5,
+            "title": "Magnitude Multiple",
+            "type": "number"
+          },
+          "merchant_ids": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5,
+            "minItems": 1,
+            "title": "Merchant Ids",
+            "type": "array"
+          },
+          "onset_hours": {
+            "minimum": 0.0,
+            "title": "Onset Hours",
+            "type": "number"
+          }
+        },
+        "required": [
+          "merchant_ids",
+          "magnitude_multiple",
+          "onset_hours"
+        ],
+        "title": "ShockRequest",
+        "type": "object"
+      },
       "ShockResponse": {
         "additionalProperties": false,
         "properties": {
@@ -6516,6 +6549,492 @@
           "type"
         ],
         "title": "ValidationError",
+        "type": "object"
+      },
+      "WalkAskIn": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "maxLength": 280,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "WalkAskIn",
+        "type": "object"
+      },
+      "WalkAskView": {
+        "additionalProperties": false,
+        "properties": {
+          "changed": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Changed",
+            "type": "array"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "provider": {
+            "title": "Provider",
+            "type": "string"
+          },
+          "refusal": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Refusal"
+          },
+          "request": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShockRequest"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "ok",
+          "request",
+          "refusal",
+          "provider",
+          "model",
+          "changed"
+        ],
+        "title": "WalkAskView",
+        "type": "object"
+      },
+      "WalkEventView": {
+        "additionalProperties": false,
+        "properties": {
+          "event_id": {
+            "title": "Event Id",
+            "type": "string"
+          },
+          "event_type": {
+            "title": "Event Type",
+            "type": "string"
+          },
+          "ingest_status": {
+            "title": "Ingest Status",
+            "type": "string"
+          },
+          "outcome": {
+            "title": "Outcome",
+            "type": "string"
+          },
+          "processed_at": {
+            "title": "Processed At",
+            "type": "string"
+          },
+          "record_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Record Status"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          },
+          "stamp": {
+            "title": "Stamp",
+            "type": "string"
+          },
+          "transmission_time": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transmission Time"
+          },
+          "verification": {
+            "title": "Verification",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "stamp",
+          "event_id",
+          "event_type",
+          "outcome",
+          "transmission_time",
+          "processed_at",
+          "verification",
+          "ingest_status",
+          "record_status"
+        ],
+        "title": "WalkEventView",
+        "type": "object"
+      },
+      "WalkFireView": {
+        "additionalProperties": false,
+        "properties": {
+          "analysis": {
+            "$ref": "#/components/schemas/ScenarioSnapshot"
+          },
+          "computed_in_ms": {
+            "title": "Computed In Ms",
+            "type": "number"
+          },
+          "event": {
+            "$ref": "#/components/schemas/WalkEventView"
+          },
+          "reentry": {
+            "$ref": "#/components/schemas/WalkReentryView"
+          },
+          "shock": {
+            "$ref": "#/components/schemas/WalkShockView"
+          }
+        },
+        "required": [
+          "event",
+          "shock",
+          "analysis",
+          "computed_in_ms",
+          "reentry"
+        ],
+        "title": "WalkFireView",
+        "type": "object"
+      },
+      "WalkRecordedView": {
+        "additionalProperties": false,
+        "properties": {
+          "event_type": {
+            "title": "Event Type",
+            "type": "string"
+          },
+          "recorded_at": {
+            "title": "Recorded At",
+            "type": "string"
+          },
+          "source": {
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "recorded_at",
+          "event_type"
+        ],
+        "title": "WalkRecordedView",
+        "type": "object"
+      },
+      "WalkReentryView": {
+        "additionalProperties": false,
+        "properties": {
+          "analysis_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Analysis Id"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "reason",
+          "analysis_id"
+        ],
+        "title": "WalkReentryView",
+        "type": "object"
+      },
+      "WalkShockView": {
+        "additionalProperties": false,
+        "properties": {
+          "magnitude_multiple": {
+            "title": "Magnitude Multiple",
+            "type": "number"
+          },
+          "merchant_id": {
+            "title": "Merchant Id",
+            "type": "string"
+          },
+          "missing_inr": {
+            "title": "Missing Inr",
+            "type": "number"
+          },
+          "onset_hours": {
+            "title": "Onset Hours",
+            "type": "number"
+          },
+          "slack_inr": {
+            "title": "Slack Inr",
+            "type": "number"
+          },
+          "trigger": {
+            "title": "Trigger",
+            "type": "string"
+          }
+        },
+        "required": [
+          "merchant_id",
+          "trigger",
+          "missing_inr",
+          "slack_inr",
+          "magnitude_multiple",
+          "onset_hours"
+        ],
+        "title": "WalkShockView",
+        "type": "object"
+      },
+      "WalkSpeedAction": {
+        "additionalProperties": false,
+        "properties": {
+          "action_type": {
+            "title": "Action Type",
+            "type": "string"
+          },
+          "amount_inr": {
+            "title": "Amount Inr",
+            "type": "number"
+          },
+          "lands_at_hours": {
+            "title": "Lands At Hours",
+            "type": "number"
+          },
+          "merchant_id": {
+            "title": "Merchant Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "action_type",
+          "merchant_id",
+          "amount_inr",
+          "lands_at_hours"
+        ],
+        "title": "WalkSpeedAction",
+        "type": "object"
+      },
+      "WalkSpeedArm": {
+        "additionalProperties": false,
+        "properties": {
+          "actions": {
+            "items": {
+              "$ref": "#/components/schemas/WalkSpeedAction"
+            },
+            "title": "Actions",
+            "type": "array"
+          },
+          "cost_inr": {
+            "title": "Cost Inr",
+            "type": "number"
+          },
+          "disruption_cut_pct": {
+            "title": "Disruption Cut Pct",
+            "type": "number"
+          },
+          "merchants_protected": {
+            "title": "Merchants Protected",
+            "type": "integer"
+          },
+          "payments_kept_on_time_inr": {
+            "title": "Payments Kept On Time Inr",
+            "type": "number"
+          }
+        },
+        "required": [
+          "disruption_cut_pct",
+          "payments_kept_on_time_inr",
+          "merchants_protected",
+          "cost_inr",
+          "actions"
+        ],
+        "title": "WalkSpeedArm",
+        "type": "object"
+      },
+      "WalkSpeedRow": {
+        "additionalProperties": false,
+        "properties": {
+          "as_chosen": {
+            "$ref": "#/components/schemas/WalkSpeedArm"
+          },
+          "delay_hours": {
+            "title": "Delay Hours",
+            "type": "number"
+          },
+          "replanned": {
+            "$ref": "#/components/schemas/WalkSpeedArm"
+          }
+        },
+        "required": [
+          "delay_hours",
+          "as_chosen",
+          "replanned"
+        ],
+        "title": "WalkSpeedRow",
+        "type": "object"
+      },
+      "WalkSpeedView": {
+        "additionalProperties": false,
+        "properties": {
+          "content_hash": {
+            "title": "Content Hash",
+            "type": "string"
+          },
+          "delays": {
+            "items": {
+              "$ref": "#/components/schemas/WalkSpeedRow"
+            },
+            "title": "Delays",
+            "type": "array"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "provenance": {
+            "additionalProperties": true,
+            "title": "Provenance",
+            "type": "object"
+          },
+          "shock": {
+            "additionalProperties": true,
+            "title": "Shock",
+            "type": "object"
+          },
+          "unplanned": {
+            "additionalProperties": true,
+            "title": "Unplanned",
+            "type": "object"
+          }
+        },
+        "required": [
+          "label",
+          "content_hash",
+          "provenance",
+          "shock",
+          "unplanned",
+          "delays"
+        ],
+        "title": "WalkSpeedView",
+        "type": "object"
+      },
+      "WalkView": {
+        "additionalProperties": false,
+        "properties": {
+          "executed": {
+            "$ref": "#/components/schemas/MoneyView"
+          },
+          "magnitude_multiple": {
+            "title": "Magnitude Multiple",
+            "type": "number"
+          },
+          "merchant_id": {
+            "title": "Merchant Id",
+            "type": "string"
+          },
+          "missing_inr": {
+            "title": "Missing Inr",
+            "type": "number"
+          },
+          "mode": {
+            "enum": [
+              "recorded",
+              "development",
+              "unavailable"
+            ],
+            "title": "Mode",
+            "type": "string"
+          },
+          "mode_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mode Reason"
+          },
+          "recorded": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WalkRecordedView"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "slack_inr": {
+            "title": "Slack Inr",
+            "type": "number"
+          },
+          "snapshot_id": {
+            "title": "Snapshot Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "snapshot_id",
+          "merchant_id",
+          "magnitude_multiple",
+          "slack_inr",
+          "missing_inr",
+          "executed",
+          "mode",
+          "mode_reason",
+          "recorded"
+        ],
+        "title": "WalkView",
         "type": "object"
       },
       "WebhookAck": {
@@ -9344,6 +9863,110 @@
         "summary": "Speed For Scenario",
         "tags": [
           "structure"
+        ]
+      }
+    },
+    "/api/v1/walk": {
+      "get": {
+        "operationId": "walk_api_v1_walk_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalkView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "The merchant the walk follows, and its event",
+        "tags": [
+          "walk"
+        ]
+      }
+    },
+    "/api/v1/walk/ask": {
+      "post": {
+        "operationId": "ask_api_v1_walk_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WalkAskIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalkAskView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Turn a what-if into a validated request (computes nothing)",
+        "tags": [
+          "walk"
+        ]
+      }
+    },
+    "/api/v1/walk/fire": {
+      "post": {
+        "operationId": "fire_api_v1_walk_fire_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalkFireView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Process the walk's failed payout through the real pipeline",
+        "tags": [
+          "walk"
+        ]
+      }
+    },
+    "/api/v1/walk/speed": {
+      "get": {
+        "operationId": "speed_api_v1_walk_speed_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WalkSpeedView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "The walk's cost of waiting, replayed offline",
+        "tags": [
+          "walk"
         ]
       }
     },

@@ -1094,6 +1094,13 @@ export interface ShockIn {
 /** What kind of liquidity shock is applied at a node. */
 export type ShockKind = "missed_inbound" | "cash_withdrawal" | "credit_line_cut" | "demand_collapse" | "counterparty_default"
 
+/** What the bounded analysis needs, and nothing else. */
+export interface ShockRequest {
+  merchant_ids: string[]
+  magnitude_multiple: number
+  onset_hours: number
+}
+
 export interface ShockResponse {
   shock_id: string
   name: string
@@ -1243,6 +1250,103 @@ export interface ValidationError {
   loc: (string | number)[]
   msg: string
   type: string
+}
+
+export interface WalkAskIn {
+  text: string
+}
+
+export interface WalkAskView {
+  ok: boolean
+  request: ShockRequest | null
+  refusal: string | null
+  provider: string
+  model: string | null
+  changed: string[]
+}
+
+export interface WalkEventView {
+  source: string
+  stamp: string
+  event_id: string
+  event_type: string
+  outcome: string
+  transmission_time: string | null
+  processed_at: string
+  verification: string
+  ingest_status: string
+  record_status: string | null
+}
+
+export interface WalkFireView {
+  event: WalkEventView
+  shock: WalkShockView
+  analysis: ScenarioSnapshot
+  computed_in_ms: number
+  reentry: WalkReentryView
+}
+
+export interface WalkRecordedView {
+  source: string
+  recorded_at: string
+  event_type: string
+}
+
+export interface WalkReentryView {
+  status: string
+  reason: string | null
+  analysis_id: string | null
+}
+
+export interface WalkShockView {
+  merchant_id: string
+  trigger: string
+  missing_inr: number
+  slack_inr: number
+  magnitude_multiple: number
+  onset_hours: number
+}
+
+export interface WalkSpeedAction {
+  action_type: string
+  merchant_id: string
+  amount_inr: number
+  lands_at_hours: number
+}
+
+export interface WalkSpeedArm {
+  disruption_cut_pct: number
+  payments_kept_on_time_inr: number
+  merchants_protected: number
+  cost_inr: number
+  actions: WalkSpeedAction[]
+}
+
+export interface WalkSpeedRow {
+  delay_hours: number
+  as_chosen: WalkSpeedArm
+  replanned: WalkSpeedArm
+}
+
+export interface WalkSpeedView {
+  label: string
+  content_hash: string
+  provenance: Record<string, unknown>
+  shock: Record<string, unknown>
+  unplanned: Record<string, unknown>
+  delays: WalkSpeedRow[]
+}
+
+export interface WalkView {
+  snapshot_id: string
+  merchant_id: string
+  magnitude_multiple: number
+  slack_inr: number
+  missing_inr: number
+  executed: MoneyView
+  mode: "recorded" | "development" | "unavailable"
+  mode_reason: string | null
+  recorded: WalkRecordedView | null
 }
 
 export interface WebhookAck {

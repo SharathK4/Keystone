@@ -114,6 +114,26 @@ class _PayPalOutcome:
     reentry: Reentry | None = None
 
 
+def _capture(raw_body: bytes, headers: Mapping[str, str], event_id: str) -> None:
+    """Keep a verified delivery as received, when a live run asked for it.
+
+    Opt-in (``LCE_RECORD_DELIVERIES_DIR``), after verification only, and never
+    allowed to fail the acknowledgement.
+    """
+    from pathlib import Path
+
+    from lce.walk.recording import capture_delivery
+    from lce.walk.thread import get_walk_settings
+
+    directory = get_walk_settings().record_deliveries_dir
+    if not directory:
+        return
+    try:
+        capture_delivery(Path(directory), raw_body=raw_body, headers=headers, event_id=event_id)
+    except OSError as exc:
+        logger.warning("paypal_delivery_not_captured", error=type(exc).__name__)
+
+
 def _process_paypal(
     raw_body: bytes, headers: Mapping[str, str], load_cert: CertLoader
 ) -> _PayPalOutcome:
@@ -146,6 +166,8 @@ def _process_paypal(
         return _PayPalOutcome(400, "body is not JSON")
     if not isinstance(event, dict) or not event.get("id"):
         return _PayPalOutcome(400, "event has no id")
+
+    _capture(raw_body, headers, str(event["id"]))
 
     try:
         with get_session_factory()() as session:
