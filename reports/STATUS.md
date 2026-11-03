@@ -1,7 +1,8 @@
 # Status
 
-Resume from this file, `docs/briefs/RUNBOOK.md` and `git log`. Branch `paypal`.
-Never push (`origin` push URL is disabled locally).
+Resume from this file, `docs/briefs/QUIET_DEMO.md` (the current brief),
+`docs/briefs/RUNBOOK.md` and `git log`. Branch `paypal`. Never push (`origin`
+push URL is disabled locally).
 
 ## Phase table
 
@@ -14,6 +15,7 @@ Never push (`origin` push URL is disabled locally).
 | 1 | 1e concept boards → **STOP** | **DONE** — boards A, B, C + font specimen + index under `design/concepts/` (SVG with subset OFL fonts embedded, PNG via headless Chrome); each rendered and self-critiqued | Ledger hero and chart layout reworked after review (see decisions) | **Pick A, B or C**: open `design/concepts/index.html` | Phase 2 after the pick |
 | 2 | Phase 2 frontend | **IN PROGRESS** — new analyses folded into the original four-card design (+ card 05); 576 passed / 8 deselected; audit 35; phase-4 28 | Human chose B, then redirected: keep the original Keystone design and add the new work to it (see decisions) | Review the cards; map sandbox emails; say "run live tests" | State screenshots to docs/screens, axe + keyboard + reduced-motion checks, README screenshots, tag phase-2 |
 | 2 | 2b review fixes (Nov 3) | **PASS** — USD display by default (`GET /display`), card 05 as three claims, audience line, ring-label / token / grey / payable-total fixes, `scripts/live_sandbox.sh`; full suite green (5 new tests); ruff, mypy clean; audit 35; phase-4 28; checked in the browser at 1440 and 375 wide | ink-4 still below AA for small text (see decisions) | PayPal sandbox keys + two personal-account emails; font decision by Nov 9 | Live spikes S1–S3 once keys exist, then Render deploy and the failure loop |
+| Q | Day 1 (Nov 3): quiet demo, scenes 1–3 + recorded pipeline | **PASS** (offline) — walk backend (`/walk`, `/walk/fire`, `/walk/ask`, `/walk/speed`), delivery capture + `lce walk record`, `lce walk build-speed` artifact `walk-7bdc15a35a48a3f3`, `lce paypal doctor`; front page = scenes 1, 2, 3, 6 with Evidence at `#evidence`; Instrument Serif replaces Against; checks: see the Day 1 report below | Thread is m0038, not the brief's m0013 (see decisions). What-if refuses duration. No recorded real delivery yet, so local fire uses a development event (stamped). | Keys, then `lce paypal doctor`; map m0038 (failing), m0005, m0009; deploy + webhook; "run live tests" | Nov 5: deploy, trigger research, record the real delivery. Nov 6–7: AI layer, scenes 4–5 (full walk plan) |
 
 ## Decisions taken
 
@@ -157,6 +159,91 @@ Never push (`origin` push URL is disabled locally).
   command, with the sandbox keys read from `.env` and its own
   `artifacts/runs/live.sqlite`. Live mode stays refused in code.
 
+- **Q1 (Nov 3)** The quiet-demo brief replaces the final stretch. It is saved
+  verbatim as `docs/briefs/QUIET_DEMO.md`, and `CLAUDE.md` points at it.
+- **Q1** **Thread = m0038 at 2x its cushion**, not the brief's example m0013.
+  Measured on the same machinery:
+  - m0013 reaches two more merchants (39 h, one step). But its plan includes
+    a supplier term extension PayPal cannot pay. And its re-planned arm jumps
+    10.3% → 25.4% at 1 h: the search at the moment of the shock misses an
+    m0009 injection it lists an hour later (the Gate H candidate-list
+    weakness, frozen optimiser).
+  - m0038 reaches one more merchant (m0059, about 4 days, one step out). Its
+    plan is two injections PayPal can pay (m0005, m0009). Both curves fall
+    monotonically: payments kept on time are $1.62M until 12 h, $1.28M at
+    24 h, $29.8K at 48 h and $0 at 72 h; the cut goes 41.8% → 18.4%.
+  - Scene 2 therefore says "One more feels it." Override with
+    `LCE_WALK_MERCHANT` and `LCE_WALK_MULTIPLE`.
+- **Q1** The failing payment is modelled as what the pipeline already handles:
+  a PayPal payout to m0038 that fails ("walk trigger"). It has its own plan
+  hash, an approval row naming who fired it, and one execution record keyed
+  by an idempotency key. Its failure re-enters through the existing
+  failed-payout re-entry, so its shock is exactly "m0038 loses 2x its cushion",
+  the pull the offline artifact replayed.
+- **Q1** **Recorded pipeline.** With `LCE_RECORD_DELIVERIES_DIR` set
+  (`live_sandbox.sh` sets it), the webhook route keeps each verified delivery
+  byte for byte: raw body plus the five signature headers, never the webhook
+  id. `lce walk record <event id>` then writes
+  `artifacts/paypal/recorded/walk.json` with PayPal's certificate (downloaded
+  from the URL the delivery names) and the trigger record. It refuses a
+  capture that does not verify.
+  - Replay (`POST /walk/fire`) restores the trigger in a fresh database and
+    verifies the bytes against that certificate and `PAYPAL_WEBHOOK_ID`, then
+    ingests and analyses them. There is no network call in recorded mode.
+  - Until a real delivery is recorded, `LCE_ENV` local/test fires a
+    development event signed in process. It is stamped "development event,
+    signed locally, not from PayPal" and refused when the hosted demo mode is
+    on.
+  - The first fire persists the re-entry analysis exactly as a webhook would;
+    later fires recompute it for the page.
+- **Q1** What-if parsing has a `ShockParser` interface with a no-key
+  `RuleParser`. The language-model parser arrives on Nov 6 under the same
+  schema and refusals.
+  - It parses who is hit, size (0.5x–4x the cushion) and onset (within the
+    week).
+  - It refuses **duration**: the analysis's shortfall lasts the rest of the
+    week. So the brief's placeholder "what if it lasts three days?" became
+    "what if it were twice as large?", and the duration question is refused
+    with its reason.
+- **Q1** **Scene 3 data.** The walk's cost of waiting is an offline artifact
+  built on the bounded analysis's own machinery (the snapshot's estimated
+  network, the same candidates, greedy search and replay). At zero delay it
+  equals the live analysis (tested), whereas Gate H's generator-based curve
+  would have been someone else's shock. Payments kept on time is the plotted
+  measure.
+- **Q1 (found)** The on-demand analysis response names only the **first**
+  selected action. `alternatives` excludes selected options, so the walk plan's
+  second injection (m0009) appears nowhere in it. The replay artifact lists
+  both. Scenes 4–5 (Nov 6) must take the full plan from there, or add an
+  additive field. `build_plan` on the live response would be incomplete.
+- **Q1** The front page is the walk; the gallery is "Evidence" at
+  `#evidence` and its old panel hashes. Closing a panel now keeps
+  `#evidence` (the only change to the gallery). Scenes 4 and 5 are not built
+  yet, and their progress ticks are dimmed.
+- **Q1** Instrument Serif (OFL, `@fontsource` 5.3.0) is the one `--display`
+  face, and `ASSETS.md` and the licence text are updated. `against-regular.otf`
+  is still in the tree, unloaded, until the publish copy.
+- **Q1** `lce paypal doctor` reads only. PayPal is called only with `--probe`
+  and the deployment only with `--public-url`. It reads plan payees from the
+  replay artifact.
+
+## Day reports (quiet demo)
+
+**Day 1, Nov 3.**
+- **Passed:**
+  - 617 tests passed (8 live-only deselected); ruff and mypy clean; audit 35; phase-4 28; anchors untouched.
+  - The walk fires end to end through the real verifier, state machine and re-entry: m0038 missed $397K → m0059 runs short four days later, one step out. Computed live in about 5 s.
+  - The what-if parses, recomputes in about 3.6 s and refuses with reasons.
+  - Scene 3's zero-delay point equals the live analysis.
+  - Content covers 7–17% of a 1440×900 scene and at most 34.5% of a 390×844 one; `getAnimations()` is empty after load and after a fire.
+- **Failed:** none.
+- **Unverified:**
+  - Everything involving real PayPal: no keys yet, no recorded delivery.
+  - The trigger behaviour (an unclaimed address is the candidate).
+  - Playwright, axe and the keyboard walk are due Nov 8.
+- **Needs the human:** keys in `.env`; `paypal doctor`; map m0038, m0005, m0009; deploy and webhook.
+- **Next:** Nov 5 deploy, trigger research and recording. Nov 6–7 the LLM parser and narration, and scenes 4–5 using the full plan from the replay.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
@@ -166,11 +253,22 @@ None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 - **Now:** PayPal sandbox keys. At developer.paypal.com, go to Apps & Credentials
   (Sandbox) → Create App (Merchant). Put `PAYPAL_CLIENT_ID`,
   `PAYPAL_CLIENT_SECRET`, `PAYPAL_MODE=sandbox` and
-  `LCE_EXECUTION_PROVIDER=paypal_sandbox` in `.env`. Then create two sandbox
-  Personal (US) accounts and share their emails.
-- **By Nov 9:** the display font. `Against` is personal-use only: swap it for an
-  OFL face (one token in `tokens.css`), or license it and keep the file out of
-  the public repo.
+  `LCE_EXECUTION_PROVIDER=paypal_sandbox` in `.env`. Then run
+  `sh scripts/live_sandbox.sh paypal doctor`; it lists everything still missing.
+- **Identities for the walk** (doctor prints the same):
+  - **m0005, m0009**: two sandbox Personal (US) accounts, the plan's payees:
+    `sh scripts/live_sandbox.sh paypal map m0005 --email <account 1>` and the
+    same for m0009.
+  - **m0038**: the failing payout. Map it to an address with **no** PayPal
+    account, so the payout should go unclaimed (to be confirmed in trigger
+    research): `sh scripts/live_sandbox.sh paypal map m0038 --email <address>`.
+- **Nov 5:** deploy (README → Deploy), register the webhook, say "run live
+  tests". Trigger research then settles which payout fails fast (an unclaimed
+  address is the first candidate). The live trigger route is built on that
+  answer, fired once, and recorded:
+  `sh scripts/live_sandbox.sh walk record <event id>`.
+- ~~By Nov 9: the display font~~ — settled by the quiet-demo brief: Instrument
+  Serif is live; Against is removed from the publish copy.
 
 - The public original (`origin/master`) already contains personal-use-only demo
   fonts (`fonts/*.zip`, `frontend/public/fonts/against-regular.otf`). Nothing is
