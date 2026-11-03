@@ -102,6 +102,19 @@ def cmd_reconcile(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_doctor(args: argparse.Namespace) -> int:
+    """What is missing before a live run. Reads only; PayPal only with --probe."""
+    from lce.paypal.doctor import diagnose
+
+    checks = diagnose(probe=args.probe, public_url=args.public_url)
+    width = max(len(c.name) for c in checks)
+    for c in checks:
+        print(f"{c.status:9} {c.name:<{width}}  {c.detail}")
+        if c.fix and c.status != "ok":
+            print(f"{'':9} {'':<{width}}  -> {c.fix}")
+    return 0 if all(c.status in {"ok", "unchecked"} for c in checks) else 1
+
+
 def register(sub: Any) -> None:
     paypal = sub.add_parser("paypal", help="PayPal sandbox: identities and connection")
     psub = paypal.add_subparsers(dest="paypal_command", required=True)
@@ -123,6 +136,13 @@ def register(sub: Any) -> None:
                          help="Read open payouts back from PayPal (GET only; never resubmits)")
     rc.add_argument("--record", default=None, help="One record id; default: every open record")
     rc.set_defaults(func=cmd_reconcile)
+
+    doc = psub.add_parser("doctor", help="What is missing before a live sandbox run (read-only)")
+    doc.add_argument("--probe", action="store_true",
+                     help="Also request one PayPal token to check the credentials")
+    doc.add_argument("--public-url", dest="public_url", default=None,
+                     help="Also read <url>/api/v1/health on the deployment")
+    doc.set_defaults(func=cmd_doctor)
 
     st = psub.add_parser("status", help="Configuration, and capabilities if probed")
     st.add_argument("--probe", action="store_true",
