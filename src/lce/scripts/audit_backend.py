@@ -231,6 +231,7 @@ def audit_api(audit: Audit) -> None:
         "/api/v1/offers/{merchant_id}",
         "/api/v1/dashboard",
         "/api/v1/execution/status",
+        "/api/v1/display",
         "/api/v1/snapshot",
         "/api/v1/model",
         "/api/v1/predict/contagion",

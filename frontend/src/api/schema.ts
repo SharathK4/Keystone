@@ -233,6 +233,15 @@ export interface DependencyView {
   estimated?: boolean
 }
 
+export interface DisplayView {
+  currency: "USD" | "INR"
+  usd_per_inr: string
+  sandbox_currency: string | null
+  sandbox_scale: string | null
+  sandbox_ratio: string | null
+  note: string
+}
+
 export interface EdgeView {
   source_id: string
   target_id: string

@@ -23,6 +23,7 @@ from lce import __version__
 from lce.api.routers import (
     analysis,
     analytics,
+    display,
     execution,
     health,
     inference,
@@ -164,6 +165,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(analytics.router, prefix=prefix)
     app.include_router(execution.router, prefix=prefix)
     app.include_router(structure.router, prefix=prefix)
+    app.include_router(display.router, prefix=prefix)
 
     @app.get("/", include_in_schema=False)
     def root() -> dict[str, str]:

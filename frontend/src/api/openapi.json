@@ -1228,6 +1228,70 @@
         "title": "DependencyView",
         "type": "object"
       },
+      "DisplayView": {
+        "additionalProperties": false,
+        "properties": {
+          "currency": {
+            "enum": [
+              "USD",
+              "INR"
+            ],
+            "title": "Currency",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "sandbox_currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sandbox Currency"
+          },
+          "sandbox_ratio": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sandbox Ratio"
+          },
+          "sandbox_scale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sandbox Scale"
+          },
+          "usd_per_inr": {
+            "title": "Usd Per Inr",
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "usd_per_inr",
+          "sandbox_currency",
+          "sandbox_scale",
+          "sandbox_ratio",
+          "note"
+        ],
+        "title": "DisplayView",
+        "type": "object"
+      },
       "EdgeView": {
         "additionalProperties": false,
         "properties": {
@@ -7500,6 +7564,27 @@
         "summary": "Rank merchants by how much damage a shock at them causes",
         "tags": [
           "analysis"
+        ]
+      }
+    },
+    "/api/v1/display": {
+      "get": {
+        "operationId": "display_api_v1_display_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplayView"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "How the interface prints money",
+        "tags": [
+          "display"
         ]
       }
     },

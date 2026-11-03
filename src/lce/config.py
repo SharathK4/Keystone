@@ -407,3 +407,34 @@ def get_demo_settings() -> DemoSettings:
 
 def reset_demo_settings_cache() -> None:
     get_demo_settings.cache_clear()
+
+
+class DisplaySettings(BaseSettings):
+    """How the interface prints money. Presentation only; nothing is computed in it.
+
+    The synthetic network is generated in rupees. A reader at a US payment
+    platform should not have to convert crore in their head, so amounts are shown
+    in US dollars by default at one declared rate (``LCE_DISPLAY_USD_PER_INR``).
+    It is a round display rate, not a market quote, and the interface says so.
+    ``LCE_DISPLAY_CURRENCY=INR`` restores rupees.
+    """
+
+    model_config = SettingsConfigDict(
+        env_file=(REPO_ROOT / ".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+        case_sensitive=False,
+        populate_by_name=True,
+    )
+
+    currency: Literal["USD", "INR"] = Field(default="USD", alias="LCE_DISPLAY_CURRENCY")
+    usd_per_inr: Decimal = Field(default=Decimal("0.01"), gt=0, alias="LCE_DISPLAY_USD_PER_INR")
+
+
+@functools.lru_cache(maxsize=1)
+def get_display_settings() -> DisplaySettings:
+    return DisplaySettings()
+
+
+def reset_display_settings_cache() -> None:
+    get_display_settings.cache_clear()
