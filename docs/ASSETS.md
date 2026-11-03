@@ -8,6 +8,7 @@ code from committed artifacts.
 
 | Face | Package | Copyright (from the font's name table) | Licence | Licence text | Used in |
 | --- | --- | --- | --- | --- | --- |
+| Instrument Serif | `@fontsource/instrument-serif` 5.3.0 | Copyright 2022 The Instrument Serif Project Authors | SIL OFL 1.1 | [`docs/licences/instrument-serif-OFL.txt`](licences/instrument-serif-OFL.txt) | the product's display face (`--display` in `frontend/src/styles/tokens.css`): the walk and the Evidence gallery |
 | IBM Plex Mono | `@fontsource/ibm-plex-mono` 5.2.5 | Copyright 2017 IBM Corp. | SIL OFL 1.1 | [`design/fonts/licenses/ibm-plex-mono-OFL.txt`](../design/fonts/licenses/ibm-plex-mono-OFL.txt) | figures on all concept boards |
 | Source Serif 4 | `@fontsource/source-serif-4` 5.2.5 | © 2014–2021 Adobe Systems Incorporated, with Reserved Font Name "Source" | SIL OFL 1.1 | [`design/fonts/licenses/source-serif-4-OFL.txt`](../design/fonts/licenses/source-serif-4-OFL.txt) | Board A, specimen |
 | Libre Caslon Text | `@fontsource/libre-caslon-text` 5.2.5 | Copyright 2012 The Libre Caslon Text Project Authors | SIL OFL 1.1 | [`design/fonts/licenses/libre-caslon-text-OFL.txt`](../design/fonts/licenses/libre-caslon-text-OFL.txt) | Board B, specimen |
@@ -32,7 +33,7 @@ embedded anywhere.
 | Asset | Where it is | Licence | Status |
 | --- | --- | --- | --- |
 | Against, Emotions Condensed, Wolfgang (`fonts/*.zip`) | local only; untracked on `paypal` | personal use only, no commercial use | never used by Keystone deliverables |
-| Against (`frontend/public/fonts/against-regular.otf`) | the frontend's display face | personal use only | kept for the demo by the human's decision (2026-10-23); one token in `tokens.css` to swap |
+| Against (`frontend/public/fonts/against-regular.otf`) | still in the tree, no longer loaded | personal use only | replaced by Instrument Serif on 2026-11-03 (quiet-demo brief); the file is removed from the repository with the publish copy |
 
 Both are present in the public original repository's history (`origin/master`);
 the Phase 3 publish copy removes them.
