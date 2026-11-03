@@ -62,6 +62,17 @@
   animation: rise 900ms var(--ease) 220ms forwards;
 }
 
+.ks__audience {
+  margin-top: 10px;
+  max-width: 54ch;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--ink-3);
+  letter-spacing: 0.008em;
+  opacity: 0;
+  animation: rise 900ms var(--ease) 300ms forwards;
+}
+
 /* ------------------------------------------------------------------- grid */
 
 .ks__grid {
@@ -98,5 +109,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ks__masthead, .ks__standfirst { animation: none; opacity: 1; }
+  .ks__masthead, .ks__standfirst, .ks__audience { animation: none; opacity: 1; }
 }

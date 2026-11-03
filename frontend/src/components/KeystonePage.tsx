@@ -78,10 +78,16 @@ export function KeystonePage() {
       <header className="ks__masthead">
         <h1 className="ks__wordmark">Keystone</h1>
         {structure ? (
-          <p className="ks__standfirst">
-            A liquidity shock at one merchant, followed all the way to the capital that
-            stops it, and paid in the PayPal sandbox once a person signs.
-          </p>
+          <>
+            <p className="ks__standfirst">
+              A liquidity shock at one merchant, followed all the way to the capital that
+              stops it, and paid in the PayPal sandbox once a person signs.
+            </p>
+            <p className="ks__audience">
+              For the risk and working-capital teams at a payment platform: the one party
+              that sees both sides of every payment.
+            </p>
+          </>
         ) : null}
       </header>
 

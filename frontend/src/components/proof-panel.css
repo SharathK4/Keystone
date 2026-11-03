@@ -39,34 +39,50 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.pp__lines {
+.pp__claims {
   list-style: none;
   margin: 0;
   padding: 0;
-  columns: 2 240px;
-  column-gap: 36px;
-  font-size: 13px;
-  letter-spacing: 0.01em;
+  max-width: 760px;
 }
-.pp__lines li {
-  break-inside: avoid;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(244, 244, 250, 0.12);
-  color: rgba(244, 244, 250, 0.82);
+.pp__claims li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  column-gap: 4px;
+  row-gap: 3px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(244, 244, 250, 0.14);
+  color: rgba(244, 244, 250, 0.94);
 }
-.pp__lines i {
-  display: inline-block;
-  width: 20px;
+.pp__claims i {
+  grid-row: span 2;
   font-style: normal;
+  font-size: 15px;
+  line-height: 1.35;
   color: #f3b49b;
 }
-.pp__lines li.is-failed {
+.pp__claim {
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: 0.005em;
+}
+.pp__count {
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(244, 244, 250, 0.66);
+}
+.pp__claims li.is-failed .pp__claim,
+.pp__claims li.is-failed .pp__count {
   color: #f3b49b;
 }
-.pp__more {
+.pp__claims li.pp__more {
+  display: block;
+  padding-left: 30px;
+  border-bottom: 0;
   font-style: italic;
-  color: rgba(244, 244, 250, 0.6) !important;
-  border-bottom: 0 !important;
+  font-size: 13px;
+  color: rgba(244, 244, 250, 0.7);
 }
 
 @media (max-width: 760px) {
@@ -76,8 +92,10 @@
     gap: 22px;
     padding: 24px;
   }
-  .pp__lines {
-    columns: 1;
+  .pp__claims {
     width: 100%;
+  }
+  .pp__claim {
+    font-size: 14px;
   }
 }
