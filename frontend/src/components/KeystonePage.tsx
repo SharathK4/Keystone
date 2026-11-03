@@ -73,10 +73,12 @@ export function KeystonePage() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
+  // With nothing open the hash is #evidence, so closing an analysis keeps the
+  // reader on this page rather than returning them to the walk.
   useEffect(() => {
-    const next = open ? `#${open}` : ' '
-    if (window.location.hash !== (open ? `#${open}` : '')) {
-      window.history.replaceState(null, '', next === ' ' ? window.location.pathname : next)
+    const next = open ? `#${open}` : '#evidence'
+    if (window.location.hash !== next) {
+      window.history.replaceState(null, '', next)
     }
   }, [open])
 

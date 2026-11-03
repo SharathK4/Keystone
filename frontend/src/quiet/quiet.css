@@ -1,0 +1,390 @@
+/* The walk. Paper and ink, one display face, and a great deal of nothing.
+ *
+ * Scenes are a full screen tall with a fifth of a screen between them; the
+ * column never passes 34rem and the focal object never passes 360px. Nothing
+ * animates on its own: the only motion is a single 180 ms fade or colour change
+ * on whatever just changed, and reduced motion removes even that. */
+
+.q {
+  position: relative;
+  z-index: 1;
+  color: var(--ink);
+}
+
+/* ------------------------------------------------------------------ chrome */
+
+.q-top {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+  pointer-events: none;
+}
+.q-top > * {
+  pointer-events: auto;
+}
+.q-wordmark {
+  font-family: var(--display);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+}
+.q-currency {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  font: 600 11px var(--text);
+  letter-spacing: 0.12em;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.q-currency .is-on {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.q-ticks {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transform: translateY(-50%);
+}
+.q-tick {
+  display: block;
+  width: 14px;
+  height: 2px;
+  background: var(--ink-3);
+}
+.q-tick.is-later {
+  background: var(--border-strong);
+}
+
+/* ------------------------------------------------------------------ scenes */
+
+.q-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 72px 24px 48px;
+  text-align: center;
+  scroll-margin-top: 0;
+}
+.q-scene + .q-scene {
+  margin-top: 20vh;
+}
+.q-col {
+  max-width: 34rem;
+}
+/* Text boxes hug their text, so the space a scene claims is the space it uses. */
+.q-head,
+.q-sentence {
+  width: fit-content;
+  margin-inline: auto;
+}
+.q-head {
+  margin-block: 0;
+  font-family: var(--display);
+  font-size: clamp(40px, 5.2vw, 68px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.q-sentence {
+  margin-top: 18px;
+  margin-bottom: 0;
+  max-width: 36ch;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-1);
+}
+.q-focal {
+  width: min(360px, 72vw);
+  margin-top: 44px;
+}
+.q-focal--chart {
+  width: min(360px, 82vw);
+}
+.q-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: min(26rem, 84vw);
+  margin-top: 36px;
+}
+.q-stamps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 34rem;
+  min-height: 24px;
+  margin: 22px 0 0;
+}
+.q-stamp {
+  padding: 3px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+.q-note {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+/* ---------------------------------------------------------------- controls */
+
+.q-btn {
+  padding: 11px 22px;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  font: 500 13px var(--text);
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.q-btn:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+.q-btn:disabled {
+  border-color: var(--border-strong);
+  color: var(--ink-2);
+  cursor: default;
+}
+.q-btn:focus-visible,
+.q-input:focus-visible,
+.q-link:focus-visible,
+.q-delay:focus-visible,
+.q-currency:focus-visible,
+.q-wordmark:focus-visible,
+.q-tick:focus-visible,
+.q-chip-clear:focus-visible,
+.q-dot-mark:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.q-input {
+  width: 100%;
+  padding: 10px 2px;
+  border: 0;
+  border-bottom: 1px solid var(--border-strong);
+  background: transparent;
+  font: 16px var(--text);
+  text-align: center;
+  color: var(--ink);
+}
+.q-input::placeholder {
+  color: var(--ink-3);
+}
+.q-input:disabled {
+  opacity: 0.7;
+}
+.q-chip-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+.q-chip {
+  white-space: nowrap;
+  padding: 3px 9px;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  font: 12px var(--mono);
+  color: var(--ink-1);
+  animation: q-in 180ms var(--ease);
+}
+.q-chip-clear {
+  padding: 0 6px;
+  border: 0;
+  background: none;
+  font-size: 15px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.q-link {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 4px;
+}
+.q-link:hover {
+  text-decoration-color: var(--ink);
+}
+.q-link--quiet {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------- dot field */
+
+.q-field {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.q-field-placeholder {
+  width: 100%;
+  aspect-ratio: 1;
+}
+.q-dot {
+  fill: #c9ccdc;
+}
+.q-dot-hit {
+  fill: transparent;
+}
+.q-dot-mark {
+  outline: none;
+  animation: q-in 180ms var(--ease);
+}
+.q-dot-mark.is-hit .q-dot-shape {
+  fill: var(--accent);
+}
+.q-dot-mark.is-reached .q-dot-shape {
+  fill: var(--paper);
+  stroke: var(--accent);
+  stroke-width: 1.3;
+}
+
+/* ------------------------------------------------------------------- chart */
+
+.q-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.q-chart-base {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+.q-line {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+.q-line.is-chosen {
+  stroke: var(--ink);
+}
+.q-line.is-replanned {
+  stroke: var(--accent);
+  stroke-dasharray: 3 4;
+}
+.q-line-name {
+  font: 10.5px var(--text);
+  fill: var(--ink-2);
+}
+.q-chart-at line {
+  stroke: var(--border-strong);
+  stroke-dasharray: 2 3;
+}
+.q-chart-at circle {
+  fill: var(--accent);
+}
+.q-chart-at text {
+  font: 600 12px var(--text);
+  fill: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.q-delays {
+  position: relative;
+  height: 30px;
+  margin-top: 8px;
+}
+.q-delay {
+  position: absolute;
+  top: 0;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  font: 12px var(--text);
+  color: var(--ink-2);
+  transform: translateX(-50%);
+  cursor: pointer;
+}
+.q-delay[aria-checked='true'] {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ------------------------------------------------------------------ footer */
+
+.q-foot {
+  padding: 16vh 0 8vh;
+  text-align: center;
+}
+
+@keyframes q-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .q-top {
+    padding: 14px 18px;
+  }
+  .q-ticks {
+    right: 8px;
+    gap: 10px;
+  }
+  .q-tick {
+    width: 10px;
+  }
+  .q-sentence {
+    font-size: 16px;
+  }
+  .q-focal {
+    width: min(220px, 58vw);
+    margin-top: 28px;
+  }
+  .q-control {
+    width: min(26rem, 74vw);
+    margin-top: 28px;
+  }
+  .q-focal--chart {
+    width: min(330px, 80vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .q-chip,
+  .q-dot-mark {
+    animation: none;
+  }
+  .q-btn {
+    transition: none;
+  }
+}

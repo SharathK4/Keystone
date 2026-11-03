@@ -37,6 +37,10 @@ import type {
   ReentryView,
   SpeedScenarioView,
   SpeedSummary,
+  WalkAskView,
+  WalkFireView,
+  WalkSpeedView,
+  WalkView,
 } from './schema'
 
 // Same origin by default; a separately hosted frontend sets VITE_API_BASE.
@@ -136,6 +140,13 @@ export const api = {
   execution: () => cached<ExecutionStatus>('/execution/status'),
   snapshot: () => cached<SnapshotHealth>('/snapshot'),
   display: () => cached<DisplayView>('/display'),
+
+  // The walk. Its mode can change (a recording lands), so it is never cached;
+  // firing and asking are user actions and always reach the server.
+  walk: () => request<WalkView>('/walk'),
+  walkFire: () => request<WalkFireView>('/walk/fire', {}),
+  walkAsk: (text: string) => request<WalkAskView>('/walk/ask', { text }),
+  walkSpeed: () => cached<WalkSpeedView>('/walk/speed'),
 
   // Offline, content-addressed artifacts: frozen like the snapshot, so cached.
   pulls: () => cached<PullsView>('/structure/pulls'),
