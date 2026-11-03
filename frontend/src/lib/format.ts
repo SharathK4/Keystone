@@ -112,3 +112,13 @@ export const SCENARIO_LABEL: Record<string, string> = {
 export function scenarioLabel(family: string): string {
   return SCENARIO_LABEL[family] ?? humanise(family)
 }
+
+/** Provenance tokens that name a method, in words. Unknown ones are humanised. */
+const OPTIMISER_LABEL: Record<string, string> = {
+  greedy_objective: 'greedy search, every plan scored by replay',
+}
+
+export function optimiserLabel(token: string | null | undefined): string | undefined {
+  if (!token) return undefined
+  return OPTIMISER_LABEL[token] ?? humanise(token)
+}

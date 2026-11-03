@@ -22,10 +22,10 @@
 
 .nv__band-label {
   font-family: var(--text);
-  font-size: 8.5px;
+  font-size: 9px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  fill: var(--ink-4);
+  fill: var(--ink-3);
 }
 
 /* ------------------------------------------------------------------ chords */

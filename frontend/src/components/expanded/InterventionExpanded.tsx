@@ -35,7 +35,18 @@ import type {
 } from '../../api/types'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
 import { CostOfWaiting } from '../CostOfWaiting'
-import { count, hours, humanise, idx, inr, inrExact, multiple, pct, ratio } from '../../lib/format'
+import {
+  count,
+  hours,
+  humanise,
+  idx,
+  inr,
+  inrExact,
+  multiple,
+  optimiserLabel,
+  pct,
+  ratio,
+} from '../../lib/format'
 import './intervention-expanded.css'
 
 interface Props {
@@ -402,7 +413,7 @@ export function InterventionExpanded({
             </XSection>
 
             {/* ------------------------------------------------- the method */}
-            <XSection label="How this was measured" note={scenario.provenance.optimizer}>
+            <XSection label="How this was measured" note={optimiserLabel(scenario.provenance.optimizer)}>
               <p className="ix__method">
                 Candidates are generated from observable network properties, then each plan is
                 replayed against the same shock with the same random draws. What is reported is the

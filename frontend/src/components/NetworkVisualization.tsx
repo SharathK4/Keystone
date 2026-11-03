@@ -67,6 +67,9 @@ export function NetworkVisualization({
     <svg
       className={`nv${compact ? ' nv--compact' : ''}${onDark ? ' nv--dark' : ''}`}
       viewBox={`0 0 ${size} ${size}`}
+      // Tier labels sit outside the ring and the side ones run past the square;
+      // let them, rather than shrink the ring to make room or clip "medium".
+      overflow={compact ? undefined : 'visible'}
       role="img"
       aria-label="Merchant dependency network: merchants on a ring ordered by tier, dependencies as chords"
       onPointerLeave={() => {

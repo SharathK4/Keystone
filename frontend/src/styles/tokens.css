@@ -35,12 +35,15 @@
   --surface-2: #ecedf6;
   --surface-sunk: #e3e5f1;
 
-  /* ---- ink ---- */
+  /* ---- ink ----
+   * Contrast on --surface: ink-2 5.9:1 and ink-3 4.8:1 (AA body text); ink-4
+   * 3.4:1, for captions set large or uppercase-tracked and for hairlines. The
+   * old ramp sat at 2.8:1 and 1.9:1, which read as decoration, not text. */
   --ink: #15161d;
   --ink-1: #383a47;
-  --ink-2: #6e7180;
-  --ink-3: #9698a8;
-  --ink-4: #b8bac9;
+  --ink-2: #5f6272;
+  --ink-3: #6c6f80;
+  --ink-4: #858899;
 
   /* ---- structure ---- */
   --border: #dcdeeb;

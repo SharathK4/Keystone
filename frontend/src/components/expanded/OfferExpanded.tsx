@@ -173,7 +173,14 @@ export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
                     }
                   />
                   <Term k="Status" v={offer.status} />
-                  <Term k="Objective movement" v={idx(benefit?.disruption_prevented)} />
+                  <Term
+                    k="Disruption cut"
+                    v={
+                      benefit?.disruption_prevented !== undefined
+                        ? `${idx(benefit.disruption_prevented)} index units`
+                        : '—'
+                    }
+                  />
                 </dl>
                 <p className="ox__disclaimer">{offer.disclaimer}</p>
               </XSection>

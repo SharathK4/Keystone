@@ -50,7 +50,9 @@
 }
 
 .ks__standfirst {
-  margin-top: 30px;
+  /* Clear the wordmark's descender (the "y" drops about 0.26em below its
+   * tight line box), plus air - so it tracks the wordmark's own clamp. */
+  margin-top: calc(clamp(58px, 8.6vw, 138px) * 0.26 + 18px);
   max-width: 46ch;
   font-size: 13px;
   line-height: 1.6;
@@ -92,7 +94,7 @@
 @media (max-width: 720px) {
   .ks { padding: 36px 18px 30px; }
   .ks__wordmark { font-size: clamp(40px, 13vw, 72px); }
-  .ks__standfirst { margin-top: 18px; font-size: 12px; }
+  .ks__standfirst { margin-top: calc(clamp(40px, 13vw, 72px) * 0.26 + 12px); font-size: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

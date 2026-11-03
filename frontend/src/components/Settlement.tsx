@@ -117,6 +117,9 @@ function Status({ paypal, demo }: { paypal: PayPalStatusView; demo: DemoStatusVi
 /* ------------------------------------------------------------------ plan */
 
 function PlanTable({ plan }: { plan: ExecutablePlanView }) {
+  // The backend totals only what is payable now, to mapped accounts. With no
+  // account mapped that total is a true $0.00 that reads like a bug, so say why.
+  const anyMapped = plan.actions.some((a) => a.recipient)
   return (
     <div className="st__plan">
       <table className="st__table">
@@ -155,8 +158,12 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
               Total
             </th>
             <td className="is-num num">{inr(Number(plan.replayed_cost_inr))}</td>
-            <td className="is-num num">{usd(plan.executed_total.value)}</td>
-            <td className="st__muted">sandbox column: payable now, to mapped accounts</td>
+            <td className="is-num num">{anyMapped ? usd(plan.executed_total.value) : '—'}</td>
+            <td className="st__muted">
+              {anyMapped
+                ? 'sandbox column: payable now, to mapped accounts'
+                : 'payable once a sandbox account is mapped'}
+            </td>
           </tr>
         </tfoot>
       </table>
