@@ -79,6 +79,9 @@ def diagnose(*, probe: bool = False, public_url: str | None = None) -> list[Chec
             token = client.probe_token()
         checks.append(Check("token", "ok" if token.available else "missing", token.reason,
                             None if token.available else "check the client id and secret"))
+    elif probe:
+        checks.append(Check("token", "unchecked", "PayPal was not called: no usable credentials",
+                            "set the credentials above, then run this again with --probe"))
     else:
         checks.append(Check("token", "unchecked", "PayPal was not called",
                             "lce paypal doctor --probe (one token request)"))
