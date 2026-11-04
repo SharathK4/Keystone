@@ -257,6 +257,16 @@ push URL is disabled locally).
 - **Tests:** 617 passed with the new `.env`.
 - **Risk:** the sandbox payer account is **IN** (the developer account's default). Whether an IN business account may send Payouts is unverified. The payouts probe settles it once keys exist; the fallback is a US Business sandbox account with an app created under it.
 
+**Nov 4 probe.**
+- **Keys:** the owner pasted the PayPal keys. Saving the file from their editor dropped the Anthropic key I had added, so it was re-added.
+- **Read-only probes:**
+  - token issued;
+  - Payouts permitted (missing batch → 404);
+  - Invoicing **403 NOT_AUTHORIZED** (invoicing is cut anyway);
+  - webhooks API 200.
+- **The app:** after a restart, `/execution/status` reports configured with Payouts available, and the canonical plan is payable to mapped accounts ($1,123.40). The desk reads "PayPal sandbox connected".
+- **Still unverified:** a real payout from the **IN** payer. A probe cannot tell whether it holds USD. If its balance is INR, USD payouts may fail, since India is excluded from payouts currency conversion. S2 (one $1 payout) settles it; the fallback is a US Business sandbox app.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
