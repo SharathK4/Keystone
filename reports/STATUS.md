@@ -244,6 +244,19 @@ push URL is disabled locally).
 - **Needs the human:** keys in `.env`; `paypal doctor`; map m0038, m0005, m0009; deploy and webhook.
 - **Next:** Nov 5 deploy, trigger research and recording. Nov 6–7 the LLM parser and narration, and scenes 4–5 using the full plan from the replay.
 
+**Nov 4 check.**
+- **Anthropic:** the key is in `.env` and verified with one read-only model listing (200).
+- **PayPal:** the keys were **not** in `.env` (it was last saved on Sep 2). Empty `PAYPAL_*` lines were added for the owner to fill.
+- **Identities** are mapped in `artifacts/runs/live.sqlite`:
+  - m0005 → `sb-47gmny53708508@personal.example.com` (US personal);
+  - m0009 → `sb-x0xaw53687003@personal.example.com` (**IN** personal);
+  - m0038 → `keystone-m0038-unclaimed@example.com` (no account, so its payout should go unclaimed).
+- **The live config serves:**
+  - The canonical plan is complete and payable to mapped accounts ($1,123.40).
+  - The walk fires through re-entry, which is now *analysed* and persisted because m0038 is mapped.
+- **Tests:** 617 passed with the new `.env`.
+- **Risk:** the sandbox payer account is **IN** (the developer account's default). Whether an IN business account may send Payouts is unverified. The payouts probe settles it once keys exist; the fallback is a US Business sandbox account with an app created under it.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
