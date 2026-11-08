@@ -20,6 +20,7 @@
 .tile--clay  .tile__glow { background: rgba(160, 110, 44, 0.4); }
 .tile--ember .tile__glow { background: var(--product-glow); }
 .tile--graphite .tile__glow { background: rgba(40, 42, 54, 0.42); }
+.tile--pearl .tile__glow { background: transparent; }
 
 .tile__body {
   position: relative;
@@ -47,6 +48,7 @@
 .tile--clay  .tile__body { background: linear-gradient(152deg, #9c6c33, #75491a 52%, #4a2c0b); }
 .tile--ember .tile__body { background: linear-gradient(150deg, #f08a45, #d9501f 52%, #b3350f); }
 .tile--graphite .tile__body { background: linear-gradient(152deg, #4a4c58, #2c2e38 54%, #1a1b22); }
+.tile--pearl .tile__body { background: linear-gradient(152deg, #ffffff, #eef0f8 52%, #dfe2f0); }
 
 /* ---- generated surface ---- */
 

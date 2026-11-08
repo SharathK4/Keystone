@@ -12,58 +12,10 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
 import type { ProofView } from '../api/schema'
+import { CLAIMS, tally } from '../lib/proofClaims'
 import { Panel } from './Panel'
 import { TexturedTile } from './TexturedTile'
 import './proof-panel.css'
-
-interface Claim {
-  title: string
-  /** Audit lines from the proof artifact that back the claim. */
-  checks: string[]
-  /** Also count the leakage barrier, one check per scenario. */
-  leakage?: boolean
-}
-
-const CLAIMS: Claim[] = [
-  {
-    title: 'PayPal is fenced: sandbox only, paid at most once, unverified webhooks refused',
-    checks: [
-      'paypal_live_mode_refused',
-      'paypal_production_host_refused',
-      'paypal_generic_interface_cannot_pay',
-      'paypal_unverified_webhook_refused',
-      'paypal_terminal_status_never_regresses',
-      'paypal_reconcile_never_resubmits',
-      'demo_recorded_mode_needs_token',
-    ],
-  },
-  {
-    title: 'Every plan is scored by replaying the same week, not by the model that proposed it',
-    checks: [
-      'on_demand_analysis_is_deterministic',
-      'on_demand_analysis_is_bounded',
-      'every_scenario_has_provenance',
-      'speed_artifact_verified',
-      'speed_zero_delay_matches_snapshot',
-    ],
-  },
-  {
-    title: 'Dependencies are estimated from history that ends before the shock they are tested on',
-    checks: ['snapshot_carries_no_payment_history', 'snapshot_overlay_is_estimated'],
-    leakage: true,
-  },
-]
-
-function tally(proof: ProofView, claim: Claim) {
-  const byName = new Map(proof.audit.map((a) => [a.name, a.passed]))
-  let total = claim.checks.length
-  let passed = claim.checks.filter((n) => byName.get(n) === true).length
-  if (claim.leakage) {
-    total += proof.leakage.length
-    passed += proof.leakage.filter((r) => r.holds).length
-  }
-  return { passed, total }
-}
 
 export function ProofPanel({ onOpen }: { onOpen: () => void }) {
   const [proof, setProof] = useState<ProofView | null>(null)
@@ -82,12 +34,12 @@ export function ProofPanel({ onOpen }: { onOpen: () => void }) {
     <Panel
       index={5}
       title="The proof"
-      subtitle="What was checked and measured, and what failed, before any number above is trusted."
-      reveals="Open the certificate"
+      subtitle="What we checked, and what we can’t promise."
+      reveals="See the checks"
       onOpen={onOpen}
       className="card--wide"
     >
-      <TexturedTile tone="graphite" seed={proof?.artifact_id ?? 'proof'} className="pp">
+      <TexturedTile tone="pearl" seed={proof?.artifact_id ?? 'proof'} className="pp">
         <div className="pp__body">
           <svg className="pp__seal" viewBox="0 0 200 200" aria-hidden="true">
             <defs>
@@ -112,12 +64,12 @@ export function ProofPanel({ onOpen }: { onOpen: () => void }) {
                     <i aria-hidden="true">{held ? '✓' : '†'}</i>
                     <span className="pp__claim">{c.title}</span>
                     <span className="pp__count num">
-                      {passed} of {total} checks {held ? 'pass' : 'pass — see the certificate'}
+                      {passed}/{total} checks pass
                     </span>
                   </li>
                 )
               })}
-              <li className="pp__more">and what failed, listed first inside</li>
+              <li className="pp__more">and what we can’t promise, inside</li>
             </ul>
           ) : null}
         </div>

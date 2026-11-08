@@ -13,7 +13,7 @@
 import type { ExecutionStatus, ScenarioSnapshot } from '../api/types'
 import { Panel } from './Panel'
 import { ContractCard } from './ContractCard'
-import { repaymentSummary, resolveOfferCopy } from '../lib/offerCopy'
+import { repaymentSummary } from '../lib/offerCopy'
 import './offer-panel.css'
 
 interface Props {
@@ -25,16 +25,13 @@ interface Props {
 
 export function OfferPanel({ scenario, execution, busy, onOpen }: Props) {
   const offer = scenario?.offer ?? null
-  const copy = offer ? resolveOfferCopy(offer.intervention_type, scenario?.family) : null
 
   return (
     <Panel
       index={4}
-      title="The offer"
-      subtitle={
-        copy ? copy.subtitle : 'A liquidity offer written around one merchant’s payment cycle.'
-      }
-      reveals={offer ? 'Open the contract' : 'See why no offer was written'}
+      title="Pay with PayPal"
+      subtitle="A person approves; PayPal pays the merchants."
+      reveals={offer ? 'Approve and pay' : 'See why there is nothing to pay'}
       onOpen={onOpen}
     >
       <div className={`op${busy ? ' is-busy' : ''}`}>
@@ -49,11 +46,8 @@ export function OfferPanel({ scenario, execution, busy, onOpen }: Props) {
           />
         ) : (
           <div className="op__empty">
-            <p className="op__empty-title">Nothing to offer here.</p>
-            <p className="op__empty-body">
-              An offer is only written where the search found an action that measurably held the
-              chain together. For this scenario it did not.
-            </p>
+            <p className="op__empty-title">Nothing to pay here.</p>
+            <p className="op__empty-body">No rescue the search tried made a difference.</p>
             <span className={`op__mode${execution.api_reachable ? ' is-live' : ''}`}>
               {execution.provider.replace('_', ' ')} · {execution.mode}
             </span>

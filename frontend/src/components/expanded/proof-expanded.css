@@ -147,3 +147,116 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---- the redesign: claims, limits, three numbers, the barrier ---- */
+
+.px__claims {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.px__claims li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 22px 24px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+.px__claims li.is-failed {
+  border-color: var(--accent-line);
+}
+.px__count {
+  font-family: var(--display);
+  font-size: 56px;
+  line-height: 0.9;
+  color: var(--ink);
+}
+.px__count em {
+  font-style: normal;
+  font-size: 22px;
+  color: var(--ink-3);
+}
+.px__claims li.is-failed .px__count {
+  color: var(--accent);
+}
+.px__claim {
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--ink-1);
+}
+
+.px .px__failed {
+  display: block;
+  counter-reset: none;
+}
+.px .px__failed li {
+  padding: 12px 0 12px 22px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  background: none;
+  font-size: 15px;
+  color: var(--ink-1);
+}
+.px .px__failed li::before {
+  content: '†';
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: auto;
+  height: auto;
+  background: none;
+  font: inherit;
+  color: var(--accent);
+}
+
+.px__numbers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.px__numbers li {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+.px__numbers .num {
+  font-family: var(--display);
+  font-size: 44px;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.px__all {
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.px__all summary {
+  cursor: pointer;
+  font: 600 11px var(--text);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.px__all[open] summary {
+  margin-bottom: 14px;
+}
+
+@media (max-width: 760px) {
+  .px__claims,
+  .px__numbers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

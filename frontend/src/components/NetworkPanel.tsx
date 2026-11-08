@@ -38,8 +38,8 @@ export function NetworkPanel({ merchants, dependencies, systemic, onOpen }: Prop
     <Panel
       index={1}
       title="The network"
-      subtitle="See which merchants the rest of the chain is quietly leaning on."
-      reveals="Open the dependency structure"
+      subtitle="Who pays whom, learned from payments alone."
+      reveals="See the network"
       onOpen={onOpen}
     >
       <figure className="np">

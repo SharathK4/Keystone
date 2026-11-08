@@ -14,7 +14,7 @@
 import { useId, type ReactNode } from 'react'
 import './textured-tile.css'
 
-export type TileTone = 'ink' | 'slate' | 'clay' | 'ember' | 'graphite'
+export type TileTone = 'ink' | 'slate' | 'clay' | 'ember' | 'graphite' | 'pearl'
 
 interface Props {
   tone: TileTone
@@ -49,6 +49,11 @@ const MATRIX: Record<TileTone, string> = {
              0.44 0.20 0.12 0 -0.14
              0.48 0.22 0.15 0 -0.12
              0    0    0    0  1`,
+  // pearl, for the proof: a pale certificate, the one light tile
+  pearl: `0.10 0.04 0.02 0 0.86
+          0.10 0.04 0.02 0 0.87
+          0.12 0.05 0.03 0 0.92
+          0    0    0    0 1`,
   // ember, the product
   ember: `1.90 0    0    0 -0.18
           0.90 0.50 0    0 -0.24

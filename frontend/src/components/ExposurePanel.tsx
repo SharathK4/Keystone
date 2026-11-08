@@ -26,8 +26,8 @@ export function ExposurePanel({ merchants, scenario, scenarios, busy, onOpen }: 
     <Panel
       index={2}
       title="What breaks"
-      subtitle="Follow one late payment through the chain and see who it reaches."
-      reveals="Open the scenario analysis"
+      subtitle="One missed payment, and who else it reaches."
+      reveals="See who it reaches"
       onOpen={onOpen}
     >
       <div className={`xp${busy ? ' is-busy' : ''}`}>

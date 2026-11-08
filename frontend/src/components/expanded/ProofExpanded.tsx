@@ -1,21 +1,36 @@
 /**
- * 05 expanded — the certificate.
+ * 05 expanded — what we checked.
  *
- * Everything here was produced when the proof artifact was built, from the same
- * frozen snapshot the other four views read; none of it is written by hand. The
- * weaknesses come first, each with the number that shows it, because a reader
- * deciding whether to trust the figures above should meet those before the
- * passes.
+ * Three claims with their pass counts, what we cannot promise, how well the
+ * network was learned, and the barrier that keeps the model from seeing the
+ * payments it is tested on. Everything comes from the proof artifact built
+ * offline; the full list of checks is one click away.
  */
 
 import { useEffect, useState } from 'react'
 import { ApiError, api } from '../../api/client'
 import type { ProofView } from '../../api/schema'
-import { count, hours } from '../../lib/format'
+import { count } from '../../lib/format'
+import { CLAIMS, tally } from '../../lib/proofClaims'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
-import { InferenceQuality } from '../InferenceQuality'
 import { Seal } from '../Seal'
 import './proof-expanded.css'
+
+/** The proof artifact's limit titles, said plainly. Unknown ones show as written. */
+const PLAIN: Record<string, string> = {
+  'Shocks barely cascade on this network': 'On this network a failure rarely spreads past one step.',
+  'Some benchmark scenarios have no plan at all': 'Some failures have no rescue worth paying for.',
+  "The optimiser's candidate list can miss the best plan": 'The search can miss the best rescue.',
+  "One snapshot figure leaves a scenario's own change out":
+    'One reference figure leaves out a scenario’s own change.',
+  'Links are observed; only their strengths are inferred':
+    'Who pays whom is read from payments; only how strongly is learned.',
+  'Webhook certificate chain not validated': 'PayPal’s webhook certificate chain is not checked end to end.',
+}
+
+function plainLimit(title: string): string {
+  return PLAIN[title] ?? title
+}
 
 export function ProofExpanded({ onClose }: { onClose: () => void }) {
   const [proof, setProof] = useState<ProofView | null>(null)
@@ -31,71 +46,84 @@ export function ProofExpanded({ onClose }: { onClose: () => void }) {
     }
   }, [])
 
+  const failedChecks = proof ? proof.audit.filter((a) => !a.passed).length : 0
+  const recovery = proof?.recovery
+  const strength = proof?.recovery.parameters.find((p) => p.name === 'pass_through')
+  const timing = proof?.recovery.parameters.find((p) => p.name === 'lag_mean_hours')
+
   return (
     <ExpandedAnalysis
-      title="Certificate of inspection"
-      subtitle="What was checked, what was measured, and what failed. Built offline from the frozen snapshot, content addressed, and refused by the server if a byte of it changes."
+      title="What we checked"
+      subtitle="Every number on this page passed these checks first."
       onClose={onClose}
     >
       {error ? (
         <p className="px__missing">
-          {error.status === 404 ? 'The proof artifact has not been built on this server, so nothing is shown in its place.' : error.message}
+          {error.status === 404 ? 'The proof has not been built on this server.' : error.message}
         </p>
       ) : !proof ? (
-        <p className="px__missing">Reading the certificate…</p>
+        <p className="px__missing">Reading the checks…</p>
       ) : (
         <div className="px">
-          <div className="px__seals">
-            <Seal src="GET /structure/proof" refId={proof.artifact_id}>
-              content hash <span className="num">{proof.content_hash.slice(0, 16)}</span>
-            </Seal>
-            <span className="px__from">
-              from snapshot <span className="num">{proof.provenance.snapshot_id}</span> and{' '}
-              <span className="num">{proof.provenance.speed_artifact_id}</span>
-            </span>
-          </div>
+          <ul className="px__claims">
+            {CLAIMS.map((c) => {
+              const { passed, total } = tally(proof, c)
+              return (
+                <li key={c.title} className={passed === total ? '' : 'is-failed'}>
+                  <span className="px__count num">
+                    {passed}
+                    <em>/{total}</em>
+                  </span>
+                  <span className="px__claim">{c.title}</span>
+                </li>
+              )
+            })}
+          </ul>
 
-          <XSection label="What failed" note="first, before the passes">
+          <XSection label="What we can’t promise">
             <ol className="px__failed">
               {proof.failed.map((f, i) => (
-                <li key={i}>
-                  <h4>{f.title}</h4>
-                  <p>{f.detail}</p>
+                <li key={i} title={f.detail}>
+                  {plainLimit(f.title)}
                 </li>
               ))}
             </ol>
           </XSection>
 
-          <XSection label="History used to estimate ends before every shock" note="the leakage barrier, per scenario">
+          {recovery ? (
+            <XSection label="How well it learned the network">
+              <ul className="px__numbers">
+                <li>
+                  <span className="num">
+                    {recovery.n_matched}/{recovery.n_true}
+                  </span>
+                  payment links found
+                </li>
+                {strength ? (
+                  <li>
+                    <span className="num">{strength.rank_correlation.toFixed(2)}</span>
+                    how much a shortfall passes on, ranked against the truth
+                  </li>
+                ) : null}
+                {timing ? (
+                  <li>
+                    <span className="num">{timing.rank_correlation.toFixed(2)}</span>
+                    how long it takes to arrive, ranked against the truth
+                  </li>
+                ) : null}
+              </ul>
+            </XSection>
+          ) : null}
+
+          <XSection label="It only saw payments from before each failure">
             <Barrier proof={proof} />
           </XSection>
 
-          <XSection label="How well the links were inferred" note="each strength against the generator’s truth">
-            <InferenceQuality />
-          </XSection>
-
-          <XSection label="Results, with their intervals" note="an interval is printed wherever one exists">
-            <ul className="px__results">
-              {proof.results.map((r, i) => {
-                const pctUnit = r.unit === '%'
-                const f = (v: number) => (pctUnit ? `${v.toFixed(1)}%` : v.toFixed(2))
-                return (
-                  <li key={i}>
-                    <span className="px__rlabel">
-                      {r.label}
-                      <em>{r.note}</em>
-                    </span>
-                    <span className="px__rvalue num">
-                      {f(r.value)}
-                      <em>{r.low !== null && r.high !== null ? `${f(r.low)} – ${f(r.high)}` : 'no interval'}</em>
-                    </span>
-                  </li>
-                )
-              })}
-            </ul>
-          </XSection>
-
-          <XSection label="Checks, as stamped when it was built" note={`${count(proof.audit.length)} checks`}>
+          <details className="px__all">
+            <summary>
+              All {count(proof.audit.length)} checks
+              {failedChecks ? ` · ${failedChecks} failed` : ' · all passed'}
+            </summary>
             <ul className="px__audit">
               {proof.audit.map((a) => (
                 <li key={a.name} className={a.passed ? '' : 'is-failed'}>
@@ -105,7 +133,10 @@ export function ProofExpanded({ onClose }: { onClose: () => void }) {
                 </li>
               ))}
             </ul>
-          </XSection>
+            <Seal src="GET /structure/proof" refId={proof.artifact_id}>
+              content hash <span className="num">{proof.content_hash.slice(0, 16)}</span>
+            </Seal>
+          </details>
         </div>
       )}
     </ExpandedAnalysis>
@@ -143,11 +174,7 @@ function Barrier({ proof }: { proof: ProofView }) {
           )
         })}
       </svg>
-      <p className="px__bnote">
-        Bars are the payment history the estimator saw, clipped on the left: it runs back to hour{' '}
-        <span className="num">{hours(Math.min(...rows.map((r) => r.first_observed_hours ?? 0)))}</span>. The red rule is the shock.
-        In every scenario the last payment seen comes before it.
-      </p>
+      <p className="px__bnote">Bars are the payments it learned from; the red line is the failure.</p>
     </div>
   )
 }
