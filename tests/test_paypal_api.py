@@ -92,7 +92,11 @@ def wired(app_client, extract, memory_session):
 
 class TestStatusIsUnchangedByDefault:
     def test_default_provider_is_still_razorpay(self, app_client, monkeypatch):
+        from lce.config import Settings
+
+        # The shipped default, whatever a developer's .env says.
         monkeypatch.delenv("LCE_EXECUTION_PROVIDER", raising=False)
+        monkeypatch.setitem(Settings.model_config, "env_file", None)
         reset_settings_cache()
         body = app_client.get("/api/v1/execution/status", params={"probe": False}).json()
         assert body["provider"] == "razorpay_test"

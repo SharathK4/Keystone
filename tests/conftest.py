@@ -54,6 +54,7 @@ def _test_environment(
             "LCE_EXECUTION_PROVIDER",
             "LCE_DEMO_MODE",
             "LCE_DEMO_TOKEN",
+            "ANTHROPIC_API_KEY",
             *_PAYPAL_ENV,
         )
     }
@@ -63,7 +64,10 @@ def _test_environment(
     os.environ["LCE_LOG_LEVEL"] = "WARNING"
     os.environ["RANDOM_SEED"] = "1234"
     os.environ["RAZORPAY_MODE"] = "test"
-    os.environ.pop("LCE_EXECUTION_PROVIDER", None)
+    # Pinned, not popped: settings also read the developer's .env, which may
+    # name another provider or hold a real model key. Tests use the defaults.
+    os.environ["LCE_EXECUTION_PROVIDER"] = "razorpay_test"
+    os.environ["ANTHROPIC_API_KEY"] = ""
     os.environ["LCE_DEMO_MODE"] = "off"
     os.environ["LCE_DEMO_TOKEN"] = ""
     if "paypal_live" not in (request.config.option.markexpr or "").replace(
