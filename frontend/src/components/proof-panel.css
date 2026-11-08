@@ -13,7 +13,7 @@
   gap: 48px;
   height: 100%;
   padding: 30px 44px;
-  color: var(--ink);
+  color: rgba(250, 240, 246, 0.94);
 }
 .pp__seal {
   width: clamp(130px, 14vw, 190px);
@@ -21,20 +21,20 @@
 }
 .pp__ring {
   fill: none;
-  stroke: var(--accent-line);
+  stroke: rgba(250, 226, 214, 0.6);
   stroke-width: 1.2;
 }
 .pp__ring--inner {
-  stroke: var(--border-strong);
+  stroke: rgba(250, 226, 214, 0.32);
 }
 .pp__ringtext {
   font: 600 11.5px var(--text);
   letter-spacing: 0.26em;
-  fill: var(--ink-2);
+  fill: rgba(250, 236, 242, 0.85);
 }
 .pp__tick {
   fill: none;
-  stroke: var(--accent);
+  stroke: #f6b79a;
   stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -51,15 +51,15 @@
   column-gap: 4px;
   row-gap: 3px;
   padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  color: var(--ink);
+  border-bottom: 1px solid rgba(250, 236, 242, 0.16);
+  color: rgba(250, 240, 246, 0.95);
 }
 .pp__claims i {
   grid-row: span 2;
   font-style: normal;
   font-size: 15px;
   line-height: 1.35;
-  color: var(--accent);
+  color: #f6b79a;
 }
 .pp__claim {
   font-size: 15px;
@@ -70,11 +70,11 @@
   font-size: 11.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: rgba(250, 236, 242, 0.68);
 }
 .pp__claims li.is-failed .pp__claim,
 .pp__claims li.is-failed .pp__count {
-  color: var(--accent);
+  color: #f6b79a;
 }
 .pp__claims li.pp__more {
   display: block;
@@ -82,7 +82,7 @@
   border-bottom: 0;
   font-style: italic;
   font-size: 13px;
-  color: var(--ink-2);
+  color: rgba(250, 236, 242, 0.75);
 }
 
 @media (max-width: 760px) {

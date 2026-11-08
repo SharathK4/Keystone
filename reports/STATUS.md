@@ -283,6 +283,8 @@ push URL is disabled locally).
   - The "Confidence" block is removed from "What breaks".
 - **README** rewritten PayPal-first and AI-first. New `docs/DEPLOY.md`, `frontend/README.md`, and screenshots in `docs/screens/` (`node frontend/scripts/screens.mjs`). The old Razorpay-era root and frontend screenshots are removed.
 - **Deviation:** commit `923f14a` (the Ask Keystone backend) also carried the staged walk-page deletions, so the frontend does not build at that commit alone. `40b8381` fixes it. Not rewritten (no history rewrites).
+- **Deviation:** the old-screenshot deletions landed in `eae189f` (the tests commit), so the README's image links are broken at that commit only. Not rewritten.
+- **Tests:** a developer's `.env` with `LCE_EXECUTION_PROVIDER` or `ANTHROPIC_API_KEY` used to leak into tests. `conftest.py` now pins both, and the default-provider test ignores `.env`.
 
 ## Leaks
 

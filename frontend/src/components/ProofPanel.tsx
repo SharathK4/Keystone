@@ -39,7 +39,7 @@ export function ProofPanel({ onOpen }: { onOpen: () => void }) {
       onOpen={onOpen}
       className="card--wide"
     >
-      <TexturedTile tone="pearl" seed={proof?.artifact_id ?? 'proof'} className="pp">
+      <TexturedTile tone="plum" seed={proof?.artifact_id ?? 'proof'} className="pp">
         <div className="pp__body">
           <svg className="pp__seal" viewBox="0 0 200 200" aria-hidden="true">
             <defs>
