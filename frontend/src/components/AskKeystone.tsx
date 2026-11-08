@@ -34,9 +34,19 @@ interface Status {
 /** "claude-opus-5-5" -> "Claude Opus 5.5". */
 function modelName(id: string | null | undefined): string {
   if (!id) return 'rules'
-  const m = id.match(/^claude-([a-z]+)-(\d+)(?:-(\d+))?/)
-  if (!m) return id
-  return `Claude ${m[1].charAt(0).toUpperCase()}${m[1].slice(1)} ${m[2]}${m[3] ? `.${m[3]}` : ''}`
+  const m = id.replace(/^anthropic\//, '').match(/^claude-([a-z]+)-(\d+)(?:[-.](\d+))?/)
+  if (m) {
+    return `Claude ${m[1].charAt(0).toUpperCase()}${m[1].slice(1)} ${m[2]}${m[3] ? `.${m[3]}` : ''}`
+  }
+  // Another model through OpenRouter: "nvidia/nemotron-3.5-lightning:free".
+  const name = id.split('/').pop() ?? id
+  const free = name.endsWith(':free')
+  const words = name
+    .replace(/:free$/, '')
+    .split('-')
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ')
+  return `${words}${free ? ' (free)' : ''} via OpenRouter`
 }
 
 const seconds = (ms?: number) =>

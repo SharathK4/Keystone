@@ -267,3 +267,31 @@ def test_the_route_streams_events(store, monkeypatch):
         assert client.post("/api/v1/agent/ask", json={"question": "x"}).status_code == 422
     finally:
         reset_agent_settings_cache()
+
+
+def test_openrouter_uses_the_same_sdk_with_its_base_url():
+    from lce.agent.loop import make_client
+    from lce.config import OPENROUTER_BASE_URL, OPENROUTER_DEFAULT_MODEL
+
+    settings = AgentSettings(OPENROUTER_API_KEY="or-key", ANTHROPIC_API_KEY="", _env_file=None)
+    assert settings.provider == "openrouter" and settings.configured
+    assert settings.model == OPENROUTER_DEFAULT_MODEL
+    client = make_client(settings)
+    assert str(client.base_url).rstrip("/") == OPENROUTER_BASE_URL
+    both = AgentSettings(OPENROUTER_API_KEY="or", ANTHROPIC_API_KEY="an", _env_file=None)
+    assert both.provider == "anthropic" and both.model == "claude-opus-5-5"
+    forced = AgentSettings(OPENROUTER_API_KEY="or", ANTHROPIC_API_KEY="an",
+                           LCE_AGENT_PROVIDER="openrouter", _env_file=None)
+    assert forced.provider == "openrouter" and forced.key == "or"
+
+
+def test_the_refusal_fallback_is_only_sent_to_the_claude_api(store, monkeypatch):
+    import anthropic
+
+    fake = FakeClaude("Fund m0005 and m0009 ({rescue_cost}).")
+    monkeypatch.setattr(anthropic, "Anthropic", lambda **kw: fake)
+    settings = AgentSettings(OPENROUTER_API_KEY="or-key", LCE_AGENT_MODEL="claude-opus-5-5",
+                             _env_file=None)
+    list(run_agent("What if m0038 misses a payment?", Toolbox(store), settings))
+    assert "fallbacks" not in fake.calls[0]
+

@@ -46,6 +46,7 @@ class AgentStatus(BaseModel):
     mode: str
     model: str | None
     effort: str | None
+    provider: str | None = None
 
 
 def _session_factory() -> Any:
@@ -61,7 +62,7 @@ def _session_factory() -> Any:
 def status() -> AgentStatus:
     s = get_agent_settings()
     if s.configured:
-        return AgentStatus(mode="claude", model=s.model, effort=s.effort)
+        return AgentStatus(mode="claude", model=s.model, effort=s.effort, provider=s.provider)
     return AgentStatus(mode="rules", model=None, effort=None)
 
 

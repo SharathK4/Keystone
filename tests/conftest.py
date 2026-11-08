@@ -55,6 +55,8 @@ def _test_environment(
             "LCE_DEMO_MODE",
             "LCE_DEMO_TOKEN",
             "ANTHROPIC_API_KEY",
+            "OPENROUTER_API_KEY",
+            "LCE_AGENT_PROVIDER",
             *_PAYPAL_ENV,
         )
     }
@@ -68,6 +70,8 @@ def _test_environment(
     # name another provider or hold a real model key. Tests use the defaults.
     os.environ["LCE_EXECUTION_PROVIDER"] = "razorpay_test"
     os.environ["ANTHROPIC_API_KEY"] = ""
+    os.environ["OPENROUTER_API_KEY"] = ""
+    os.environ["LCE_AGENT_PROVIDER"] = "auto"
     os.environ["LCE_DEMO_MODE"] = "off"
     os.environ["LCE_DEMO_TOKEN"] = ""
     if "paypal_live" not in (request.config.option.markexpr or "").replace(

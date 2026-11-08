@@ -149,12 +149,12 @@ class ModelUnavailable(Exception):
 def _claude(question: str, run: _Run, settings: AgentSettings) -> Iterator[dict[str, Any]]:
     import anthropic
 
-    client = anthropic.Anthropic(api_key=settings.api_key.get_secret_value(),
-                                 timeout=settings.timeout_s, max_retries=1)
+    client = make_client(settings)
     tools = run.toolbox.definitions()
     messages: list[dict[str, Any]] = [{"role": "user", "content": question}]
     extra: dict[str, Any] = {}
-    if settings.fallbacks and settings.model in FALLBACK_MODELS:
+    if settings.provider == "anthropic" and settings.fallbacks \
+            and settings.model in FALLBACK_MODELS:
         extra = {"betas": ["server-side-fallback-2026-07-01"], "fallbacks": "default"}
 
     yield {"type": "step", "id": "s0", "tool": "read", "label": "Reading your question",
@@ -192,10 +192,22 @@ def _claude(question: str, run: _Run, settings: AgentSettings) -> Iterator[dict[
     yield from _finish(run, text, settings.model)
 
 
+def make_client(settings: AgentSettings) -> Any:
+    """The Anthropic SDK client, pointed at the Claude API or at OpenRouter."""
+    import anthropic
+
+    from lce.config import OPENROUTER_BASE_URL
+
+    if settings.provider == "openrouter":
+        return anthropic.Anthropic(base_url=OPENROUTER_BASE_URL, auth_token=settings.key,
+                                   api_key=None, timeout=settings.timeout_s, max_retries=1)
+    return anthropic.Anthropic(api_key=settings.key, timeout=settings.timeout_s, max_retries=1)
+
+
 def _api_reason(exc: Any) -> str:
     message = str(getattr(exc, "message", "") or "")
-    if "credit balance" in message:
-        return "the Anthropic account has no credit"
+    if "credit balance" in message or getattr(exc, "status_code", None) == 402:
+        return "the model account has no credit"
     if getattr(exc, "status_code", None) == 401:
         return "the Anthropic API key was rejected"
     if getattr(exc, "status_code", None) == 429:
@@ -265,7 +277,8 @@ def run_agent(question: str, toolbox: Toolbox, settings: AgentSettings) -> Itera
     run = _Run(toolbox)
     try:
         if settings.configured:
-            yield {"type": "start", "mode": "claude", "model": settings.model}
+            yield {"type": "start", "mode": "claude", "model": settings.model,
+                   "provider": settings.provider}
             try:
                 yield from _claude(question, run, settings)
             except ModelUnavailable as exc:

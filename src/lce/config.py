@@ -440,15 +440,25 @@ def reset_display_settings_cache() -> None:
     get_display_settings.cache_clear()
 
 
+OPENROUTER_BASE_URL = "https://openrouter.ai/api"
+#: Free on OpenRouter and reliable at tool calls (measured on this project).
+OPENROUTER_DEFAULT_MODEL = "nvidia/nemotron-3.5-lightning:free"
+
+
 class AgentSettings(BaseSettings):
     """The language model behind "Ask Keystone".
 
-    Claude reads a question, calls Keystone's own tools (find a merchant, replay
-    the week without a payment, check a delay, prepare the PayPal payout) and
-    answers in plain words. It never chooses an amount and never pays: the
-    search chooses, a person approves. Without a key - or when the API refuses
-    - the same tools run from a rule-based reading of the question, and the page
-    says so.
+    The model reads a question, calls Keystone's own tools (find a merchant,
+    replay the week without a payment, check a delay, prepare the PayPal
+    payout) and answers in plain words. It never chooses an amount and never
+    pays: the search chooses, a person approves. Without a key - or when the
+    API refuses - the same tools run from a rule-based reading of the question,
+    and the page says so.
+
+    Two providers, one SDK: the Claude API (``ANTHROPIC_API_KEY``), or
+    OpenRouter's Anthropic-compatible endpoint (``OPENROUTER_API_KEY``), which
+    serves Claude and other models behind the same Messages interface. With
+    ``LCE_AGENT_PROVIDER=auto`` OpenRouter is used when only its key is set.
     """
 
     model_config = SettingsConfigDict(
@@ -460,7 +470,13 @@ class AgentSettings(BaseSettings):
     )
 
     api_key: SecretStr = Field(default=SecretStr(""), alias="ANTHROPIC_API_KEY")
-    model: str = Field(default="claude-opus-5-5", alias="LCE_AGENT_MODEL")
+    openrouter_key: SecretStr = Field(default=SecretStr(""), alias="OPENROUTER_API_KEY")
+    provider_choice: Literal["auto", "anthropic", "openrouter"] = Field(
+        default="auto", alias="LCE_AGENT_PROVIDER")
+    #: Empty means the provider's default: claude-opus-5-5 on the Claude API,
+    #: a free tool-calling model on OpenRouter (set an anthropic/... id there
+    #: once the account has credit).
+    model_choice: str = Field(default="", alias="LCE_AGENT_MODEL")
     effort: Literal["low", "medium", "high"] = Field(default="low", alias="LCE_AGENT_EFFORT")
     max_turns: int = Field(default=6, ge=1, le=12, alias="LCE_AGENT_MAX_TURNS")
     #: Server-side refusal fallbacks (Claude API only); off for other gateways.
@@ -468,8 +484,27 @@ class AgentSettings(BaseSettings):
     timeout_s: float = Field(default=60.0, gt=0, alias="LCE_AGENT_TIMEOUT_S")
 
     @property
+    def provider(self) -> Literal["anthropic", "openrouter"]:
+        if self.provider_choice != "auto":
+            return self.provider_choice
+        has_anthropic = bool(self.api_key.get_secret_value())
+        has_openrouter = bool(self.openrouter_key.get_secret_value())
+        return "openrouter" if has_openrouter and not has_anthropic else "anthropic"
+
+    @property
+    def model(self) -> str:
+        if self.model_choice:
+            return self.model_choice
+        return OPENROUTER_DEFAULT_MODEL if self.provider == "openrouter" else "claude-opus-5-5"
+
+    @property
+    def key(self) -> str:
+        secret = self.openrouter_key if self.provider == "openrouter" else self.api_key
+        return secret.get_secret_value()
+
+    @property
     def configured(self) -> bool:
-        return bool(self.api_key.get_secret_value())
+        return bool(self.key)
 
 
 @functools.lru_cache(maxsize=1)
