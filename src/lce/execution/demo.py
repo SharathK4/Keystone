@@ -76,8 +76,12 @@ def check(request: Request, settings: DemoSettings) -> None:
     if not expected or not hmac.compare_digest(supplied.encode(), expected.encode()):
         raise DemoRefused(RECORDED_NOTE, mode=settings.mode)
     scenario_id = request.path_params.get("scenario_id")
-    if scenario_id is not None and scenario_id != settings.scenario_id:
-        raise DemoRefused("The hosted demo executes only the canonical plan.",
+    from lce.agent.plans import is_agent_plan
+
+    allowed = scenario_id == settings.scenario_id or is_agent_plan(scenario_id)
+    if scenario_id is not None and not allowed:
+        raise DemoRefused("The hosted demo executes only the canonical plan or a plan "
+                          "Ask Keystone just found.",
                           scenario_id=scenario_id, allowed=settings.scenario_id)
     wait = limiter.allow(client_key(request), settings.rate_limit, settings.rate_window_s)
     if wait is not None:

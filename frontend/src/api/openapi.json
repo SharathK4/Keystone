@@ -72,6 +72,44 @@
         "title": "AffectedMerchant",
         "type": "object"
       },
+      "AgentStatus": {
+        "additionalProperties": false,
+        "properties": {
+          "effort": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Effort"
+          },
+          "mode": {
+            "title": "Mode",
+            "type": "string"
+          },
+          "model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Model"
+          }
+        },
+        "required": [
+          "mode",
+          "model",
+          "effort"
+        ],
+        "title": "AgentStatus",
+        "type": "object"
+      },
       "AnalyzeRequest": {
         "additionalProperties": false,
         "description": "``POST /scenarios/analyze`` - a shock the caller chose.",
@@ -241,6 +279,22 @@
           "reduction"
         ],
         "title": "ArmResult",
+        "type": "object"
+      },
+      "AskIn": {
+        "additionalProperties": false,
+        "properties": {
+          "question": {
+            "maxLength": 400,
+            "minLength": 3,
+            "title": "Question",
+            "type": "string"
+          }
+        },
+        "required": [
+          "question"
+        ],
+        "title": "AskIn",
         "type": "object"
       },
       "AuditLine": {
@@ -3890,7 +3944,8 @@
           "source": {
             "enum": [
               "recommended",
-              "offer"
+              "offer",
+              "plan"
             ],
             "title": "Source",
             "type": "string"
@@ -7225,6 +7280,66 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/api/v1/agent/ask": {
+      "post": {
+        "operationId": "ask_api_v1_agent_ask_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AskIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask Keystone a question; the answer streams as events",
+        "tags": [
+          "agent"
+        ]
+      }
+    },
+    "/api/v1/agent/status": {
+      "get": {
+        "operationId": "status_api_v1_agent_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentStatus"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Who answers Ask Keystone here",
+        "tags": [
+          "agent"
+        ]
+      }
+    },
     "/api/v1/dashboard": {
       "get": {
         "operationId": "dashboard_api_v1_dashboard_get",

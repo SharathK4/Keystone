@@ -57,7 +57,7 @@ class Recipient:
 @dataclass(frozen=True, slots=True)
 class PlannedAction:
     key: str
-    source: str  # "recommended" | "offer"
+    source: str  # "recommended" | "offer" | "plan" (an Ask Keystone plan)
     merchant_id: str
     action_type: str
     analytic_amount_inr: float
@@ -182,6 +182,55 @@ def build_plan(
         replayed_cost_inr=replayed,
         complete=complete,
         incomplete_reason=reason,
+    )
+    return _with_hash(plan)
+
+
+def build_plan_from_actions(
+    *,
+    scenario_id: str,
+    snapshot_id: str,
+    provider: str,
+    scale: DemoScale,
+    recipients: Mapping[str, Recipient],
+    actions: list[tuple[str, str, float, float]],
+    replayed_cost_inr: float,
+) -> ExecutablePlan:
+    """A plan given as the search's whole list of actions (Ask Keystone).
+
+    ``actions`` are ``(merchant_id, action_type, amount_inr, cost_inr)`` in the
+    order the search chose them. Keys are positional and deterministic - never
+    the analysis's random intervention ids - so asking the same question again
+    yields the same fingerprint. The completeness check is the same as
+    :func:`build_plan`'s.
+    """
+    planned = tuple(
+        PlannedAction(
+            key=f"{scenario_id}:{i}:{merchant_id}",
+            source="plan",
+            merchant_id=merchant_id,
+            action_type=action_type,
+            analytic_amount_inr=amount,
+            analytic_cost_inr=cost,
+            executed=scale.apply(amount),
+            mapping=PAYPAL_MAPPINGS.get(action_type),
+            recipient=recipients.get(merchant_id),
+        )
+        for i, (merchant_id, action_type, amount, cost) in enumerate(actions, start=1)
+    )
+    total = sum(a.analytic_cost_inr or 0.0 for a in planned)
+    complete = bool(planned) and abs(total - replayed_cost_inr) <= COMPLETENESS_RTOL * max(
+        1.0, abs(replayed_cost_inr))
+    plan = ExecutablePlan(
+        snapshot_id=snapshot_id,
+        scenario_id=scenario_id,
+        provider=provider,
+        scale=scale,
+        actions=planned,
+        replayed_cost_inr=replayed_cost_inr,
+        complete=complete,
+        incomplete_reason=None if complete else (
+            "the actions do not add up to the replayed plan's committed capital"),
     )
     return _with_hash(plan)
 

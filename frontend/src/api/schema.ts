@@ -13,6 +13,12 @@ export interface AffectedMerchant {
   tier: string
 }
 
+export interface AgentStatus {
+  mode: string
+  model: string | null
+  effort: string | null
+}
+
 /** ``POST /scenarios/analyze`` - a shock the caller chose. */
 export interface AnalyzeRequest {
   merchant_ids: string[]
@@ -48,6 +54,10 @@ export interface ArmResult {
   merchants_protected: number
   defaults_avoided: number
   reduction: ObjectiveTerms
+}
+
+export interface AskIn {
+  question: string
 }
 
 export interface AuditLine {
@@ -732,7 +742,7 @@ export interface PaymentIn {
 
 export interface PlannedActionView {
   key: string
-  source: "recommended" | "offer"
+  source: "recommended" | "offer" | "plan"
   merchant_id: string
   action_type: string
   analytic_amount_inr: string

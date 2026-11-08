@@ -278,6 +278,10 @@ class SnapshotStore:
         silently returns a worse answer under load is harder to reason about than
         one that says the request is out of scope.
         """
+        self._check_request(merchant_ids, onset_hours)
+        return self._analyze(merchant_ids, magnitude_multiple, onset_hours, max_actions, None)
+
+    def _check_request(self, merchant_ids: list[str], onset_hours: float) -> None:
         if len(self._merchants) > MAX_MERCHANTS_FOR_ON_DEMAND:
             raise ValidationError(
                 f"on-demand analysis is limited to {MAX_MERCHANTS_FOR_ON_DEMAND:,} "
@@ -295,6 +299,34 @@ class SnapshotStore:
                 onset_hours=onset_hours,
             )
 
+    def analyze_with_plan(
+        self,
+        *,
+        merchant_ids: list[str],
+        magnitude_multiple: float = 2.0,
+        onset_hours: float = 0.0,
+        max_actions: int = MAX_ON_DEMAND_ACTIONS,
+    ) -> tuple[ScenarioSnapshot, list[Any]]:
+        """:meth:`analyze`, plus every intervention the search chose.
+
+        The snapshot is identical to :meth:`analyze`'s; the list is the whole
+        plan (the snapshot names only its first action), for a caller that will
+        price and pay it.
+        """
+        plan: list[Any] = []
+        self._check_request(merchant_ids, onset_hours)
+        snapshot = self._analyze(merchant_ids, magnitude_multiple, onset_hours, max_actions,
+                                 plan)
+        return snapshot, plan
+
+    def _analyze(
+        self,
+        merchant_ids: list[str],
+        magnitude_multiple: float,
+        onset_hours: float,
+        max_actions: int,
+        plan_out: list[Any] | None,
+    ) -> ScenarioSnapshot:
         from lce.snapshot.analysis import analyse_shock
 
         with self._lock:  # one analysis at a time keeps the CPU budget predictable
@@ -304,6 +336,7 @@ class SnapshotStore:
                 magnitude_multiple=magnitude_multiple,
                 onset_hours=onset_hours,
                 max_actions=min(max_actions, MAX_ON_DEMAND_ACTIONS),
+                plan_out=plan_out,
             )
             self._analysis_cache[snapshot.scenario_id] = snapshot
         return snapshot

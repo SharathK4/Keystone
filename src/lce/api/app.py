@@ -21,6 +21,7 @@ from fastapi.responses import JSONResponse
 
 from lce import __version__
 from lce.api.routers import (
+    agent,
     analysis,
     analytics,
     display,
@@ -168,6 +169,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(structure.router, prefix=prefix)
     app.include_router(display.router, prefix=prefix)
     app.include_router(walk.router, prefix=prefix)
+    app.include_router(agent.router, prefix=prefix)
 
     @app.get("/", include_in_schema=False)
     def root() -> dict[str, str]:

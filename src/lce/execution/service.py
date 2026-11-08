@@ -206,6 +206,21 @@ class ExecutionService:
         return DemoScale(rate=self.settings.demo_scale, currency=self.settings.demo_currency)
 
     def plan(self, scenario_id: str) -> ExecutablePlan:
+        from lce.agent.plans import get as agent_plan
+        from lce.execution.plan import build_plan_from_actions
+
+        asked = agent_plan(scenario_id)
+        if asked is not None:
+            return build_plan_from_actions(
+                scenario_id=scenario_id,
+                snapshot_id=self.store.snapshot_id,
+                provider=PROVIDER_NAME,
+                scale=self.scale,
+                recipients=self.recipients(),
+                actions=[(a.merchant_id, a.action_type, a.amount_inr, a.cost_inr)
+                         for a in asked.actions],
+                replayed_cost_inr=asked.replayed_cost_inr,
+            )
         scenario = self.store.scenario(scenario_id)
         plan = build_plan(
             scenario,

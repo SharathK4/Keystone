@@ -438,3 +438,44 @@ def get_display_settings() -> DisplaySettings:
 
 def reset_display_settings_cache() -> None:
     get_display_settings.cache_clear()
+
+
+class AgentSettings(BaseSettings):
+    """The language model behind "Ask Keystone".
+
+    Claude reads a question, calls Keystone's own tools (find a merchant, replay
+    the week without a payment, check a delay, prepare the PayPal payout) and
+    answers in plain words. It never chooses an amount and never pays: the
+    search chooses, a person approves. Without a key - or when the API refuses
+    - the same tools run from a rule-based reading of the question, and the page
+    says so.
+    """
+
+    model_config = SettingsConfigDict(
+        env_file=(REPO_ROOT / ".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+        case_sensitive=False,
+        populate_by_name=True,
+    )
+
+    api_key: SecretStr = Field(default=SecretStr(""), alias="ANTHROPIC_API_KEY")
+    model: str = Field(default="claude-opus-5-5", alias="LCE_AGENT_MODEL")
+    effort: Literal["low", "medium", "high"] = Field(default="low", alias="LCE_AGENT_EFFORT")
+    max_turns: int = Field(default=6, ge=1, le=12, alias="LCE_AGENT_MAX_TURNS")
+    #: Server-side refusal fallbacks (Claude API only); off for other gateways.
+    fallbacks: bool = Field(default=True, alias="LCE_AGENT_FALLBACKS")
+    timeout_s: float = Field(default=60.0, gt=0, alias="LCE_AGENT_TIMEOUT_S")
+
+    @property
+    def configured(self) -> bool:
+        return bool(self.api_key.get_secret_value())
+
+
+@functools.lru_cache(maxsize=1)
+def get_agent_settings() -> AgentSettings:
+    return AgentSettings()
+
+
+def reset_agent_settings_cache() -> None:
+    get_agent_settings.cache_clear()

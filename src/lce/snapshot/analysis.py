@@ -83,8 +83,14 @@ def analyse_shock(
     magnitude_multiple: float,
     onset_hours: float,
     max_actions: int,
+    plan_out: list[Any] | None = None,
 ) -> ScenarioSnapshot:
-    """Build, analyse and replay one caller-specified shock."""
+    """Build, analyse and replay one caller-specified shock.
+
+    ``plan_out``, when given, receives every chosen intervention. The snapshot
+    names only the first (``recommended_intervention``); a caller that pays the
+    plan needs all of it. Passing it changes nothing else.
+    """
     started = time.perf_counter()
     graph = store.graph
     sim_config = store.sim_config
@@ -161,6 +167,8 @@ def analyse_shock(
         objective=ObjectiveSpec(),
     )
     chosen = list(solved.interventions)
+    if plan_out is not None:
+        plan_out.extend(chosen)
     treated = (
         replay(graph, shock, chosen, config=sim_config, run_id="adhoc:treated")
         if chosen

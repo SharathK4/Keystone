@@ -74,7 +74,7 @@ class RecipientView(_Contract):
 
 class PlannedActionView(_Contract):
     key: str
-    source: Literal["recommended", "offer"]
+    source: Literal["recommended", "offer", "plan"]
     merchant_id: str
     action_type: str
     analytic_amount_inr: str
