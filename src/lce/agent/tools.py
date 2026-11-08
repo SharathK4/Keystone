@@ -277,7 +277,7 @@ class Toolbox:
         from lce.walk.speed import _shock
 
         plan = plans.get(plan_ref)
-        if plan is None or not plan.interventions:
+        if plan is None or not plan.interventions or plan.analysis is None:
             raise ValidationError("unknown plan_ref; simulate the missed payment first")
         delay = max(0.0, min(float(delay_hours), MAX_DELAY_HOURS))
         horizon = self.store.horizon_hours

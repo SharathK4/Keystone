@@ -1,4 +1,4 @@
-"""Plans found by Ask Keystone, kept so a person can approve and pay them.
+"""Plans found by Ask Keystone or the rule lab, kept so a person can approve and pay them.
 
 An answer's plan is identified by the analysis's own id (``adhoc-…``, a hash of
 the snapshot, merchants, size and timing), so the same question always names
@@ -40,16 +40,21 @@ class AgentPlan:
     merchant_ids: tuple[str, ...]
     magnitude_multiple: float
     onset_hours: float
-    analysis: ScenarioSnapshot
+    #: The search's analysis; ``None`` for a plan a lab rule decided.
+    analysis: ScenarioSnapshot | None
     actions: tuple[PlanAction, ...]
     computed_in_ms: float
     #: The search's own intervention objects, for replaying the plan late.
     interventions: tuple[Any, ...] = ()
     created_at: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
+    #: The plan's own cost when there is no analysis to read it from.
+    cost_inr: float | None = None
 
     @property
     def replayed_cost_inr(self) -> float:
-        return float(self.analysis.counterfactual.cost)
+        if self.cost_inr is not None:
+            return float(self.cost_inr)
+        return float(self.analysis.counterfactual.cost) if self.analysis is not None else 0.0
 
 
 _plans: OrderedDict[str, AgentPlan] = OrderedDict()

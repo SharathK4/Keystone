@@ -91,7 +91,7 @@ class _Run:
         self.sources.append(json.dumps(result.data))
         yield {"type": "step", "id": sid, "tool": name, "status": "error" if result.error
                else "done", "summary": result.summary, "ms": result.ms}
-        if result.plan is not None:
+        if result.plan is not None and result.plan.analysis is not None:
             yield {"type": "scenario", "plan_ref": result.plan.plan_ref,
                    "scenario": result.plan.analysis.model_dump(mode="json")}
         if result.payment is not None:
