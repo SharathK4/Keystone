@@ -74,8 +74,8 @@ export function NetworkExpanded({
 
   return (
     <ExpandedAnalysis
-      title="Where payment dependence actually lives"
-      subtitle="Merchants on a ring ordered by counterparty tier, importance leading each band. Chords are estimated pass-through between merchants, recovered from transaction history alone."
+      title="Who pays whom"
+      subtitle="Each line is a payment link. How much of a shortfall passes along it was learned from payments alone."
       onClose={onClose}
     >
       <div className="nx">
@@ -88,12 +88,11 @@ export function NetworkExpanded({
             onSelect={onSelect}
           />
           <Annotation className="nx__note nx__note--lead" delay={500}>
-            load-bearing — highest measured marginal disruption
+            the one the rest lean on most
           </Annotation>
           {outlier ? (
             <Annotation className="nx__note nx__note--outlier" delay={700}>
-              <span className="num">{outlier.merchant_id}</span> — unusually central for its
-              position
+              <span className="num">{outlier.merchant_id}</span> — more central than its size suggests
             </Annotation>
           ) : null}
           <p className="nx__hint">
@@ -114,7 +113,7 @@ export function NetworkExpanded({
 
               <dl className="nx__rows">
                 <Row
-                  label="Systemic importance"
+                  label="Importance"
                   value={
                     focus.systemic_importance !== null
                       ? focus.systemic_importance.toFixed(3)
@@ -123,17 +122,17 @@ export function NetworkExpanded({
                   sub={focus.systemic_rank !== null ? `rank ${focus.systemic_rank}` : undefined}
                 />
                 <Row
-                  label="Inbound dependencies"
+                  label="Depends on"
                   value={count(focusDetail?.upstream.length ?? focus.in_degree)}
                 />
                 <Row
-                  label="Outbound dependencies"
+                  label="Depended on by"
                   value={count(focusDetail?.downstream.length ?? focus.out_degree)}
                 />
-                <Row label="Payables in horizon" value={money(focus.payables_in_horizon)} />
-                <Row label="Receivables in horizon" value={money(focus.receivables_in_horizon)} />
+                <Row label="Owes this week" value={money(focus.payables_in_horizon)} />
+                <Row label="Is owed this week" value={money(focus.receivables_in_horizon)} />
                 <Row
-                  label="Cover ratio"
+                  label="Cash cover"
                   value={focus.cover_ratio !== null ? multiple(focus.cover_ratio) : 'no payables'}
                   sub={focus.vulnerable ? 'below 1.0×' : undefined}
                   tone={focus.vulnerable ? 'accent' : undefined}
@@ -161,8 +160,7 @@ export function NetworkExpanded({
                 </div>
               ) : focusDetail ? (
                 <p className="nx__isolated">
-                  No estimated dependency either way. This merchant transacts, but the estimator
-                  found no reliable pass-through link to a counterparty.
+                  No learned link either way.
                 </p>
               ) : null}
             </section>
@@ -171,10 +169,10 @@ export function NetworkExpanded({
       </div>
 
       <XSection
-        label="Systemic importance"
-        note={`bar is measured importance · figure is downstream payment value delayed · ${count(
+        label="The merchants the rest lean on"
+        note={`bar: how much their failure would hurt · figure: payments delayed downstream · ${count(
           systemic.n_sampled,
-        )} of ${count(systemic.n_merchants)} merchants probed`}
+        )} of ${count(systemic.n_merchants)} tested`}
       >
         <div className="nx__ranking">
           {systemic.entries.slice(0, 8).map((e) => {
@@ -203,18 +201,18 @@ export function NetworkExpanded({
         </div>
 
         <p className="nx__correlations">
-          Rank correlation against simpler orderings —{' '}
+          Not just size. Agreement with simpler rankings —{' '}
           {Object.entries(systemic.baseline_rank_correlation).map(([k, v], i) => (
             <span key={k}>
               {i > 0 ? ', ' : ''}
               {k.replace(/_/g, ' ')} <b className="num">{v.toFixed(2)}</b>
             </span>
           ))}
-          . Correlated but not equivalent: ranking by size alone picks different merchants.
+          .
         </p>
       </XSection>
 
-      <XSection label="How well the links were inferred" note="each inferred strength, scored against the generator’s truth">
+      <XSection label="How well it learned the links" note="each learned strength, scored against the truth">
         <InferenceQuality />
       </XSection>
     </ExpandedAnalysis>

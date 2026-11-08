@@ -20,6 +20,8 @@ const CLASSES: [RegExp, ProvenanceKind][] = [
   [/^GET \/execution\/ledger/, 'executed_paypal_sandbox'],
   [/^POST \/execution\/plans\/[^/]+\/executions$/, 'executed_paypal_sandbox'],
   [/^POST \/execution\/records\/[^/]+\/refresh$/, 'executed_paypal_sandbox'],
+  // A plan Ask Keystone just found is priced from an analysis run on request.
+  [/^GET \/execution\/plans\/adhoc-/, 'computed_now'],
   [/^GET \/(network|scenarios|structure|offers|execution\/plans)/, 'replayed_offline'],
 ]
 

@@ -17,7 +17,7 @@ import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
 import { PullAMerchant } from '../PullAMerchant'
 import { ExposureDotMatrix } from '../ExposureDotMatrix'
 import { ScenarioSelector } from '../ScenarioSelector'
-import { count, hours, idx, money, pct, scenarioLabel, unitWord } from '../../lib/format'
+import { count, hours, money, pct, scenarioLabel } from '../../lib/format'
 import './exposure-expanded.css'
 
 interface Props {
@@ -43,15 +43,14 @@ export function ExposureExpanded({
   const affected = scenario?.affected_merchants ?? []
   const buckets = scenario?.time_to_constraint ?? []
   const peak = Math.max(1, ...buckets.map((b) => b.n_merchants))
-  const conf = scenario?.confidence
 
   return (
     <ExpandedAnalysis
       title={scenario ? scenarioLabel(scenario.family) : 'Scenario analysis'}
       subtitle={
         scenario
-          ? `${scenario.shock.description}. Every figure below is the shock's attributable contribution — the difference between the network with this shock and the same network without it, not the network's total distress.`
-          : "The shock's attributable contribution, not the network's total distress."
+          ? `${scenario.shock.origin_merchants.join(' and ')} is short ${money(scenario.shock.magnitude)} from hour ${Math.round(scenario.shock.onset_hours)}. Figures count only what this failure adds.`
+          : 'Figures count only what the failure adds.'
       }
       aside={
         <ScenarioSelector
@@ -75,27 +74,27 @@ export function ExposureExpanded({
             }
             lead
           />
-          <Figure value={money(impact?.disrupted_value)} label="disrupted value" />
+          <Figure value={money(impact?.disrupted_value)} label="payments delayed" />
           <Figure
             value={count(impact?.max_cascade_depth)}
-            label="cascade depth"
-            note="hops from origin"
+            label="steps out"
+            note="from the failure"
           />
           <Figure
             value={impact ? `${(impact.systemic_exposure * 100).toFixed(2)}%` : '—'}
-            label="systemic exposure"
-            note="of horizon obligations"
+            label="at risk"
+            note="of this week’s payments"
           />
           <Figure
             value={count(impact?.n_defaulted)}
-            label="defaults in run"
-            note="includes background distress"
+            label="defaults"
+            note="including ones that happen anyway"
           />
         </div>
 
         <XSection
-          label="Every merchant, in cover order"
-          note="one dot per merchant · position is cover, ink is this shock"
+          label="Every merchant, thinnest cash cover first"
+          note="one dot per merchant · colour shows this failure"
         >
           <div className="xx__spectrum">
             <ExposureDotMatrix
@@ -106,12 +105,12 @@ export function ExposureExpanded({
           </div>
         </XSection>
 
-        <XSection label="Pull any merchant" note="every merchant’s failure, replayed offline · or computed now">
+        <XSection label="Make any merchant fail" note="replayed offline, or computed now">
           <PullAMerchant merchants={merchants} />
         </XSection>
 
         <div className="xx__split">
-          <XSection label="Time to constraint" note="hours from shock onset">
+          <XSection label="When they run short" note="hours after the failure">
             {buckets.some((b) => b.n_merchants > 0) ? (
               <div className="xx__timing">
                 {buckets.map((b) => (
@@ -135,47 +134,15 @@ export function ExposureExpanded({
               </div>
             ) : (
               <p className="xx__none">
-                No merchant crossed into constraint inside the horizon for this shock — the
-                network absorbed it without anyone running short.
+                No one else runs short this week.
               </p>
             )}
           </XSection>
 
-          <XSection label="Confidence" note={conf ? conf.source : undefined}>
-            {conf ? (
-              <dl className="xx__conf">
-                <ConfRow
-                  label="Calibrated"
-                  value={conf.calibrated ? 'yes' : 'no'}
-                  note={conf.calibrated ? undefined : 'scores are uncalibrated propagator output'}
-                />
-                <ConfRow
-                  label="Robust mode"
-                  value={conf.robust_mode ? 'on' : 'off'}
-                  note={`${count(conf.n_scenarios_considered)} perturbed worlds`}
-                />
-                <ConfRow
-                  label="Disruption spread"
-                  value={conf.disruption_spread !== null ? idx(conf.disruption_spread) : '—'}
-                  note={`objective index across those worlds, not ${unitWord(true)}`}
-                />
-                <ConfRow
-                  label="Recommendation stable"
-                  value={
-                    conf.recommendation_stable_under_uncertainty === null
-                      ? '—'
-                      : conf.recommendation_stable_under_uncertainty
-                        ? 'yes'
-                        : 'no'
-                  }
-                />
-              </dl>
-            ) : null}
-          </XSection>
         </div>
 
         {affected.length > 0 ? (
-          <XSection label="Merchants reached" note="ranked by disrupted value">
+          <XSection label="Merchants reached" note="most payments delayed first">
             <div className="xx__affected">
               {affected.map((a) => (
                 <div className="xx__hit" key={a.merchant_id}>
@@ -199,7 +166,7 @@ export function ExposureExpanded({
           </XSection>
         ) : null}
 
-        <XSection label="Across scenarios" note="the same network, seven different shocks">
+        <XSection label="Across scenarios" note="the same network, seven different failures">
           <div className="xx__compare">
             {scenarios.map((s) => {
               const on = s.scenario_id === selectedId
@@ -250,14 +217,3 @@ function Figure({
   )
 }
 
-function ConfRow({ label, value, note }: { label: string; value: string; note?: string }) {
-  return (
-    <div className="xx__conf-row">
-      <dt>{label}</dt>
-      <dd>
-        <span className="num">{value}</span>
-        {note ? <em>{note}</em> : null}
-      </dd>
-    </div>
-  )
-}

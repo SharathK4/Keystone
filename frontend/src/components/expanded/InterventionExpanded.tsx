@@ -43,7 +43,6 @@ import {
   money,
   moneyExact,
   multiple,
-  optimiserLabel,
   pct,
   ratio,
   unitWord,
@@ -104,8 +103,8 @@ export function InterventionExpanded({
 
   return (
     <ExpandedAnalysis
-      title={`Where one ${unitWord()} does the most work`}
-      subtitle="Candidates are generated from measurable network properties, then each is replayed against the same shock. The model proposes; the replay scores. Protected value is measured, never predicted."
+      title="Who to fund"
+      subtitle="Every possible rescue was tested by replaying the week. This is the one that worked best for the least money."
       onClose={onClose}
     >
       <div className={`ix${busy ? ' is-busy' : ''}`}>
@@ -114,48 +113,46 @@ export function InterventionExpanded({
             {/* ---------------------------------------- the money comparison */}
             <div className="ix__ledger">
               <Cell
-                label="Capital committed"
+                label="Money placed"
                 value={money(cf.cost)}
-                note="placed as a facility and repaid at term, not spent"
+                note="lent and repaid, not spent"
               />
               <Arrow />
               <Cell
-                label="Commerce protected"
+                label="Payments kept on time"
                 value={money(cf.commerce_preserved)}
-                note="payment value that stayed on its original dates"
+                note="that would otherwise be late"
                 accent
               />
               <Arrow />
               <Cell
-                label={`${humanise(unitWord())} leverage`}
+                label={`Kept per ${unitWord()}`}
                 value={leverage === null ? '—' : ratio(leverage)}
-                note={`protected per ${unitWord()} placed`}
+                note={`payments kept on time per ${unitWord()} placed`}
                 lead
               />
             </div>
 
             {cf.commerce_preserved <= 0 ? (
               <p className="ix__caveat">
-                No payment value moved out of the delayed set in this replay. The plan still
-                reduced the objective by {pct(cf.disruption_reduction_pct)} — it shortened how late
-                payments were, rather than making them on time.
+                No payment moved back on time here: the plan made late payments less late,
+                preventing {pct(cf.disruption_reduction_pct)} of the damage.
               </p>
             ) : null}
 
             <div className="ix__facts">
-              <Fact label="Network disruption removed" value={pct(cf.disruption_reduction_pct)} />
+              <Fact label="Damage prevented" value={pct(cf.disruption_reduction_pct)} />
               <Fact label="Merchants protected" value={count(cf.merchants_protected)} />
               <Fact
-                label="Optimality gap"
-                value={cf.optimality_gap === null ? 'not reported' : pct(cf.optimality_gap * 100)}
-                note="against the best plan the search found"
+                label="Gap to the best plan"
+                value={cf.optimality_gap === null ? 'not measured' : pct(cf.optimality_gap * 100)}
               />
               <Fact
-                label="Constraints"
-                value={recommended.feasible ? 'satisfied' : 'violated'}
+                label="Within limits"
+                value={recommended.feasible ? 'yes' : 'no'}
                 note={
                   recommended.feasible
-                    ? 'amount within buffer and horizon'
+                    ? 'within the merchant’s cushion and the week'
                     : recommended.constraint_violations.join(', ')
                 }
               />
@@ -163,7 +160,7 @@ export function InterventionExpanded({
 
             {/* --------------------------------------------------- the plan */}
             <XSection
-              label="Actions in the selected plan"
+              label="The plan"
               note={`${money(cf.cost)} of capital committed across the plan`}
             >
               <table className="ix__table ix__table--plan">
@@ -209,20 +206,14 @@ export function InterventionExpanded({
                   ) : null}
                 </tbody>
               </table>
-              <p className="ix__foot">
-                Size is how large the action is; capital committed is what it consumes against the
-                plan&apos;s budget, and the two differ where an action moves dates rather than
-                money. The contract on the fourth card is written for one of these actions — the
-                row it is written against is marked.
-              </p>
             </XSection>
 
             {/* --------------------------------------------- the candidates */}
             <XSection
-              label="Every candidate the search evaluated"
-              note={`${count(candidates.length)} generated · ${count(
+              label="Every rescue it tried"
+              note={`${count(candidates.length)} tried · ${count(
                 candidates.filter((c) => c.disruption_prevented > 0).length,
-              )} moved the objective`}
+              )} helped`}
             >
               <table className="ix__table">
                 <thead>
@@ -274,12 +265,6 @@ export function InterventionExpanded({
                 </tbody>
               </table>
 
-              <p className="ix__foot">
-                Only the selected plan is replayed end to end, so only it carries a measured
-                objective movement. The rest were generated and scored against the same network,
-                then set aside — the column is empty because nothing was measured there, not
-                because a measurement came back zero.
-              </p>
             </XSection>
 
             {/* ----------------------------------------------- the evidence */}
@@ -291,17 +276,17 @@ export function InterventionExpanded({
                 <div className="ix__evidence">
                   <Group title="Network">
                     <E
-                      k="Downstream dependencies"
+                      k="Pays"
                       v={count(subject.out_degree)}
-                      s="merchants paid by this one"
+                      s="merchants"
                     />
                     <E
-                      k="Inbound dependencies"
+                      k="Paid by"
                       v={count(subject.in_degree)}
-                      s="merchants paying into it"
+                      s="merchants"
                     />
                     <E
-                      k="Systemic importance"
+                      k="Importance"
                       v={
                         subject.systemic_importance !== null
                           ? subject.systemic_importance.toFixed(3)
@@ -314,58 +299,58 @@ export function InterventionExpanded({
                       }
                     />
                     <E
-                      k="Downstream merchants reached"
+                      k="Merchants its failure reaches"
                       v={probe ? count(probe.downstream_affected) : '—'}
-                      s="under a standardised shock at this merchant"
+                      s="in a standard test"
                     />
                     <E
-                      k="Downstream value delayed"
+                      k="Payments its failure delays"
                       v={probe ? money(probe.downstream_delayed_value) : '—'}
-                      s="in that same probe"
+                      s="in the same test"
                     />
                   </Group>
 
-                  <Group title="Liquidity">
+                  <Group title="Cash">
                     <E
-                      k="Cover ratio"
+                      k="Cash cover"
                       v={
                         subject.cover_ratio !== null ? multiple(subject.cover_ratio) : 'no payables'
                       }
                       s={subject.vulnerable ? 'owes more than it can cover' : 'clears its own book'}
                       tone={subject.vulnerable ? 'accent' : undefined}
                     />
-                    <E k="Obligations in horizon" v={money(subject.payables_in_horizon)} />
-                    <E k="Receivables in horizon" v={money(subject.receivables_in_horizon)} />
+                    <E k="Owes this week" v={money(subject.payables_in_horizon)} />
+                    <E k="Is owed this week" v={money(subject.receivables_in_horizon)} />
                     <E
-                      k="Liquidity buffer"
+                      k="Cushion"
                       v={money(subject.liquidity_buffer)}
-                      s="opening balance plus credit line"
+                      s="cash plus credit line"
                     />
                     <E
                       k="Net position"
                       v={money(subject.net_position)}
-                      s="receivables less payables"
+                      s="owed to it, less what it owes"
                     />
                   </Group>
 
-                  <Group title="Contagion">
+                  <Group title="Reach">
                     <E
-                      k="Cascade depth"
+                      k="Steps out"
                       v={probe ? count(probe.cascade_depth) : '—'}
-                      s="hops reached from this merchant"
+                      s="reached from this merchant"
                     />
                     <E
                       k="Time to first impact"
                       v={probe ? hours(probe.time_to_impact_hours) : '—'}
-                      s="from shock onset"
+                      s="after the failure"
                     />
                     <E
-                      k="Exposure scores"
+                      k="Risk scores"
                       v={scenario.confidence.calibrated ? 'calibrated' : 'uncalibrated'}
-                      s={`${scenario.confidence.source} — used to rank, not read as probabilities`}
+                      s="used to rank, not probabilities"
                     />
                     <E
-                      k="Stable under uncertainty"
+                      k="Holds when the data wobbles"
                       v={
                         scenario.confidence.recommendation_stable_under_uncertainty === null
                           ? 'not tested'
@@ -373,35 +358,35 @@ export function InterventionExpanded({
                             ? 'yes'
                             : 'no'
                       }
-                      s={`${count(scenario.confidence.n_scenarios_considered)} perturbed worlds`}
+                      s={`${count(scenario.confidence.n_scenarios_considered)} variations tried`}
                     />
                   </Group>
 
-                  <Group title="Intervention">
+                  <Group title="The rescue">
                     <E
                       k="Amount"
                       v={inspected ? money(inspected.amount) : money(offer?.proposed_amount)}
                       s={inspected ? moneyExact(inspected.amount) : undefined}
                     />
                     <E
-                      k="Commerce protected"
+                      k="Payments kept on time"
                       v={money(cf.commerce_preserved)}
-                      s="measured by replay"
+                      s="measured by replaying the week"
                     />
                     <E
-                      k="Objective movement"
+                      k="Damage score cut"
                       v={idx(cf.disruption_prevented)}
-                      s={`index units, not ${unitWord(true)}`}
+                      s={`a score, not ${unitWord(true)}`}
                     />
                     <E
-                      k="Model ranking score"
+                      k="Score cut per dollar"
                       v={cf.capital_efficiency === null ? '—' : cf.capital_efficiency.toFixed(1)}
-                      s={`objective units moved per ${unitWord()} — what the search ranks on`}
+                      s="what the search ranks rescues by"
                     />
                     <E
-                      k="Regret"
+                      k="Left on the table"
                       v={cf.regret === null ? 'not reported' : idx(cf.regret)}
-                      s="objective left on the table against the best plan found"
+                      s="against the best plan found"
                     />
                   </Group>
                 </div>
@@ -414,17 +399,13 @@ export function InterventionExpanded({
             </XSection>
 
             {/* ------------------------------------------------- the method */}
-            <XSection label="How this was measured" note={optimiserLabel(scenario.provenance.optimizer)}>
+            <XSection label="How this was measured">
               <p className="ix__method">
-                Candidates are generated from observable network properties, then each plan is
-                replayed against the same shock with the same random draws. What is reported is the
-                difference between the two runs, not a forecast. The objective sums a
-                value-weighted delay term, a default count and a liquidity deficit-time term, so
-                its units are an index rather than currency — which is why the money figures above
-                come from payment value, and the index figures are labelled as index.
+                Each rescue is tested by replaying the same week, with and without it, using the
+                same random draws. The difference is what is reported, not a forecast.
                 {execution.configured
-                  ? ' Approved plans are paid in the PayPal sandbox at a declared demo scale.'
-                  : ' Plans are recorded; the PayPal sandbox pays only an approved plan.'}
+                  ? ' Approved plans are paid in the PayPal sandbox.'
+                  : ' Plans are shown; PayPal pays only an approved plan.'}
               </p>
               <dl className="ix__prov">
                 <ProvRow k="Run" v={scenario.provenance.run_id} />
@@ -446,11 +427,10 @@ export function InterventionExpanded({
           </>
         ) : (
           <div className="ix__empty">
-            <p className="ix__empty-title">No feasible intervention for this scenario.</p>
+            <p className="ix__empty-title">No rescue helps here.</p>
             <p className="ix__empty-body">
-              The bounded search generated {count(candidates.length)} candidates and replayed them
-              against the same shock. None both satisfied the constraints and reduced disruption, so
-              the backend returns no recommendation rather than the least-bad one.
+              None of the {count(candidates.length)} rescues it tried made a difference, so there is
+              nothing to recommend.
             </p>
             {candidates.length > 0 ? (
               <table className="ix__table ix__table--muted">

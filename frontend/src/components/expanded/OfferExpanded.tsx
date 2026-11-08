@@ -108,8 +108,7 @@ export function OfferExpanded({ scenario, execution, busy, reviewFirst = false, 
                     : `, ${offer.repayment.n_instalments} × ${money(
                         offer.repayment.instalment_amount,
                       )}`}
-                  . Sized against {money(offer.eligibility.constraints.obligations_in_horizon)} of
-                  obligations and a {money(offer.eligibility.constraints.liquidity_buffer)} buffer.
+                  .
                 </Point>
 
                 <Point
@@ -120,33 +119,26 @@ export function OfferExpanded({ scenario, execution, busy, reviewFirst = false, 
                   }
                 >
                   {offer.indicative_rate_annual_pct !== null
-                    ? `${pct(
-                        offer.indicative_rate_annual_pct,
-                      )} a year, computed from a declared assumption rather than quoted. Not a credit approval and not an underwriting decision.`
-                    : 'No indicative rate was produced for this offer.'}
+                    ? `${pct(offer.indicative_rate_annual_pct)} a year: an assumption, not a quote.`
+                    : 'No rate was produced for this plan.'}
                 </Point>
 
-                <Point title={`${money(benefit?.commerce_preserved)} kept on schedule`}>
-                  Replaying this plan with the same random draws kept that much payment value on its original
-                  dates, protected {count(benefit?.merchants_protected)} merchant
-                  {(benefit?.merchants_protected ?? 0) === 1 ? '' : 's'} and reduced modelled
-                  network disruption by {pct(benefit?.disruption_reduction_pct)}. Measured, not
-                  predicted.
+                <Point title={`${money(benefit?.commerce_preserved)} of payments kept on time`}>
+                  Measured by replaying the week: {pct(benefit?.disruption_reduction_pct)} of the damage
+                  prevented, {count(benefit?.merchants_protected)} merchant
+                  {(benefit?.merchants_protected ?? 0) === 1 ? '' : 's'} protected.
                 </Point>
 
-                <Point title={offer.eligibility.eligible ? 'Eligibility met' : 'Eligibility not met'}>
-                  {Object.entries(offer.eligibility.criteria)
-                    .map(([k, ok]) => `${k.replace(/_/g, ' ')} ${ok ? '✓' : '✗'}`)
-                    .join(' · ')}
-                  . Facility capped at {money(offer.eligibility.constraints.max_amount)} over a
-                  maximum {hours(offer.eligibility.constraints.max_duration_hours)} term.
+                <Point title={offer.eligibility.eligible ? 'Within the limits' : 'Outside the limits'}>
+                  At most {money(offer.eligibility.constraints.max_amount)}, for up to{' '}
+                  {hours(offer.eligibility.constraints.max_duration_hours)}.
                 </Point>
               </ul>
             </div>
 
             {reviewing && scenario ? (
               <div ref={desk}>
-                <XSection label="Approve and pay" note="the plan behind this offer, paid in the PayPal sandbox">
+                <XSection label="Approve and pay" note="PayPal pays once a person signs">
                   <Settlement scenarioId={scenario.scenario_id} />
                 </XSection>
               </div>
