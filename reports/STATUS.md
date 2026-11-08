@@ -267,11 +267,35 @@ push URL is disabled locally).
 - **The app:** after a restart, `/execution/status` reports configured with Payouts available, and the canonical plan is payable to mapped accounts ($1,123.40). The desk reads "PayPal sandbox connected".
 - **Still unverified:** a real payout from the **IN** payer. A probe cannot tell whether it holds USD. If its balance is INR, USD payouts may fail, since India is excluded from payouts currency conversion. S2 (one $1 payout) settles it; the fallback is a US Business sandbox app.
 
+**Nov 8 — the owner redirected; this supersedes the quiet-demo page.**
+- **Landing.** The four cards are the landing page again. The quiet walk page is deleted from the frontend; its backend (`lce.walk`: fire, ask, speed, recording) stays and is tested.
+- **AI.** "Ask Keystone" sits above the cards.
+  - Claude (`claude-opus-5-5`, effort low, strict tools, refusal fallback on) calls four real tools over SSE: `find_merchants`, `simulate_missed_payment`, `check_delay`, `prepare_paypal_payout`.
+  - Every number in the answer is checked against the tool results; on failure the answer is replaced by one built from them.
+  - No key, a refusal or an API error → the same tools run by rules, and the page says so.
+  - Claude never picks amounts and never pays.
+- **Payment.** Agent plans are kept in memory by analysis id. The execution layer prices, fingerprints and pays them like the reference plan, and "Review and pay with PayPal" opens the desk on that plan.
+- **Full plan.** `analyse_shock(plan_out=...)` / `SnapshotStore.analyze_with_plan` return every chosen action. The snapshot is unchanged; a test compares it, ignoring the random intervention ids.
+- **Finding:** in 30 of 30 merchants' failures, the cheapest rescue funds m0005; in 29 it funds exactly m0005 and m0009. The README states this with its caveat (both are already short of cash).
+- **Copy.**
+  - Every card header and expanded view is rewritten in plain words: no cascade, simulator, objective or contagion.
+  - The proof card moves to a pearl certificate tile, and its view shows three claims, the limits (reworded for display), three learning numbers, the barrier, and the checks folded away.
+  - The "Confidence" block is removed from "What breaks".
+- **README** rewritten PayPal-first and AI-first. New `docs/DEPLOY.md`, `frontend/README.md`, and screenshots in `docs/screens/` (`node frontend/scripts/screens.mjs`). The old Razorpay-era root and frontend screenshots are removed.
+- **Deviation:** commit `923f14a` (the Ask Keystone backend) also carried the staged walk-page deletions, so the frontend does not build at that commit alone. `40b8381` fixes it. Not rewritten (no history rewrites).
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
 
 ## Needs the human (exact commands, never blocking)
+
+- **Now: Anthropic credit.** The key works (it can list models), but every message
+  answers "credit balance is too low". Add about $5 at console.anthropic.com →
+  Plans & Billing. Then re-shoot the README screenshots with Claude answering:
+  `node frontend/scripts/screens.mjs` (API and Vite running).
+- **Then: "run live tests"**, for the first real sandbox payouts (S2). That settles
+  whether the IN payer can pay USD.
 
 - **Now:** PayPal sandbox keys. At developer.paypal.com, go to Apps & Credentials
   (Sandbox) → Create App (Merchant). Put `PAYPAL_CLIENT_ID`,

@@ -1,148 +1,221 @@
 # Keystone
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-6.png)
-**A liquidity shock at one merchant, followed all the way to the capital that stops it.**
 
-Merchants on a payment platform do not fail independently. A supplier who is
-paid late pays their own suppliers late, and the delay travels along the same
-edges the money does. The platform is the only party that can see those edges —
-it processes both sides of the transaction — and is therefore the only party
-that can tell the difference between a merchant who is genuinely short of cash
-and a merchant who is short because someone upstream was.
+**When one merchant misses a payment, others start missing theirs.
+Keystone finds the few merchants to fund that stop it — and pays them through PayPal.**
 
-Keystone is a decision engine for that difference. It answers four questions in
-order:
+![Ask Keystone: a question, the real steps, the answer, and the PayPal payout](docs/screens/02-ask-keystone.png)
 
-1. **Where does payment dependence actually live?** Estimate the network from
-   transaction history alone — who pays whom, how much passes through, with
-   what lag and what reliability.
-2. **What breaks when one payment fails?** Simulate the shock through that
-   network and measure who becomes liquidity-constrained, by how much, and when.
-3. **Where does one rupee do the most work?** Search over candidate
-   interventions, replay each plan against the same shock, and report the
-   difference between the two runs.
-4. **What should be offered, to whom?** Turn the selected action into a
-   structured liquidity offer sized to that merchant's own payment cycle.
-
-The distinguishing claim is in step 3. Most systems predict which merchants are
-at risk. Keystone measures what an intervention *achieved* by replaying it —
-the recommendation is scored by the simulator, not by the model that proposed it.
+`PayPal Payouts + Webhooks (sandbox)` · `Claude with tool use` · `Python 3.12 · FastAPI` · `React 19` · `630+ tests` · `Apache-2.0`
 
 ---
 
-## Research basis
+## The idea in one picture
 
-This work builds on:
+Merchants on a payment platform pay each other. A supplier who is paid late pays
+*its* suppliers late, and the delay travels along the same lines the money does.
 
-**Programmable Repayment: Risk-Sharing and Enforcement Through the Payment
-Platform** — Kumar Rishabh and Alessandro Di Stefano, 7 May 2026.
-[SSRN 6729024](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6729024)
+```
+   customer ──✗──▶  m0038  ──late──▶  m0059  ──late──▶  …
+                      │
+                      └── one missed payment, and the damage spreads
+```
 
-The paper's argument is that a payment platform can enforce and share risk in
-ways a lender outside the flow cannot, because repayment can be made a property
-of the payment rail itself. Keystone takes that premise and asks the operational
-question it implies: if the platform can place liquidity anywhere in the network,
-*where* should it go? That is a network problem, not a credit-scoring problem,
-and it is the problem this repository solves.
+A lender sees one merchant. **A payment platform sees every line between them.**
+So it can answer a question nobody else can:
 
----
+> **Where does the least money keep the most payments on time?**
 
-## What is in here
+That is Keystone: a small, hard search problem — *pick the fewest merchants to
+fund, and how much, so the fewest other payments fail* — solved on a model of
+who pays whom, learned from payment history, and executed through PayPal.
 
-| | |
+## What you do with it
+
+1. **Ask in plain words.** *"What if m0038 misses a payment this week?"*
+2. **Watch it work.** Claude calls Keystone's own tools, and every step is real
+   computation, shown live with its timing:
+   - finds the merchant you described,
+   - replays the coming week without that payment, on the learned network,
+   - compares a dozen possible rescues and keeps the cheapest that works,
+   - checks what happens if the money arrives late.
+3. **Get a short answer.** *"Fund m0005 ($1M) and m0009 ($938K). If m0038 misses
+   this payment, one more merchant runs short; this prevents 42% of the damage
+   and keeps $1.62M of payments on time."* Every number in it is checked against
+   the tools.
+4. **Approve, and PayPal pays.** One click opens the plan; a person signs it;
+   Keystone sends the PayPal Payouts. PayPal's webhooks report back, and a payout
+   that fails becomes a new problem that Keystone plans for again.
+
+The four cards on the page redraw around your question: the network, who your
+failure reaches, who to fund, and the payout.
+
+## The finding
+
+We asked the same question about 30 different merchants failing.
+**In 30 of 30, the cheapest rescue funds m0005 — and in 29, it funds exactly m0005
+and m0009.** Whatever breaks, the same two merchants hold the network up. They are
+its keystones, and finding them is what this project does.
+
+## How PayPal is used
+
+PayPal is not a final "pay" button. It is the loop: money goes out, PayPal reports
+what happened, and Keystone acts on the report.
+
+| PayPal API | What Keystone does with it |
 | --- | --- |
-| `src/lce/domain` | Payment graph, dependency estimation, cascade propagation, the disruption objective |
-| `src/lce/simulation` | Discrete-event liquidity simulator over a 168-hour horizon |
-| `src/lce/optimization` | Intervention search, systemic-importance ranking, counterfactual replay |
-| `src/lce/data` | Synthetic network generator with known ground truth |
-| `src/lce/api` | FastAPI service |
-| `src/lce/snapshot` | Precomputed analytical snapshot the API serves |
-| `frontend` | The Keystone interface — four panels, each opening onto its analysis |
+| **OAuth 2.0** (client credentials) | Gets a sandbox token. Live mode is refused in code, with no override. |
+| **Payouts** — `POST /v1/payments/payouts`, `GET` batch and item | Pays each approved rescue to the merchant's PayPal account. One `PayPal-Request-Id` per *(plan, action)*, so the same plan can never pay twice — even if you click twice or the network drops. |
+| **Webhooks** — `PAYMENT.PAYOUTS-ITEM.*`, `PAYMENT.PAYOUTSBATCH.*` | Verifies PayPal's RSA-SHA256 signature over the raw body, records each event once, and moves the payout through a state machine that never goes backwards. A payout that **fails, is held, or goes unclaimed** becomes a new shortfall, and Keystone finds a new plan for it. |
+| **Read-only probes** | Knows what the app may do before it tries (`lce paypal doctor`). |
 
-The default benchmark is a 100-merchant network with 216 estimated
-relationships and seven analysed shock scenarios.
+**Safety, enforced in code:** nothing is paid without a person approving the
+exact plan (its fingerprint); sandbox only; a demo token and rate limits on the
+hosted demo.
 
-## Running it
+## How AI is used
+
+Two kinds, each doing the job it is good at.
+
+**Machine learning finds the network.** From ~11,000 past payments, Keystone maps
+who pays whom (all 216 links are read straight from the payments) and *learns*
+what no payment says outright: how much of a shortfall each link passes on, how
+often, and how long it takes. Tested against the known truth, the learned
+pass-through ranks links with **0.85** correlation. A search then tests each
+candidate rescue by replaying the whole week, so a plan is *measured*, not guessed.
+
+**Claude reads the question and explains the answer.** Claude
+(`claude-opus-5-5`, strict tool use) chooses which of four tools to call —
+`find_merchants`, `simulate_missed_payment`, `check_delay`,
+`prepare_paypal_payout` — and words the result in two or three sentences.
+
+- **It never picks an amount or a merchant to fund.** The search does.
+- **It never pays.** A person approves; PayPal pays.
+- **It cannot make up a number.** Every figure in its answer must appear in a
+  tool result, or the answer is replaced by one built from the tool figures.
+- **It degrades honestly.** With no API key, the same tools run from a
+  rule-based reading of the question, and the page says so.
+
+## Why this is new
+
+Credit tools ask *"is this merchant risky?"*, one merchant at a time.
+Keystone asks the network question: *"where does one dollar keep the most **other**
+merchants' payments on time?"* Only the platform in the middle of the payments can
+answer it, and only a platform that can move money — like PayPal — can act on the
+answer in the same minute.
+
+It builds on *Programmable Repayment: Risk-Sharing and Enforcement Through the
+Payment Platform* (Rishabh and Di Stefano, 2026,
+[SSRN 6729024](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6729024)),
+which argues the platform can lend in ways an outside lender cannot. Keystone asks
+the operational question that follows: *if the platform can place money anywhere
+in the network, where should it go?*
+
+## Run it in two minutes
 
 ```bash
 pip install -e ".[dev]"
-python -m lce.cli serve --host 127.0.0.1 --port 8000
+cp .env.example .env        # optional: PayPal sandbox keys and ANTHROPIC_API_KEY
+sh scripts/live_sandbox.sh  # the API on http://127.0.0.1:8000
 ```
 
 ```bash
-cd frontend && npm install && npm run dev
+cd frontend && npm install && npm run dev   # open http://localhost:5173
 ```
 
-The frontend proxies `/api` to the backend and has no data of its own. If the
-service is down the page says so rather than rendering a plausible number.
-See [`frontend/README.md`](frontend/README.md) for the interface, and
-[`BACKEND_FREEZE_REPORT.md`](BACKEND_FREEZE_REPORT.md) for the architecture,
-benchmarks and verified provider capabilities.
+It works with **no keys at all**: questions are answered by the same tools run
+from rules, and plans are shown and approved but not paid. Add PayPal sandbox keys
+to pay; add an Anthropic key for Claude. `sh scripts/live_sandbox.sh paypal doctor`
+lists anything still missing.
 
-## Deploy (Render)
+## Screens
 
-[`render.yaml`](render.yaml) is a Render Blueprint for three pieces: the API as a
-Python web service, the frontend as a static site, and a free Postgres database
-that holds **execution records only**. The analysis is served from committed
-artifacts and works with no database at all. Nothing deploys automatically.
+| | |
+| --- | --- |
+| ![The landing: four cards and one question](docs/screens/01-landing.png) | ![Approve and pay with PayPal](docs/screens/03-pay-with-paypal.png) |
+| **The landing.** The network, what breaks, who to fund, the payout — and one question box. | **Approve and pay.** The exact plan, each PayPal account, then review → sign → pay. |
+| ![What we checked](docs/screens/04-what-we-checked.png) | |
+| **What we checked.** Three claims with their pass counts, and what we can't promise. | |
 
-1. Create a Blueprint from the repository. Render asks once for each
-   `sync: false` value: the sandbox app's `PAYPAL_CLIENT_ID` and
-   `PAYPAL_CLIENT_SECRET`, `PAYPAL_WEBHOOK_ID` (fill in after step 3) and
-   `LCE_DEMO_TOKEN` (a long random string you keep private). Leave
-   `LCE_CORS_ORIGINS` and `VITE_API_BASE` empty unless you use the fallback below.
-2. After the first deploy, check the API's address. If it is not
-   `keystone-api.onrender.com`, edit the `/api/*` rewrite in `render.yaml`.
-3. In the PayPal developer dashboard, add a **sandbox** webhook pointing at
-   `https://<api>/api/v1/webhooks/paypal` for `PAYMENT.PAYOUTS-ITEM.*` and
-   `PAYMENT.PAYOUTSBATCH.*`, and put its id in `PAYPAL_WEBHOOK_ID`.
-4. Map the two sandbox accounts against the hosted database (`DATABASE_URL` set
-   to Render's external connection string):
-   `lce paypal map m0005 --email <sandbox account>` and the same for `m0009`.
-5. Record the canonical run once, sending the header `X-Keystone-Demo-Token`.
-   `lce demo reset --yes` clears it (identities are kept) if you need to redo it.
+## Under the hood
 
-**What visitors can and cannot do.** The hosted service runs with
-`LCE_DEMO_MODE=recorded`: everyone sees the analysis and the ledger of the
-sandbox run recorded in step 5, and nobody starts a new payout without the demo
-token. A token holder is limited to the canonical plan and to six execution
-requests per address per ten minutes. Reads are never limited. PayPal is sandbox
-only; live mode is refused in code, with no override.
+```mermaid
+flowchart LR
+  Q["Question<br/>(plain words)"] --> C["Claude<br/>chooses tools"]
+  C --> T1["find_merchants"]
+  C --> T2["simulate_missed_payment"]
+  C --> T3["check_delay"]
+  C --> T4["prepare_paypal_payout"]
+  T2 --> A["Bounded analysis<br/>learned network · 12 candidate rescues<br/>· greedy search · replay"]
+  T3 --> A
+  A --> P["Plan<br/>(fingerprinted)"]
+  T4 --> P
+  P --> H["Person approves<br/>the exact plan"]
+  H --> PP["PayPal Payouts<br/>(sandbox)"]
+  PP --> W["PayPal webhooks<br/>verified · state machine"]
+  W -->|"failed · held · unclaimed"| A
+  C --> G["Answer<br/>every number checked"]
+```
 
-**Free-tier limits (US region, Oregon).** A free web service spins down after a
-period without traffic, and the next request waits while it starts again (about
-a minute). A free Postgres database expires 30 days after it is created; after
-that `/api/v1/health/ready` (which needs the database) fails while the analysis
-routes still answer, so upgrade or recreate it first. The plan is to move the API
-to an always-on paid instance for 1–15 December. A free instance has 0.1 CPU:
-the re-entry analysis that takes about 1.6 s on a laptop will take longer there
-(not measured).
+| Layer | Where | What it does |
+| --- | --- | --- |
+| Ask Keystone | `src/lce/agent/` | Claude tool loop, the four tools, the number check, the rules fallback, streamed to the page |
+| Network model | `src/lce/inference/`, `src/lce/learning/` | Learns who pays whom, and how strongly, from payment history alone |
+| Search and replay | `src/lce/intervention/`, `src/lce/simulation/` | Generates rescues, picks the cheapest that works, replays the week to measure it |
+| PayPal | `src/lce/paypal/`, `src/lce/execution/` | OAuth, Payouts, webhook verification, approvals, pay-at-most-once, re-planning |
+| API | `src/lce/api/` | FastAPI; every number the page shows comes from here |
+| Page | `frontend/` | React 19, no chart library; every figure drawn from an API field |
 
-**Known limitations.** The PayPal webhook signature is verified locally, but the
-certificate **chain is not validated**: the certificate must come from an HTTPS
-`paypal.com` URL and be within its validity window, and the RSA-SHA256 signature
-must match. The demo rate limit is in memory, per process. Whether Render's
-static-site rewrite proxies `POST /api/*` to the API is unverified; if it does
-not, set `VITE_API_BASE` on the static site to the API's address and
-`LCE_CORS_ORIGINS` on the API to the site's address, then redeploy both.
-Render Workflows is not used ([why](reports/hosting/render.md)).
+**What makes it hard:** the search is a budgeted choice over a network where
+helping one merchant changes who the others can pay, so a plan can only be judged
+by replaying the week with it. Each analysis is bounded (at most 5 failing
+merchants, 12 candidate rescues, 2 actions) and runs in a few seconds on a laptop.
 
-## Three things worth stating plainly
+## Proof, and honest limits
 
-**The benchmark is synthetic, and that is the point.** Every metric is measured
-on networks whose generating process is known, so the model can be *scored*
-rather than demonstrated. No claim is made here about real-world predictive
-accuracy.
+- **Tested:** 630+ automated tests; 35 build-time checks (secrets never committed,
+  live PayPal refused, unverified webhooks refused, a payout never resubmitted…);
+  `ruff` and `mypy` clean.
+- **Measured, not claimed:** the learned pass-through ranks the 216 links with
+  0.85 correlation to the truth (timing 0.64, chance of passing on 0.38); every
+  plan's effect comes from replaying the week with it.
+- **Synthetic on purpose:** the 100-merchant network is generated, so every result
+  can be scored against a known truth. No claim is made about real merchants.
+- **Amounts:** shown in US dollars at a declared ₹100 = $1 (the network is
+  generated in rupees); the sandbox pays 1/1000 of each amount.
+- **What we can't promise:** on this network a failure rarely spreads past one
+  step; part of what a rescue prevents would happen even without the failure
+  (m0005 and m0009 are already short of cash); the search can miss the best rescue;
+  PayPal's webhook certificate chain is not checked end to end. The page lists all
+  of these under *What we checked*.
 
-**Nothing moves money.** Razorpay integration runs in Test Mode and is used for
-connectivity and capability probing. Route and Direct Transfers are not enabled
-on the test account — probed, not assumed — so every recommendation is recorded
-as a plan.
+## What is new since October 1
 
-**The offers are model output, not credit decisions.** Amounts, terms and
-indicative costs are computed under stated assumptions. They are not quotes and
-not underwriting.
+Keystone began as a payment-network analysis. For this hackathon it became a
+working product on PayPal:
+
+- **PayPal execution:** OAuth, Payouts, plan fingerprints, pay-at-most-once,
+  approvals, an audit trail.
+- **PayPal webhooks:** signature verification, a payout state machine, and failed
+  payouts that re-enter as new problems.
+- **Ask Keystone:** Claude with four real tools, live steps, the number check, and
+  a rules fallback.
+- **The cost of waiting:** how much of a rescue survives if the money lands late.
+- **A redesigned page:** USD amounts, plain words, the payout desk, the proof
+  certificate.
+- **Hosting:** a Render blueprint, a demo token, rate limits, `lce paypal doctor`.
+
+## Built with
+
+Python 3.12 · FastAPI · SQLAlchemy and Alembic · NumPy · React 19 · Vite ·
+PayPal REST APIs (Payouts, Webhooks, OAuth) · Anthropic Claude API.
+Development was AI-assisted (Claude Code), with every change reviewed and tested.
+
+## Deploy
+
+[`render.yaml`](render.yaml) deploys the API, the page and a small Postgres for
+payout records. Steps, free-tier limits and the webhook setup are in
+[`docs/DEPLOY.md`](docs/DEPLOY.md).
+
+## License
+
+[Apache-2.0](LICENSE).

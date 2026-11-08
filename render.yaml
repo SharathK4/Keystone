@@ -44,6 +44,8 @@ services:
         sync: false
       - key: PAYPAL_WEBHOOK_ID
         sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false       # optional: without it Ask Keystone runs on rules
       - key: LCE_DEMO_MODE
         value: recorded
       - key: LCE_DEMO_TOKEN
