@@ -147,6 +147,8 @@ export const api = {
   walkFire: () => request<WalkFireView>('/walk/fire', {}),
   walkAsk: (text: string) => request<WalkAskView>('/walk/ask', { text }),
   walkSpeed: () => cached<WalkSpeedView>('/walk/speed'),
+  agentStatus: () =>
+    request<{ mode: string; model: string | null; effort: string | null }>('/agent/status'),
 
   // Offline, content-addressed artifacts: frozen like the snapshot, so cached.
   pulls: () => cached<PullsView>('/structure/pulls'),
@@ -183,4 +185,61 @@ export const api = {
     }),
   refresh: (recordId: string) =>
     request<ExecutionRecordView>(`/execution/records/${encodeURIComponent(recordId)}/refresh`, {}),
+}
+
+/**
+ * Ask Keystone. The answer streams as server-sent events - each tool call as it
+ * runs and finishes, the analysis, the PayPal payouts, the answer - and each is
+ * handed to `onEvent` the moment it arrives.
+ */
+export async function askKeystone(
+  question: string,
+  onEvent: (event: Record<string, unknown>) => void,
+): Promise<void> {
+  const headers: Record<string, string> = {
+    accept: 'text/event-stream',
+    'content-type': 'application/json',
+  }
+  const token = demoToken()
+  if (token) headers[TOKEN_HEADER] = token
+  let response: Response
+  try {
+    response = await fetch(`${BASE}/agent/ask`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ question }),
+    })
+  } catch {
+    throw new ApiError('Analytical service unreachable.', null, '/agent/ask')
+  }
+  if (!response.ok || !response.body) {
+    let detail = `Request failed (${response.status}).`
+    try {
+      const err = (await response.json()) as { message?: string }
+      if (err?.message) detail = err.message
+    } catch {
+      /* keep the status line */
+    }
+    throw new ApiError(detail, response.status, '/agent/ask')
+  }
+  const reader = response.body.getReader()
+  const decoder = new TextDecoder()
+  let buffer = ''
+  for (;;) {
+    const { value, done } = await reader.read()
+    if (done) break
+    buffer += decoder.decode(value, { stream: true })
+    let cut = buffer.indexOf('\n\n')
+    while (cut !== -1) {
+      const chunk = buffer.slice(0, cut)
+      buffer = buffer.slice(cut + 2)
+      const data = chunk
+        .split('\n')
+        .filter((line) => line.startsWith('data: '))
+        .map((line) => line.slice(6))
+        .join('\n')
+      if (data) onEvent(JSON.parse(data) as Record<string, unknown>)
+      cut = buffer.indexOf('\n\n')
+    }
+  }
 }

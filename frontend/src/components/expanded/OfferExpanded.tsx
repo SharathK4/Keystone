@@ -17,7 +17,7 @@
  * sandbox, and the ledger shows what PayPal said.
  */
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { ExecutionStatus, ScenarioSnapshot } from '../../api/types'
 import { Settlement } from '../Settlement'
 import { ExpandedAnalysis, XSection } from '../ExpandedAnalysis'
@@ -31,16 +31,23 @@ interface Props {
   scenario: ScenarioSnapshot | null
   execution: ExecutionStatus
   busy: boolean
+  /** Open straight onto the approval desk (from "Review and pay with PayPal"). */
+  reviewFirst?: boolean
   onClose: () => void
 }
 
-export function OfferExpanded({ scenario, execution, busy, onClose }: Props) {
+export function OfferExpanded({ scenario, execution, busy, reviewFirst = false, onClose }: Props) {
   const offer = scenario?.offer ?? null
   const copy = offer ? resolveOfferCopy(offer.intervention_type, scenario?.family) : null
   const benefit = offer?.expected_network_benefit
 
-  const [reviewing, setReviewing] = useState(false)
+  const [reviewing, setReviewing] = useState(reviewFirst)
   const desk = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (reviewFirst) {
+      window.requestAnimationFrame(() => desk.current?.scrollIntoView({ block: 'start' }))
+    }
+  }, [reviewFirst])
   const review = () => {
     setReviewing((v) => !v)
     if (!reviewing) {

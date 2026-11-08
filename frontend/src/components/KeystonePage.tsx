@@ -17,6 +17,8 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useKeystoneData } from '../api/useKeystoneData'
+import { useAgent } from '../api/useAgent'
+import { AskKeystone } from './AskKeystone'
 import { FourPanelGrid } from './FourPanelGrid'
 import { NetworkExpanded } from './expanded/NetworkExpanded'
 import { ExposureExpanded } from './expanded/ExposureExpanded'
@@ -73,16 +75,30 @@ export function KeystonePage() {
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
-  // With nothing open the hash is #evidence, so closing an analysis keeps the
-  // reader on this page rather than returning them to the walk.
   useEffect(() => {
-    const next = open ? `#${open}` : '#evidence'
+    const next = open ? `#${open}` : ''
     if (window.location.hash !== next) {
-      window.history.replaceState(null, '', next)
+      window.history.replaceState(null, '', next || window.location.pathname)
     }
   }, [open])
 
-  const close = useCallback(() => setOpen(null), [])
+  const [payIntent, setPayIntent] = useState(false)
+  const close = useCallback(() => {
+    setOpen(null)
+    setPayIntent(false)
+  }, [])
+
+  // Ask Keystone. While an answer is on screen, every card shows its analysis
+  // instead of the reference week; picking a reference scenario clears it.
+  const { run, ask, clear } = useAgent()
+  const shown = run?.scenario ?? scenario
+  const pickScenario = useCallback(
+    (id: string) => {
+      clear()
+      selectScenario(id)
+    },
+    [clear, selectScenario],
+  )
 
   // Money is printed in the reader's currency, defaulting to the server's. It
   // is set here, above every panel, before any of them renders a figure.
@@ -117,12 +133,8 @@ export function KeystonePage() {
         {structure ? (
           <>
             <p className="ks__standfirst">
-              A liquidity shock at one merchant, followed all the way to the capital that
-              stops it, and paid in the PayPal sandbox once a person signs.
-            </p>
-            <p className="ks__audience">
-              For the risk and working-capital teams at a payment platform: the one party
-              that sees both sides of every payment.
+              When one merchant misses a payment, others start missing theirs. Keystone finds
+              the few merchants to fund that stop it, and pays them through PayPal.
             </p>
             {display ? (
               <p className="ks__units">
@@ -138,14 +150,26 @@ export function KeystonePage() {
         ) : null}
       </header>
 
+      {phase === 'ready' && structure ? (
+        <AskKeystone
+          run={run}
+          onAsk={ask}
+          onClear={clear}
+          onPay={() => {
+            setPayIntent(true)
+            setOpen('offer')
+          }}
+        />
+      ) : null}
+
       {phase === 'loading' ? <Loading /> : null}
       {phase === 'failed' && error ? <Failure message={error.message} path={error.path} /> : null}
 
       {phase === 'ready' && structure ? (
         <FourPanelGrid
           structure={structure}
-          scenario={scenario}
-          scenarioBusy={scenarioBusy}
+          scenario={shown}
+          scenarioBusy={scenarioBusy && !run?.scenario}
           onOpen={setOpen}
         />
       ) : null}
@@ -167,31 +191,32 @@ export function KeystonePage() {
       {open === 'exposure' && structure ? (
         <ExposureExpanded
           merchants={structure.merchants}
-          scenario={scenario}
+          scenario={shown}
           scenarios={structure.scenarios}
-          selectedId={scenarioId}
-          busy={scenarioBusy}
-          onSelect={selectScenario}
+          selectedId={run?.scenario ? null : scenarioId}
+          busy={scenarioBusy && !run?.scenario}
+          onSelect={pickScenario}
           onClose={close}
         />
       ) : null}
 
       {open === 'intervention' && structure ? (
         <InterventionExpanded
-          scenario={scenario}
+          scenario={shown}
           merchants={structure.merchants}
           systemic={structure.systemic}
           execution={structure.execution}
-          busy={scenarioBusy}
+          busy={scenarioBusy && !run?.scenario}
           onClose={close}
         />
       ) : null}
 
       {open === 'offer' && structure ? (
         <OfferExpanded
-          scenario={scenario}
+          scenario={shown}
           execution={structure.execution}
-          busy={scenarioBusy}
+          busy={scenarioBusy && !run?.scenario}
+          reviewFirst={payIntent}
           onClose={close}
         />
       ) : null}

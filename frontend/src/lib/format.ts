@@ -168,6 +168,7 @@ export const SCENARIO_LABEL: Record<string, string> = {
   supplier_failure: 'Supplier failure',
   concentrated_shock: 'Concentrated shock',
   multi_node_shock: 'Multi-node shock',
+  on_demand: 'Your question',
 }
 
 export function scenarioLabel(family: string): string {
