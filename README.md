@@ -65,11 +65,14 @@ rescued — in proportion to what they are short. None of the six rules people w
 looked at the shape of the network that way. The rule is readable, decides in
 about **0.2 ms instead of about 1 s**, and pays a real rescue through PayPal.
 
-**You drive it.** Choose which failures it learns from and how big the fund is;
-strike out a clue and make it win without it; write your own rule and race it;
-pick two rules and ask the model to breed them; choose *quick ideas* (~3 s) or let
-it *think deeply* (~45 s, its reasoning shown). Each run is live, so the model's
-rules differ from run to run; every one is scored the same way.
+**One button.** The lab opens on the six rules people wrote, each replayed as you
+watch. Press *Let the AI write its rules*: the AI writes a round, every new rule
+is replayed on every scenario, the board re-ranks, and it keeps going (up to three
+rounds) until it clearly leads. Then its best rule is shown with what it says,
+what it prevents, how it does on failures it never saw, whom it funds on the
+network — and a button that pays that rescue through PayPal. Each run is live, so
+the AI's rules differ from run to run; every one is scored the same way. (The API
+also lets you choose the failures, ban clues, race your own rule and breed two.)
 
 **It is safe by construction.** The model only ever returns text. Every formula
 is parsed into a whitelisted expression — numbers, clues, `+ − × ÷`, `min`, `max`,
@@ -155,10 +158,10 @@ doctor` lists anything still missing.
 
 | | |
 | --- | --- |
-| ![The landing: six cards](docs/screens/01-landing.png) | ![Let a rule decide a rescue, then pay with PayPal](docs/screens/03-pay-with-paypal.png) |
-| **The landing.** The network, what breaks, who to fund, the payout, the proof — and the rule lab. | **From rule to payout.** The rule decides; the plan is replayed against the search; a person approves; PayPal pays. |
-| ![What we checked](docs/screens/04-what-we-checked.png) | |
-| **What we checked.** Three claims with their pass counts, and what we can't promise. | |
+| ![The landing: six cards](docs/screens/01-landing.png) | ![The AI's winning rule, and whom it funds on the network](docs/screens/05-the-winner.png) |
+| **The landing.** The network, what breaks, who to fund, the rule lab, the payout, the proof. | **The winner.** The AI's rule, what it prevents against people and the search, and whom it funds on the network. |
+| ![Pay the AI's rescue with PayPal](docs/screens/03-pay-with-paypal.png) | ![What we checked](docs/screens/04-what-we-checked.png) |
+| **Pay it.** The rule's plan beside the search's, then a person approves and PayPal pays. | **What we checked.** Three claims with their pass counts, and what we can't promise. |
 
 ## Under the hood
 

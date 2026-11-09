@@ -1,6 +1,7 @@
 # Keystone — the page
 
-One page: a question box, then five cards that answer it.
+One page: six cards, in the order the story runs. Each card is a picture; the
+numbers are one click away.
 
 ![The landing](../docs/screens/01-landing.png)
 
@@ -9,12 +10,13 @@ One page: a question box, then five cards that answer it.
 | **01 The network** | Who pays whom, learned from payments alone | Every merchant and link, the ones the rest lean on |
 | **02 What breaks** | One missed payment, and who else it reaches | Each merchant hit, when, and how badly; pull any merchant yourself |
 | **03 Who to fund** | The fewest dollars that keep the most payments on time | The plan, the rescues it beat, and what waiting costs |
-| **04 Pay with PayPal** | The payout a person approves | Review → sign → pay in the PayPal sandbox, then the ledger PayPal's webhooks fill |
-| **05 What we checked** | Three claims and their pass counts | What we can't promise, how well it learned, every check |
-| **06 The rule lab** | People's best rule, Keystone's search, the AI's best rule | A language model writes rules for who to fund first; each is replayed on every scenario as you watch; breed, race your own, test on unseen failures, pay with PayPal |
+| **04 The rule lab** | A family tree of rules, ending in the one the AI wrote | The race: people's rules against the AI's, each replayed as you watch; the winner, whom it funds, and its PayPal payout |
+| **05 Pay with PayPal** | The payout a person approves | Review → sign → pay in the PayPal sandbox, then the ledger PayPal's webhooks fill |
+| **06 The proof** | An engraved seal and how many checks pass | Three claims, what we can't promise, how well it learned, every check |
 
-The lab streams its work: each rule appears on its parent in the family tree and
-moves to its score as each scenario's replay lands. Code: `src/lab/`.
+The lab streams its work: each rule the AI writes enters the race at the foot,
+its bar grows as each scenario's replay lands, and it slides to its place.
+Code: `src/lab/`.
 
 ## Run it
 
