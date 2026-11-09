@@ -36,6 +36,11 @@ interface Props {
   onClose: () => void
 }
 
+/** The page's own words for the limits of a recommendation. */
+const DISCLAIMER =
+  'A recommendation from a network model. Not a credit approval, an underwriting decision or a ' +
+  'financial product offer. Amounts and costs are model outputs under stated assumptions, not quoted terms.'
+
 export function OfferExpanded({ scenario, execution, busy, reviewFirst = false, onClose }: Props) {
   const offer = scenario?.offer ?? null
   const copy = offer ? resolveOfferCopy(offer.intervention_type, scenario?.family) : null
@@ -188,7 +193,7 @@ export function OfferExpanded({ scenario, execution, busy, reviewFirst = false, 
                     }
                   />
                 </dl>
-                <p className="ox__disclaimer">{offer.disclaimer}</p>
+                <p className="ox__disclaimer">{DISCLAIMER}</p>
               </XSection>
             ) : null}
 

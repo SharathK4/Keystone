@@ -3,7 +3,7 @@
 //   node scripts/screens.mjs            # writes ../docs/screens/*.png
 //
 // Uses the Chrome or Edge already installed; downloads no browser. Each shot is
-// the real page: the ask is a real question answered by the real tools.
+// the real page: the lab round is written by the configured model and replayed.
 
 import { chromium } from 'playwright-core'
 import { existsSync, mkdirSync } from 'node:fs'
@@ -31,21 +31,37 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, dev
 const settle = () => page.waitForTimeout(1200)
 
 await page.goto(base, { waitUntil: 'networkidle' })
-await page.waitForSelector('.ak__input')
+await page.waitForSelector('.lp')
 await settle()
 await page.screenshot({ path: `${out}/01-landing.png` })
 
-await page.fill('.ak__input', 'What if m0038 misses a payment this week?')
-await page.click('.ak__go')
-await page.waitForSelector('.ak__answer', { timeout: 60000 })
+// The rule lab: the people's rules, then one round written by the model.
+await page.goto(`${base}/#lab`, { waitUntil: 'networkidle' })
+await page.waitForSelector('.rl__go:not([disabled])', { timeout: 30000 })
+await page.click('.rl__go')
+const idle = () =>
+  page.waitForFunction(
+    () => {
+      const b = document.querySelector('.rl__evolve')
+      return b && !b.disabled && !document.querySelector('.ln__node.is-testing, .ln__node.is-proposed')
+    },
+    null,
+    { timeout: 240000 },
+  )
+await idle()
+await page.click('.rl__evolve')
+await page.waitForTimeout(2000)
+await idle()
 await settle()
-await page.screenshot({ path: `${out}/02-ask-keystone.png` })
+await page.screenshot({ path: `${out}/02-rule-lab.png` })
 
-await page.click('.ak__pay')
-await page.waitForSelector('.st__table', { timeout: 20000 })
+// From rule to payout: the best rule decides, then the PayPal desk.
+await page.click('.rl__pay')
+await page.click('.us__go')
+await page.waitForSelector('.us__result', { timeout: 60000 })
+await page.waitForSelector('.st__table', { timeout: 30000 })
 await page.waitForTimeout(1500)
-const desk = await page.$('.st__table')
-await desk?.scrollIntoViewIfNeeded()
+await page.locator('.us__delta').scrollIntoViewIfNeeded()
 await settle()
 await page.screenshot({ path: `${out}/03-pay-with-paypal.png` })
 

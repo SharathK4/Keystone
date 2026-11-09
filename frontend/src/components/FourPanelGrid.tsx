@@ -14,15 +14,17 @@ import { ExposurePanel } from './ExposurePanel'
 import { InterventionPanel } from './InterventionPanel'
 import { OfferPanel } from './OfferPanel'
 import { ProofPanel } from './ProofPanel'
+import { RuleLabPanel } from '../lab/RuleLabPanel'
 
 interface Props {
   structure: Structure
   scenario: ScenarioSnapshot | null
   scenarioBusy: boolean
   onOpen: (id: PanelId) => void
+  onOpenLab: () => void
 }
 
-export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen }: Props) {
+export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen, onOpenLab }: Props) {
   return (
     <div className="ks__grid">
       <NetworkPanel
@@ -54,6 +56,8 @@ export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen }: Pro
       />
 
       <ProofPanel onOpen={() => onOpen('proof')} />
+
+      <RuleLabPanel onOpen={onOpenLab} />
     </div>
   )
 }

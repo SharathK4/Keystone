@@ -17,8 +17,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { useKeystoneData } from '../api/useKeystoneData'
-import { useAgent } from '../api/useAgent'
-import { AskKeystone } from './AskKeystone'
+import { RuleLab } from '../lab/RuleLab'
 import { FourPanelGrid } from './FourPanelGrid'
 import { NetworkExpanded } from './expanded/NetworkExpanded'
 import { ExposureExpanded } from './expanded/ExposureExpanded'
@@ -50,6 +49,8 @@ function panelFromHash(): PanelId | null {
   return PANELS.includes(id) ? id : null
 }
 
+const labFromHash = () => window.location.hash === '#lab'
+
 export function KeystonePage() {
   const {
     phase,
@@ -68,19 +69,25 @@ export function KeystonePage() {
   // "the intervention view" rather than "open it and click the third panel".
   // Still one page and still a state transition - the hash only seeds it.
   const [open, setOpen] = useState<PanelId | null>(() => panelFromHash())
+  const [labOpen, setLabOpen] = useState(labFromHash)
 
   useEffect(() => {
-    const onHash = () => setOpen(panelFromHash())
+    const onHash = () => {
+      setOpen(panelFromHash())
+      setLabOpen(labFromHash())
+    }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
 
   useEffect(() => {
-    const next = open ? `#${open}` : ''
+    const next = labOpen ? '#lab' : open ? `#${open}` : ''
     if (window.location.hash !== next) {
       window.history.replaceState(null, '', next || window.location.pathname)
     }
-  }, [open])
+  }, [open, labOpen])
+
+  const closeLab = useCallback(() => setLabOpen(false), [])
 
   const [payIntent, setPayIntent] = useState(false)
   const close = useCallback(() => {
@@ -88,17 +95,8 @@ export function KeystonePage() {
     setPayIntent(false)
   }, [])
 
-  // Ask Keystone. While an answer is on screen, every card shows its analysis
-  // instead of the reference week; picking a reference scenario clears it.
-  const { run, ask, clear } = useAgent()
-  const shown = run?.scenario ?? scenario
-  const pickScenario = useCallback(
-    (id: string) => {
-      clear()
-      selectScenario(id)
-    },
-    [clear, selectScenario],
-  )
+  const shown = scenario
+  const pickScenario = selectScenario
 
   // Money is printed in the reader's currency, defaulting to the server's. It
   // is set here, above every panel, before any of them renders a figure.
@@ -140,7 +138,7 @@ export function KeystonePage() {
               <p className="ks__units">
                 {currency === 'USD'
                   ? `Amounts in US dollars at a declared ${declaredRate()}, not a market rate.`
-                  : 'Amounts in rupees, as the synthetic network was generated.'}{' '}
+                  : 'Amounts in rupees, the network’s own currency.'}{' '}
                 <button type="button" className="ks__units-switch" onClick={flipCurrency}>
                   {currency === 'USD' ? 'Show rupees' : 'Show US dollars'}
                 </button>
@@ -150,17 +148,6 @@ export function KeystonePage() {
         ) : null}
       </header>
 
-      {phase === 'ready' && structure ? (
-        <AskKeystone
-          run={run}
-          onAsk={ask}
-          onClear={clear}
-          onPay={() => {
-            setPayIntent(true)
-            setOpen('offer')
-          }}
-        />
-      ) : null}
 
       {phase === 'loading' ? <Loading /> : null}
       {phase === 'failed' && error ? <Failure message={error.message} path={error.path} /> : null}
@@ -169,8 +156,9 @@ export function KeystonePage() {
         <FourPanelGrid
           structure={structure}
           scenario={shown}
-          scenarioBusy={scenarioBusy && !run?.scenario}
+          scenarioBusy={scenarioBusy}
           onOpen={setOpen}
+          onOpenLab={() => setLabOpen(true)}
         />
       ) : null}
 
@@ -193,8 +181,8 @@ export function KeystonePage() {
           merchants={structure.merchants}
           scenario={shown}
           scenarios={structure.scenarios}
-          selectedId={run?.scenario ? null : scenarioId}
-          busy={scenarioBusy && !run?.scenario}
+          selectedId={scenarioId}
+          busy={scenarioBusy}
           onSelect={pickScenario}
           onClose={close}
         />
@@ -206,7 +194,7 @@ export function KeystonePage() {
           merchants={structure.merchants}
           systemic={structure.systemic}
           execution={structure.execution}
-          busy={scenarioBusy && !run?.scenario}
+          busy={scenarioBusy}
           onClose={close}
         />
       ) : null}
@@ -215,13 +203,15 @@ export function KeystonePage() {
         <OfferExpanded
           scenario={shown}
           execution={structure.execution}
-          busy={scenarioBusy && !run?.scenario}
+          busy={scenarioBusy}
           reviewFirst={payIntent}
           onClose={close}
         />
       ) : null}
 
       {open === 'proof' && structure ? <ProofExpanded onClose={close} /> : null}
+
+      {labOpen ? <RuleLab onClose={closeLab} /> : null}
     </main>
   )
 }

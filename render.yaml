@@ -44,8 +44,10 @@ services:
         sync: false
       - key: PAYPAL_WEBHOOK_ID
         sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false       # optional: the model that writes the lab's rules
       - key: ANTHROPIC_API_KEY
-        sync: false       # optional: without it Ask Keystone runs on rules
+        sync: false       # optional: Claude instead; without either, mutation writes them
       - key: LCE_DEMO_MODE
         value: recorded
       - key: LCE_DEMO_TOKEN

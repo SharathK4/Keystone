@@ -185,9 +185,11 @@ function PlanTable({ plan }: { plan: ExecutablePlanView }) {
         )}
       </p>
       <Seal src={`GET /execution/plans/${plan.scenario_id}`} refId={plan.snapshot_id}>
-        {plan.scenario_id.startsWith('adhoc-')
-          ? 'found by Ask Keystone, priced now'
-          : 'priced from the reference week'}
+        {plan.scenario_id.startsWith('rule-')
+          ? 'decided by a lab rule, priced now'
+          : plan.scenario_id.startsWith('adhoc-')
+            ? 'found on request, priced now'
+            : 'priced from the reference week'}
       </Seal>
     </div>
   )

@@ -11,11 +11,10 @@ One page: a question box, then five cards that answer it.
 | **03 Who to fund** | The fewest dollars that keep the most payments on time | The plan, the rescues it beat, and what waiting costs |
 | **04 Pay with PayPal** | The payout a person approves | Review → sign → pay in the PayPal sandbox, then the ledger PayPal's webhooks fill |
 | **05 What we checked** | Three claims and their pass counts | What we can't promise, how well it learned, every check |
+| **06 The rule lab** | People's best rule, Keystone's search, the AI's best rule | A language model writes rules for who to fund first; each is replayed on every scenario as you watch; breed, race your own, test on unseen failures, pay with PayPal |
 
-**Ask Keystone** sits above the cards. A question streams back as real steps —
-each tool call with its result and time — then a short answer whose numbers were
-checked, and *Review and pay with PayPal*. While an answer is on screen, every card
-shows its analysis.
+The lab streams its work: each rule appears on its parent in the family tree and
+moves to its score as each scenario's replay lands. Code: `src/lab/`.
 
 ## Run it
 
@@ -39,7 +38,7 @@ separately hosted build.
   inferred, or executed in the PayPal sandbox — derived from the endpoint, never
   written by hand.
 - **Money in one currency at a time.** US dollars by default at a declared
-  ₹100 = $1 (the network is generated in rupees); the sandbox pays 1/1000 of each.
+  ₹100 = $1 (the network is denominated in rupees); the sandbox pays 1/1000 of each.
   A switch shows rupees.
 - **Nothing moves on its own.** Motion only answers a click, is short, and stops
   under reduced motion.

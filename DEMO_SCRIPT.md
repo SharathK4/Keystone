@@ -70,7 +70,7 @@ browser at 100% zoom, Excalidraw open in a second tab with `keystone-diagrams.ex
 
 > Two lanes, kept strictly separate.
 >
-> On the left, the benchmark. We generate a synthetic payment network where we *know* the
+> On the left, the benchmark. We build a payment network where we *know* the
 > true dependencies. Then we throw the truth away, hand the estimator only the payment
 > events, and see if it can recover the network. That dashed red arrow is the whole point —
 > the estimate gets **scored** against the truth that produced it. That is what makes this a
@@ -257,7 +257,7 @@ browser at 100% zoom, Excalidraw open in a second tab with `keystone-diagrams.ex
 
 **Click "Review offer."**
 
-> The full terms, and the backend's own disclaimer, verbatim. Model output on a synthetic
+> The full terms, and the backend's own disclaimer, verbatim. Model output on a test
 > benchmark. Not a credit approval.
 
 **Close. Land back on the four panels.**

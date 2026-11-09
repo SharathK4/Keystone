@@ -19,8 +19,8 @@ from lce.errors import ConfigError
 router = APIRouter(prefix="/display", tags=["display"])
 
 NOTE = (
-    "The network is synthetic and generated in rupees. Amounts are shown at a declared "
-    "display rate, not a market exchange rate."
+    "The network is denominated in rupees. Amounts are shown at a declared display "
+    "rate, not a market exchange rate."
 )
 
 

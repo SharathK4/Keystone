@@ -21,6 +21,7 @@
 .tile--ember .tile__glow { background: var(--product-glow); }
 .tile--graphite .tile__glow { background: rgba(40, 42, 54, 0.42); }
 .tile--plum .tile__glow { background: rgba(110, 52, 98, 0.42); }
+.tile--tide .tile__glow { background: rgba(48, 92, 96, 0.42); }
 
 .tile__body {
   position: relative;
@@ -49,6 +50,7 @@
 .tile--ember .tile__body { background: linear-gradient(150deg, #f08a45, #d9501f 52%, #b3350f); }
 .tile--graphite .tile__body { background: linear-gradient(152deg, #4a4c58, #2c2e38 54%, #1a1b22); }
 .tile--plum .tile__body { background: linear-gradient(152deg, #6a3a63, #4a2446 52%, #2f1530); }
+.tile--tide .tile__body { background: linear-gradient(152deg, #46727a, #2c5057 52%, #18312f); }
 
 /* ---- generated surface ---- */
 

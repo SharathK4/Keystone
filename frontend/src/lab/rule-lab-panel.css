@@ -1,0 +1,75 @@
+/* Card 06: built like the proof card, on a deep sea-stone tile. */
+
+.lp { height: 100%; }
+.lp__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 48px;
+  height: 100%;
+  padding: 30px 44px;
+  color: rgba(238, 246, 245, 0.94);
+}
+
+.lp__tree { width: clamp(130px, 14vw, 190px); height: auto; }
+.lp__branch {
+  fill: none;
+  stroke: rgba(226, 240, 238, 0.42);
+  stroke-width: 1.4;
+}
+.lp__node {
+  fill: rgba(24, 49, 47, 0.9);
+  stroke: rgba(226, 240, 238, 0.7);
+  stroke-width: 1.4;
+}
+.lp__node.is-best { fill: #f6b79a; stroke: #f6b79a; }
+
+.lp__board { max-width: 760px; }
+.lp__head {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(226, 240, 238, 0.66);
+}
+.lp__board ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.lp__board li {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.9fr) minmax(0, 1.4fr) 80px;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(226, 240, 238, 0.16);
+}
+.lp__label { font-size: 15px; line-height: 1.35; }
+.lp__track { height: 4px; border-radius: 2px; background: rgba(226, 240, 238, 0.14); overflow: hidden; }
+.lp__track i { display: block; height: 100%; border-radius: 2px; background: rgba(238, 246, 245, 0.78); }
+.lp__board li.is-search .lp__track i { background: rgba(238, 246, 245, 0.5); }
+.lp__board li.is-ai .lp__track i { background: #f6b79a; }
+.lp__board li.is-ai .lp__label,
+.lp__board li.is-ai .lp__val { color: #f6b79a; }
+.lp__val { text-align: right; font-size: 15px; }
+.lp__val em { font-style: italic; font-size: 13px; color: rgba(226, 240, 238, 0.72); }
+
+.lp__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  padding-top: 14px;
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(226, 240, 238, 0.75);
+}
+.lp__formula { font-style: normal; color: #fff; }
+.lp__formula .fx { color: inherit; }
+.lp__formula .fx-clue { border-bottom-color: rgba(255, 255, 255, 0.3); }
+.lp__formula .fx-clue.is-failure,
+.lp__formula .fx-bracket { color: #f6b79a; }
+
+@media (max-width: 760px) {
+  .lp__body { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 22px; padding: 24px; }
+  .lp__board { width: 100%; }
+  .lp__board li { grid-template-columns: 1fr 64px; }
+  .lp__track { grid-column: 1 / -1; grid-row: 2; }
+}

@@ -147,8 +147,6 @@ export const api = {
   walkFire: () => request<WalkFireView>('/walk/fire', {}),
   walkAsk: (text: string) => request<WalkAskView>('/walk/ask', { text }),
   walkSpeed: () => cached<WalkSpeedView>('/walk/speed'),
-  agentStatus: () =>
-    request<{ mode: string; model: string | null; effort: string | null }>('/agent/status'),
 
   // Offline, content-addressed artifacts: frozen like the snapshot, so cached.
   pulls: () => cached<PullsView>('/structure/pulls'),
@@ -188,13 +186,15 @@ export const api = {
 }
 
 /**
- * Ask Keystone. The answer streams as server-sent events - each tool call as it
- * runs and finishes, the analysis, the PayPal payouts, the answer - and each is
- * handed to `onEvent` the moment it arrives.
+ * A POST whose answer streams as server-sent events, one JSON object per event,
+ * each handed to `onEvent` the moment it arrives. Used by the rule lab, whose
+ * every step - the search, each rule tested on each scenario - is drawn live.
  */
-export async function askKeystone(
-  question: string,
+export async function streamEvents(
+  path: string,
+  body: unknown,
   onEvent: (event: Record<string, unknown>) => void,
+  signal?: AbortSignal,
 ): Promise<void> {
   const headers: Record<string, string> = {
     accept: 'text/event-stream',
@@ -204,13 +204,14 @@ export async function askKeystone(
   if (token) headers[TOKEN_HEADER] = token
   let response: Response
   try {
-    response = await fetch(`${BASE}/agent/ask`, {
+    response = await fetch(BASE + path, {
       method: 'POST',
       headers,
-      body: JSON.stringify({ question }),
+      body: JSON.stringify(body ?? {}),
+      signal,
     })
   } catch {
-    throw new ApiError('Analytical service unreachable.', null, '/agent/ask')
+    throw new ApiError('Analytical service unreachable.', null, path)
   }
   if (!response.ok || !response.body) {
     let detail = `Request failed (${response.status}).`
@@ -220,7 +221,7 @@ export async function askKeystone(
     } catch {
       /* keep the status line */
     }
-    throw new ApiError(detail, response.status, '/agent/ask')
+    throw new ApiError(detail, response.status, path)
   }
   const reader = response.body.getReader()
   const decoder = new TextDecoder()
@@ -242,4 +243,9 @@ export async function askKeystone(
       cut = buffer.indexOf('\n\n')
     }
   }
+}
+
+/** A plain JSON call, for the lab's small requests. */
+export function call<T>(path: string, body?: unknown): Promise<T> {
+  return request<T>(path, body)
 }
