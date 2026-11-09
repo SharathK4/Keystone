@@ -35,33 +35,33 @@ await page.waitForSelector('.lp')
 await settle()
 await page.screenshot({ path: `${out}/01-landing.png` })
 
-// The rule lab: the people's rules, then one round written by the model.
+// The rule lab: the people's rules, then the AI's rounds, then its winner.
 await page.goto(`${base}/#lab`, { waitUntil: 'networkidle' })
-await page.waitForSelector('.rl__go:not([disabled])', { timeout: 30000 })
-await page.click('.rl__go')
-const idle = () =>
-  page.waitForFunction(
-    () => {
-      const b = document.querySelector('.rl__evolve')
-      return b && !b.disabled && !document.querySelector('.ln__node.is-testing, .ln__node.is-proposed')
-    },
-    null,
-    { timeout: 240000 },
-  )
-await idle()
-await page.click('.rl__evolve')
-await page.waitForTimeout(2000)
-await idle()
+await page.waitForFunction(
+  () => document.querySelectorAll('.race__row.is-scored').length >= 6 && !document.querySelector('.race__row.is-testing'),
+  null,
+  { timeout: 120000 },
+)
+await page.click('.rl__write')
+await page.waitForFunction(
+  () => {
+    const b = document.querySelector('.rl__write')
+    return b && !b.disabled && document.querySelector('.rl__ring .wr')
+  },
+  null,
+  { timeout: 300000 },
+)
 await settle()
 await page.screenshot({ path: `${out}/02-rule-lab.png` })
+await page.locator('.rl__win').scrollIntoViewIfNeeded()
+await settle()
+await page.screenshot({ path: `${out}/05-the-winner.png` })
 
-// From rule to payout: the best rule decides, then the PayPal desk.
+// Pay the AI's rescue: the plan beside the search's, then the PayPal desk.
 await page.click('.rl__pay')
-await page.click('.us__go')
-await page.waitForSelector('.us__result', { timeout: 60000 })
 await page.waitForSelector('.st__table', { timeout: 30000 })
 await page.waitForTimeout(1500)
-await page.locator('.us__delta').scrollIntoViewIfNeeded()
+await page.locator('.ps__vs').scrollIntoViewIfNeeded()
 await settle()
 await page.screenshot({ path: `${out}/03-pay-with-paypal.png` })
 
@@ -71,4 +71,4 @@ await settle()
 await page.screenshot({ path: `${out}/04-what-we-checked.png` })
 
 await browser.close()
-console.log(`wrote 4 screenshots to ${out}`)
+console.log(`wrote 5 screenshots to ${out}`)

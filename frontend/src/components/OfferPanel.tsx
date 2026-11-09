@@ -1,5 +1,5 @@
 /**
- * Card 04 — the offer.
+ * Card 05 — the offer.
  *
  * The contract card itself, small, sitting in its own light. It is the only
  * saturated colour in the composition, which is what makes the fourth card read
@@ -28,7 +28,7 @@ export function OfferPanel({ scenario, execution, busy, onOpen }: Props) {
 
   return (
     <Panel
-      index={4}
+      index={5}
       title="Pay with PayPal"
       subtitle="A person approves; PayPal pays the merchants."
       reveals={offer ? 'Approve and pay' : 'See why there is nothing to pay'}

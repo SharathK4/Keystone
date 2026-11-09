@@ -170,24 +170,3 @@ export const lab = {
   use: (id: string, ruleId: string, failing: string, budget: number) =>
     call<UseResult>(`/discovery/labs/${id}/use`, { rule_id: ruleId, failing, budget }),
 }
-
-/** "nvidia/nemotron-3.5-lightning:free" -> "Nemotron 3.5 Lightning". */
-export function modelName(id: string | null | undefined): string {
-  if (!id) return 'random mutation'
-  if (id === 'random mutation') return id
-  const claude = id.replace(/^anthropic\//, '').match(/^claude-([a-z]+)-(\d+)(?:[-.](\d+))?/)
-  if (claude) {
-    const family = claude[1].charAt(0).toUpperCase() + claude[1].slice(1)
-    return `Claude ${family} ${claude[2]}${claude[3] ? `.${claude[3]}` : ''}`
-  }
-  const name = (id.split('/').pop() ?? id).replace(/:free$/, '')
-  return name
-    .split('-')
-    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-    .join(' ')
-}
-
-export function viaWhom(id: string | null | undefined): string {
-  if (!id || id === 'random mutation') return ''
-  return id.includes('/') ? 'via OpenRouter' : 'via the Claude API'
-}

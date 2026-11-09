@@ -1,0 +1,28 @@
+/* A rule, typeset: the display face, clue names in italic, fractions stacked,
+ * comparisons as Iverson brackets. Colour always comes from the context (ink on
+ * paper, light on a tile): on this page terracotta means "written by the AI",
+ * so nothing inside a formula claims it. */
+
+.fx { display: inline-flex; align-items: center; flex-wrap: nowrap; font-family: var(--display); color: var(--ink); line-height: 1; white-space: nowrap; }
+.fx--xl { font-size: 48px; }
+.fx--lg { font-size: 36px; }
+.fx--md { font-size: 26px; }
+.fx--sm { font-size: 19px; }
+.fx-row { display: inline-flex; align-items: center; }
+.fx-clue { font-style: italic; padding: 0 0.04em; }
+.fx-clue.is-failure { color: inherit; }
+.fx-num { font-feature-settings: 'lnum' 1; }
+.fx-exp { font-size: 0.6em; vertical-align: 0.7em; margin-left: 0.04em; }
+.fx-op { padding: 0 0.24em; opacity: 0.7; }
+.fx-op.is-dot { padding: 0 0.12em; }
+.fx-paren, .fx-bar { opacity: 0.5; font-weight: 300; }
+.fx-bracket { opacity: 0.6; padding: 0 0.04em; }
+.fx-fn { font-style: normal; margin-right: 0.04em; opacity: 0.8; }
+.fx-comma { padding-right: 0.2em; opacity: 0.5; }
+.fx-sup { font-size: 0.62em; align-self: flex-start; margin-left: 0.06em; }
+.fx-frac { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 0.1em; font-size: 0.84em; }
+.fx-frac__top, .fx-frac__bottom { display: inline-flex; align-items: center; padding: 0.05em 0.18em; }
+.fx-frac__bar { align-self: stretch; height: 1px; background: currentColor; opacity: 0.55; }
+.fx-radical { font-size: 1.1em; opacity: 0.7; margin-right: -0.02em; }
+.fx-sqrt__under { border-top: 1px solid currentColor; padding: 0.08em 0.1em 0; }
+

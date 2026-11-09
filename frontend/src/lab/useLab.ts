@@ -359,16 +359,26 @@ export function useLab() {
 
   const labId = state.header?.lab_id ?? null
 
-  return {
-    state,
-    start: (options: StartOptions) => run('start', (fn) => lab.start(options, fn)),
-    evolve: (mode: 'evolve' | 'breed' | 'push', parents: string[], deep: boolean) =>
+  const start = useCallback(
+    (options: StartOptions) => run('start', (fn) => lab.start(options, fn)),
+    [run],
+  )
+  const evolve = useCallback(
+    (mode: 'evolve' | 'breed' | 'push', parents: string[], deep: boolean) =>
       labId ? run(mode, (fn) => lab.evolve(labId, { mode, parents, deep }, fn)) : Promise.resolve(),
-    add: (formula: string) => (labId ? run('add', (fn) => lab.add(labId, formula, fn)) : Promise.resolve()),
-    test: (ids: string[]) => (labId ? run('test', (fn) => lab.test(labId, ids, fn)) : Promise.resolve()),
-    reset: () => dispatch({ kind: 'reset' }),
-    isRunning: () => running.current,
-  }
+    [run, labId],
+  )
+  const add = useCallback(
+    (formula: string) => (labId ? run('add', (fn) => lab.add(labId, formula, fn)) : Promise.resolve()),
+    [run, labId],
+  )
+  const test = useCallback(
+    (ids: string[]) => (labId ? run('test', (fn) => lab.test(labId, ids, fn)) : Promise.resolve()),
+    [run, labId],
+  )
+  const reset = useCallback(() => dispatch({ kind: 'reset' }), [])
+
+  return { state, start, evolve, add, test, reset }
 }
 
 /** A rule's mean so far: final when scored, running while its scenarios come in. */

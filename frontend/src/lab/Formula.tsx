@@ -9,6 +9,7 @@
 
 import type { ReactNode } from 'react'
 import type { Clue, Tree } from './api'
+import './formula.css'
 
 interface Props {
   tree: Tree

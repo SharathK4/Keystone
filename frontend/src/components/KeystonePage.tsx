@@ -211,7 +211,9 @@ export function KeystonePage() {
 
       {open === 'proof' && structure ? <ProofExpanded onClose={close} /> : null}
 
-      {labOpen ? <RuleLab onClose={closeLab} /> : null}
+      {labOpen && structure ? (
+        <RuleLab merchants={structure.merchants} dependencies={structure.dependencies} onClose={closeLab} />
+      ) : null}
     </main>
   )
 }

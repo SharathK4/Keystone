@@ -1,5 +1,6 @@
 /**
- * The 2x2 composition.
+ * The 3x2 composition, in the order the story runs: the network, what breaks,
+ * who to fund, the rule the AI writes for it, paying, and the proof.
  *
  * Its only job is to keep the four panels geometrically identical and to hand
  * each one the slice of state it needs. Everything about how a panel looks
@@ -48,6 +49,8 @@ export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen, onOpe
         onOpen={() => onOpen('intervention')}
       />
 
+      <RuleLabPanel onOpen={onOpenLab} />
+
       <OfferPanel
         scenario={scenario}
         execution={structure.execution}
@@ -56,8 +59,6 @@ export function FourPanelGrid({ structure, scenario, scenarioBusy, onOpen, onOpe
       />
 
       <ProofPanel onOpen={() => onOpen('proof')} />
-
-      <RuleLabPanel onOpen={onOpenLab} />
     </div>
   )
 }
