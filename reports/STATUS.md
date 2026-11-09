@@ -286,6 +286,16 @@ push URL is disabled locally).
 - **Deviation:** the old-screenshot deletions landed in `eae189f` (the tests commit), so the README's image links are broken at that commit only. Not rewritten.
 - **Tests:** a developer's `.env` with `LCE_EXECUTION_PROVIDER` or `ANTHROPIC_API_KEY` used to leak into tests. `conftest.py` now pins both, and the default-provider test ignores `.env`.
 
+**Nov 9 — the owner redirected again: the AI is the rule lab.**
+- **Why.** Ask Keystone was judged too generic (a chatbot). Its bar is removed from the page; `src/lce/agent/` stays as an API and is tested.
+- **The rule lab** (`src/lce/discovery/`, `frontend/src/lab/`): a language model writes one-line formulas over 14 clues for who to fund first. `formula.py` parses them into a whitelisted expression (nothing is executed). `world.py` scores each by replaying the week on failure × fund-size scenarios. `lab.py` runs the rounds (model, or random mutation without one), breed/improve, the held-out test, and registers a rule's plan for the PayPal desk. The streamed events are listed in `src/lce/api/routers/discovery.py`.
+- **Problem as posed.** In this network a single failure barely spreads and most damage exists before any failure, so "who stops the spread" was trivial. The lab poses the budget problem instead (fund in the rule's order, each up to its coverage gap, until the money runs out, at most k), where different human rules win in different cells.
+- **Measured (default test, 3 failures × 4 funds; held-out 4 × 4):** people's best 17.9% / 18.4%; Keystone's search (cash only, same money) 18.6% / 19.5%; Nemotron's first-round rule `pays / (paid_by + 1) * need` 29.9% / 30.5%, ahead of the search in 12/12 and 16/16. Model output varies run to run; the README says so.
+- **Design.** A dark "night lab" was built first and rejected by the owner; the lab now uses the light overlay, ink, one accent and a sixth tile tone (`tide`) as card 06, last on the page.
+- **Wording.** At the owner's request "synthetic" is gone from the page and README. The README keeps a neutral "Scope: a 100-merchant network; not yet run on a live merchant book"; nothing claims the data is real.
+- **Sandbox payees.** `lce paypal map-rest --from m0005 m0009` was run on the live database (97 merchants share those two accounts; m0038's unclaimed address is not shared). `--undo` reverses it.
+- **Deviation:** the frontend commit failed on a pathspec, so the Ask Keystone deletions landed in `f5bc720` (the frontend does not build at that commit alone) and the lab's frontend in `0d964b1` (the docs commit). HEAD builds and the suite passes. Not rewritten (no history rewrites).
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
