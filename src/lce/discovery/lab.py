@@ -173,7 +173,29 @@ class Lab:
                    "picks": [[m, a] for m, a in cell.picks], "cached": cell.cached}
         rule.ms = round((time.perf_counter() - started) * 1000.0, 1)
         self.rules[rule.id] = rule
+        self._post(rule)
         yield {"type": "scored", "rule": rule.view(self.search)}
+
+    def is_default(self) -> bool:
+        """The landing page's test: default failures, every budget, k=3, no bans."""
+        return (self.training == self.world.default_training()
+                and self.budgets == sorted(BUDGETS_INR) and self.k == DEFAULT_K
+                and not self.banned)
+
+    def _post(self, rule: Rule) -> None:
+        """Record the rule on the world's board when this lab runs the default test."""
+        if not self.is_default():
+            return
+        board = dict(self.world.board or {})
+        board["search_mean"] = round(self.search_mean(), 3)
+        entry = {"formula": rule.formula.text, "idea": rule.idea, "mean": round(rule.mean, 3),
+                 "author": rule.author, "origin": rule.origin}
+        key = {"people": "people_best", "model": "best"}.get(rule.origin)
+        if key and (board.get(key) is None or rule.mean > board[key]["mean"]):
+            board[key] = entry
+        board.setdefault("best", None)
+        board.setdefault("people_best", None)
+        self.world.board = board
 
     def _admit(self, text: str, idea: str, origin: str, author: str, parents: list[str],
                seen: set[str]) -> tuple[Rule | None, Event | None]:

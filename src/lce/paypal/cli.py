@@ -34,6 +34,48 @@ def cmd_map(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_map_rest(args: argparse.Namespace) -> int:
+    """Map every unmapped merchant to the sandbox payees already mapped, in turn.
+
+    A rule from the lab may fund any merchant. In the sandbox, the payees are a
+    handful of test accounts; this lets every merchant be paid to one of them.
+    Local database only; ``--undo`` removes exactly the rows it added.
+    """
+    from sqlalchemy import select
+
+    from lce.data.database import session_scope
+    from lce.data.orm import PayPalIdentityRow
+    from lce.execution.service import ExecutionService
+    from lce.snapshot.store import require_store
+
+    label = "sandbox payee (shared)"
+    with session_scope() as session:
+        rows = session.execute(select(PayPalIdentityRow)).scalars().all()
+        if args.undo:
+            removed = [r for r in rows if r.label == label]
+            for r in removed:
+                session.delete(r)
+            print(json.dumps({"removed": len(removed)}))
+            return 0
+        sources = set(args.sources or [])
+        payees = sorted({(r.recipient_type, r.receiver) for r in rows
+                         if r.label != label and (not sources or r.merchant_id in sources)})
+        if not payees:
+            print(json.dumps({"error": "map at least one merchant first (lce paypal map)"}))
+            return 1
+        service = ExecutionService(session, store=require_store())
+        mapped = {r.merchant_id for r in rows}
+        added = 0
+        for i, m in enumerate(sorted(v.merchant_id for v in service.store.merchants())):
+            if m in mapped:
+                continue
+            kind, receiver = payees[i % len(payees)]
+            service.map_identity(m, recipient_type=kind, receiver=receiver, label=label)
+            added += 1
+        print(json.dumps({"added": added, "payees": len(payees)}))
+    return 0
+
+
 def cmd_identities(args: argparse.Namespace) -> int:
     from sqlalchemy import select
 
@@ -128,6 +170,12 @@ def register(sub: Any) -> None:
     m.add_argument("--label", default="")
     m.set_defaults(func=cmd_map)
 
+    rest = psub.add_parser("map-rest",
+                           help="Map every unmapped merchant to the existing sandbox payees")
+    rest.add_argument("--undo", action="store_true", help="Remove the rows map-rest added")
+    rest.add_argument("--from", dest="sources", nargs="*", metavar="MERCHANT",
+                      help="Share only these merchants' payees (default: every mapped one)")
+    rest.set_defaults(func=cmd_map_rest)
     psub.add_parser("identities", help="List mapped sandbox identities").set_defaults(
         func=cmd_identities
     )

@@ -89,6 +89,8 @@ class SetupView(BaseModel):
     people: list[dict[str, str]]
     k: int
     writer: WriterView
+    board: dict[str, Any] | None = Field(
+        default=None, description="Best rules found on the default test on this server.")
 
 
 class CheckIn(BaseModel):
@@ -199,6 +201,7 @@ def setup(store: Store) -> SetupView:
         people=[{"formula": f, "idea": i} for f, i in HUMAN_RULES],
         k=DEFAULT_K,
         writer=WriterView(mode=mode, model=model, reason=reason),
+        board=world.board,
     )
 
 
@@ -264,6 +267,11 @@ def warm_in_background(store: SnapshotStore) -> None:
             world = get_world(store)
             training = world.default_training()
             world.warm(training + world.held_out(training))
+            # The rules people wrote, on the default test, for the landing page.
+            board = labs.Lab(world=world, settings=get_agent_settings(), training=training,
+                             budgets=sorted(BUDGETS_INR), k=DEFAULT_K, banned=set())
+            for _ in board.start(None):
+                pass
             logger.info("discovery_warm", replays=world.replays)
         except Exception:
             logger.exception("discovery_warm_failed")

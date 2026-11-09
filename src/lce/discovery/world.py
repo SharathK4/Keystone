@@ -158,6 +158,9 @@ class World:
     _search: dict[tuple[str, int], SearchCell] = field(default_factory=dict)
     _no_shock: Any = None
     replays: int = 0
+    #: The standing result on the default test: the best rule people wrote, the
+    #: best anyone else wrote, and the search. Shown on the landing page.
+    board: dict[str, Any] | None = None
     _var: dict[str, float] = field(default_factory=dict)
     _views: dict[str, Any] = field(default_factory=dict)
     _importance: dict[str, float] = field(default_factory=dict)

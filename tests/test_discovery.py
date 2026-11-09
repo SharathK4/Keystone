@@ -280,3 +280,56 @@ def test_the_routes(store, monkeypatch):
             assert used.status_code == 200 and used.json()["plan_ref"].startswith("rule-")
     finally:
         reset_agent_settings_cache()
+
+
+def test_the_board_keeps_the_best_model_rule_and_never_credits_yours(world, monkeypatch):
+    import anthropic
+
+    fake = FakeModel([{"formula": "pays / (paid_by + 1) * need", "idea": "Network shape.",
+                       "builds_on": []}])
+    monkeypatch.setattr(anthropic, "Anthropic", lambda **kw: fake)
+    settings = AgentSettings(OPENROUTER_API_KEY="or-key", ANTHROPIC_API_KEY="", _env_file=None)
+    lab = _small_lab(world, settings)
+    monkeypatch.setattr(labs.Lab, "is_default", lambda self: True)
+    monkeypatch.setattr(world, "board", None)
+    _run(lab.start("need * (failing < 1)"))
+    board = world.board
+    assert board is not None and board["people_best"]["origin"] == "people"
+    assert board["best"] is None  # your rule is not the AI's
+    _run(lab.evolve("evolve", []))
+    assert world.board["best"]["formula"] == "pays / (paid_by + 1) * need"
+    assert world.board["best"]["origin"] == "model"
+
+
+def test_map_rest_shares_payees_and_undoes_exactly(store, monkeypatch):
+    import argparse
+
+    from sqlalchemy import select
+
+    from lce.data.database import session_scope
+    from lce.data.orm import PayPalIdentityRow
+    from lce.execution.service import ExecutionService
+    from lce.paypal.cli import cmd_map_rest
+    from lce.snapshot import store as store_module
+
+    monkeypatch.setattr(store_module, "get_store", lambda *a, **k: store)
+    with session_scope() as session:
+        for row in session.execute(select(PayPalIdentityRow)).scalars().all():
+            session.delete(row)
+    with session_scope() as session:
+        service = ExecutionService(session, store=store)
+        service.map_identity("m0005", recipient_type="EMAIL", receiver="a@example.com")
+        service.map_identity("m0038", recipient_type="EMAIL", receiver="nobody@example.com")
+    assert cmd_map_rest(argparse.Namespace(undo=False, sources=["m0005"])) == 0
+    with session_scope() as session:
+        rows = session.execute(select(PayPalIdentityRow)).scalars().all()
+        receivers = {r.merchant_id: r.receiver for r in rows}
+    assert len(rows) == len(store.merchants())
+    assert receivers["m0009"] == "a@example.com" and receivers["m0038"] == "nobody@example.com"
+    assert "nobody@example.com" not in {v for k, v in receivers.items() if k != "m0038"}
+    assert cmd_map_rest(argparse.Namespace(undo=True, sources=None)) == 0
+    with session_scope() as session:
+        left = {r.merchant_id for r in session.execute(select(PayPalIdentityRow)).scalars()}
+        for row in session.execute(select(PayPalIdentityRow)).scalars().all():
+            session.delete(row)
+    assert left == {"m0005", "m0038"}
