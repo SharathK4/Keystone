@@ -1,0 +1,9 @@
+{
+  "snapshot_id": "snap-a4c99d5a49a64ffd",
+  "best": {
+    "formula": "pays / (paid_by + 1) * need",
+    "idea": "Favor merchants many pay, few pay them.",
+    "author": "nvidia/nemotron-3.5-lightning:free",
+    "origin": "model"
+  }
+}

@@ -14,3 +14,8 @@ A rebuild produces a *different, equally valid* snapshot with a new id. That is
 why these copies are kept as files rather than as build instructions.
 
 Everything else under `artifacts/` is ignored and may be regenerated freely.
+
+`discovery/hall_of_fame.json` is the one mutable file kept here: the best rule a
+language model has written in the rule lab for this snapshot, as text only. The
+server never reads a score from it; it replays the rule on the default test at
+every start, and a lab run that finds a better rule rewrites it.

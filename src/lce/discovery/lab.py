@@ -193,6 +193,10 @@ class Lab:
         key = {"people": "people_best", "model": "best"}.get(rule.origin)
         if key and (board.get(key) is None or rule.mean > board[key]["mean"]):
             board[key] = entry
+            if key == "best":
+                from lce.discovery.world import write_hall_of_fame
+
+                write_hall_of_fame(self.world.store.snapshot_id, entry)
         board.setdefault("best", None)
         board.setdefault("people_best", None)
         self.world.board = board
@@ -455,7 +459,10 @@ class Lab:
                     f"({best.mean:.2f}% by {best.id} if any). " if best else
                     f"Write {PER_ROUND} new rules. ") + (
                 "Find where the leading rules lose (which budgets, which failures) and "
-                "target that. Mix bold ideas with refinements.")
+                "target that. Mix bold ideas with refinements. Think about the network's "
+                "shape as well as money: who pays whom (pays, paid_by), how much each "
+                "passes on (passes_on), and how the failure reaches them (hit, steps, "
+                "exposure).")
         return f"""THE PUZZLE
 One merchant misses a payment, and a rescue fund of a fixed size is available.
 Keystone ranks the merchants who are short of money by your rule (highest score

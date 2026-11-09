@@ -333,3 +333,28 @@ def test_map_rest_shares_payees_and_undoes_exactly(store, monkeypatch):
         for row in session.execute(select(PayPalIdentityRow)).scalars().all():
             session.delete(row)
     assert left == {"m0005", "m0038"}
+
+
+def test_the_remembered_rule_is_text_and_is_rescored_by_replay(world, monkeypatch, tmp_path):
+    import json
+
+    from lce.discovery import world as world_module
+
+    path = tmp_path / "hall_of_fame.json"
+    monkeypatch.setattr(world_module, "hall_of_fame_path", lambda: path)
+    monkeypatch.setattr(world, "board", None)
+    assert world_module.read_hall_of_fame(world.store.snapshot_id) is None
+    world_module.write_hall_of_fame(world.store.snapshot_id, {
+        "formula": "pays / (paid_by + 1) * need", "idea": "Network shape.", "author": "m",
+        "origin": "model", "mean": 99.0})
+    saved = json.loads(path.read_text(encoding="utf-8"))
+    assert "mean" not in saved["best"]  # a score is never stored, only the text
+    monkeypatch.setattr(world_module.World, "default_training", lambda self: [FAILING])
+    monkeypatch.setattr(world_module, "BUDGETS_INR", (BUDGET,))
+    world_module.score_hall_of_fame(world)
+    best = world.board["best"]
+    assert best["formula"] == "pays / (paid_by + 1) * need"
+    expected = world.cell(parse(best["formula"], CLUE_NAMES), world.scenario(FAILING, BUDGET), 3)
+    assert best["mean"] == pytest.approx(expected.pct, abs=1e-3)
+    other = world_module.read_hall_of_fame("snap-somewhere-else")
+    assert other is None

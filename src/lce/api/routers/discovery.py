@@ -37,6 +37,7 @@ from lce.discovery.world import (
     DEFAULT_K,
     HUMAN_RULES,
     get_world,
+    score_hall_of_fame,
 )
 from lce.errors import LCEError, RateLimited
 from lce.execution.demo import client_key, limiter
@@ -272,6 +273,7 @@ def warm_in_background(store: SnapshotStore) -> None:
                              budgets=sorted(BUDGETS_INR), k=DEFAULT_K, banned=set())
             for _ in board.start(None):
                 pass
+            score_hall_of_fame(world)
             logger.info("discovery_warm", replays=world.replays)
         except Exception:
             logger.exception("discovery_warm_failed")

@@ -364,6 +364,64 @@ class World:
                 self.search(self.scenario(failing, budget), k)
 
 
+HALL_OF_FAME = "discovery/hall_of_fame.json"
+
+
+def hall_of_fame_path() -> Any:
+    from lce.config import get_settings
+
+    return get_settings().model_artifact_dir / HALL_OF_FAME
+
+
+def read_hall_of_fame(snapshot_id: str) -> dict[str, Any] | None:
+    """The best rule a model has written for this snapshot, as text only.
+
+    Its score is never read from the file: :func:`score_hall_of_fame` replays it.
+    """
+    import json
+
+    try:
+        data = json.loads(hall_of_fame_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    best = data.get("best") if data.get("snapshot_id") == snapshot_id else None
+    return best if isinstance(best, dict) and best.get("formula") else None
+
+
+def write_hall_of_fame(snapshot_id: str, best: dict[str, Any]) -> None:
+    import json
+
+    keep = {k: best[k] for k in ("formula", "idea", "author", "origin") if k in best}
+    try:
+        path = hall_of_fame_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        text = json.dumps({"snapshot_id": snapshot_id, "best": keep}, indent=2)
+        path.write_text(text + chr(10), encoding="utf-8")
+    except OSError:  # a read-only disk keeps the board in memory only
+        pass
+
+
+def score_hall_of_fame(world: World, k: int = DEFAULT_K) -> None:
+    """Replay the remembered best rule on the default test and put it on the board."""
+    from lce.discovery.formula import FormulaError, parse
+
+    best = read_hall_of_fame(world.store.snapshot_id)
+    if best is None:
+        return
+    try:
+        formula = parse(str(best["formula"]), CLUE_NAMES)
+    except FormulaError:
+        return
+    cells = [world.cell(formula, world.scenario(f, b), k)
+             for f in world.default_training() for b in BUDGETS_INR]
+    mean = sum(c.pct for c in cells) / len(cells)
+    board = dict(world.board or {"people_best": None, "search_mean": None})
+    current = board.get("best")
+    if current is None or mean > float(current.get("mean", 0.0)):
+        board["best"] = {**best, "formula": formula.text, "mean": round(mean, 3)}
+    world.board = board
+
+
 def _outcome(shocked: Replay, treated: Replay) -> Outcome:
     prevented = shocked.disruption - treated.disruption
     pct = 100.0 * prevented / shocked.disruption if shocked.disruption > 0 else 0.0

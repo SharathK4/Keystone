@@ -35,6 +35,10 @@ artifacts/**
 !artifacts/contagion/**
 !artifacts/structure/
 !artifacts/structure/**
+# The best rule a model has written in the rule lab (text only; re-scored by
+# replay at every start).
+!artifacts/discovery/
+!artifacts/discovery/hall_of_fame.json
 # One real PayPal delivery, recorded for replay (lce walk record). Raw captures
 # in artifacts/paypal/deliveries/ stay local.
 !artifacts/paypal/
