@@ -296,6 +296,11 @@ push URL is disabled locally).
 - **Sandbox payees.** `lce paypal map-rest --from m0005 m0009` was run on the live database (97 merchants share those two accounts; m0038's unclaimed address is not shared). `--undo` reverses it.
 - **Deviation:** the frontend commit failed on a pathspec, so the Ask Keystone deletions landed in `f5bc720` (the frontend does not build at that commit alone) and the lab's frontend in `0d964b1` (the docs commit). HEAD builds and the suite passes. Not rewritten (no history rewrites).
 
+**Nov 11 — first live sandbox run (the owner said to run the real PayPal tests).**
+- S1 token: PASS. Probe: payouts endpoint reachable, webhooks API answers, invoicing not permitted for this app (not used).
+- S2 payout: **refused by PayPal** — "You live in a country that is not allowed to send this payout." The sandbox *business* (sender) account is India-registered. Fix (owner): create a US sandbox Business account, create a REST app on it, and use that app's client id and secret.
+- Pushed `paypal` to GitHub `master` at the owner's request (merged the two GitHub-only commits; the published README's images and demo link kept). The repo shows Apache-2.0.
+
 ## Leaks
 
 None. `sh scripts/ci/check_commit_trailers.sh` → clean after every commit.
