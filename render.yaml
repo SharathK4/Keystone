@@ -74,7 +74,7 @@ services:
       # first deploy and edit this line if it differs.
       - type: rewrite
         source: /api/*
-        destination: https://keystone-api.onrender.com/api/*
+        destination: https://keystone-api-kwju.onrender.com/api/*
       - type: rewrite
         source: /*
         destination: /index.html
