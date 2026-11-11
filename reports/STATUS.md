@@ -299,6 +299,8 @@ push URL is disabled locally).
 **Nov 11 — first live sandbox run (the owner said to run the real PayPal tests).**
 - S1 token: PASS. Probe: payouts endpoint reachable, webhooks API answers, invoicing not permitted for this app (not used).
 - S2 payout: **refused by PayPal** — "You live in a country that is not allowed to send this payout." The sandbox *business* (sender) account is India-registered. Fix (owner): create a US sandbox Business account, create a REST app on it, and use that app's client id and secret.
+- After the owner created a US sandbox business account and app: S1, probe, S2 (batch accepted, PENDING) PASS; S2b shows the sandbox *refuses* a duplicate `PayPal-Request-Id` (400 USER_BUSINESS_ERROR) instead of returning the first batch, so the test now asserts "never pays twice"; S3 invoicing skips (not permitted, unused).
+- **First real payout through Keystone:** reference plan `scn-07c647ec1459` approved and executed via the API; PayPal batches `PY42P5ZVVMXPY` (m0005) and `R3WG7ZG52WLU8` (m0009); reconciled as **succeeded**. Webhook delivery still needs the public URL (Render).
 - Pushed `paypal` to GitHub `master` at the owner's request (merged the two GitHub-only commits; the published README's images and demo link kept). The repo shows Apache-2.0.
 
 ## Leaks

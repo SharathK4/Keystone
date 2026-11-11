@@ -11,7 +11,9 @@ What each establishes (record the outcome in ``reports/paypal/spikes.md``):
   be read back, and the item reaches a status this system maps. Needs
   ``PAYPAL_SPIKE_RECEIVER`` (a sandbox *personal* account email).
 * **S2b** - resubmitting the identical request with the same
-  ``PayPal-Request-Id`` returns the same batch: PayPal's idempotency, observed.
+  ``PayPal-Request-Id`` never creates a second batch. Observed on Nov 11: the
+  sandbox refuses the duplicate (400 ``USER_BUSINESS_ERROR``) rather than
+  returning the first batch; either answer means the plan cannot pay twice.
 * **S3** - an invoice can be created, sent and read; and whether its due date can
   be changed after sending (this decides how term extension would be mapped).
   Needs ``PAYPAL_SPIKE_RECEIVER`` too.
@@ -104,11 +106,19 @@ def test_s2_payout_create_and_read(client):
     assert batch["batch_header"]["payout_batch_id"] == batch_id
 
 
-def test_s2b_same_request_id_returns_same_batch(client):
+def test_s2b_same_request_id_never_pays_twice(client):
+    from lce.errors import PayPalError
+
     _need_receiver()
     key = f"ks-spike-{uuid.uuid4().hex[:20]}"
     first = client.create_payout(_payout_body(key), request_id=key)
-    second = client.create_payout(_payout_body(key), request_id=key)
+    try:
+        second = client.create_payout(_payout_body(key), request_id=key)
+    except PayPalError as exc:  # the sandbox refuses the duplicate outright
+        print("S2b:", first["batch_header"]["payout_batch_id"], "duplicate refused:",
+              exc.context.get("name"))
+        assert exc.context.get("status") == 400
+        return
     print("S2b:", first["batch_header"]["payout_batch_id"],
           second["batch_header"]["payout_batch_id"])
     assert (first["batch_header"]["payout_batch_id"]
@@ -132,6 +142,8 @@ def test_s3_invoice_create_send_get_and_due_date(client):
     }
     created = client._send("POST", "/v2/invoicing/invoices", json=body)
     print("S3 create:", created.status_code)
+    if created.status_code == 403:
+        pytest.skip("invoicing is not permitted for this app (Keystone does not use it)")
     assert created.status_code in (200, 201), created.text
     href = created.json().get("href", "")
     invoice_id = href.rsplit("/", 1)[-1] if href else created.json()["id"]
