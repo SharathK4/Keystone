@@ -6,6 +6,28 @@
   min-height: 0;
 }
 
+/* An orrery: orbits by size class, dots by importance, a few lit links. */
+.np__orrery { position: absolute; inset: 6% 0; width: 100%; height: 88%; overflow: visible; }
+.np__orbit { fill: none; stroke: rgba(226, 244, 232, 0.16); stroke-width: 0.8; }
+.np__link { fill: none; stroke: rgba(226, 244, 232, 0.16); stroke-width: 0.8; }
+.np__link.is-lit { stroke: rgba(246, 183, 154, 0.85); stroke-width: 1.2; }
+.np__dot { fill: rgba(226, 244, 232, 0.55); }
+.np__dot.is-key { fill: rgba(240, 250, 244, 0.95); }
+.np__dot.is-lead { fill: #f6b79a; }
+.np__halo { fill: none; stroke: rgba(246, 183, 154, 0.55); stroke-width: 1; }
+.np__leader { fill: none; stroke: rgba(240, 250, 244, 0.28); stroke-width: 0.8; }
+.np__note {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 15px;
+  fill: rgba(240, 250, 244, 0.9);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .np__link.is-lit { stroke-dasharray: 600; stroke-dashoffset: 600; animation: np-draw 1600ms var(--ease-out) 400ms forwards; }
+}
+@keyframes np-draw { to { stroke-dashoffset: 0; } }
+
 @media (max-width: 840px) {
   .np { height: min(74vw, 330px); }
 }

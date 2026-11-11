@@ -1,16 +1,15 @@
 /**
  * Card 02 — what breaks.
  *
- * The dot matrix and the scenario's own words. The blocks are sized by their
- * share, so the shape of the answer is visible before any figure is — and no
- * figure appears at this layer.
+ * The dot matrix alone: one dot per merchant, the merchant that misses its
+ * payment and the ones it reaches lit, the rest by how well they can cover
+ * themselves. The shape of the answer, with no words or figures on the tile.
  */
 
 import type { MerchantView, ScenarioSnapshot, ScenarioSummary } from '../api/types'
 import { Panel } from './Panel'
 import { ExposureDotMatrix } from './ExposureDotMatrix'
 import { TexturedTile } from './TexturedTile'
-import { scenarioLabel } from '../lib/format'
 import './exposure-panel.css'
 
 interface Props {
@@ -21,7 +20,7 @@ interface Props {
   onOpen: () => void
 }
 
-export function ExposurePanel({ merchants, scenario, scenarios, busy, onOpen }: Props) {
+export function ExposurePanel({ merchants, scenario, busy, onOpen }: Props) {
   return (
     <Panel
       index={2}
@@ -32,22 +31,15 @@ export function ExposurePanel({ merchants, scenario, scenarios, busy, onOpen }: 
     >
       <div className={`xp${busy ? ' is-busy' : ''}`}>
         <TexturedTile tone="slate" seed={scenario?.scenario_id ?? 'exposure'}>
-          <div className="xp__inner">
-            <span className="xp__eyebrow">
-              {scenario ? scenarioLabel(scenario.family) : 'Scenario'}
-            </span>
-
+          <div className="xp__inner xp__inner--bare">
             <ExposureDotMatrix
               merchants={merchants}
               affected={scenario?.affected_merchants ?? []}
               origins={scenario?.shock.origin_merchants ?? []}
               compact
               onDark
+              bare
             />
-
-            <span className="xp__more">
-              +{Math.max(scenarios.length - 1, 0)} more scenarios inside
-            </span>
           </div>
         </TexturedTile>
       </div>

@@ -38,6 +38,8 @@ interface Props {
   /** Make every dot a choice: pulling that merchant. */
   onPick?: (merchantId: string) => void
   picked?: string | null
+  /** The picture alone: no legend, no counts. */
+  bare?: boolean
 }
 
 type State = 'reached' | 'thin' | 'covered' | 'idle'
@@ -53,7 +55,7 @@ const LABEL: Record<State, string> = {
 
 const COLUMNS = 10
 
-export function ExposureDotMatrix({ merchants, affected, origins, compact, onDark, onPick, picked }: Props) {
+export function ExposureDotMatrix({ merchants, affected, origins, compact, onDark, onPick, picked, bare }: Props) {
   const buttons = useRef<(HTMLButtonElement | null)[]>([])
   const { dots, tally } = useMemo(() => {
     const hit = new Map(affected.map((a) => [a.merchant_id, a]))
@@ -93,7 +95,7 @@ export function ExposureDotMatrix({ merchants, affected, origins, compact, onDar
   const nReached = tally.find((t) => t.state === 'reached')?.n ?? 0
 
   return (
-    <figure className={`dm${compact ? ' dm--compact' : ''}${onDark ? ' dm--dark' : ''}`}>
+    <figure className={`dm${compact ? ' dm--compact' : ''}${onDark ? ' dm--dark' : ''}${bare ? ' dm--bare' : ''}`}>
       <div className="dm__field">
         {onPick ? (
           <div className="dm__grid" role="radiogroup" aria-label="Pull a merchant: one dot per merchant, in cover order">
@@ -145,7 +147,7 @@ export function ExposureDotMatrix({ merchants, affected, origins, compact, onDar
         )}
       </div>
 
-      <figcaption className="dm__legend">
+      {bare ? null : <figcaption className="dm__legend">
         {compact ? null : (
           <p className="dm__caption">
             One dot per merchant, laid out by how thinly it covers its own payments — thinnest
@@ -172,7 +174,7 @@ export function ExposureDotMatrix({ merchants, affected, origins, compact, onDar
             standing downstream of the payment that failed.
           </p>
         ) : null}
-      </figcaption>
+      </figcaption>}
     </figure>
   )
 }

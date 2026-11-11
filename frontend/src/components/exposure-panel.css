@@ -28,3 +28,9 @@
   letter-spacing: 0.04em;
   color: rgba(240, 245, 250, 0.6);
 }
+
+/* The picture alone, centred on the tile. */
+.xp__inner--bare { display: flex; align-items: center; justify-content: center; height: 100%; }
+.xp__inner--bare .dm { margin: 0 auto; }
+.xp__inner--bare .dm--bare { width: 330px; max-width: 100%; flex: 0 1 auto; justify-content: center; gap: 0; }
+.xp__inner--bare .dm--bare .dm__field { width: 100%; flex: 1 1 auto; }
