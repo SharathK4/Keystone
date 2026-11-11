@@ -19,7 +19,7 @@ services:
     runtime: python
     plan: free            # spins down when idle; first request after takes ~1 min
     region: oregon
-    buildCommand: pip install --upgrade pip && pip install .
+    buildCommand: pip install --upgrade pip && pip install -e .   # editable: the app reads artifacts/ from the repo
     startCommand: bash scripts/render_start.sh
     healthCheckPath: /api/v1/health/ready
     autoDeploy: false
